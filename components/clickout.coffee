@@ -16,3 +16,14 @@ Spellbook.clickout = (options) ->
   options.element.on 'click', (e) ->
     e.stopPropagation()
 
+# -------------------------------------
+#   Usage
+# -------------------------------------
+#
+# Spellbook.clickout({
+#   element: $('.js-clickout')
+#   run: ->
+#     # ...
+# })
+#
+
