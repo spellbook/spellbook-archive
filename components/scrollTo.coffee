@@ -6,6 +6,7 @@
 # *************************************
 #
 # options.element - the element (jQuery)
+# options.speed - the speed of the scroll (milliseconds)
 #
 # *************************************
 
