@@ -21,7 +21,7 @@ Components
 #
 # *************************************
 
-Spellbook.componentName = (options) ->
+@Spellbook.componentName = (options) ->
   options.element.on 'click', (e) ->
     e.preventDefault()
     $(@).toggleClass(options.className)
@@ -54,7 +54,7 @@ Classes
 #
 # *************************************
 
-class @ClassName
+class @Spellbook.ClassName
 
   ###
     Called when the object is instantiated, and it immediately
@@ -119,7 +119,7 @@ Modules
 # *************************************
 
 # CoffeeScript shortcut for a self-invoking anonymous function
-Spellbook.moduleName = do ->
+@Spellbook.moduleName = do ->
 
   privateVar = ''
 

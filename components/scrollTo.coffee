@@ -10,7 +10,7 @@
 #
 # *************************************
 
-Spellbook.scrollTo = (options) ->
+@Spellbook.scrollTo = (options) ->
   options.element.on 'click', (e) ->
     e.preventDefault()
     to = options.el.attr('href')
@@ -18,3 +18,4 @@ Spellbook.scrollTo = (options) ->
     $('body, html').animate({
       scrollTop: parseInt($(to).offset().top)
     }, options.speed)
+

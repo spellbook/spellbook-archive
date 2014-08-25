@@ -10,7 +10,7 @@
 #
 # *************************************
 
-Spellbook.clickout = (options) ->
+@Spellbook.clickout = (options) ->
   $(document).on 'click', -> options.run()
 
   options.element.on 'click', (e) ->

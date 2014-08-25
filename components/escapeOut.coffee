@@ -9,7 +9,7 @@
 #
 # *************************************
 
-Spellbook.escapeOut = (options) ->
+@Spellbook.escapeOut = (options) ->
   $(document).on 'keyup', (e) ->
     switch e.which
       when 27 then options.run()
