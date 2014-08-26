@@ -19,3 +19,13 @@
       scrollTop: parseInt($(to).offset().top)
     }, options.speed)
 
+# -------------------------------------
+#   Usage
+# -------------------------------------
+#
+# Spellbook.scrollTo({
+#   element: $('.js-scrollTo')
+#   speed: 250
+# })
+#
+
