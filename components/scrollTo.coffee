@@ -11,8 +11,8 @@
 # *************************************
 
 @Spellbook.scrollTo = (options) ->
-  options.element.on 'click', (e) ->
-    e.preventDefault()
+  options.element.on 'click', (event) ->
+    event.preventDefault()
     to = options.el.attr('href')
 
     $('body, html').animate({

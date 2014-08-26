@@ -10,8 +10,8 @@
 # *************************************
 
 @Spellbook.escapeOut = (options) ->
-  $(document).on 'keyup', (e) ->
-    switch e.which
+  $(document).on 'keyup', (event) ->
+    switch event.which
       when 27 then options.run()
 
 # -------------------------------------

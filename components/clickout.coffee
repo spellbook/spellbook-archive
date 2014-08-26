@@ -13,8 +13,8 @@
 @Spellbook.clickout = (options) ->
   $(document).on 'click', -> options.run()
 
-  options.element.on 'click', (e) ->
-    e.stopPropagation()
+  options.element.on 'click', (event) ->
+    event.stopPropagation()
 
 # -------------------------------------
 #   Usage
