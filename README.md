@@ -25,6 +25,15 @@ Components
   options.element.on 'click', (e) ->
     e.preventDefault()
     $(@).toggleClass(options.className)
+
+# -------------------------------------
+#   Usage
+# -------------------------------------
+#
+# Spellbook.componentName({
+#   # ...
+# })
+#
 ```
 
 And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
@@ -90,6 +99,15 @@ class @Spellbook.ClassName
   ###
   @klassMethod: ->
     # ...
+
+# -------------------------------------
+#   Usage
+# -------------------------------------
+#
+# new Spellbook.ClassName({
+#   # ...
+# })
+#
 ```
 
 And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
@@ -126,6 +144,15 @@ Modules
   privateMethod = ->
 
   publicMethod: privateMethod
+
+# -------------------------------------
+#   Usage
+# -------------------------------------
+#
+# new Spellbook.moduleName.init({
+#   # ...
+# })
+#
 ```
 
 And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
