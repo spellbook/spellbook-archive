@@ -1,7 +1,7 @@
 Spellbook
 =========
 
-A collection of CoffeeScript structure, components, and classes.
+A compilation of CoffeeScript structure, components, and classes.
 
 Compendium
 ----------
