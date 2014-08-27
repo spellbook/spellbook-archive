@@ -6,10 +6,9 @@
 # *************************************
 
 @Spellbook.equalHeights = (options) ->
-  settings =
+  settings = $.extend(
     element: $('.js-equalHeight')
-
-  settings = $.extend(settings, options)
+  , options)
 
   heights = []
   settings.element.each -> heights.push $(@).height()

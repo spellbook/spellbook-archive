@@ -11,19 +11,22 @@
 # *************************************
 
 @Spellbook.clickout = (options) ->
-  $(document).on 'click', -> options.run()
+  settings = $.extend(
+    element: $('.js-clickout')
+  , options)
 
-  options.element.on 'click', (event) ->
+  $(document).on 'click', -> settings.run()
+
+  settings.element.on 'click', (event) ->
     event.stopPropagation()
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.clickout({
+# Spellbook.clickout
 #   element: $('.js-clickout')
 #   run: ->
 #     # ...
-# })
 #
 

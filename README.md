@@ -30,19 +30,17 @@ Components
 #   Usage
 # -------------------------------------
 #
-# Spellbook.componentName({
+# Spellbook.componentName
 #   # ...
-# })
 #
 ```
 
 And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
 
 ```coffeescript
-Spellbook.componentName({
+Spellbook.componentName
   element: $('.js-element')
   className: 'is-active'
-})
 ```
 
 Classes
@@ -104,18 +102,16 @@ class @Spellbook.ClassName
 #   Usage
 # -------------------------------------
 #
-# new Spellbook.ClassName({
+# new Spellbook.ClassName
 #   # ...
-# })
 #
 ```
 
 And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
 
 ```coffeescript
-new SpellBook.ClassName({
+new SpellBook.ClassName
   # ...
-})
 ```
 
 Modules
@@ -141,24 +137,22 @@ Modules
 
   privateVar = ''
 
-  privateMethod = ->
+  init = ->
 
-  publicMethod: privateMethod
+  init: init
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# new Spellbook.moduleName.init({
+# Spellbook.moduleName.init
 #   # ...
-# })
 #
 ```
 
 And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
 
 ```coffeescript
-SpellBook.moduleName({
+SpellBook.moduleName.init
   # ...
-})
 ```

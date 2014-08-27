@@ -12,19 +12,21 @@
 # *************************************
 
 @Spellbook.scrollTrigger = (options) ->
-  scrolled = $(window).scrollTop()
-  active = scrolled - options.element.offset().top >= 0 - options.scrollPadding
+  settings = $.extend(
+    element: $('.js-scrollTrigger')
+    scrollPadding: 400
+    activeClass: 'is-active'
+  , options)
 
-  if !options.element.hasClass(options.activeClass) and active
-    options.element.addClass(options.activeClass)
+  scrolled = $(window).scrollTop()
+  active = scrolled - settings.element.offset().top >= 0 - settings.scrollPadding
+
+  if !settings.element.hasClass(settings.activeClass) and active
+    settings.element.addClass(settings.activeClass)
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.scrollTrigger({
-#   element: $('.js-scrollTrigger-element')
-#   scrollPadding: 400
-#   activeClass: 'is-active'
-# })
+# Spellbook.scrollTrigger()
 #

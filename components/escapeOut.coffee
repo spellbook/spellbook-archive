@@ -18,9 +18,8 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.escapeOut({
+# Spellbook.escapeOut
 #   run: ->
 #     # ...
-# })
 #
 

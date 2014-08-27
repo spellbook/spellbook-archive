@@ -11,8 +11,11 @@
 # *************************************
 
 @Spellbook.fixOrphanWords = (options) ->
+  settings = $.extend(
+    element: $('.js-orphan')
+  , options)
 
-  wordArray = options.element.text().split(" ")
+  wordArray = settings.element.text().split(" ")
   finalTitle = ""
 
   for i in [0..wordArray.length - 1]
@@ -24,13 +27,11 @@
     else
         finalTitle += " "
 
-  options.element.html(finalTitle)
+  settings.element.html(finalTitle)
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.fixOrphanWords({
-#   element: $('.js-orphan')
-# })
+# Spellbook.fixOrphanWords()
 #
