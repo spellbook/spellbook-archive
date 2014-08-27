@@ -34,8 +34,8 @@ Components
 # *************************************
 
 @Spellbook.componentName = (options) ->
-  options.element.on 'click', (e) ->
-    e.preventDefault()
+  options.element.on 'click', (event) ->
+    event.preventDefault()
     $(@).toggleClass(options.className)
 
 # -------------------------------------
@@ -94,7 +94,7 @@ class @Spellbook.ClassName
     @setEventHandlers()
 
   setEventHandlers: ->
-    @options.element.on 'click', (e) => @doSomething()
+    @options.element.on 'click', (event) => @doSomething()
 
   doSomething: ->
     # ...
