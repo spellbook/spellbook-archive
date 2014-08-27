@@ -156,3 +156,23 @@ And to call your Component, put it in `javascripts/domready.js.coffee` or, if yo
 SpellBook.moduleName.init
   # ...
 ```
+
+Defaults
+--------
+
+If applicable, each Component sets default options to standardize calles. For example:
+
+```coffeescript
+@Spellbook.componentName = (options) ->
+  settings = $.extend(
+    element: $('.js-component'),
+    activeClass: 'is-active'
+  , options)
+```
+
+Use `js-` selectors to standardize the class applied to elements. Now, in the call, you can either leave out the options (using the defaults), or pass in overrides to the default options.
+
+jQuery
+------
+
+There is a jQuery dependency in Spellbook, but you could easily swap out the underlying jQuery with vanilla JavaScript.
