@@ -11,17 +11,17 @@
 # *************************************
 
 @Spellbook.headingLinks = do ->
-  
+
   settings = {}
-  
+
   init = (options) ->
     settings = $.extend(
       headings: $('h1, h2, h3, h4, h5')
       anchorClass: 'anchor'
     , options)
-    
+
     addAnchors()
-  
+
   slugify = (string) ->
     string.toLowerCase().replace(/[^\w ]+/g,'').replace(/\s+/g,'-')
 
@@ -31,9 +31,9 @@
       slug = slugify( element.text() )
       element.attr('id', slug)
       element.prepend("<a class='#{settings.anchorClass}' href='##{slug}'>#</a>")
-      
+
   init: init
-      
+
 # -------------------------------------
 #   Usage
 # -------------------------------------
