@@ -3,8 +3,20 @@ Spellbook
 
 A collection of CoffeeScript structure, components, and classes.
 
+Compendium
+----------
+
+`application.coffee` is the compendium file, which is what you would load in your application. It shows you the order in which you would include the individual setup files, as well as each individual Component. This obviously changes if you're not in a Rails environment with Sprockets.
+
+Namespace
+---------
+
+`spellbook.coffee` simple sets up the namespace for the application. Be sure to change this file and namespace to the name of your application.
+
 Components
 ----------
+
+### Functions
 
 ```coffeescript
 # javascripts/components/componentName.coffee
@@ -43,8 +55,7 @@ Spellbook.componentName
   className: 'is-active'
 ```
 
-Classes
--------
+### Classes
 
 ```coffeescript
 # javascripts/components/className.coffee
@@ -114,8 +125,7 @@ new SpellBook.ClassName
   # ...
 ```
 
-Modules
--------
+### Modules
 
 ```coffeescript
 # javascripts/components/moduleName.coffee
@@ -156,6 +166,16 @@ And to call your Component, put it in `javascripts/domready.js.coffee` or, if yo
 SpellBook.moduleName.init
   # ...
 ```
+
+Document Ready
+--------------
+
+`domready.coffee` is for all of your JavaScript that is run when the document is ready. You will put your calls to the Components that are used across the application, not just on a single page.
+
+Inbox
+-----
+
+This is a good place to put JavaScript that you aren't ready to organize and sort; or, simply as a testing environment.
 
 Defaults
 --------

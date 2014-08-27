@@ -10,3 +10,9 @@
 ##= require components/componentName (/className, /moduleName)
 ##= require domready
 ##= require_self
+
+# -------------------------------------
+#   Inbox
+# -------------------------------------
+
+# ...
