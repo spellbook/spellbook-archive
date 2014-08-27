@@ -25,7 +25,6 @@
 # -------------------------------------
 #
 # Spellbook.clickout
-#   element: $('.js-clickout')
 #   run: ->
 #     # ...
 #
