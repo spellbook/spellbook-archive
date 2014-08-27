@@ -6,7 +6,7 @@
 # *************************************
 #
 # options.run - the function to run
-# options.elemetn - the element to kill propagation on
+# options.element - the element to kill propagation on
 #
 # *************************************
 
