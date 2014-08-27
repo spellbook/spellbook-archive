@@ -160,7 +160,7 @@ SpellBook.moduleName.init
 Defaults
 --------
 
-If applicable, each Component sets default options to standardize calles. For example:
+If applicable, each Component sets default options to standardize calls. For example:
 
 ```coffeescript
 @Spellbook.componentName = (options) ->
