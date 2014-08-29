@@ -217,7 +217,7 @@ You have two options:
 1. Run `gulp coffee` to compile the `components/*.coffee` files.
 2. Run `gulp` and have it watch and automatically compile `components/*.coffee` files.
 
-### Jasmine Tests
+### Testing with Jasmine
 
 When you write a new Component, you need to:
 
