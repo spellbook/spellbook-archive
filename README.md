@@ -221,7 +221,8 @@ You have two options:
 
 When you write a new Component, you need to:
 
-- Open up `jasmine/SpecRunner.html`
-- Add the source file from `components/js/*.js` and the spec file from `spec/js/*.js`.
-- Load up `jasmine/SpecRunner.html` in the browser to see the tests.
+- Create the `.coffee` file at `tests/spec`
+- Open up `tests/jasmine/SpecRunner.html`
+- Add the source file from `components/js/*.js` and the spec file from `tests/spec/js/*.js`.
+- Load up `tests/jasmine/SpecRunner.html` in the browser to see the tests.
 
