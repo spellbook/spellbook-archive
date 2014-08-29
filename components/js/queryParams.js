@@ -37,7 +37,6 @@ this.Spellbook.QueryParams = (function() {
     _ref = this.params;
     for (key in _ref) {
       value = _ref[key];
-      console.log(key);
       if (matcher === key) {
         return true;
       }
@@ -50,7 +49,6 @@ this.Spellbook.QueryParams = (function() {
     _ref = this.params;
     for (key in _ref) {
       value = _ref[key];
-      console.log(value);
       if (matcher === value) {
         return true;
       }

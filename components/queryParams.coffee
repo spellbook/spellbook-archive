@@ -57,7 +57,6 @@ class @Spellbook.QueryParams
 
   matchParamKey: (matcher) ->
     for key, value of @params
-      console.log key
       return true if matcher == key
 
     return false
@@ -70,7 +69,6 @@ class @Spellbook.QueryParams
 
   matchParamValue: (matcher) ->
     for key, value of @params
-      console.log value
       return true if matcher == value
 
     return false
