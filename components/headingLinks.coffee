@@ -12,7 +12,15 @@
 
 @Spellbook.headingLinks = do ->
 
+  # -------------------------------------
+  #   Instance Variables
+  # -------------------------------------
+
   settings = {}
+
+  # -------------------------------------
+  #   Initialize
+  # -------------------------------------
 
   init = (options) ->
     settings = $.extend(
@@ -22,8 +30,18 @@
 
     addAnchors()
 
+  # -------------------------------------
+  #   Slugify
+  # -------------------------------------
+  # string - the string to slugify
+  # -------------------------------------
+
   slugify = (string) ->
     string.toLowerCase().replace(/[^\w ]+/g,'').replace(/\s+/g,'-')
+
+  # -------------------------------------
+  #   Add Anchors
+  # -------------------------------------
 
   addAnchors = ->
     settings.headings.each ->
@@ -31,6 +49,10 @@
       slug = slugify( element.text() )
       element.attr('id', slug)
       element.prepend("<a class='#{settings.anchorClass}' href='##{slug}'>#</a>")
+
+  # -------------------------------------
+  #   Public Methods
+  # -------------------------------------
 
   init: init
 
