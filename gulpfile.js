@@ -5,7 +5,7 @@ var gulp    = require('gulp');
     es      = require('event-stream');
 
 gulp.task('default', function() {
-  watch(['components/*.coffee', 'spec/*.coffee'], function(files) {
+  watch(['components/*.coffee', 'tests/spec/*.coffee'], function(files) {
     gulp.start('coffee');
   });
 });
@@ -15,9 +15,9 @@ gulp.task('coffee', function() {
     .pipe( coffee({ bare: true }).on('error', gutil.log) )
     .pipe( gulp.dest('components/js/') );
 
-  var tests = gulp.src('spec/*.coffee')
+  var tests = gulp.src('tests/spec/*.coffee')
     .pipe( coffee({ bare: true }).on('error', gutil.log) )
-    .pipe( gulp.dest('spec/js/') );
+    .pipe( gulp.dest('tests/spec/js/') );
 
   return es.concat(components, tests);
 });
