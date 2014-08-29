@@ -1,6 +1,6 @@
 # *************************************
 #
-#   Clickout
+#   Click Out
 #   -> Run action when document is clicked
 #
 # *************************************
@@ -10,7 +10,7 @@
 #
 # *************************************
 
-@Spellbook.clickout = (options) ->
+@Spellbook.clickOut = (options) ->
   settings = $.extend(
     element: $('.js-clickout')
   , options)
@@ -24,7 +24,7 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.clickout
+# Spellbook.clickOut
 #   run: ->
 #     # ...
 #
