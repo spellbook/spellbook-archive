@@ -196,3 +196,32 @@ jQuery
 ------
 
 There is a jQuery dependency in Spellbook, but you could easily swap out the underlying jQuery with vanilla JavaScript.
+
+Development
+-----------
+
+Install Gulp:
+
+```shell
+# Install grunt-cli globally
+npm install -g grunt-cli
+
+# Install dependencies
+npm install
+```
+
+### Compiling CoffeeScript
+
+You have two options:
+
+1. Run `gulp coffee` to compile the `components/*.coffee` files.
+2. Run `gulp` and have it watch and automatically compile `components/*.coffee` files.
+
+### Jasmine Tests
+
+When you write a new Component, you need to:
+
+- Open up `jasmine/SpecRunner.html`
+- Add the source file from `components/js/*.js` and the spec file from `spec/js/*.js`.
+- Load up `jasmine/SpecRunner.html` in the browser to see the tests.
+
