@@ -37,7 +37,10 @@
   # -------------------------------------
 
   slugify = (string) ->
-    string.toLowerCase().replace(/[^\w ]+/g,'').replace(/\s+/g,'-')
+    string
+      .toLowerCase()
+      .replace(/[^\w ]+/g, '')
+      .replace(/\s+/g, '-')
 
   # -------------------------------------
   #   Add Anchors
