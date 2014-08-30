@@ -1,3 +1,3 @@
-this.Spellbook.sanitize = function(str) {
-  return str.replace(/(<([^>]+)>)/ig, "");
+this.Spellbook.sanitize = function(string) {
+  return string.replace(/(<([^>]+)>)/ig, '');
 };
