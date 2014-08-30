@@ -4,20 +4,23 @@ var gulp    = require('gulp');
     watch   = require('gulp-watch'),
     es      = require('event-stream');
 
+var srcFiles  = 'components/*.coffee';
+var specFiles = 'test/spec/*.coffee';
+
 gulp.task('default', function() {
-  watch(['components/*.coffee', 'tests/spec/*.coffee'], function(files) {
+  watch([srcFiles, specFiles], function(files) {
     gulp.start('coffee');
   });
 });
 
 gulp.task('coffee', function() {
-  var components = gulp.src('components/*.coffee')
+  var components = gulp.src(srcFiles)
     .pipe( coffee({ bare: true }).on('error', gutil.log) )
     .pipe( gulp.dest('components/js/') );
 
-  var tests = gulp.src('tests/spec/*.coffee')
+  var tests = gulp.src(specFiles)
     .pipe( coffee({ bare: true }).on('error', gutil.log) )
-    .pipe( gulp.dest('tests/spec/js/') );
+    .pipe( gulp.dest('test/spec/js/') );
 
   return es.concat(components, tests);
 });
