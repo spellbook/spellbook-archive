@@ -11,7 +11,7 @@ Compendium
 Namespace
 ---------
 
-`spellbook.coffee` simple sets up the namespace for the application. Be sure to change this file and namespace to the name of your application.
+`spellbook.coffee` simply sets up the namespace for the application. Be sure to change this file and namespace to the name of your application.
 
 Components
 ----------
