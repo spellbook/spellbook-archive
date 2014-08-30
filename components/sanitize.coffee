@@ -5,8 +5,8 @@
 #
 # *************************************
 
-@Spellbook.sanitize = (str) ->
-  str.replace(/(<([^>]+)>)/ig,"")
+@Spellbook.sanitize = (string) ->
+  string.replace(/(<([^>]+)>)/ig,"")
 
 # -------------------------------------
 #   Usage
