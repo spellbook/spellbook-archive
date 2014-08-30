@@ -1,12 +1,13 @@
 describe('Spellbook.headingLinks', function() {
   beforeEach(function() {
+    this.firstHeading = $('h1');
     this.headings = $('h1, h2, h3, h4');
     return Spellbook.headingLinks.init({
       headings: this.headings
     });
   });
   it('should slugify the heading string as an ID', function() {
-    return expect(this.headings).toHaveId('this-is-a-heading');
+    return expect(this.firstHeading).toHaveId('this-is-a-heading');
   });
   it('should have an anchor link prepended to the heading', function() {
     return expect(this.headings).toContainElement('a');

@@ -6,12 +6,38 @@
   <link rel="shortcut icon" type="image/png" href="lib/jasmine-2.0.3/jasmine_favicon.png">
   <link rel="stylesheet" type="text/css" href="lib/jasmine-2.0.3/jasmine.css">
   <style type="text/css" media="screen">
-    .fixture { display: none; }
+    .fixture                    { display: none; }
     .js-equalHeight:first-child { height: 400px; }
-    .js-equalHeight:last-child { height: 200px; }
+    .js-equalHeight:last-child  { height: 200px; }
   </style>
 </head>
 <body>
+  <!-- Fixture: Spellbook.dematerialize -->
+  <div class="fixture">
+    <div class="js-dematerialize-element">
+      <a href="#" class="js-dematerialize-trigger">Trigger</a>
+      <p>This is a thing.</p>
+    </div>
+  </div>
+  <!-- / Fixture: Spellbook.dematerialize -->
+
+  <!-- Fixture: Spellbook.equalHeights -->
+  <div class="fixture">
+    <div class="js-equalHeight">
+      <h1>This is a heading.</h1>
+    </div>
+    <div class="js-equalHeight">
+      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
+      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
+      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
+      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
+      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
+      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
+      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
+    </div>
+  </div>
+  <!-- / Fixture: Spellbook.equalHeights -->
+
   <!-- Fixture: Spellbook.headingLinks -->
   <div class="fixture">
     <h1>This is a heading</h1>
@@ -42,32 +68,6 @@
     <a href="#" class="js-limiter-toggle">Toggle</a>
   </div>
   <!-- / Fixture: Spellbook.limiter -->
-
-  <!-- Fixture: Spellbook.dematerialize -->
-  <div class="fixture">
-    <div class="js-dematerialize-element">
-      <a href="#" class="js-dematerialize-trigger">Trigger</a>
-      <p>This is a thing.</p>
-    </div>
-  </div>
-  <!-- / Fixture: Spellbook.dematerialize -->
-
-  <!-- Fixture: Spellbook.equalHeights -->
-  <div class="fixture">
-    <div class="js-equalHeight">
-      <h1>This is a heading.</h1>
-    </div>
-    <div class="js-equalHeight">
-      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
-      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
-      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
-      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
-      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
-      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
-      <p>This is some paragraph text that is going to make this element taller than the other one.</p>
-    </div>
-  </div>
-  <!-- / Fixture: Spellbook.equalHeights -->
 
   <script type="text/javascript" src="lib/jasmine-2.0.3/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-2.0.3/jasmine-html.js"></script>
