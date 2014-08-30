@@ -6,7 +6,7 @@ describe('Spellbook.equalHeights', function() {
   });
   return it('should set equal heights on the elements', function() {
     return expect(this.element).toHaveCss({
-      height: '222px'
+      height: '400px'
     });
   });
 });
