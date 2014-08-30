@@ -1,5 +1,7 @@
 describe 'Spellbook.limiter', ->
   beforeEach ->
+    loadFixtures('limiter.html')
+
     @container = $('.fixture--limiter')
     @elements = $('.js-limiter-element')
     @toggle = $('.js-limiter-toggle')

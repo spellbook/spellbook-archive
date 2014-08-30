@@ -1,5 +1,7 @@
 describe 'Spellbook.headingLinks', ->
   beforeEach ->
+    loadFixtures('heading_links.html')
+
     @firstHeading = $('h1')
     @headings = $('h1, h2, h3, h4')
 

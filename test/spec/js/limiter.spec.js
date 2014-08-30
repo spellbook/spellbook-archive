@@ -1,5 +1,6 @@
 describe('Spellbook.limiter', function() {
   beforeEach(function() {
+    loadFixtures('limiter.html');
     this.container = $('.fixture--limiter');
     this.elements = $('.js-limiter-element');
     this.toggle = $('.js-limiter-toggle');

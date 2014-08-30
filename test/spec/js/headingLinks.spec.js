@@ -1,5 +1,6 @@
 describe('Spellbook.headingLinks', function() {
   beforeEach(function() {
+    loadFixtures('heading_links.html');
     this.firstHeading = $('h1');
     this.headings = $('h1, h2, h3, h4');
     return Spellbook.headingLinks.init({

@@ -217,12 +217,28 @@ You have two options:
 1. Run `gulp coffee` to compile the `components/*.coffee` files.
 2. Run `gulp` and have it watch and automatically compile `components/*.coffee` files.
 
-### Testing with Jasmine
+### Writing Tests with Jasmine
 
-When you write a new Component, you need to:
+- Create the `componentName.spec.coffee` file at `test/spec`
+- Open up `index.html`
+- Add the source file from `components/js/*.js` and the spec file from `test/spec/js/*.js`.
+- Load up `index.html` in the browser to see the tests.
 
-- Create the `.coffee` file at `tests/spec`
-- Open up `tests/jasmine/SpecRunner.html`
-- Add the source file from `components/js/*.js` and the spec file from `tests/spec/js/*.js`.
-- Load up `tests/jasmine/SpecRunner.html` in the browser to see the tests.
+**Note**: You _have_ to load the `index.html` file via a web server, otherwise the specs will fail because of their reliance on HTML fixtures. I recommend either installing [Anvil for Mac](http://anvilformac.com/), or running a python server via this simple Bash function:
+
+```bash
+## ----- Server ----- ##
+## Simple HTTP server from a directory, optionally specifying a port
+##
+## $1 - the port (optional)
+##
+## Usage: `server`
+##
+
+function server() {
+  local port="${1:-8000}"
+  open "http://localhost:${port}/"
+  python -m SimpleHTTPServer "$port"
+}
+```
 

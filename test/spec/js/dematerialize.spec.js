@@ -1,5 +1,6 @@
 describe('Spellbook.dematerialize', function() {
   beforeEach(function() {
+    loadFixtures('dematerialize.html');
     this.element = $('.js-dematerialize-element');
     this.trigger = $('.js-dematerialize-trigger');
     this.itemTitle = 'hidden_element';
