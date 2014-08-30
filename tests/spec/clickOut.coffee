@@ -5,6 +5,7 @@ describe 'Spellbook.clickOut', ->
 
     Spellbook.clickOut
       element: @element
+      run: -> 'turtle'
 
   it 'should trigger a click event on the element', ->
     spyOnEvent(@element, 'click')
@@ -12,7 +13,7 @@ describe 'Spellbook.clickOut', ->
 
     expect('click').toHaveBeenTriggeredOn(@element)
 
-  xit 'should trigger a click event on the document', ->
+  it 'should trigger a click event on the document', ->
     spyOnEvent(@document, 'click')
     @document.click()
 

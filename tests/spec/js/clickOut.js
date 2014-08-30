@@ -3,7 +3,10 @@ describe('Spellbook.clickOut', function() {
     this.document = $(document);
     this.element = $('<div class="js-clickout"></div>');
     return Spellbook.clickOut({
-      element: this.element
+      element: this.element,
+      run: function() {
+        return 'turtle';
+      }
     });
   });
   it('should trigger a click event on the element', function() {
@@ -11,7 +14,7 @@ describe('Spellbook.clickOut', function() {
     this.element.click();
     return expect('click').toHaveBeenTriggeredOn(this.element);
   });
-  return xit('should trigger a click event on the document', function() {
+  return it('should trigger a click event on the document', function() {
     spyOnEvent(this.document, 'click');
     this.document.click();
     return expect('click').toHaveBeenTriggeredOn(this.document);

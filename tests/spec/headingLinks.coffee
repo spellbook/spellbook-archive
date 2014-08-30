@@ -1,16 +1,16 @@
 describe 'Spellbook.headingLinks', ->
   beforeEach ->
-    @element = $('<h1>This is a heading</h1>')
+    @headings = $('h1, h2, h3, h4')
 
     Spellbook.headingLinks.init
-      headings: @element
+      headings: @headings
 
   it 'should slugify the heading string as an ID', ->
-    expect(@element).toHaveId('this-is-a-heading')
+    expect(@headings).toHaveId('this-is-a-heading')
 
   it 'should have an anchor link prepended to the heading', ->
-    expect(@element).toContainElement('a')
+    expect(@headings).toContainElement('a')
 
   it 'should apply the correct class to the heading link', ->
-    expect(@element.find('a')).toHaveAttr('class', 'anchor')
+    expect(@headings.find('a')).toHaveAttr('class', 'anchor')
 
