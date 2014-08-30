@@ -13,6 +13,6 @@ describe('Spellbook.headingLinks', function() {
     return expect(this.headings).toContainElement('a');
   });
   return it('should apply the correct class to the heading link', function() {
-    return expect(this.headings.find('a')).toHaveAttr('class', 'anchor');
+    return expect(this.headings.find('a')).toHaveClass('anchor');
   });
 });
