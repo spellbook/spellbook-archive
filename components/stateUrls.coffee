@@ -8,7 +8,7 @@
 @Spellbook.stateUrls = do ->
 
   # -------------------------------------
-  #   Instance Variables
+  #   Private Variables
   # -------------------------------------
 
   settings = {}

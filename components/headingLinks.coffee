@@ -13,7 +13,7 @@
 @Spellbook.headingLinks = do ->
 
   # -------------------------------------
-  #   Instance Variables
+  #   Private Variables
   # -------------------------------------
 
   settings = {}
