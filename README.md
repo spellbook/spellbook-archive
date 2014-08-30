@@ -224,7 +224,7 @@ You have two options:
 - Add the source file from `components/js/*.js` and the spec file from `test/spec/js/*.js`.
 - Load up `index.html` in the browser to see the tests.
 
-**Note**: You _have_ to load the `index.html` file via a web server, otherwise the specs will fail because of their reliance on HTML fixtures. I recommend either installing [Anvil for Mac](http://anvilformac.com/), or running a python server via this simple Bash function:
+**Note**: You _have_ to load the `index.html` file via a web server, otherwise the specs will fail because of their reliance on HTML fixtures. I recommend either installing [Anvil for Mac](http://anvilformac.com/), or running a Python server via this simple Bash function:
 
 ```bash
 ## ----- Server ----- ##
