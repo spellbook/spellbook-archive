@@ -67,4 +67,3 @@ Spellbook.toggle = (options) ->
 #
 # Spellbook.toggle()
 #
-

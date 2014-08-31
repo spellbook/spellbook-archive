@@ -1,5 +1,5 @@
 this.Spellbook.stateUrls = (function() {
-  var events, getCurrentState, init, sanitizeHash, setInitialState, settings;
+  var init, settings, _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState;
   settings = {};
   init = function(options) {
     settings = $.extend({
@@ -8,26 +8,26 @@ this.Spellbook.stateUrls = (function() {
       hiddenClass: 'is-hidden',
       activeClass: 'is-active'
     }, options);
-    setInitialState(getCurrentState());
-    return events();
+    _setInitialState(_getCurrentState());
+    return _setEventHandlers();
   };
-  sanitizeHash = function(string) {
+  _sanitizeHash = function(string) {
     return string.replace(/(<([^>]+)>)/ig, '');
   };
-  getCurrentState = function() {
+  _getCurrentState = function() {
     var state;
     if (window.location.hash) {
-      state = sanitizeHash(window.location.hash);
+      state = _sanitizeHash(window.location.hash);
     } else {
       state = settings.link.first().attr('href');
     }
     return state;
   };
-  setInitialState = function(state) {
+  _setInitialState = function(state) {
     settings.section.not(state).addClass(settings.hiddenClass);
     return $("[data-state=" + state + "]").removeClass(settings.hiddenClass).addClass(settings.activeClass);
   };
-  events = function() {
+  _setEventHandlers = function() {
     return settings.link.on('click', function(event) {
       var element, state;
       event.preventDefault();

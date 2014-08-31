@@ -25,8 +25,8 @@
       activeClass: 'is-active'
     , options)
 
-    setInitialState( getCurrentState() )
-    events()
+    _setInitialState( _getCurrentState() )
+    _setEventHandlers()
 
   # -------------------------------------
   #   Santize Hash
@@ -34,16 +34,16 @@
   # string - the string to sanitize
   # -------------------------------------
 
-  sanitizeHash = (string) ->
+  _sanitizeHash = (string) ->
     string.replace(/(<([^>]+)>)/ig, '')
 
   # -------------------------------------
   #   Get Current State
   # -------------------------------------
 
-  getCurrentState = ->
+  _getCurrentState = ->
     if window.location.hash
-      state = sanitizeHash(window.location.hash)
+      state = _sanitizeHash(window.location.hash)
     else
       state = settings.link.first().attr('href')
 
@@ -55,7 +55,7 @@
   # state - the initial state
   # -------------------------------------
 
-  setInitialState = (state) ->
+  _setInitialState = (state) ->
     settings.section
       .not(state)
       .addClass(settings.hiddenClass)
@@ -65,10 +65,10 @@
       .addClass(settings.activeClass)
 
   # -------------------------------------
-  #   Event Handlers
+  #   Set Event Handlers
   # -------------------------------------
 
-  events = ->
+  _setEventHandlers = ->
     settings.link.on 'click', (event) ->
       event.preventDefault()
 
