@@ -1,22 +1,25 @@
 this.Spellbook.QueryParams = (function() {
+  QueryParams.prototype.params = {};
+
+  QueryParams.prototype.variables = [];
+
   function QueryParams() {
     this.init();
   }
 
   QueryParams.prototype.init = function() {
-    this.params = {};
-    this.variables = [];
-    this.parseQueryString();
-    return this.sortParams();
+    this._parseQueryString();
+    return this._sortParams();
   };
 
-  QueryParams.prototype.parseQueryString = function() {
+  QueryParams.prototype._parseQueryString = function() {
     var queryString;
     queryString = window.location.search.substring(1);
-    return this.variables = queryString.split('&');
+    this.variables = queryString.split('&');
+    return this;
   };
 
-  QueryParams.prototype.sortParams = function() {
+  QueryParams.prototype._sortParams = function() {
     var pair, param, _i, _len, _ref, _results;
     _ref = this.variables;
     _results = [];

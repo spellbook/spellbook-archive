@@ -8,36 +8,42 @@
 class @Spellbook.QueryParams
 
   # -------------------------------------
+  #   Instance Variables
+  # -------------------------------------
+
+  params: {}
+
+  variables: []
+
+  # -------------------------------------
   #   Constructor
   # -------------------------------------
 
-  constructor: () ->
+  constructor: ->
     @init()
 
   # -------------------------------------
   #   Initializer
   # -------------------------------------
 
-  init: () ->
-    @params = {}
-    @variables = []
-
-    @parseQueryString()
-    @sortParams()
+  init: ->
+    @_parseQueryString()
+    @_sortParams()
 
   # -------------------------------------
   #   Parse Query String
   # -------------------------------------
 
-  parseQueryString: () ->
+  _parseQueryString: ->
     queryString = window.location.search.substring(1)
     @variables = queryString.split('&')
+    return this
 
   # -------------------------------------
   #   Sort Parameters
   # -------------------------------------
 
-  sortParams: ->
+  _sortParams: ->
     for param in @variables
       pair = param.split("=")
       @params[pair[0]] = pair[1]
@@ -46,7 +52,7 @@ class @Spellbook.QueryParams
   #   Get All Parameters
   # -------------------------------------
 
-  allParams: () ->
+  allParams: ->
     @params
 
   # -------------------------------------
