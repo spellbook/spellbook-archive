@@ -16,19 +16,19 @@
   #   Private Variables
   # -------------------------------------
 
-  settings = {}
+  _settings = {}
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
   init = (options) ->
-    settings = $.extend(
+    _settings = $.extend(
       headings: $('h1, h2, h3, h4, h5')
       anchorClass: 'anchor'
     , options)
 
-    addAnchors()
+    _addAnchors()
 
   # -------------------------------------
   #   Slugify
@@ -36,7 +36,7 @@
   # string - the string to slugify
   # -------------------------------------
 
-  slugify = (string) ->
+  _slugify = (string) ->
     string
       .toLowerCase()
       .replace(/[^\w ]+/g, '')
@@ -46,12 +46,12 @@
   #   Add Anchors
   # -------------------------------------
 
-  addAnchors = ->
-    settings.headings.each ->
+  _addAnchors = ->
+    _settings.headings.each ->
       element = $(@)
-      slug = slugify( element.text() )
+      slug = _slugify( element.text() )
       element.attr('id', slug)
-      element.prepend("<a class='#{settings.anchorClass}' href='##{slug}'>#</a>")
+      element.prepend("<a class='#{ _settings.anchorClass }' href='##{ slug }'>#</a>")
 
   # -------------------------------------
   #   Public Methods

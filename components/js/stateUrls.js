@@ -1,8 +1,8 @@
 this.Spellbook.stateUrls = (function() {
-  var init, settings, _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState;
-  settings = {};
+  var init, _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState, _settings;
+  _settings = {};
   init = function(options) {
-    settings = $.extend({
+    _settings = $.extend({
       link: $('.js-stateUrls-link'),
       section: $('.js-stateUrls-section'),
       hiddenClass: 'is-hidden',
@@ -19,16 +19,16 @@ this.Spellbook.stateUrls = (function() {
     if (window.location.hash) {
       state = _sanitizeHash(window.location.hash);
     } else {
-      state = settings.link.first().attr('href');
+      state = _settings.link.first().attr('href');
     }
     return state;
   };
   _setInitialState = function(state) {
-    settings.section.not(state).addClass(settings.hiddenClass);
-    return $("[data-state=" + state + "]").removeClass(settings.hiddenClass).addClass(settings.activeClass);
+    _settings.section.not(state).addClass(_settings.hiddenClass);
+    return $("[data-state=" + state + "]").removeClass(_settings.hiddenClass).addClass(_settings.activeClass);
   };
   _setEventHandlers = function() {
-    return settings.link.on('click', function(event) {
+    return _settings.link.on('click', function(event) {
       var element, state;
       event.preventDefault();
       element = $(this);
@@ -38,10 +38,10 @@ this.Spellbook.stateUrls = (function() {
       } else {
         window.location.hash = state;
       }
-      settings.link.removeClass(settings.activeClass);
-      settings.section.addClass(settings.hiddenClass);
-      element.addClass(settings.activeClass);
-      return $(state).removeClass(settings.hiddenClass);
+      _settings.link.removeClass(_settings.activeClass);
+      _settings.section.addClass(_settings.hiddenClass);
+      element.addClass(_settings.activeClass);
+      return $(state).removeClass(_settings.hiddenClass);
     });
   };
   return {

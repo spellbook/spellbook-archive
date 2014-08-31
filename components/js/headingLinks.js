@@ -1,23 +1,23 @@
 this.Spellbook.headingLinks = (function() {
-  var addAnchors, init, settings, slugify;
-  settings = {};
+  var init, _addAnchors, _settings, _slugify;
+  _settings = {};
   init = function(options) {
-    settings = $.extend({
+    _settings = $.extend({
       headings: $('h1, h2, h3, h4, h5'),
       anchorClass: 'anchor'
     }, options);
-    return addAnchors();
+    return _addAnchors();
   };
-  slugify = function(string) {
+  _slugify = function(string) {
     return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
   };
-  addAnchors = function() {
-    return settings.headings.each(function() {
+  _addAnchors = function() {
+    return _settings.headings.each(function() {
       var element, slug;
       element = $(this);
-      slug = slugify(element.text());
+      slug = _slugify(element.text());
       element.attr('id', slug);
-      return element.prepend("<a class='" + settings.anchorClass + "' href='#" + slug + "'>#</a>");
+      return element.prepend("<a class='" + _settings.anchorClass + "' href='#" + slug + "'>#</a>");
     });
   };
   return {

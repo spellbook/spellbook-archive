@@ -11,14 +11,14 @@
   #   Private Variables
   # -------------------------------------
 
-  settings = {}
+  _settings = {}
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
   init = (options) ->
-    settings = $.extend(
+    _settings = $.extend(
       link: $('.js-stateUrls-link')
       section: $('.js-stateUrls-section')
       hiddenClass: 'is-hidden'
@@ -45,7 +45,7 @@
     if window.location.hash
       state = _sanitizeHash(window.location.hash)
     else
-      state = settings.link.first().attr('href')
+      state = _settings.link.first().attr('href')
 
     return state
 
@@ -56,20 +56,20 @@
   # -------------------------------------
 
   _setInitialState = (state) ->
-    settings.section
+    _settings.section
       .not(state)
-      .addClass(settings.hiddenClass)
+      .addClass(_settings.hiddenClass)
 
-    $("[data-state=#{state}]")
-      .removeClass(settings.hiddenClass)
-      .addClass(settings.activeClass)
+    $("[data-state=#{ state }]")
+      .removeClass(_settings.hiddenClass)
+      .addClass(_settings.activeClass)
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
   _setEventHandlers = ->
-    settings.link.on 'click', (event) ->
+    _settings.link.on 'click', (event) ->
       event.preventDefault()
 
       element = $(@)
@@ -80,10 +80,10 @@
       else
         window.location.hash = state
 
-      settings.link.removeClass(settings.activeClass)
-      settings.section.addClass(settings.hiddenClass)
-      element.addClass(settings.activeClass)
-      $(state).removeClass(settings.hiddenClass)
+      _settings.link.removeClass(_settings.activeClass)
+      _settings.section.addClass(_settings.hiddenClass)
+      element.addClass(_settings.activeClass)
+      $(state).removeClass(_settings.hiddenClass)
 
   # -------------------------------------
   #   Public Methods
