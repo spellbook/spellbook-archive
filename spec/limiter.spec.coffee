@@ -3,21 +3,21 @@ describe 'Spellbook.limiter', ->
     loadFixtures('limiter.html')
 
     @container = $('.fixture--limiter')
-    @elements = $('.js-limiter-element')
+    @element = $('.js-limiter-element')
     @toggle = $('.js-limiter-toggle')
     @hiddenClass = 'is-hidden'
 
     Spellbook.limiter()
 
   afterEach ->
-    @elements.removeClass('is-hidden')
+    @element.removeClass('is-hidden')
     @toggle.appendTo(@container)
 
   it 'should do nothing if there are less items than the limit', ->
     Spellbook.limiter
       limit: 6
 
-    expect(@elements).not.toHaveClass(@hiddenClass)
+    expect(@element).not.toHaveClass(@hiddenClass)
 
   it 'should hide the toggle if there are less items than the limit', ->
     Spellbook.limiter

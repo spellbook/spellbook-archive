@@ -2,20 +2,20 @@ describe('Spellbook.limiter', function() {
   beforeEach(function() {
     loadFixtures('limiter.html');
     this.container = $('.fixture--limiter');
-    this.elements = $('.js-limiter-element');
+    this.element = $('.js-limiter-element');
     this.toggle = $('.js-limiter-toggle');
     this.hiddenClass = 'is-hidden';
     return Spellbook.limiter();
   });
   afterEach(function() {
-    this.elements.removeClass('is-hidden');
+    this.element.removeClass('is-hidden');
     return this.toggle.appendTo(this.container);
   });
   it('should do nothing if there are less items than the limit', function() {
     Spellbook.limiter({
       limit: 6
     });
-    return expect(this.elements).not.toHaveClass(this.hiddenClass);
+    return expect(this.element).not.toHaveClass(this.hiddenClass);
   });
   it('should hide the toggle if there are less items than the limit', function() {
     Spellbook.limiter({
