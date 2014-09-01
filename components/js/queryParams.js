@@ -1,24 +1,24 @@
 this.Spellbook.QueryParams = (function() {
   QueryParams.prototype.params = {};
 
-  QueryParams.prototype.settings = {};
-
   QueryParams.prototype.variables = [];
+
+  QueryParams.prototype._settings = {};
 
   function QueryParams(options) {
     this.options = options;
-    this.settings = $.extend({
+    this._settings = $.extend({
       url: null
     }, this.options);
     this.init();
   }
 
   QueryParams.prototype.init = function() {
-    this.parseQueryString(this.settings.url);
-    return this.sortParams();
+    this._parseQueryString(this._settings.url);
+    return this._sortParams();
   };
 
-  QueryParams.prototype.parseQueryString = function(url) {
+  QueryParams.prototype._parseQueryString = function(url) {
     var queryString;
     if (url) {
       queryString = url.split('?')[1];
@@ -28,7 +28,7 @@ this.Spellbook.QueryParams = (function() {
     return this.variables = queryString.split('&');
   };
 
-  QueryParams.prototype.sortParams = function() {
+  QueryParams.prototype._sortParams = function() {
     var pair, param, _i, _len, _ref, _results;
     _ref = this.variables;
     _results = [];
