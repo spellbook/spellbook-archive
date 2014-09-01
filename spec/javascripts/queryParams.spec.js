@@ -1,24 +1,32 @@
 describe('Spellbook.QueryParams', function() {
-  beforeEach(function() {
-    this.qp = new Spellbook.QueryParams();
-    this.qp.variables = ['param1=true', 'param2=false'];
-    return this.qp.params = {
-      'param1': 'true',
-      'param2': 'false'
-    };
-  });
   it('should instantiate a new object', function() {
+    this.qp = new Spellbook.QueryParams();
     return expect(this.qp).not.toBe(false);
   });
+  beforeEach(function() {
+    return this.qp = new Spellbook.QueryParams({
+      url: 'http://www.example.com/?param1=true&param2=false'
+    });
+  });
   describe('#parseQueryString', function() {
-    return xit('should sort parse the query string', function() {});
+    return it('should parse the query string', function() {
+      return expect(this.qp.variables).toEqual(['param1=true', 'param2=false']);
+    });
   });
   describe('#sortParams', function() {
-    return xit('should sort the parameters', function() {});
+    return it('should sort the parameters', function() {
+      return expect(this.qp.params).toEqual({
+        'param1': 'true',
+        'param2': 'false'
+      });
+    });
   });
   describe('.allParams', function() {
     return it('should return a list of the parameters', function() {
-      return expect(this.qp.allParams()).toBe(this.qp.params);
+      return expect(this.qp.params).toEqual({
+        'param1': 'true',
+        'param2': 'false'
+      });
     });
   });
   describe('.matchParamKey', function() {

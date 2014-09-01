@@ -13,13 +13,18 @@ class @Spellbook.QueryParams
 
   params: {}
 
+  settings: {}
+
   variables: []
 
   # -------------------------------------
   #   Constructor
   # -------------------------------------
 
-  constructor: ->
+  constructor: (@options) ->
+    @settings = $.extend(
+      url: null
+    , @options)
     @init()
 
   # -------------------------------------
@@ -27,25 +32,29 @@ class @Spellbook.QueryParams
   # -------------------------------------
 
   init: ->
-    @_parseQueryString()
-    @_sortParams()
+    @parseQueryString(@settings.url)
+    @sortParams()
 
   # -------------------------------------
   #   Parse Query String
   # -------------------------------------
 
-  _parseQueryString: ->
-    queryString = window.location.search.substring(1)
+  parseQueryString: (url) ->
+    if url
+      queryString = url.split('?')[1]
+    else
+      queryString = window.location.search.substring(1)
+
     @variables = queryString.split('&')
 
   # -------------------------------------
   #   Sort Parameters
   # -------------------------------------
 
-  _sortParams: ->
+  sortParams: ->
     for param in @variables
-      pair = param.split("=")
-      @params[pair[0]] = pair[1]
+      pair = param.split('=')
+      @params[pair[0]] = pair[1] unless pair[1] is undefined
 
   # -------------------------------------
   #   Get All Parameters
