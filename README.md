@@ -6,12 +6,12 @@ A compilation of CoffeeScript structure, components, and classes.
 Compendium
 ----------
 
-`application.coffee` is the compendium file, which is what you would load in your application. It shows you the order in which you would include the individual setup files, as well as each individual Component. This obviously changes if you're not in a Rails environment with Sprockets.
+`compendium/application.coffee` is the compendium file, which is what you would load in your application. It shows you the order in which you would include the individual setup files, as well as each individual Component. This obviously changes if you're not in a Rails environment with Sprockets.
 
 Namespace
 ---------
 
-`spellbook.coffee` simply sets up the namespace for the application. Be sure to change this file and namespace to the name of your application.
+`compendium/spellbook.coffee` simply sets up the namespace for the application. Be sure to change this file and namespace to the name of your application.
 
 Components
 ----------
@@ -170,12 +170,17 @@ SpellBook.moduleName.init
 Document Ready
 --------------
 
-`domready.coffee` is for all of your JavaScript that is run when the document is ready. You will put your calls to the Components that are used across the application, not just on a single page.
+`compendium/domready.coffee` is for all of your JavaScript that is run when the document is ready. You will put your calls to the Components that are used across the application, not just on a single page.
 
 Inbox
 -----
 
 This is a good place to put JavaScript that you aren't ready to organize and sort; or, simply as a testing environment.
+
+jQuery
+------
+
+There is a jQuery dependency in Spellbook, but you could easily swap out the underlying jQuery with vanilla JavaScript.
 
 Defaults
 --------
@@ -191,11 +196,6 @@ If applicable, each Component sets default options to standardize calls. For exa
 ```
 
 Use `js-` selectors to standardize the class applied to elements. Now, in the call, you can either leave out the options (using the defaults), or pass in overrides to the default options.
-
-jQuery
-------
-
-There is a jQuery dependency in Spellbook, but you could easily swap out the underlying jQuery with vanilla JavaScript.
 
 Development
 -----------
