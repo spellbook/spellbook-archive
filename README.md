@@ -219,26 +219,30 @@ You have two options:
 
 ### Writing Tests with Jasmine
 
-- Create the `componentName.spec.coffee` file at `test/spec`
-- Open up `index.html`
-- Add the source file from `components/js/*.js` and the spec file from `test/spec/js/*.js`.
-- Load up `index.html` in the browser to see the tests.
+- Create the `componentName.spec.coffee` file at `spec/`
+- Run the `gulp` command in a separate tab to compile your CoffeeScript
+- Follow the _Running Tests_ section below
 
-**Note**: You _have_ to load the `index.html` file via a web server, otherwise the specs will fail because of their reliance on HTML fixtures. I recommend either installing [Anvil for Mac](http://anvilformac.com/), or running a Python server via this simple Bash function:
+### Running Tests
 
-```bash
-## ----- Server ----- ##
-## Simple HTTP server from a directory, optionally specifying a port
-##
-## $1 - the port (optional)
-##
-## Usage: `server`
-##
+**Install Bundler**
 
-function server() {
-  local port="${1:-8000}"
-  open "http://localhost:${port}/"
-  python -m SimpleHTTPServer "$port"
-}
+```shell
+gem install bundler
+bundle install --binstubs
+```
+
+**Run Jasmine Server**
+
+```shell
+bundle exec rake jasmine
+```
+
+Now you can go to `http://localhost:1234/` to see the tests.
+
+**Run Tests via Command Line**
+
+```shell
+bundle exec rake jasmine:ci
 ```
 

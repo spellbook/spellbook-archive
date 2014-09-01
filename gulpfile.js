@@ -5,7 +5,7 @@ var gulp    = require('gulp');
     es      = require('event-stream');
 
 var srcFiles  = 'components/*.coffee';
-var specFiles = 'test/spec/*.coffee';
+var specFiles = 'spec/*.coffee';
 
 gulp.task('default', function() {
   watch([srcFiles, specFiles], function(files) {
@@ -20,7 +20,7 @@ gulp.task('coffee', function() {
 
   var tests = gulp.src(specFiles)
     .pipe( coffee({ bare: true }).on('error', gutil.log) )
-    .pipe( gulp.dest('test/spec/js/') );
+    .pipe( gulp.dest('spec/javascripts/') );
 
   return es.concat(components, tests);
 });

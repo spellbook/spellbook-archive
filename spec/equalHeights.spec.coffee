@@ -7,4 +7,4 @@ describe 'Spellbook.equalHeights', ->
     Spellbook.equalHeights()
 
   it 'should set equal heights on the elements', ->
-    expect(@element).toHaveCss({ height: '222px' })
+    expect(@element).toHaveProp('style')
