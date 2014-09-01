@@ -7,23 +7,23 @@
 
 @Spellbook.limiter = (options) ->
   settings = $.extend(
-    elements: $('.js-limiter-element')
+    element: $('.js-limiter-element')
     toggle: $('.js-limiter-toggle')
     limit: 5
     hiddenClass: 'is-hidden'
   , options)
 
-  count = settings.elements.length
+  count = settings.element.length
 
   if count > settings.limit
-    settings.elements
+    settings.element
       .not(":lt(#{ settings.limit })")
       .addClass(settings.hiddenClass)
 
     settings.toggle.on 'click', (event) ->
       event.preventDefault()
       $(@).remove()
-      settings.elements.removeClass(settings.hiddenClass)
+      settings.element.removeClass(settings.hiddenClass)
   else
     settings.toggle.remove()
 
