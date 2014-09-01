@@ -32,7 +32,7 @@ describe 'Spellbook.stateUrls', ->
   it 'should show the appropriate section when the link is clicked on', ->
     Spellbook.stateUrls.init()
 
-    @link.last().trigger('click')
+    @link.last().click()
 
     goto = @link.last().attr('href')
     expect($(goto)).toBeVisible()
@@ -40,7 +40,7 @@ describe 'Spellbook.stateUrls', ->
   it 'should add an active class to the clicked link', ->
     Spellbook.stateUrls.init()
 
-    @link.first().trigger('click')
+    @link.first().click()
 
     expect(@link.first()).toHaveClass(@activeClass)
 

@@ -29,13 +29,13 @@ describe('Spellbook.stateUrls', function() {
   it('should show the appropriate section when the link is clicked on', function() {
     var goto;
     Spellbook.stateUrls.init();
-    this.link.last().trigger('click');
+    this.link.last().click();
     goto = this.link.last().attr('href');
     return expect($(goto)).toBeVisible();
   });
   return it('should add an active class to the clicked link', function() {
     Spellbook.stateUrls.init();
-    this.link.first().trigger('click');
+    this.link.first().click();
     return expect(this.link.first()).toHaveClass(this.activeClass);
   });
 });
