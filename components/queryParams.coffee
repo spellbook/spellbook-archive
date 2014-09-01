@@ -37,7 +37,6 @@ class @Spellbook.QueryParams
   _parseQueryString: ->
     queryString = window.location.search.substring(1)
     @variables = queryString.split('&')
-    return this
 
   # -------------------------------------
   #   Sort Parameters

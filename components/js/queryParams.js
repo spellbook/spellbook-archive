@@ -15,8 +15,7 @@ this.Spellbook.QueryParams = (function() {
   QueryParams.prototype._parseQueryString = function() {
     var queryString;
     queryString = window.location.search.substring(1);
-    this.variables = queryString.split('&');
-    return this;
+    return this.variables = queryString.split('&');
   };
 
   QueryParams.prototype._sortParams = function() {
