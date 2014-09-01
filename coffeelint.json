@@ -1,0 +1,23 @@
+{
+  "arrow_spacing": {
+    "level": "error"
+  },
+  "max_line_length": {
+    "level": "warn"
+  },
+  "no_empty_param_list": {
+    "level": "warn"
+  },
+  "no_interpolation_in_single_quotes": {
+    "level": "error"
+  },
+  "no_unnecessary_double_quotes": {
+    "level": "error"
+  },
+  "prefer_english_operator": {
+    "level": "warn"
+  },
+  "space_operators": {
+    "level": "error"
+  }
+}

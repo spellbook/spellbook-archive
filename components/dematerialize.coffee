@@ -15,7 +15,7 @@
 
   item = localStorage.getItem(settings.itemTitle)
 
-  if item == null
+  if item is null
     settings.element.removeClass(settings.hiddenClass)
   else
     settings.element.addClass(settings.hiddenClass)

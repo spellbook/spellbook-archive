@@ -19,9 +19,10 @@
   , options)
 
   scrolled = $(window).scrollTop()
-  active = scrolled - settings.element.offset().top >= 0 - settings.scrollPadding
+  if settings.element.offset().top >= 0
+    active = scrolled - settings.element.offset().top - settings.scrollPadding
 
-  if !settings.element.hasClass(settings.activeClass) and active
+  if not settings.element.hasClass(settings.activeClass) and active
     settings.element.addClass(settings.activeClass)
 
 # -------------------------------------

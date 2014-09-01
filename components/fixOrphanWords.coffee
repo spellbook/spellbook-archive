@@ -15,17 +15,17 @@
     element: $('.js-orphan')
   , options)
 
-  wordArray = settings.element.text().split(" ")
-  finalTitle = ""
+  wordArray = settings.element.text().split(' ')
+  finalTitle = ''
 
   for i in [0..wordArray.length - 1]
 
     finalTitle += wordArray[i]
 
-    if i == (wordArray.length - 2)
-        finalTitle += "&nbsp;"
+    if i is (wordArray.length - 2)
+      finalTitle += '&nbsp;'
     else
-        finalTitle += " "
+      finalTitle += ' '
 
   settings.element.html(finalTitle)
 

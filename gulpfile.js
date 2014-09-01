@@ -1,8 +1,9 @@
-var gulp    = require('gulp');
-    coffee  = require('gulp-coffee'),
-    gutil   = require('gulp-util'),
-    watch   = require('gulp-watch'),
-    es      = require('event-stream');
+var gulp       = require('gulp');
+    coffee     = require('gulp-coffee'),
+    gutil      = require('gulp-util'),
+    watch      = require('gulp-watch'),
+    es         = require('event-stream'),
+    coffeelint = require('gulp-coffeelint');
 
 var srcFiles  = 'components/*.coffee';
 var specFiles = 'spec/*.coffee';
@@ -25,3 +26,8 @@ gulp.task('coffee', function() {
   return es.concat(components, tests);
 });
 
+gulp.task('lint', function () {
+    gulp.src(srcFiles)
+        .pipe(coffeelint())
+        .pipe(coffeelint.reporter())
+});

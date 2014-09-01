@@ -24,10 +24,14 @@ Spellbook.toggle = (options) ->
         unless settings.receiver
 
           switch settings.proximity
-            when 'next'       then $(@).next().toggleClass(settings.toggleClass)
-            when 'prev'       then $(@).prev().toggleClass(settings.toggleClass)
-            when 'nextParent' then $(@).parent().next().toggleClass(settings.toggleClass)
-            when 'prevParent' then $(@).parent().prev().toggleClass(settings.toggleClass)
+            when 'next'
+              $(@).next().toggleClass(settings.toggleClass)
+            when 'prev'
+              $(@).prev().toggleClass(settings.toggleClass)
+            when 'nextParent'
+              $(@).parent().next().toggleClass(settings.toggleClass)
+            when 'prevParent'
+              $(@).parent().prev().toggleClass(settings.toggleClass)
             else
               settings.proximity.toggleClass(settings.toggleClass)
 
@@ -41,23 +45,31 @@ Spellbook.toggle = (options) ->
 
       settings.sender.on
 
-        mouseenter: () ->
+        mouseenter: ->
 
           switch settings.proximity
-            when 'next'       then $(@).next().addClass(settings.toggleClass)
-            when 'prev'       then $(@).prev().addClass(settings.toggleClass)
-            when 'nextParent' then $(@).parent().next().addClass(settings.toggleClass)
-            when 'prevParent' then $(@).parent().prev().addClass(settings.toggleClass)
+            when 'next'
+              $(@).next().addClass(settings.toggleClass)
+            when 'prev'
+              $(@).prev().addClass(settings.toggleClass)
+            when 'nextParent'
+              $(@).parent().next().addClass(settings.toggleClass)
+            when 'prevParent'
+              $(@).parent().prev().addClass(settings.toggleClass)
             else
               settings.proximity.addClass(settings.toggleClass)
 
-        mouseleave: () ->
+        mouseleave: ->
 
           switch settings.proximity
-            when 'next'       then $(@).next().removeClass(settings.toggleClass)
-            when 'prev'       then $(@).prev().removeClass(settings.toggleClass)
-            when 'nextParent' then $(@).parent().next().removeClass(settings.toggleClass)
-            when 'prevParent' then $(@).parent().prev().removeClass(settings.toggleClass)
+            when 'next'
+              $(@).next().removeClass(settings.toggleClass)
+            when 'prev'
+              $(@).prev().removeClass(settings.toggleClass)
+            when 'nextParent'
+              $(@).parent().next().removeClass(settings.toggleClass)
+            when 'prevParent'
+              $(@).parent().prev().removeClass(settings.toggleClass)
             else
               settings.proximity.removeClass(settings.toggleClass)
 

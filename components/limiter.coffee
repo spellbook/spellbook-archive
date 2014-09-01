@@ -16,7 +16,9 @@
   count = settings.elements.length
 
   if count > settings.limit
-    settings.elements.not(":lt(#{ settings.limit })").addClass(settings.hiddenClass)
+    settings.elements
+      .not(":lt(#{ settings.limit })")
+      .addClass(settings.hiddenClass)
 
     settings.toggle.on 'click', (event) ->
       event.preventDefault()

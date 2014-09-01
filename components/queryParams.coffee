@@ -71,7 +71,7 @@ class @Spellbook.QueryParams
 
   matchParamKey: (matcher) ->
     for key, value of @params
-      return true if matcher == key
+      return true if matcher is key
 
     return false
 
@@ -83,7 +83,7 @@ class @Spellbook.QueryParams
 
   matchParamValue: (matcher) ->
     for key, value of @params
-      return true if matcher == value
+      return true if matcher is value
 
     return false
 

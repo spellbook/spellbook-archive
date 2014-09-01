@@ -217,6 +217,12 @@ You have two options:
 1. Run `gulp coffee` to compile the `components/*.coffee` files.
 2. Run `gulp` and have it watch and automatically compile `components/*.coffee` files.
 
+### Running CoffeeLint
+
+```shell
+gulp lint
+```
+
 ### Writing Tests with Jasmine
 
 - Create the `componentName.spec.coffee` file at `spec/`
