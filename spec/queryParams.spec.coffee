@@ -17,7 +17,7 @@ describe 'Spellbook.QueryParams', ->
 
   describe '.allParams', ->
     it 'should return a list of the parameters', ->
-      expect(@qp.params).toEqual({ 'param1': 'true', 'param2': 'false' })
+      expect( @qp.allParams() ).toEqual({ 'param1': 'true', 'param2': 'false' })
 
   describe '.matchParamKey', ->
     it 'should return a correct match on a parameter key', ->

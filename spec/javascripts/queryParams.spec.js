@@ -23,7 +23,7 @@ describe('Spellbook.QueryParams', function() {
   });
   describe('.allParams', function() {
     return it('should return a list of the parameters', function() {
-      return expect(this.qp.params).toEqual({
+      return expect(this.qp.allParams()).toEqual({
         'param1': 'true',
         'param2': 'false'
       });
