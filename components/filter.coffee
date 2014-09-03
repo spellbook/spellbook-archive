@@ -9,8 +9,8 @@
   settings = $.extend(
     link: $('.js-filter-link')
     item: $('.js-filter-item')
-    activeLinkClass: 'is-active'
-    hiddenItemClass: 'is-hidden'
+    activeClass: 'is-active'
+    hiddenClass: 'is-hidden'
   , options)
 
   settings.link.on 'click', (event) ->
@@ -18,15 +18,15 @@
     element = $(@)
     itemToShow = element.attr('href').split('#')[1]
 
-    settings.link.removeClass(settings.activeLinkClass)
-    element.toggleClass(settings.activeLinkClass)
+    settings.link.removeClass(settings.activeClass)
+    element.toggleClass(settings.activeClass)
 
-    settings.link.removeClass(settings.hiddenItemClass)
+    settings.link.removeClass(settings.hiddenClass)
 
     unless itemToShow is 'all'
       settings.item
         .not("[data-item=#{ itemToShow }]")
-        .addClass(settings.hiddenItemClass)
+        .addClass(settings.hiddenClass)
 
 # -------------------------------------
 #   Usage
