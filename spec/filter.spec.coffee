@@ -26,20 +26,24 @@ describe 'Spellbook.filter', ->
     expect( @link.not( @link.first() ) ).not.toHaveClass(@activeClass)
 
   it 'should show the first set when the first set link is clicked', ->
+    firstSetLink = $('.link-first')
     firstSet = $('.set-01')
 
-    @link.click()
+    firstSetLink.click()
 
     expect(firstSet).not.toHaveClass(@hiddenClass)
 
   it 'should show the second set when the second set link is clicked', ->
+    secondSetLink = $('.link-second')
     secondSet = $('.set-02')
 
-    @link.click()
+    secondSet.click()
 
     expect(secondSet).not.toHaveClass(@hiddenClass)
 
   it 'should show all elements when the all link is clicked', ->
-    @link.click()
+    allLink = $('.link-all')
+
+    allLink.click()
 
     expect(@item).not.toHaveClass(@hiddenClass)

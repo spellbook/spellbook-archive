@@ -21,19 +21,23 @@ describe('Spellbook.filter', function() {
     return expect(this.link.not(this.link.first())).not.toHaveClass(this.activeClass);
   });
   it('should show the first set when the first set link is clicked', function() {
-    var firstSet;
+    var firstSet, firstSetLink;
+    firstSetLink = $('.link-first');
     firstSet = $('.set-01');
-    this.link.click();
+    firstSetLink.click();
     return expect(firstSet).not.toHaveClass(this.hiddenClass);
   });
   it('should show the second set when the second set link is clicked', function() {
-    var secondSet;
+    var secondSet, secondSetLink;
+    secondSetLink = $('.link-second');
     secondSet = $('.set-02');
-    this.link.click();
+    secondSet.click();
     return expect(secondSet).not.toHaveClass(this.hiddenClass);
   });
   return it('should show all elements when the all link is clicked', function() {
-    this.link.click();
+    var allLink;
+    allLink = $('.link-all');
+    allLink.click();
     return expect(this.item).not.toHaveClass(this.hiddenClass);
   });
 });

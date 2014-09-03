@@ -21,12 +21,12 @@
     settings.link.removeClass(settings.activeClass)
     element.toggleClass(settings.activeClass)
 
-    settings.link.removeClass(settings.hiddenClass)
-
     unless itemToShow is 'all'
-      settings.item
-        .not("[data-item=#{ itemToShow }]")
-        .addClass(settings.hiddenClass)
+      settings.item.addClass(settings.hiddenClass)
+      $("[data-item=#{ itemToShow }]")
+        .removeClass(settings.hiddenClass)
+    else
+      settings.item.removeClass(settings.hiddenClass)
 
 # -------------------------------------
 #   Usage

@@ -13,9 +13,11 @@ this.Spellbook.filter = function(options) {
     itemToShow = element.attr('href').split('#')[1];
     settings.link.removeClass(settings.activeClass);
     element.toggleClass(settings.activeClass);
-    settings.link.removeClass(settings.hiddenClass);
     if (itemToShow !== 'all') {
-      return settings.item.not("[data-item=" + itemToShow + "]").addClass(settings.hiddenClass);
+      settings.item.addClass(settings.hiddenClass);
+      return $("[data-item=" + itemToShow + "]").removeClass(settings.hiddenClass);
+    } else {
+      return settings.item.removeClass(settings.hiddenClass);
     }
   });
 };
