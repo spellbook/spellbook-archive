@@ -5,13 +5,13 @@
 #
 # *************************************
 
-Spellbook.toggle = (options) ->
+@Spellbook.toggle = (options) ->
   settings = $.extend(
     sender: $('.js-toggle-sender')
-    receiver: null
-    proximity: 'next' # prev, parent, nextParent, parentPrev, $('.element')
+    proximity: 'next' # prev, parent, nextParent, prevParent, $('.element')
     event: 'click' # hover
-    toggleClass: 'is-hidden'
+    proximityToggleClass: 'is-hidden'
+    senderActiveClass: 'is-active'
   , options)
 
   switch settings.event
@@ -20,24 +20,21 @@ Spellbook.toggle = (options) ->
 
       settings.sender.on 'click', (event) ->
         event.preventDefault()
+        element = $(@)
 
-        unless settings.receiver
+        settings.sender.toggleClass(settings.senderActiveClass)
 
-          switch settings.proximity
-            when 'next'
-              $(@).next().toggleClass(settings.toggleClass)
-            when 'prev'
-              $(@).prev().toggleClass(settings.toggleClass)
-            when 'nextParent'
-              $(@).parent().next().toggleClass(settings.toggleClass)
-            when 'prevParent'
-              $(@).parent().prev().toggleClass(settings.toggleClass)
-            else
-              settings.proximity.toggleClass(settings.toggleClass)
-
-        else
-
-          settings.receiver.toggleClass(settings.toggleClass)
+        switch settings.proximity
+          when 'next'
+            element.next().toggleClass(settings.proximityToggleClass)
+          when 'prev'
+            element.prev().toggleClass(settings.proximityToggleClass)
+          when 'nextParent'
+            element.parent().next().toggleClass(settings.proximityToggleClass)
+          when 'prevParent'
+            element.parent().prev().toggleClass(settings.proximityToggleClass)
+          else
+            settings.proximity.toggleClass(settings.proximityToggleClass)
 
     when 'hover'
 
@@ -47,31 +44,37 @@ Spellbook.toggle = (options) ->
 
         mouseenter: ->
 
+          element = $(@)
+          element.addClass(settings.senderActiveClass)
+
           switch settings.proximity
             when 'next'
-              $(@).next().addClass(settings.toggleClass)
+              element.next().addClass(settings.proximityToggleClass)
             when 'prev'
-              $(@).prev().addClass(settings.toggleClass)
+              element.prev().addClass(settings.proximityToggleClass)
             when 'nextParent'
-              $(@).parent().next().addClass(settings.toggleClass)
+              element.parent().next().addClass(settings.proximityToggleClass)
             when 'prevParent'
-              $(@).parent().prev().addClass(settings.toggleClass)
+              element.parent().prev().addClass(settings.proximityToggleClass)
             else
-              settings.proximity.addClass(settings.toggleClass)
+              settings.proximity.addClass(settings.proximityToggleClass)
 
         mouseleave: ->
 
+          element = $(@)
+          element.removeClass(settings.senderActiveClass)
+
           switch settings.proximity
             when 'next'
-              $(@).next().removeClass(settings.toggleClass)
+              element.next().removeClass(settings.proximityToggleClass)
             when 'prev'
-              $(@).prev().removeClass(settings.toggleClass)
+              element.prev().removeClass(settings.proximityToggleClass)
             when 'nextParent'
-              $(@).parent().next().removeClass(settings.toggleClass)
+              element.parent().next().removeClass(settings.proximityToggleClass)
             when 'prevParent'
-              $(@).parent().prev().removeClass(settings.toggleClass)
+              element.parent().prev().removeClass(settings.proximityToggleClass)
             else
-              settings.proximity.removeClass(settings.toggleClass)
+              settings.proximity.removeClass(settings.proximityToggleClass)
 
 # -------------------------------------
 #   Usage

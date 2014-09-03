@@ -1,31 +1,30 @@
-Spellbook.toggle = function(options) {
+this.Spellbook.toggle = function(options) {
   var settings;
   settings = $.extend({
     sender: $('.js-toggle-sender'),
-    receiver: null,
     proximity: 'next',
     event: 'click',
-    toggleClass: 'is-hidden'
+    proximityToggleClass: 'is-hidden',
+    senderActiveClass: 'is-active'
   }, options);
   switch (settings.event) {
     case 'click':
       return settings.sender.on('click', function(event) {
+        var element;
         event.preventDefault();
-        if (!settings.receiver) {
-          switch (settings.proximity) {
-            case 'next':
-              return $(this).next().toggleClass(settings.toggleClass);
-            case 'prev':
-              return $(this).prev().toggleClass(settings.toggleClass);
-            case 'nextParent':
-              return $(this).parent().next().toggleClass(settings.toggleClass);
-            case 'prevParent':
-              return $(this).parent().prev().toggleClass(settings.toggleClass);
-            default:
-              return settings.proximity.toggleClass(settings.toggleClass);
-          }
-        } else {
-          return settings.receiver.toggleClass(settings.toggleClass);
+        element = $(this);
+        settings.sender.toggleClass(settings.senderActiveClass);
+        switch (settings.proximity) {
+          case 'next':
+            return element.next().toggleClass(settings.proximityToggleClass);
+          case 'prev':
+            return element.prev().toggleClass(settings.proximityToggleClass);
+          case 'nextParent':
+            return element.parent().next().toggleClass(settings.proximityToggleClass);
+          case 'prevParent':
+            return element.parent().prev().toggleClass(settings.proximityToggleClass);
+          default:
+            return settings.proximity.toggleClass(settings.proximityToggleClass);
         }
       });
     case 'hover':
@@ -34,31 +33,37 @@ Spellbook.toggle = function(options) {
       }
       return settings.sender.on({
         mouseenter: function() {
+          var element;
+          element = $(this);
+          element.addClass(settings.senderActiveClass);
           switch (settings.proximity) {
             case 'next':
-              return $(this).next().addClass(settings.toggleClass);
+              return element.next().addClass(settings.proximityToggleClass);
             case 'prev':
-              return $(this).prev().addClass(settings.toggleClass);
+              return element.prev().addClass(settings.proximityToggleClass);
             case 'nextParent':
-              return $(this).parent().next().addClass(settings.toggleClass);
+              return element.parent().next().addClass(settings.proximityToggleClass);
             case 'prevParent':
-              return $(this).parent().prev().addClass(settings.toggleClass);
+              return element.parent().prev().addClass(settings.proximityToggleClass);
             default:
-              return settings.proximity.addClass(settings.toggleClass);
+              return settings.proximity.addClass(settings.proximityToggleClass);
           }
         },
         mouseleave: function() {
+          var element;
+          element = $(this);
+          element.removeClass(settings.senderActiveClass);
           switch (settings.proximity) {
             case 'next':
-              return $(this).next().removeClass(settings.toggleClass);
+              return element.next().removeClass(settings.proximityToggleClass);
             case 'prev':
-              return $(this).prev().removeClass(settings.toggleClass);
+              return element.prev().removeClass(settings.proximityToggleClass);
             case 'nextParent':
-              return $(this).parent().next().removeClass(settings.toggleClass);
+              return element.parent().next().removeClass(settings.proximityToggleClass);
             case 'prevParent':
-              return $(this).parent().prev().removeClass(settings.toggleClass);
+              return element.parent().prev().removeClass(settings.proximityToggleClass);
             default:
-              return settings.proximity.removeClass(settings.toggleClass);
+              return settings.proximity.removeClass(settings.proximityToggleClass);
           }
         }
       });
