@@ -4,8 +4,10 @@ describe 'Spellbook.filter', ->
 
     @link =  $('.js-filter-link')
     @item =  $('.js-filter-item')
+    @itemsContainer = $('.js-filter-items')
     @activeClass = 'is-active'
     @hiddenClass = 'is-hidden'
+    @emptyElement = $('<p>There are no items to show.</p>')
 
     Spellbook.filter()
 
@@ -47,3 +49,10 @@ describe 'Spellbook.filter', ->
     allLink.click()
 
     expect(@item).not.toHaveClass(@hiddenClass)
+
+  it 'should show an empty message when there are not items in the set', ->
+    thirdSetLink = $('.link-third')
+
+    thirdSetLink.click()
+
+    expect(@itemsContainer).toContainHtml(@emptyElement)

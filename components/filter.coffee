@@ -9,8 +9,10 @@
   settings = $.extend(
     link: $('.js-filter-link')
     item: $('.js-filter-item')
+    itemsContainer: $('.js-filter-items')
     activeClass: 'is-active'
     hiddenClass: 'is-hidden'
+    emptyElement: $('<p>There are no items to show.</p>')
   , options)
 
   settings.link.on 'click', (event) ->
@@ -23,8 +25,13 @@
 
     unless itemToShow is 'all'
       settings.item.addClass(settings.hiddenClass)
-      $("[data-item=#{ itemToShow }]")
-        .removeClass(settings.hiddenClass)
+
+      dataItemToShow = $("[data-item=#{ itemToShow }]")
+
+      if dataItemToShow.length > 0
+        dataItemToShow.removeClass(settings.hiddenClass)
+      else
+        settings.itemsContainer.append(settings.emptyElement)
     else
       settings.item.removeClass(settings.hiddenClass)
 

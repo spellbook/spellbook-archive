@@ -3,8 +3,10 @@ describe('Spellbook.filter', function() {
     loadFixtures('filter.html');
     this.link = $('.js-filter-link');
     this.item = $('.js-filter-item');
+    this.itemsContainer = $('.js-filter-items');
     this.activeClass = 'is-active';
     this.hiddenClass = 'is-hidden';
+    this.emptyElement = $('<p>There are no items to show.</p>');
     return Spellbook.filter();
   });
   it('should trigger a click on the filter link', function() {
@@ -34,10 +36,16 @@ describe('Spellbook.filter', function() {
     secondSet.click();
     return expect(secondSet).not.toHaveClass(this.hiddenClass);
   });
-  return it('should show all elements when the all link is clicked', function() {
+  it('should show all elements when the all link is clicked', function() {
     var allLink;
     allLink = $('.link-all');
     allLink.click();
     return expect(this.item).not.toHaveClass(this.hiddenClass);
+  });
+  return it('should show an empty message when there are not items in the set', function() {
+    var thirdSetLink;
+    thirdSetLink = $('.link-third');
+    thirdSetLink.click();
+    return expect(this.itemsContainer).toContainHtml(this.emptyElement);
   });
 });
