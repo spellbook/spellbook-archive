@@ -1,5 +1,5 @@
 this.Spellbook.stateUrls = (function() {
-  var init, _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState, _settings;
+  var init, _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState, _settings, _showSection;
   _settings = {};
   init = function(options) {
     _settings = $.extend({
@@ -38,11 +38,16 @@ this.Spellbook.stateUrls = (function() {
       } else {
         window.location.hash = state;
       }
-      _settings.link.removeClass(_settings.activeClass);
-      _settings.section.addClass(_settings.hiddenClass);
-      element.addClass(_settings.activeClass);
-      return $(state).removeClass(_settings.hiddenClass);
+      if ($(state).length > 0) {
+        return _showSection(element, state);
+      }
     });
+  };
+  _showSection = function(element, state) {
+    _settings.link.removeClass(_settings.activeClass);
+    _settings.section.addClass(_settings.hiddenClass);
+    element.addClass(_settings.activeClass);
+    return $(state).removeClass(_settings.hiddenClass);
   };
   return {
     init: init

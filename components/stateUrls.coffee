@@ -80,10 +80,20 @@
       else
         window.location.hash = state
 
-      _settings.link.removeClass(_settings.activeClass)
-      _settings.section.addClass(_settings.hiddenClass)
-      element.addClass(_settings.activeClass)
-      $(state).removeClass(_settings.hiddenClass)
+      _showSection(element, state) if $(state).length > 0
+
+  # -------------------------------------
+  #   Show Section
+  # -------------------------------------
+  # element - the clicked element (jQuery)
+  # state   - the state to show   (string)
+  # -------------------------------------
+
+  _showSection = (element, state) ->
+    _settings.link.removeClass(_settings.activeClass)
+    _settings.section.addClass(_settings.hiddenClass)
+    element.addClass(_settings.activeClass)
+    $(state).removeClass(_settings.hiddenClass)
 
   # -------------------------------------
   #   Public Methods
