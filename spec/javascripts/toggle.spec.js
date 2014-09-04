@@ -45,7 +45,7 @@ describe('Spellbook.toggle', function() {
       this.sender3.trigger('click');
       return expect(this.receiver3).toHaveClass(this.proximityToggleClass);
     });
-    return it('should toggle the visibility of the previous parent element when clicked', function() {
+    it('should toggle the visibility of the previous parent element when clicked', function() {
       this.sender4 = $('.js-toggle-sender-04');
       this.receiver4 = $('#receiver-04');
       Spellbook.toggle({
@@ -54,6 +54,16 @@ describe('Spellbook.toggle', function() {
       });
       this.sender4.trigger('click');
       return expect(this.receiver4).toHaveClass(this.proximityToggleClass);
+    });
+    return it('should toggle the visibility of the referenced element when clicked', function() {
+      this.sender = $('.js-toggle-sender-04');
+      this.receiver = $('#receiver-04');
+      Spellbook.toggle({
+        sender: this.sender,
+        proximity: this.receiver
+      });
+      this.sender.trigger('click');
+      return expect(this.receiver).toHaveClass(this.proximityToggleClass);
     });
   });
   return describe('hover', function() {
@@ -119,7 +129,7 @@ describe('Spellbook.toggle', function() {
       this.sender3.trigger('mouseover');
       return expect(this.receiver3).toHaveClass(this.proximityToggleClass);
     });
-    return it('should toggle the visibility of the previous parent element when hovered on', function() {
+    it('should toggle the visibility of the previous parent element when hovered on', function() {
       this.sender4 = $('.js-toggle-sender-04');
       this.receiver4 = $('#receiver-04');
       Spellbook.toggle({
@@ -129,6 +139,17 @@ describe('Spellbook.toggle', function() {
       });
       this.sender4.trigger('mouseover');
       return expect(this.receiver4).toHaveClass(this.proximityToggleClass);
+    });
+    return it('should toggle the visibility of the referenced element when hovered on', function() {
+      this.sender = $('.js-toggle-sender-04');
+      this.receiver = $('#receiver-04');
+      Spellbook.toggle({
+        event: 'hover',
+        sender: this.sender,
+        proximity: this.receiver
+      });
+      this.sender.trigger('mouseover');
+      return expect(this.receiver).toHaveClass(this.proximityToggleClass);
     });
   });
 });

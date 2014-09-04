@@ -64,6 +64,17 @@ describe 'Spellbook.toggle', ->
       @sender4.trigger('click')
       expect(@receiver4).toHaveClass(@proximityToggleClass)
 
+    it 'should toggle the visibility of the referenced element when clicked', ->
+      @sender = $('.js-toggle-sender-04')
+      @receiver = $('#receiver-04')
+
+      Spellbook.toggle
+        sender: @sender
+        proximity: @receiver
+
+      @sender.trigger('click')
+      expect(@receiver).toHaveClass(@proximityToggleClass)
+
   describe 'hover', ->
 
     it 'should register a mouseover on the sender', ->
@@ -146,4 +157,16 @@ describe 'Spellbook.toggle', ->
 
       @sender4.trigger('mouseover')
       expect(@receiver4).toHaveClass(@proximityToggleClass)
+
+    it 'should toggle the visibility of the referenced element when hovered on', ->
+      @sender = $('.js-toggle-sender-04')
+      @receiver = $('#receiver-04')
+
+      Spellbook.toggle
+        event: 'hover'
+        sender: @sender
+        proximity: @receiver
+
+      @sender.trigger('mouseover')
+      expect(@receiver).toHaveClass(@proximityToggleClass)
 
