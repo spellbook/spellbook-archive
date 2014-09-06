@@ -5,7 +5,8 @@
 #
 # *************************************
 #
-# options.elements - the element containing text to save
+# options.element - the element whose value to save
+# options.container - the element containing input elements
 # options.dataAttribute - the data attribute of the Local Storage key
 #
 # *************************************
@@ -24,7 +25,8 @@
 
   init = (options) ->
     _settings = $.extend(
-      elements: $('.js-saveProgress')
+      element: $('.js-saveProgress')
+      container: $('.js-saveProgress-container')
       dataAttribute: 'saveprogress'
     , options)
 
@@ -32,14 +34,24 @@
     _setEventHandlers()
 
   # -------------------------------------
+  #   Erase Progress
+  # -------------------------------------
+
+  _eraseProgress = (container) ->
+    container.find(_settings.element).each ->
+      key = $(@).data(_settings.dataAttribute)
+
+      localStorage.removeItem(key)
+
+  # -------------------------------------
   #   Restore Progress
   # -------------------------------------
 
   _restoreProgress = ->
-    _settings.elements.each ->
+    _settings.element.each ->
       element = $(@)
       key = element.data(_settings.dataAttribute)
-      value = localStorage.getItem key
+      value = localStorage.getItem(key)
 
       element.val(value)
 
@@ -48,14 +60,15 @@
   # -------------------------------------
 
   _setEventHandlers = ->
-    _settings.elements.each ->
+    _settings.element.on 'input', ->
       element = $(@)
+      key = element.data(_settings.dataAttribute)
+      value = element.val()
 
-      element.on 'input', ->
-        key = element.data(_settings.dataAttribute)
-        value = element.val()
+      _storeProgress( key, value )
 
-        _storeProgress( key, value )
+    _settings.container.on 'submit', (event) ->
+      _eraseProgress($(@))
 
   # -------------------------------------
   #   Store Progress
