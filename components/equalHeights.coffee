@@ -13,9 +13,9 @@
   heights = []
   settings.element.each -> heights.push $(@).height()
 
-  height = Math.max.apply(Math, heights)
+  height = Math.max.apply( Math, heights )
 
-  settings.element.css('height', height)
+  settings.element.css( 'height', height )
 
 # -------------------------------------
 #   Usage

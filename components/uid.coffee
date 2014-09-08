@@ -6,13 +6,13 @@
 #
 # *************************************
 
-@Spellbook.uid = (length = 10) ->
+@Spellbook.uid = ( length = 10 ) ->
   id = ''
 
   while id.length < length
     id += Math.random().toString(36).substr(2)
 
-  id.substr 0, length
+  id.substr( 0, length )
 
 # -------------------------------------
 #   Usage

@@ -54,7 +54,7 @@ class @Spellbook.QueryParams
   _sortParams: ->
     for param in @variables
       pair = param.split('=')
-      @params[pair[0]] = pair[1] unless pair[1] is undefined
+      @params[ pair[0] ] = pair[1] unless pair[1] is undefined
 
   # -------------------------------------
   #   Get All Parameters

@@ -24,7 +24,7 @@
     event.preventDefault()
 
     settings.element.addClass(settings.hiddenClass)
-    localStorage.setItem(settings.itemTitle, true)
+    localStorage.setItem( settings.itemTitle, true )
 
 # -------------------------------------
 #   Usage

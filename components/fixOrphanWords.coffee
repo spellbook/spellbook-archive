@@ -18,11 +18,11 @@
   wordArray = settings.element.text().split(' ')
   finalTitle = ''
 
-  for i in [0..wordArray.length - 1]
+  for i in [ 0..wordArray.length - 1 ]
 
     finalTitle += wordArray[i]
 
-    if i is (wordArray.length - 2)
+    if i is ( wordArray.length - 2 )
       finalTitle += '&nbsp;'
     else
       finalTitle += ' '

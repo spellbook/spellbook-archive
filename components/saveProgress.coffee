@@ -68,7 +68,7 @@
       _storeProgress( key, value )
 
     _settings.container.on 'submit', (event) ->
-      _eraseProgress($(@))
+      _eraseProgress( $(@) )
 
   # -------------------------------------
   #   Store Progress

@@ -8,8 +8,8 @@
 @Spellbook.slugify = (string) ->
   string
     .toLowerCase()
-    .replace(/[^\w ]+/g, '')
-    .replace(/\s+/g, '-')
+    .replace( /[^\w ]+/g, '' )
+    .replace( /\s+/g, '-' )
 
 # -------------------------------------
 #   Usage

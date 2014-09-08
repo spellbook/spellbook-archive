@@ -5,7 +5,7 @@
 #
 # *************************************
 #
-# options.elements - the heading elements
+# options.headings - the heading elements
 # options.anchorClass - the class to add to the anchor
 #
 # *************************************
@@ -50,7 +50,7 @@
     _settings.headings.each ->
       element = $(@)
       slug = _slugify( element.text() )
-      element.attr('id', slug)
+      element.attr( 'id', slug )
       element.prepend("<a class='#{ _settings.anchorClass }' href='##{ slug }'>#</a>")
 
   # -------------------------------------

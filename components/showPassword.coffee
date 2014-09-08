@@ -38,15 +38,15 @@
       if show
         _showPassword()
       else
-        _settings.input.attr('type', 'password')
+        _settings.input.attr( 'type', 'password' )
 
   # -------------------------------------
   #   Show Password
   # -------------------------------------
 
   _showPassword = ->
-    _settings.input.attr('type', 'text')
-    _settings.toggle.prop('checked', true)
+    _settings.input.attr( 'type', 'text' )
+    _settings.toggle.prop( 'checked', true )
 
   # -------------------------------------
   #   Public Methods

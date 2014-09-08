@@ -35,7 +35,7 @@
   # -------------------------------------
 
   _sanitizeHash = (string) ->
-    string.replace(/(<([^>]+)>)/ig, '')
+    string.replace( /(<([^>]+)>)/ig, '' )
 
   # -------------------------------------
   #   Get Current State

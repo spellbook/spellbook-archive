@@ -6,7 +6,7 @@
 # *************************************
 
 Spellbook.randomizer = (collection) ->
-  randomNumber = Math.floor(Math.random() * collection.length)
+  randomNumber = Math.floor( Math.random() * collection.length )
   return collection[randomNumber]
 
 # -------------------------------------
