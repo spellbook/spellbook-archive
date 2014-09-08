@@ -21,6 +21,7 @@ describe('Spellbook.saveProgress', function() {
     Spellbook.saveProgress.init();
     localStorage.setItem(this.key, this.value);
     localStorage.setItem('keep', 'me');
+    spyOnEvent(this.container, 'submit');
     this.container.trigger('submit');
     expect(localStorage.getItem(this.key)).toEqual(null);
     return expect(localStorage.getItem('keep')).toEqual('me');

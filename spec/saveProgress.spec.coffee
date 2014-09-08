@@ -27,6 +27,8 @@ describe 'Spellbook.saveProgress', ->
 
     localStorage.setItem( @key, @value )
     localStorage.setItem( 'keep', 'me' )
+
+    spyOnEvent(@container, 'submit')
     @container.trigger('submit')
 
     expect( localStorage.getItem(@key) ).toEqual(null)
