@@ -15,19 +15,23 @@
     element: $('.js-orphan')
   , options)
 
-  wordArray = settings.element.text().split(' ')
-  finalTitle = ''
+  settings.element.each ->
+    element = $(@)
+    wordArray = element.text().split(' ')
+    finalTitle = ''
 
-  for i in [ 0..wordArray.length - 1 ]
+    for i in [ 0..wordArray.length - 1 ]
 
-    finalTitle += wordArray[i]
+      finalTitle += wordArray[i]
 
-    if i is ( wordArray.length - 2 )
-      finalTitle += '&nbsp;'
-    else
-      finalTitle += ' '
+      if i is ( wordArray.length - 2 )
+        finalTitle += '&nbsp;'
+      else if i is ( wordArray.length - 1 )
+        finalTitle += ''
+      else
+        finalTitle += ' '
 
-  settings.element.html(finalTitle)
+    element.html(finalTitle)
 
 # -------------------------------------
 #   Usage
