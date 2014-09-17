@@ -7,7 +7,7 @@ describe 'Spellbook.dematerialize', ->
     @itemTitle = 'hidden_element'
     @hiddenClass = 'is-hidden'
 
-    Spellbook.dematerialize()
+    Spellbook.dematerialize.init()
 
   afterEach ->
     localStorage.removeItem(@itemTitle)
@@ -24,3 +24,4 @@ describe 'Spellbook.dematerialize', ->
   it 'should hide the element when the trigger is clicked', ->
     @trigger.click()
     expect(@element).toHaveClass(@hiddenClass)
+

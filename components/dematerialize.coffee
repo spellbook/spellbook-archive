@@ -5,31 +5,85 @@
 #
 # *************************************
 
-@Spellbook.dematerialize = (options) ->
-  settings = $.extend(
-    element: $('.js-dematerialize-element')
-    trigger: $('.js-dematerialize-trigger')
-    itemTitle: 'hidden_element'
-    hiddenClass: 'is-hidden'
-  , options)
+@Spellbook.dematerialize = do ->
 
-  item = localStorage.getItem(settings.itemTitle)
+  # -------------------------------------
+  #   Private Variables
+  # -------------------------------------
 
-  if item is null
-    settings.element.removeClass(settings.hiddenClass)
-  else
-    settings.element.addClass(settings.hiddenClass)
+  _settings = {}
+  _item     = ''
 
-  settings.trigger.on 'click', (event) ->
-    event.preventDefault()
+  # -------------------------------------
+  #   Initialize
+  # -------------------------------------
 
-    settings.element.addClass(settings.hiddenClass)
-    localStorage.setItem( settings.itemTitle, true )
+  init = (options) ->
+    _settings = $.extend(
+      element: $('.js-dematerialize-element')
+      trigger: $('.js-dematerialize-trigger')
+      itemTitle: 'hidden_element'
+      hiddenClass: 'is-hidden'
+    , options)
+
+    _setEventHandlers()
+    _setInitialState()
+
+  # -------------------------------------
+  #   Set Event Handlers
+  # -------------------------------------
+
+  _setEventHandlers = ->
+    if _settings.trigger instanceof jQuery
+      _settings.trigger.on 'click', (event) ->
+        event.preventDefault()
+        _toggleState()
+    else
+      _toggleStateViaKey()
+
+  # -------------------------------------
+  #   Set Initial State
+  # -------------------------------------
+
+  _setInitialState = ->
+    _item = localStorage.getItem(_settings.itemTitle)
+
+    if _item is null
+      _settings.element.removeClass(_settings.hiddenClass)
+    else
+      _settings.element.addClass(_settings.hiddenClass)
+
+  # -------------------------------------
+  #   Toggle State
+  # -------------------------------------
+
+  _toggleState = ->
+    unless _settings.element.hasClass(_settings.hiddenClass)
+      _settings.element.addClass(_settings.hiddenClass)
+      _item = localStorage.setItem( _settings.itemTitle, true )
+    else
+      _settings.element.removeClass(_settings.hiddenClass)
+      _item = localStorage.removeItem(_settings.itemTitle)
+
+  # -------------------------------------
+  #   Toggle State Via Key
+  # -------------------------------------
+
+  _toggleStateViaKey = ->
+    $(document).on 'keyup', (event) ->
+      switch event.which
+        when _settings.trigger then _toggleState()
+
+  # -------------------------------------
+  #   Public Methods
+  # -------------------------------------
+
+  init: init
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.dematerialize()
+# Spellbook.dematerialize.init()
 #
 

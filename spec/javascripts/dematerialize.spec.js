@@ -5,7 +5,7 @@ describe('Spellbook.dematerialize', function() {
     this.trigger = $('.js-dematerialize-trigger');
     this.itemTitle = 'hidden_element';
     this.hiddenClass = 'is-hidden';
-    return Spellbook.dematerialize();
+    return Spellbook.dematerialize.init();
   });
   afterEach(function() {
     return localStorage.removeItem(this.itemTitle);
