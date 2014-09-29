@@ -71,8 +71,11 @@
 
   _toggleStateViaKey = ->
     $(document).on 'keyup', (event) ->
+      tag = event.target.tagName.toLowerCase()
       switch event.which
-        when _settings.trigger then _toggleState()
+        when _settings.trigger
+          unless tag == 'input' or tag == 'textarea'
+            _toggleState()
 
   # -------------------------------------
   #   Public Methods

@@ -41,9 +41,13 @@ this.Spellbook.dematerialize = (function() {
   };
   _toggleStateViaKey = function() {
     return $(document).on('keyup', function(event) {
+      var tag;
+      tag = event.target.tagName.toLowerCase();
       switch (event.which) {
         case _settings.trigger:
-          return _toggleState();
+          if (!(tag === 'input' || tag === 'textarea')) {
+            return _toggleState();
+          }
       }
     });
   };
