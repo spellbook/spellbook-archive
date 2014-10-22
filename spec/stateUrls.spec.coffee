@@ -15,11 +15,11 @@ describe 'Spellbook.stateUrls', ->
   it 'should set the state to the window hash, if present', ->
     window.location.hash = '#section-03'
     Spellbook.stateUrls.init()
-    expect($('#section-03')).toBeVisible()
+    expect( $('#section-03') ).toBeVisible()
 
   it 'should set the first section to active when no hash is present', ->
     Spellbook.stateUrls.init()
-    expect($('#section-01')).toBeVisible()
+    expect( $('#section-01') ).toBeVisible()
 
   it 'should trigger a click on the link', ->
     Spellbook.stateUrls.init()
@@ -35,12 +35,12 @@ describe 'Spellbook.stateUrls', ->
     @link.last().click()
 
     goto = @link.last().attr('href')
-    expect($(goto)).toBeVisible()
+    expect( $(goto) ).toBeVisible()
 
   it 'should add an active class to the clicked link', ->
     Spellbook.stateUrls.init()
 
     @link.first().click()
 
-    expect(@link.first()).toHaveClass(@activeClass)
+    expect( @link.first() ).toHaveClass(@activeClass)
 

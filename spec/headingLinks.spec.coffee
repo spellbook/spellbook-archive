@@ -15,5 +15,5 @@ describe 'Spellbook.headingLinks', ->
     expect(@headings).toContainElement('a')
 
   it 'should apply the correct class to the heading link', ->
-    expect(@headings.find('a')).toHaveClass('anchor')
+    expect( @headings.find('a') ).toHaveClass('anchor')
 

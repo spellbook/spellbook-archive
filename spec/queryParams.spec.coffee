@@ -21,16 +21,16 @@ describe 'Spellbook.QueryParams', ->
 
   describe '.matchParamKey', ->
     it 'should return a correct match on a parameter key', ->
-      expect(@qp.matchParamKey('param1')).toBe(true)
+      expect( @qp.matchParamKey('param1') ).toBe(true)
 
   describe '.matchParamValue', ->
     it 'should return a correct match on a parameter value', ->
-      expect(@qp.matchParamValue('true')).toBe(true)
+      expect( @qp.matchParamValue('true') ).toBe(true)
 
   describe '.matchParamKey', ->
     it 'should not return a correct match on a parameter key', ->
-      expect(@qp.matchParamKey('param3')).not.toBe(true)
+      expect( @qp.matchParamKey('param3') ).not.toBe(true)
 
   describe '.matchParamValue', ->
     it 'should not return a correct match on a parameter value', ->
-      expect(@qp.matchParamValue('turtle')).not.toBe(true)
+      expect( @qp.matchParamValue('turtle') ).not.toBe(true)
