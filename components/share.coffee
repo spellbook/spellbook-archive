@@ -20,7 +20,6 @@
   init = (options) ->
     _settings = $.extend(
       service: $('.js-share-service')
-      activeClass: 'is-active'
       popup:
         height: 400
         width: 575
@@ -42,8 +41,6 @@
       url     = element.attr('href')
       service = element.data('share-service')
       content = element.data('share-text')
-
-      element.toggleClass(_settings.activeClass)
 
       _triggerPopup(service, url, content)
 

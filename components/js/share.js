@@ -4,7 +4,6 @@ this.Spellbook.share = (function() {
   init = function(options) {
     _settings = $.extend({
       service: $('.js-share-service'),
-      activeClass: 'is-active',
       popup: {
         height: 400,
         width: 575,
@@ -22,7 +21,6 @@ this.Spellbook.share = (function() {
       url = element.attr('href');
       service = element.data('share-service');
       content = element.data('share-text');
-      element.toggleClass(_settings.activeClass);
       return _triggerPopup(service, url, content);
     });
   };
