@@ -74,7 +74,7 @@
       tag = event.target.tagName.toLowerCase()
       switch event.which
         when _settings.trigger
-          unless tag == 'input' or tag == 'textarea'
+          unless tag is 'input' or tag is 'textarea'
             _toggleState()
 
   # -------------------------------------
