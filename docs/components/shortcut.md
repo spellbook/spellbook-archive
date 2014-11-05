@@ -12,8 +12,8 @@ First, add a `data-shortcut` for the keyboard shortcut you want:
 
 Now, when you hit `1` on the keyboard, it will click this button.
 
-JavaScript
-----------
+JavaScript (CoffeeScript)
+-------------------------
 
 ```coffeescript
 Spellbook.focus()

@@ -10,8 +10,8 @@ Markup
 <a class='js-share-service' data-share-service='google' data-share-text='Share this thing!' href='http://www.example.com'>Google</a>
 ```
 
-JavaScript
-----------
+JavaScript (CoffeeScript)
+-------------------------
 
 ```coffeescript
 Spellbook.share.init()

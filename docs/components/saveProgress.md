@@ -11,8 +11,8 @@ Markup
 </form>
 ```
 
-JavaScript
-----------
+JavaScript (CoffeeScript)
+-------------------------
 
 ```coffeescript
 Spellbook.saveProgress.init()

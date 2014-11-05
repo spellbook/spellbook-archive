@@ -14,8 +14,8 @@ Markup
 </div>
 ```
 
-JavaScript
-----------
+JavaScript (CoffeeScript)
+-------------------------
 
 ```coffeescript
 Spellbook.scrollTo({

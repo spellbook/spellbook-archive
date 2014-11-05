@@ -14,8 +14,8 @@ Markup
 </form>
 ```
 
-JavaScript
-----------
+JavaScript (CoffeeScript)
+-------------------------
 
 ```coffeescript
 Spellbook.showPassword.init()
