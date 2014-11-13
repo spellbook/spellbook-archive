@@ -6,7 +6,8 @@ this.Spellbook.stateUrls = (function() {
       link: $('.js-stateUrls-link'),
       section: $('.js-stateUrls-section'),
       hiddenClass: 'is-hidden',
-      activeClass: 'is-active'
+      activeClass: 'is-active',
+      dataAttribute: 'state'
     }, options);
     _setInitialState(_getCurrentState());
     return _setEventHandlers();
@@ -25,7 +26,7 @@ this.Spellbook.stateUrls = (function() {
   };
   _setInitialState = function(state) {
     _settings.section.not(state).addClass(_settings.hiddenClass);
-    return $("[data-state=" + state + "]").removeClass(_settings.hiddenClass).addClass(_settings.activeClass);
+    return $("[data-" + _settings.dataAttribute + "=" + state + "]").removeClass(_settings.hiddenClass).addClass(_settings.activeClass);
   };
   _setEventHandlers = function() {
     return _settings.link.on('click', function(event) {

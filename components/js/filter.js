@@ -6,7 +6,8 @@ this.Spellbook.filter = function(options) {
     itemsContainer: $('.js-filter-items'),
     activeClass: 'is-active',
     hiddenClass: 'is-hidden',
-    emptyElement: $('<p>There are no items to show.</p>')
+    emptyElement: $('<p>There are no items to show.</p>'),
+    dataAttribute: 'item'
   }, options);
   return settings.link.on('click', function(event) {
     var dataItemToShow, element, itemToShow;
@@ -17,7 +18,7 @@ this.Spellbook.filter = function(options) {
     element.toggleClass(settings.activeClass);
     if (itemToShow !== 'all') {
       settings.item.addClass(settings.hiddenClass);
-      dataItemToShow = $("[data-item=" + itemToShow + "]");
+      dataItemToShow = $("[data-" + settings.dataAttribute + "=" + itemToShow + "]");
       if (dataItemToShow.length > 0) {
         return dataItemToShow.removeClass(settings.hiddenClass);
       } else {

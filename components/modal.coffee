@@ -23,7 +23,7 @@
     _settings = $.extend(
       trigger: $('.js-modal-trigger')
       close: $('.js-modal-close')
-      dataAttrName: 'modal'
+      dataAttribute: 'modal'
       backdropClass: 'modal-backdrop'
       activeClass: 'is-active'
       inactiveClass: 'is-inactive'
@@ -80,7 +80,7 @@
   _setEventHandlers = ->
     _settings.trigger.on 'click', (event) ->
       event.preventDefault()
-      selector = $(@).data(_settings.dataAttrName)
+      selector = $(@).data(_settings.dataAttribute)
       _modal = $(selector)
 
       trigger(_modal, 'open')

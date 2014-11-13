@@ -13,6 +13,7 @@
     activeClass: 'is-active'
     hiddenClass: 'is-hidden'
     emptyElement: $('<p>There are no items to show.</p>')
+    dataAttribute: 'item'
   , options)
 
   settings.link.on 'click', (event) ->
@@ -26,7 +27,7 @@
     unless itemToShow is 'all'
       settings.item.addClass(settings.hiddenClass)
 
-      dataItemToShow = $("[data-item=#{ itemToShow }]")
+      dataItemToShow = $("[data-#{ settings.dataAttribute }=#{ itemToShow }]")
 
       if dataItemToShow.length > 0
         dataItemToShow.removeClass(settings.hiddenClass)

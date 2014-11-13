@@ -23,6 +23,7 @@
       section: $('.js-stateUrls-section')
       hiddenClass: 'is-hidden'
       activeClass: 'is-active'
+      dataAttribute: 'state'
     , options)
 
     _setInitialState( _getCurrentState() )
@@ -60,7 +61,7 @@
       .not(state)
       .addClass(_settings.hiddenClass)
 
-    $("[data-state=#{ state }]")
+    $("[data-#{ _settings.dataAttribute }=#{ state }]")
       .removeClass(_settings.hiddenClass)
       .addClass(_settings.activeClass)
 

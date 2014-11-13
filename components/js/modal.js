@@ -7,7 +7,7 @@ this.Spellbook.modal = (function() {
     _settings = $.extend({
       trigger: $('.js-modal-trigger'),
       close: $('.js-modal-close'),
-      dataAttrName: 'modal',
+      dataAttribute: 'modal',
       backdropClass: 'modal-backdrop',
       activeClass: 'is-active',
       inactiveClass: 'is-inactive',
@@ -61,7 +61,7 @@ this.Spellbook.modal = (function() {
     return _settings.trigger.on('click', function(event) {
       var selector;
       event.preventDefault();
-      selector = $(this).data(_settings.dataAttrName);
+      selector = $(this).data(_settings.dataAttribute);
       _modal = $(selector);
       return trigger(_modal, 'open');
     });
