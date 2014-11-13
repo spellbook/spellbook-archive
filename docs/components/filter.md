@@ -15,7 +15,7 @@ Markup
   <p>This is an item.</p>
 </div>
 
-<div class="js-filter-item" ata-item="all">
+<div class="js-filter-item" data-item="all">
   <p>This is an item.</p>
 </div>
 
