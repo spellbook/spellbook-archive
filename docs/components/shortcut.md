@@ -1,5 +1,5 @@
-Spellbook.focus
-===============
+Spellbook.shortcut
+==================
 
 Markup
 ------
@@ -16,6 +16,6 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.focus()
+Spellbook.shortcut()
 ```
 
