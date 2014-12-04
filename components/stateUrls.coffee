@@ -19,11 +19,11 @@
 
   init = (options) ->
     _settings = $.extend(
-      link: $('.js-stateUrls-link')
-      section: $('.js-stateUrls-section')
-      hiddenClass: 'is-hidden'
-      activeClass: 'is-active'
-      dataAttribute: 'state'
+      link          : $('.js-stateUrls-link')
+      section       : $('.js-stateUrls-section')
+      hiddenClass   : 'is-hidden'
+      activeClass   : 'is-active'
+      dataAttribute : 'state'
     , options)
 
     _setInitialState( _getCurrentState() )

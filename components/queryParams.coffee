@@ -11,11 +11,9 @@ class @Spellbook.QueryParams
   #   Instance Variables
   # -------------------------------------
 
-  params: {}
-
-  variables: []
-
-  _settings: {}
+  params    : {}
+  variables : []
+  _settings : {}
 
   # -------------------------------------
   #   Constructor

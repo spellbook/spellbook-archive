@@ -25,9 +25,9 @@
 
   init = (options) ->
     _settings = $.extend(
-      element: $('.js-saveProgress')
-      container: $('.js-saveProgress-container')
-      dataAttribute: 'saveprogress'
+      element       : $('.js-saveProgress')
+      container     : $('.js-saveProgress-container')
+      dataAttribute : 'saveprogress'
     , options)
 
     _restoreProgress()
@@ -50,8 +50,8 @@
   _restoreProgress = ->
     _settings.element.each ->
       element = $(@)
-      key = element.data(_settings.dataAttribute)
-      value = localStorage.getItem(key)
+      key     = element.data(_settings.dataAttribute)
+      value   = localStorage.getItem(key)
 
       element.val(value)
 
@@ -62,8 +62,8 @@
   _setEventHandlers = ->
     _settings.element.on 'input', ->
       element = $(@)
-      key = element.data(_settings.dataAttribute)
-      value = element.val()
+      key     = element.data(_settings.dataAttribute)
+      value   = element.val()
 
       _storeProgress( key, value )
 

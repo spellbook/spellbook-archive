@@ -20,10 +20,10 @@
 
   init = (options) ->
     _settings = $.extend(
-      element: $('.js-dematerialize-element')
-      trigger: $('.js-dematerialize-trigger')
-      itemTitle: 'hidden_element'
-      hiddenClass: 'is-hidden'
+      element     : $('.js-dematerialize-element')
+      trigger     : $('.js-dematerialize-trigger')
+      itemTitle   : 'hidden_element'
+      hiddenClass : 'is-hidden'
     , options)
 
     _setEventHandlers()

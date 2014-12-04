@@ -24,8 +24,8 @@
 
   init = (options) ->
     _settings = $.extend(
-      headings: $('h1, h2, h3, h4, h5')
-      anchorClass: 'anchor'
+      headings    : $('h1, h2, h3, h4, h5')
+      anchorClass : 'anchor'
     , options)
 
     _addAnchors()
@@ -49,7 +49,7 @@
   _addAnchors = ->
     _settings.headings.each ->
       element = $(@)
-      slug = _slugify( element.text() )
+      slug    = _slugify( element.text() )
       element.attr( 'id', slug )
       element.prepend("<a class='#{ _settings.anchorClass }' href='##{ slug }'>#</a>")
 

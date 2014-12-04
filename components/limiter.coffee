@@ -7,10 +7,10 @@
 
 @Spellbook.limiter = (options) ->
   settings = $.extend(
-    element: $('.js-limiter-element')
-    toggle: $('.js-limiter-toggle')
-    limit: 5
-    hiddenClass: 'is-hidden'
+    element     : $('.js-limiter-element')
+    toggle      : $('.js-limiter-toggle')
+    limit       : 5
+    hiddenClass : 'is-hidden'
   , options)
 
   count = settings.element.length

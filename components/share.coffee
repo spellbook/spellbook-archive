@@ -19,12 +19,12 @@
 
   init = (options) ->
     _settings = $.extend(
-      service: $('.js-share-service')
-      popup:
-        height: 400
-        width: 575
-        left: 0
-        top: 0
+      service : $('.js-share-service')
+      popup   :
+        height : 400
+        width  : 575
+        left   : 0
+        top    : 0
     , options)
 
     _setEventHandlers()

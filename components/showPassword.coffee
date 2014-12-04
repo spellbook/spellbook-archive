@@ -19,9 +19,9 @@
 
   init = (options) ->
     _settings = $.extend(
-      input: $('.js-showPassword-input')
-      toggle: $('.js-showPassword-toggle')
-      showByDefault: false
+      input         : $('.js-showPassword-input')
+      toggle        : $('.js-showPassword-toggle')
+      showByDefault : false
     , options)
 
     _setEventHandlers()

@@ -13,9 +13,9 @@
 
 @Spellbook.scrollTrigger = (options) ->
   settings = $.extend(
-    element: $('.js-scrollTrigger')
-    scrollPadding: 400
-    activeClass: 'is-active'
+    element       : $('.js-scrollTrigger')
+    scrollPadding : 400
+    activeClass   : 'is-active'
   , options)
 
   scrolled = $(window).scrollTop()

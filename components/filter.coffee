@@ -7,18 +7,19 @@
 
 @Spellbook.filter = (options) ->
   settings = $.extend(
-    link: $('.js-filter-link')
-    item: $('.js-filter-item')
-    itemsContainer: $('.js-filter-items')
-    activeClass: 'is-active'
-    hiddenClass: 'is-hidden'
-    emptyElement: $('<p>There are no items to show.</p>')
-    dataAttribute: 'item'
+    link           : $('.js-filter-link')
+    item           : $('.js-filter-item')
+    itemsContainer : $('.js-filter-items')
+    activeClass    : 'is-active'
+    hiddenClass    : 'is-hidden'
+    emptyElement   : $('<p>There are no items to show.</p>')
+    dataAttribute  : 'item'
   , options)
 
   settings.link.on 'click', (event) ->
     event.preventDefault()
-    element = $(@)
+
+    element    = $(@)
     itemToShow = element.attr('href').split('#')[1]
 
     settings.link.removeClass(settings.activeClass)

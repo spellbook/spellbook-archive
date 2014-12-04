@@ -16,8 +16,8 @@
   , options)
 
   settings.element.each ->
-    element = $(@)
-    wordArray = element.text().split(' ')
+    element    = $(@)
+    wordArray  = element.text().split(' ')
     finalTitle = ''
 
     for i in [ 0..wordArray.length - 1 ]

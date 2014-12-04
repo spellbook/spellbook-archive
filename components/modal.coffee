@@ -21,13 +21,13 @@
 
   init = (options) ->
     _settings = $.extend(
-      trigger: $('.js-modal-trigger')
-      close: $('.js-modal-close')
-      dataAttribute: 'modal'
-      backdropClass: 'modal-backdrop'
-      activeClass: 'is-active'
-      inactiveClass: 'is-inactive'
-      activeBodyClass: 'is-modal-active'
+      trigger         : $('.js-modal-trigger')
+      close           : $('.js-modal-close')
+      dataAttribute   : 'modal'
+      backdropClass   : 'modal-backdrop'
+      activeClass     : 'is-active'
+      inactiveClass   : 'is-inactive'
+      activeBodyClass : 'is-modal-active'
     , options)
 
     _setEventHandlers()

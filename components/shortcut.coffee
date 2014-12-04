@@ -17,9 +17,9 @@
 
 @Spellbook.shortcut = (options) ->
   settings = $.extend
-    element: $('[data-shortcut]')
-    dataAttribute: 'shortcut'
-    keyCodes: Spellbook.keyCodes
+    element       : $('[data-shortcut]')
+    dataAttribute : 'shortcut'
+    keyCodes      : Spellbook.keyCodes
   , options
 
   settings.element.each ->
@@ -27,7 +27,7 @@
 
     $(document).on 'keyup', (event) =>
       element = $(@)
-      tag = event.target.tagName.toLowerCase()
+      tag     = event.target.tagName.toLowerCase()
 
       unless tag == 'input' or tag == 'textarea'
         if event.which == key

@@ -7,13 +7,13 @@
 
 @Spellbook.loader = (options) ->
   settings = $.extend(
-    toggle: $('.js-loader-toggle')
-    element: $('.js-loader-element')
-    spinner: $('<span></span>')
-    spinnerClass: 'loader'
-    overlay: $('<div></div>')
-    overlayClass: 'loader-overlay'
-    loadingClass: 'is-loading'
+    toggle       : $('.js-loader-toggle')
+    element      : $('.js-loader-element')
+    spinner      : $('<span></span>')
+    spinnerClass : 'loader'
+    overlay      : $('<div></div>')
+    overlayClass : 'loader-overlay'
+    loadingClass : 'is-loading'
   , options)
 
   settings.toggle.on 'click', (event) ->
