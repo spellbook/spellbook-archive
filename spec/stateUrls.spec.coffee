@@ -2,8 +2,8 @@ describe 'Spellbook.stateUrls', ->
   beforeEach ->
     loadFixtures('state_urls.html')
 
-    @link = $('.js-stateUrls-link')
-    @section = $('.js-stateUrls-section')
+    @link        = $('.js-stateUrls-link')
+    @section     = $('.js-stateUrls-section')
     @hiddenClass = 'is-hidden'
     @activeClass = 'is-active'
 

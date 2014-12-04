@@ -1,6 +1,6 @@
 describe 'Spellbook.slugify', ->
   beforeEach ->
-    @string = 'This is my title!'
+    @string        = 'This is my title!'
     @sluggedString = Spellbook.slugify(@string)
 
   it 'should convert the string into a slug', ->

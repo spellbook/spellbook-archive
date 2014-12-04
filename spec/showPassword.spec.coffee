@@ -2,7 +2,7 @@ describe 'Spellbook.showPassword', ->
   beforeEach ->
     loadFixtures('show_password.html')
 
-    @input = $('.js-showPassword-input')
+    @input  = $('.js-showPassword-input')
     @toggle = $('.js-showPassword-toggle')
 
     Spellbook.showPassword.init()

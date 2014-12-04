@@ -2,9 +2,9 @@ describe 'Spellbook.limiter', ->
   beforeEach ->
     loadFixtures('limiter.html')
 
-    @container = $('.fixture--limiter')
-    @element = $('.js-limiter-element')
-    @toggle = $('.js-limiter-toggle')
+    @container   = $('.fixture--limiter')
+    @element     = $('.js-limiter-element')
+    @toggle      = $('.js-limiter-toggle')
     @hiddenClass = 'is-hidden'
 
     Spellbook.limiter()

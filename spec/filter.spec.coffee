@@ -2,12 +2,12 @@ describe 'Spellbook.filter', ->
   beforeEach ->
     loadFixtures('filter.html')
 
-    @link =  $('.js-filter-link')
-    @item =  $('.js-filter-item')
+    @link           = $('.js-filter-link')
+    @item           = $('.js-filter-item')
     @itemsContainer = $('.js-filter-items')
-    @activeClass = 'is-active'
-    @hiddenClass = 'is-hidden'
-    @emptyElement = $('<p>There are no items to show.</p>')
+    @activeClass    = 'is-active'
+    @hiddenClass    = 'is-hidden'
+    @emptyElement   = $('<p>There are no items to show.</p>')
 
     Spellbook.filter()
 
@@ -29,7 +29,7 @@ describe 'Spellbook.filter', ->
 
   it 'should show the first set when the first set link is clicked', ->
     firstSetLink = $('.link-first')
-    firstSet = $('.set-01')
+    firstSet     = $('.set-01')
 
     firstSetLink.click()
 
@@ -37,7 +37,7 @@ describe 'Spellbook.filter', ->
 
   it 'should show the second set when the second set link is clicked', ->
     secondSetLink = $('.link-second')
-    secondSet = $('.set-02')
+    secondSet     = $('.set-02')
 
     secondSet.click()
 

@@ -2,10 +2,10 @@ describe 'Spellbook.modal', ->
   beforeEach ->
     loadFixtures('modal.html')
 
-    @trigger = $('.js-modal-trigger')
-    @close = $('.js-modal-close')
-    @modal = $('#modal')
-    @backdrop = $('.modal-backdrop')
+    @trigger     = $('.js-modal-trigger')
+    @close       = $('.js-modal-close')
+    @modal       = $('#modal')
+    @backdrop    = $('.modal-backdrop')
     @activeClass = 'is-active'
 
     Spellbook.modal.init()

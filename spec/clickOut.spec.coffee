@@ -1,11 +1,11 @@
 describe 'Spellbook.clickOut', ->
   beforeEach ->
     @document = $(document)
-    @element = $('<div class="js-clickout"></div>')
+    @element  = $('<div class = "js-clickout"></div>')
 
     Spellbook.clickOut
-      element: @element
-      run: -> 'turtle'
+      element : @element
+      run     : -> 'turtle'
 
   it 'should trigger a click event on the element', ->
     spyOnEvent(@element, 'click')

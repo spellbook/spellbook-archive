@@ -2,9 +2,9 @@ describe 'Spellbook.scrollTo', ->
   beforeEach ->
     loadFixtures('scroll_to.html')
 
-    @element = $('.js-scrollTo')
+    @element  = $('.js-scrollTo')
     @document = $('body, html')
-    @to = $(@element.attr('href'))
+    @to       = $(@element.attr('href'))
 
     Spellbook.scrollTo()
 

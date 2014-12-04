@@ -2,7 +2,7 @@ describe 'Spellbook.share', ->
   beforeEach ->
     loadFixtures('share.html')
 
-    @element = $('.js-share-service')
+    @element     = $('.js-share-service')
     @activeClass = 'is-active'
 
     Spellbook.share.init()
