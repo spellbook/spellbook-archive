@@ -5,21 +5,49 @@
 #
 # *************************************
 
-@Spellbook.equalHeights = (options) ->
-  settings = $.extend(
-    element: $('.js-equalHeight')
-  , options)
+@Spellbook.equalHeights = do ->
 
-  heights = []
-  settings.element.each -> heights.push $(@).height()
+  # -------------------------------------
+  #   Private Variables
+  # -------------------------------------
 
-  height = Math.max.apply( Math, heights )
+  _settings = {}
+  _heights  = []
 
-  settings.element.css( 'height', height )
+  # -------------------------------------
+  #   Initialize
+  # -------------------------------------
+
+  init = (options) ->
+    _settings = $.extend(
+      element: $('.js-equalHeight')
+    , options)
+
+    _setHeight()
+    _setEventHandlers()
+
+
+  _setHeight = ->
+    _settings.element.css( 'height', 'auto' )
+
+    _settings.element.each -> _heights.push $(@).height()
+
+    height = Math.max.apply( Math, _heights )
+
+    _settings.element.css( 'height', height )
+
+  _setEventHandlers = ->
+    $(window).on 'resize', _setHeight
+
+  # -------------------------------------
+  #   Public Methods
+  # -------------------------------------
+
+  init: init
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.equalHeights()
+# Spellbook.equalHeights.init()
 #
