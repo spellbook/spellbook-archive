@@ -13,6 +13,7 @@
 
   _settings = {}
   _heights  = []
+  _timer    = null
 
   # -------------------------------------
   #   Initialize
@@ -44,7 +45,9 @@
   # -------------------------------------
 
   _setEventHandlers = ->
-    $(window).on 'resize', _setHeight
+    $(window).on 'resize', ->
+      clearTimeout(_timer)
+      _timer = setTimeout(_setHeight, 250)
 
   # -------------------------------------
   #   Public Methods
