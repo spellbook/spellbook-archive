@@ -26,6 +26,9 @@
     _setHeight()
     _setEventHandlers()
 
+  # -------------------------------------
+  #   Set Height
+  # -------------------------------------
 
   _setHeight = ->
     _settings.element.css( 'height', 'auto' )
@@ -35,6 +38,10 @@
     height = Math.max.apply( Math, _heights )
 
     _settings.element.css( 'height', height )
+
+  # -------------------------------------
+  #   Set Event Handlers
+  # -------------------------------------
 
   _setEventHandlers = ->
     $(window).on 'resize', _setHeight
