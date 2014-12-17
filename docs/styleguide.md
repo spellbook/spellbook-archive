@@ -41,14 +41,14 @@ No trailing whitespace
 
 ### Parenthesis
 
-_Always_ use a single space inside parenthesis **unless it is a single word**.
+_Always_ use a single space inside parenthesis.
 
 ```coffeescript
 # BAD
-foo( bar )
+foo(bar)
 
 # GOOD
-foo(bar)
+foo( bar )
 
 # BAD
 foo(bar.baz)
@@ -69,10 +69,10 @@ foo(bar())
 foo( bar() )
 
 # BAD
-foo( 'string' )
+foo('string')
 
 # GOOD
-foo('string')
+foo( 'string' )
 ```
 
 ### String Interpolation
