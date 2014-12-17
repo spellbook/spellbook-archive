@@ -14,7 +14,11 @@ General
 
 - Use soft tabs with two-space indentation
 - Use `camelCase`
-- No empty parameter list
+- Don't use parenthesis with conditional statements (`if`, `switch`, else.)
+
+### Parmeters
+
+No empty parameter list.
 
 ```coffeescript
 # BAD
@@ -24,7 +28,9 @@ foo = () ->
 foo = ->
 ```
 
-- _Always_ use single quotes _unless_ it is a string with string interpolation or it has punctuation that requires escaping.
+### Quotes
+
+_Always_ use single quotes _unless_ it is a string with string interpolation or it has punctuation that requires escaping.
 
 ```coffeescript
 # BAD
@@ -39,7 +45,7 @@ foo = "bar's got baz"
 Spacing
 -------
 
-- No trailing whitespace
+No trailing whitespace
 
 ### Parenthesis
 
@@ -69,18 +75,24 @@ foo(bar())
 
 # GOOD
 foo( bar() )
+
+# BAD
+foo( 'string' )
+
+# GOOD
+foo('string')
 ```
 
 ### String Interpolation
 
-- Use a single space inside string interpolation
+Use a single space inside string interpolation
 
 ```coffeescript
 # BAD
 foo = 'string'
 bar = "I am a #{foo}"
 
-# BAD
+# GOOD
 foo = 'string'
 bar = "I am a #{ foo }"
 ```
@@ -113,21 +125,19 @@ foo    = bar
 foobar = baz
 
 # BAD
-foo = {
+foo =
   foobar: baz
   bar: foobar
-}
 
 # GOOD
-foo = {
+foo =
   foobar : baz
   bar    : foobar
-}
 ```
 
 ### Maximum Line Length
 
-- Try and keep your lines within 80 characters.
+Try and keep your lines within 80 characters.
 
 Comments
 --------
@@ -154,25 +164,43 @@ There are four heading levels.
 Naming
 ------
 
-- Use explicit names whenever possible.
+Use explicit names whenever possible.
 
 ```coffeescript
 # BAD
 evt  = ''
 elem = ''
 
-# BAD
+# GOOD
 event   = ''
 element = ''
 ```
 
 ### Boolean Variables
 
-- Prefix boolean variables with `is`
+Prefix boolean variables with `is`
 
 ```coffeescript
 # GOOD
 isEditing = true
+```
+
+### Private Variables & Methods
+
+If you don't expose your variables and/or methods to the outside world, prefix them with an underscore (`_`).
+
+```coffeescript
+# BAD
+privateVariable = false
+
+# GOOD
+_privateVariable = false
+
+# BAD
+privateMethod = ->
+
+# GOOD
+_privateMethod = ->
 ```
 
 ### Return Values
@@ -187,5 +215,20 @@ foo = ->
 # GOOD
 foo = ->
   return true
+```
+
+Operator Keywords
+-----------------
+
+Whenever possible, use CoffeeScripts' operator keyword aliases, such as `is`, `isnt`, `or`, `and`, etc.
+
+```coffeescript
+# BAD
+if foo == bar
+  # ...
+
+# GOOD
+if foo is bar
+  # ...
 ```
 
