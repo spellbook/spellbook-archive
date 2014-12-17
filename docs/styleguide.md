@@ -1,14 +1,6 @@
 CoffeeScript Styleguide
 =======================
 
-- General
-- Spacing
-- Comments
-- Naming
-- Operator Keywords
-- Quote Styles & Interpolation
-- jQuery Styleguide
-
 General
 -------
 
