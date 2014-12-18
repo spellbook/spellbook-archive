@@ -170,7 +170,7 @@ element = ''
 
 ### Boolean Variables
 
-Prefix boolean variables with `is`
+Prefix boolean variables with `is`.
 
 ```coffeescript
 # GOOD
