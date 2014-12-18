@@ -37,7 +37,7 @@ foo = "bar's got baz"
 Spacing
 -------
 
-No trailing whitespace
+No trailing whitespace.
 
 ### Parenthesis
 
@@ -77,7 +77,7 @@ foo( 'string' )
 
 ### String Interpolation
 
-Use a single space inside string interpolation
+Use a single space inside string interpolation.
 
 ```coffeescript
 # BAD
