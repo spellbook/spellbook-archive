@@ -28,7 +28,7 @@ Components
 #
 # *************************************
 #
-# options.element - the element (jQuery)
+# options.element   - the element (jQuery)
 # options.className - the class to toggle
 #
 # *************************************
@@ -36,6 +36,7 @@ Components
 @Spellbook.componentName = (options) ->
   options.element.on 'click', (event) ->
     event.preventDefault()
+
     $(@).toggleClass(options.className)
 
 # -------------------------------------
@@ -51,8 +52,8 @@ And to call your Component, put it in `javascripts/domready.js.coffee` or, if yo
 
 ```coffeescript
 Spellbook.componentName
-  element: $('.js-element')
-  className: 'is-active'
+  element   : $('.js-element')
+  className : 'is-active'
 ```
 
 ### Classes
@@ -67,7 +68,7 @@ Spellbook.componentName
 #
 # *************************************
 #
-# options.element - the element (jQuery)
+# options.element   - the element (jQuery)
 # options.className - the class to toggle
 #
 # *************************************
@@ -137,7 +138,7 @@ new SpellBook.ClassName
 #
 # *************************************
 #
-# options.element - the element (jQuery)
+# options.element   - the element (jQuery)
 # options.className - the class to toggle
 #
 # *************************************
@@ -163,8 +164,7 @@ new SpellBook.ClassName
 And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
 
 ```coffeescript
-SpellBook.moduleName.init
-  # ...
+SpellBook.moduleName.init()
 ```
 
 Document Ready
@@ -189,10 +189,10 @@ If applicable, each Component sets default options to standardize calls. For exa
 
 ```coffeescript
 @Spellbook.componentName = (options) ->
-  settings = $.extend(
-    element: $('.js-component'),
-    activeClass: 'is-active'
-  , options)
+  _settings = $.extend
+    element     : $('.js-component'),
+    activeClass : 'is-active'
+  , options
 ```
 
 Use `js-` selectors to standardize the class applied to elements. Now, in the call, you can either leave out the options (using the defaults), or pass in overrides to the default options.
