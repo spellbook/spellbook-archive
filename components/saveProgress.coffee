@@ -5,8 +5,8 @@
 #
 # *************************************
 #
-# options.element - the element whose value to save
-# options.container - the element containing input elements
+# options.element       - the element whose value to save
+# options.container     - the element containing input elements
 # options.dataAttribute - the data attribute of the Local Storage key
 #
 # *************************************
@@ -24,11 +24,11 @@
   # -------------------------------------
 
   init = (options) ->
-    _settings = $.extend(
+    _settings = $.extend
       element       : $('.js-saveProgress')
       container     : $('.js-saveProgress-container')
       dataAttribute : 'saveprogress'
-    , options)
+    , options
 
     _restoreProgress()
     _setEventHandlers()

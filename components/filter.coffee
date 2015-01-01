@@ -6,7 +6,7 @@
 # *************************************
 
 @Spellbook.filter = (options) ->
-  settings = $.extend(
+  settings = $.extend
     link           : $('.js-filter-link')
     item           : $('.js-filter-item')
     itemsContainer : $('.js-filter-items')
@@ -14,7 +14,7 @@
     hiddenClass    : 'is-hidden'
     emptyElement   : $('<p>There are no items to show.</p>')
     dataAttribute  : 'item'
-  , options)
+  , options
 
   settings.link.on 'click', (event) ->
     event.preventDefault()

@@ -5,15 +5,15 @@
 #
 # *************************************
 #
-# options.run - the function to run
+# options.run     - the function to run
 # options.element - the element to kill propagation on
 #
 # *************************************
 
 @Spellbook.clickOut = (options) ->
-  settings = $.extend(
+  settings = $.extend
     element: $('.js-clickout')
-  , options)
+  , options
 
   $(document).on 'click', -> settings.run()
 

@@ -20,7 +20,7 @@
   # -------------------------------------
 
   init = (options) ->
-    _settings = $.extend(
+    _settings = $.extend
       trigger         : $('.js-modal-trigger')
       close           : $('.js-modal-close')
       dataAttribute   : 'modal'
@@ -28,7 +28,7 @@
       activeClass     : 'is-active'
       inactiveClass   : 'is-inactive'
       activeBodyClass : 'is-modal-active'
-    , options)
+    , options
 
     _setEventHandlers()
     @
@@ -80,8 +80,9 @@
   _setEventHandlers = ->
     _settings.trigger.on 'click', (event) ->
       event.preventDefault()
+
       selector = $(@).data(_settings.dataAttribute)
-      _modal = $(selector)
+      _modal   = $(selector)
 
       trigger(_modal, 'open')
 

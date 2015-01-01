@@ -4,7 +4,7 @@ describe 'Spellbook.equalHeights', ->
 
     @element = $('.js-equalHeight')
 
-    Spellbook.equalHeights()
+    Spellbook.equalHeights.init()
 
   it 'should set equal heights on the elements', ->
     expect(@element).toHaveProp('style')

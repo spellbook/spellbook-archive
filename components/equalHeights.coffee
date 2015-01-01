@@ -20,9 +20,9 @@
   # -------------------------------------
 
   init = (options) ->
-    _settings = $.extend(
+    _settings = $.extend
       element: $('.js-equalHeight')
-    , options)
+    , options
 
     _setHeight()
     _setEventHandlers()

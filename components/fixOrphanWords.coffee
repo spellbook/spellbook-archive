@@ -11,11 +11,11 @@
 # *************************************
 
 @Spellbook.fixOrphanWords = (options) ->
-  _settings = $.extend(
+  settings = $.extend
     element: $('.js-orphan')
-  , options)
+  , options
 
-  _settings.element.each ->
+  settings.element.each ->
     element    = $(@)
     wordArray  = element.text().split(' ')
     finalTitle = ''

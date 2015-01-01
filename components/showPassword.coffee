@@ -18,11 +18,11 @@
   # -------------------------------------
 
   init = (options) ->
-    _settings = $.extend(
+    _settings = $.extend
       input         : $('.js-showPassword-input')
       toggle        : $('.js-showPassword-toggle')
       showByDefault : false
-    , options)
+    , options
 
     _setEventHandlers()
     _showPassword() if _settings.showByDefault

@@ -1,9 +1,9 @@
 this.Spellbook.fixOrphanWords = function(options) {
-  var _settings;
-  _settings = $.extend({
+  var settings;
+  settings = $.extend({
     element: $('.js-orphan')
   }, options);
-  return _settings.element.each(function() {
+  return settings.element.each(function() {
     var element, finalTitle, i, wordArray, _i, _ref;
     element = $(this);
     wordArray = element.text().split(' ');

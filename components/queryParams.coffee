@@ -20,9 +20,10 @@ class @Spellbook.QueryParams
   # -------------------------------------
 
   constructor: (@options) ->
-    @_settings = $.extend(
+    @_settings = $.extend
       url: null
-    , @options)
+    , @options
+
     @init()
 
   # -------------------------------------

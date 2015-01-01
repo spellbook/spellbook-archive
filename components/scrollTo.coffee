@@ -6,15 +6,15 @@
 # *************************************
 #
 # options.element - the element (jQuery)
-# options.speed - the speed of the scroll (milliseconds)
+# options.speed   - the speed of the scroll (milliseconds)
 #
 # *************************************
 
 @Spellbook.scrollTo = (options) ->
-  settings = $.extend(
+  settings = $.extend
     element : $('.js-scrollTo')
     speed   : 250
-  , options)
+  , options
 
   settings.element.on 'click', (event) ->
     event.preventDefault()

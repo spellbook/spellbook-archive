@@ -19,12 +19,12 @@
   # -------------------------------------
 
   init = (options) ->
-    _settings = $.extend(
+    _settings = $.extend
       element     : $('.js-dematerialize-element')
       trigger     : $('.js-dematerialize-trigger')
       itemTitle   : 'hidden_element'
       hiddenClass : 'is-hidden'
-    , options)
+    , options
 
     _setEventHandlers()
     _setInitialState()

@@ -18,13 +18,13 @@
   # -------------------------------------
 
   init = (options) ->
-    _settings = $.extend(
+    _settings = $.extend
       link          : $('.js-stateUrls-link')
       section       : $('.js-stateUrls-section')
       hiddenClass   : 'is-hidden'
       activeClass   : 'is-active'
       dataAttribute : 'state'
-    , options)
+    , options
 
     _setInitialState( _getCurrentState() )
     _setEventHandlers()
