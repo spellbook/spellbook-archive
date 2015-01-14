@@ -33,11 +33,11 @@ Components
 #
 # *************************************
 
-@Spellbook.componentName = (options) ->
-  options.element.on 'click', (event) ->
+@Spellbook.componentName = ( options ) ->
+  options.element.on 'click', ( event ) ->
     event.preventDefault()
 
-    $(@).toggleClass(options.className)
+    $(@).toggleClass( options.className )
 
 # -------------------------------------
 #   Usage
@@ -52,7 +52,7 @@ And to call your Component, put it in `javascripts/domready.js.coffee` or, if yo
 
 ```coffeescript
 Spellbook.componentName
-  element   : $('.js-element')
+  element   : $( '.js-element' )
   className : 'is-active'
 ```
 
@@ -83,7 +83,7 @@ class @Spellbook.ClassName
     @options sets instance variables for all of the options that are
     passed in.
   ###
-  constructor: (@options) -> @init()
+  constructor: ( @options ) -> @init()
 
   init: ->
     # Initialize things here...
@@ -95,7 +95,7 @@ class @Spellbook.ClassName
     @setEventHandlers()
 
   setEventHandlers: ->
-    @options.element.on 'click', (event) => @doSomething()
+    @options.element.on 'click', ( event ) => @doSomething()
 
   doSomething: ->
     # ...
@@ -188,9 +188,9 @@ Defaults
 If applicable, each Component sets default options to standardize calls. For example:
 
 ```coffeescript
-@Spellbook.componentName = (options) ->
+@Spellbook.componentName = ( options ) ->
   _settings = $.extend
-    element     : $('.js-component'),
+    element     : $( '.js-component' ),
     activeClass : 'is-active'
   , options
 ```
