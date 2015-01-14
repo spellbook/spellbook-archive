@@ -1,4 +1,4 @@
-Spellbook.stateUrls
+Spellbook.StateUrls
 ===================
 
 Markup
@@ -41,5 +41,5 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.stateUrls.init()
+Spellbook.StateUrls.init()
 ```

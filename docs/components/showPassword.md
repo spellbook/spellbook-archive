@@ -1,4 +1,4 @@
-Spellbook.showPassword
+Spellbook.ShowPassword
 ======================
 
 Markup
@@ -18,5 +18,5 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.showPassword.init()
+Spellbook.ShowPassword.init()
 ```

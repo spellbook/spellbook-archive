@@ -1,4 +1,4 @@
-Spellbook.modal
+Spellbook.Modal
 ===============
 
 [CodePen](http://codepen.io/drewbarontini/pen/7ecffac2796ca9a1826c519184298097)
@@ -32,17 +32,17 @@ JavaScript (CoffeeScript)
 To instantiate the modal:
 
 ```coffeescript
-Spellbook.modal.init()
+Spellbook.Modal.init()
 ```
 
 To trigger the modal via JavaScript:
 
 ```coffeescript
 # Open the modal
-Spellbook.modal.init().trigger( $('#modal'), 'open' )
+Spellbook.Modal.init().trigger( $( '#modal' ), 'open' )
 
 # Close the modal
-Spellbook.modal.init().trigger( $('#modal'), 'close' )
+Spellbook.Modal.init().trigger( $( '#modal' ), 'close' )
 ```
 
 CSS (Sass)

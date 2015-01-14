@@ -1,4 +1,4 @@
-Spellbook.share
+Spellbook.Share
 ===============
 
 Markup
@@ -14,5 +14,5 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.share.init()
+Spellbook.Share.init()
 ```

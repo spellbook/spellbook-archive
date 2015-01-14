@@ -18,8 +18,7 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.scrollTo({
-  element: $('.js-scrollTo')
-  speed: 250
-})
+Spellbook.scrollTo
+  element : $( '.js-scrollTo' )
+  speed   : 250
 ```
