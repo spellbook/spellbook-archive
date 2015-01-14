@@ -41,6 +41,10 @@ class @Spellbook.QueryParams
   # -------------------------------------
   #   Parse Query String
   # -------------------------------------
+  #
+  # @param url { string }
+  #
+  # -------------------------------------
 
   _parseQueryString: ( url ) ->
     if url
@@ -69,7 +73,9 @@ class @Spellbook.QueryParams
   # -------------------------------------
   #   Match Parameter Key
   # -------------------------------------
-  # matcher - the key to match
+  #
+  # @param matcher { string }
+  #
   # -------------------------------------
 
   matchParamKey: ( matcher ) ->
@@ -81,7 +87,9 @@ class @Spellbook.QueryParams
   # -------------------------------------
   #   Match Parameter Value
   # -------------------------------------
-  # matcher - the value to match
+  #
+  # @param matcher { string }
+  #
   # -------------------------------------
 
   matchParamValue: ( matcher ) ->

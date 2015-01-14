@@ -36,6 +36,10 @@
   # -------------------------------------
   #   Erase Progress
   # -------------------------------------
+  #
+  # @param container { jQuery object }
+  #
+  # -------------------------------------
 
   _eraseProgress = ( container ) ->
     container.find( _settings.element ).each ->

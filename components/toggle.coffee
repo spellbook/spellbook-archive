@@ -24,6 +24,10 @@
 
   switch settings.event
 
+    # -------------------------------------
+    #   Click
+    # -------------------------------------
+
     when 'click'
 
       settings.sender.on 'click', ( event ) ->
@@ -55,11 +59,17 @@
             settings.proximity
               .toggleClass( settings.proximityToggleClass )
 
+    # -------------------------------------
+    #   Hover
+    # -------------------------------------
+
     when 'hover'
 
       settings.initialState() if settings.initialState
 
       settings.sender.on
+
+        # ----- Mouse Enter ----- #
 
         mouseenter: ->
 
@@ -88,6 +98,8 @@
             else
               settings.proximity
                 .addClass( settings.proximityToggleClass )
+
+        # ----- Mouse Leave ----- #
 
         mouseleave: ->
 

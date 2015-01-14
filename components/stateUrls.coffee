@@ -40,7 +40,9 @@
   # -------------------------------------
   #   Santize Hash
   # -------------------------------------
-  # string - the string to sanitize
+  #
+  # @param string { string }
+  #
   # -------------------------------------
 
   _sanitizeHash = ( string ) ->
@@ -48,6 +50,10 @@
 
   # -------------------------------------
   #   Get Current State
+  # -------------------------------------
+  #
+  # @return string
+  #
   # -------------------------------------
 
   _getCurrentState = ->
@@ -61,7 +67,9 @@
   # -------------------------------------
   #   Set Current State
   # -------------------------------------
-  # state - the initial state
+  #
+  # @param state { string }
+  #
   # -------------------------------------
 
   _setInitialState = ( state ) ->
@@ -94,8 +102,10 @@
   # -------------------------------------
   #   Show Section
   # -------------------------------------
-  # element - the clicked element (jQuery)
-  # state   - the state to show   (string)
+  #
+  # @param element { jQuery object }
+  # @param state   { string }
+  #
   # -------------------------------------
 
   _showSection = ( element, state ) ->

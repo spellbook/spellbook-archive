@@ -46,6 +46,13 @@
   # -------------------------------------
   #   Trigger
   # -------------------------------------
+  #
+  # @param element        { jQuery object }
+  # @param event          { string }
+  # @param removeBackdrop { boolean }
+  # @param callback       { function }
+  #
+  # -------------------------------------
 
   trigger = ( element, event, removeBackdrop = false, callback = null ) ->
     _modal = element

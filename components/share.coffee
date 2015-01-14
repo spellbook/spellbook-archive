@@ -55,6 +55,12 @@
   # -------------------------------------
   #   Trigger Popup
   # -------------------------------------
+  #
+  # @param service { string }
+  # @param url     { string }
+  # @param content { string }
+  #
+  # -------------------------------------
 
   _triggerPopup = ( service, url, content ) ->
     popupOptions =
