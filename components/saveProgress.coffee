@@ -5,9 +5,9 @@
 #
 # *************************************
 #
-# options.element       - the element whose value to save
-# options.container     - the element containing input elements
-# options.dataAttribute - the data attribute of the Local Storage key
+# @param element       { jQuery object }
+# @param container     { jQuery object }
+# @param dataAttribute { jQuery object }
 #
 # *************************************
 

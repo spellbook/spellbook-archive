@@ -4,6 +4,14 @@
 #   -> Toggle URL/page sections via history.pushState (with fallback)
 #
 # *************************************
+#
+# @param link          { jQuery object }
+# @param section       { jQuery object }
+# @param hiddenClass   { string }
+# @param activeClass   { string }
+# @param dataAttribute { string }
+#
+# *************************************
 
 @Spellbook.StateUrls = do ->
 

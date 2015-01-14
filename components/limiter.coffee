@@ -4,6 +4,13 @@
 #   -> Limit a set of elements
 #
 # *************************************
+#
+# @param element     { jQuery object }
+# @param toggle      { jQuery object }
+# @param limit       { integer }
+# @param hiddenClass { string }
+#
+# *************************************
 
 @Spellbook.limiter = ( options ) ->
   settings = $.extend

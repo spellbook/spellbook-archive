@@ -4,6 +4,12 @@
 #   -> Allows a user to hide/show password field
 #
 # *************************************
+#
+# @param input         { jQuery object }
+# @param toggle        { jQuery object }
+# @param showByDefault { boolean }
+#
+# *************************************
 
 @Spellbook.ShowPassword = do ->
 

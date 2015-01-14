@@ -5,19 +5,19 @@
 #
 # *************************************
 #
-# options.run     - the function to run
-# options.element - the element to kill propagation on
+# @param run     { function }
+# @param element { jQuery object }
 #
 # *************************************
 
-@Spellbook.clickOut = (options) ->
+@Spellbook.clickOut = ( options ) ->
   settings = $.extend
-    element: $('.js-clickout')
+    element: $( '.js-clickout' )
   , options
 
-  $(document).on 'click', -> settings.run()
+  $( document ).on 'click', -> settings.run()
 
-  settings.element.on 'click', (event) ->
+  settings.element.on 'click', ( event ) ->
     event.stopPropagation()
 
 # -------------------------------------

@@ -4,6 +4,10 @@
 #   -> Sanitizes a string to make it safe
 #
 # *************************************
+#
+# @param string { string }
+#
+# *************************************
 
 @Spellbook.sanitize = ( string ) ->
   string.replace( /(<([^>]+)>)/ig, '' )

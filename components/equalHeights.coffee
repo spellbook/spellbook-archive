@@ -4,6 +4,10 @@
 #   -> Create equal-height elements
 #
 # *************************************
+#
+# @param element { jQuery object }
+#
+# *************************************
 
 @Spellbook.EqualHeights = do ->
 

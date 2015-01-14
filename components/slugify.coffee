@@ -4,6 +4,10 @@
 #   -> Converts a string to a URL-friendly slug
 #
 # *************************************
+#
+# @param string { string }
+#
+# *************************************
 
 @Spellbook.slugify = ( string ) ->
   string

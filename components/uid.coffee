@@ -5,6 +5,10 @@
 #      Credit: http://coffeescriptcookbook.com/chapters/strings/generating-a-unique-id
 #
 # *************************************
+#
+# @param length { integer }
+#
+# *************************************
 
 @Spellbook.uid = ( length = 10 ) ->
   id = ''

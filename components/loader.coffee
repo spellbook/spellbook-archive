@@ -4,11 +4,21 @@
 #   -> Loading state
 #
 # *************************************
+#
+# @param element      { jQuery object }
+# @param toggle       { jQuery object }
+# @param spinner      { jQuery object }
+# @param spinnerClass { string }
+# @param overlay      { jQuery object }
+# @param overlayClass { string }
+# @param loadingClass { string }
+#
+# *************************************
 
 @Spellbook.loader = ( options ) ->
   settings = $.extend
-    toggle       : $( '.js-loader-toggle' )
     element      : $( '.js-loader-element' )
+    toggle       : $( '.js-loader-toggle' )
     spinner      : $( '<span></span>' )
     spinnerClass : 'loader'
     overlay      : $( '<div></div>' )

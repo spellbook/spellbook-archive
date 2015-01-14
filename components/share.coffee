@@ -4,6 +4,14 @@
 #   -> Share page on social sites
 #
 # *************************************
+#
+# @param service      { jQuery object }
+# @param popup.height { integer }
+# @param popup.width  { integer }
+# @param popup.left   { integer }
+# @param popup.top    { integer }
+#
+# *************************************
 
 @Spellbook.Share = do ->
 

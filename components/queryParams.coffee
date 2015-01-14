@@ -4,6 +4,10 @@
 #   -> Gets URL query parameters
 #
 # *************************************
+#
+# @param url { string }
+#
+# *************************************
 
 class @Spellbook.QueryParams
 

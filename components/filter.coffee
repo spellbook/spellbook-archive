@@ -4,15 +4,25 @@
 #   -> Sift through a set of items
 #
 # *************************************
+#
+# @param link           { jQuery object }
+# @param item           { jQuery object }
+# @param itemsContainer { jQuery object }
+# @param activeClass    { string }
+# @param hiddenClass    { string }
+# @param emptyElement   { jQuery object }
+# @param dataAttribute  { string }
+#
+# *************************************
 
 @Spellbook.filter = ( options ) ->
   settings = $.extend
-    link           : $('.js-filter-link')
-    item           : $('.js-filter-item')
-    itemsContainer : $('.js-filter-items')
+    link           : $( '.js-filter-link' )
+    item           : $( '.js-filter-item' )
+    itemsContainer : $( '.js-filter-items' )
     activeClass    : 'is-active'
     hiddenClass    : 'is-hidden'
-    emptyElement   : $('<p>There are no items to show.</p>')
+    emptyElement   : $( '<p>There are no items to show.</p>' )
     dataAttribute  : 'item'
   , options
 
@@ -28,7 +38,7 @@
     unless itemToShow is 'all'
       settings.item.addClass( settings.hiddenClass )
 
-      dataItemToShow = $("[data-#{ settings.dataAttribute }=#{ itemToShow }]")
+      dataItemToShow = $( "[data-#{ settings.dataAttribute }=#{ itemToShow }]" )
 
       if dataItemToShow.length > 0
         dataItemToShow.removeClass( settings.hiddenClass )

@@ -6,7 +6,7 @@
 #
 # *************************************
 #
-# options.element - the element containing the text to fix
+# @param element { jQuery object }
 #
 # *************************************
 

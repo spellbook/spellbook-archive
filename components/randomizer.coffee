@@ -4,6 +4,10 @@
 #   -> Randomly select a value
 #
 # *************************************
+#
+# @param collection { array }
+#
+# *************************************
 
 @Spellbook.randomizer = ( collection ) ->
   randomNumber = Math.floor( Math.random() * collection.length )

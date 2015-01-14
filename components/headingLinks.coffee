@@ -5,8 +5,8 @@
 #
 # *************************************
 #
-# options.headings    - the heading elements
-# options.anchorClass - the class to add to the anchor
+# @param headings    { jQuery object }
+# @param anchorClass { string }
 #
 # *************************************
 

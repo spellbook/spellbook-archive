@@ -1,8 +1,8 @@
 this.Spellbook.loader = function(options) {
   var settings;
   settings = $.extend({
-    toggle: $('.js-loader-toggle'),
     element: $('.js-loader-element'),
+    toggle: $('.js-loader-toggle'),
     spinner: $('<span></span>'),
     spinnerClass: 'loader',
     overlay: $('<div></div>'),

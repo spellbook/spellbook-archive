@@ -5,9 +5,9 @@
 #
 # *************************************
 #
-# options.element       - the element to hit
-# options.scrollPadding - the padding on the element
-# options.activeClass   - the class to add to the active element
+# @param element       { jQuery object }
+# @param scrollPadding { integer }
+# @param activeClass   { string }
 #
 # *************************************
 

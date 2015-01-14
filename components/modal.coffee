@@ -4,6 +4,16 @@
 #   -> Triggers a dialog window
 #
 # *************************************
+#
+# @param trigger         { jQuery object }
+# @param close           { jQuery object }
+# @param dataAttribute   { string }
+# @param backdropClass   { string }
+# @param activeClass     { string }
+# @param inactiveClass   { string }
+# @param activeBodyClass { string }
+#
+# *************************************
 
 @Spellbook.Modal = do ->
 

@@ -10,8 +10,9 @@
 #
 # *************************************
 #
-# options.element       - the element to trigger an event on
-# options.dataAttribute - the data attribute that stores the shortcut key
+# @param element       { jQuery object }
+# @param dataAttribute { string }
+# @param keyCodes      { object }
 #
 # *************************************
 

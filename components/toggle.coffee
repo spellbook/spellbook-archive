@@ -4,6 +4,14 @@
 #   -> Toggles state on given elements
 #
 # *************************************
+#
+# @param sender               { jQuery object }
+# @param proximity            { string }
+# @param event                { string }
+# @param proximityToggleClass { string }
+# @param senderActiveClass    { string }
+#
+# *************************************
 
 @Spellbook.toggle = ( options ) ->
   settings = $.extend
