@@ -28,8 +28,8 @@ Components
 #
 # *************************************
 #
-# options.element   - the element (jQuery)
-# options.className - the class to toggle
+# @param element   { jQuery object }
+# @param className { string }
 #
 # *************************************
 
@@ -68,8 +68,8 @@ Spellbook.componentName
 #
 # *************************************
 #
-# options.element   - the element (jQuery)
-# options.className - the class to toggle
+# @param element   { jQuery object }
+# @param className { string }
 #
 # *************************************
 
@@ -138,8 +138,8 @@ new SpellBook.ClassName
 #
 # *************************************
 #
-# options.element   - the element (jQuery)
-# options.className - the class to toggle
+# @param element   { jQuery object }
+# @param className { string }
 #
 # *************************************
 
