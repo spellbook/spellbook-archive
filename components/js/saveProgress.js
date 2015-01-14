@@ -1,4 +1,4 @@
-this.Spellbook.saveProgress = (function() {
+this.Spellbook.SaveProgress = (function() {
   var init, _eraseProgress, _restoreProgress, _setEventHandlers, _settings, _storeProgress;
   _settings = {};
   init = function(options) {

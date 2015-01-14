@@ -5,7 +5,7 @@
 #
 # *************************************
 
-@Spellbook.equalHeights = do ->
+@Spellbook.EqualHeights = do ->
 
   # -------------------------------------
   #   Private Variables
@@ -19,9 +19,9 @@
   #   Initialize
   # -------------------------------------
 
-  init = (options) ->
+  init = ( options ) ->
     _settings = $.extend
-      element: $('.js-equalHeight')
+      element: $( '.js-equalHeight' )
     , options
 
     _setHeight()
@@ -45,9 +45,9 @@
   # -------------------------------------
 
   _setEventHandlers = ->
-    $(window).on 'resize', ->
-      clearTimeout(_timer)
-      _timer = setTimeout(_setHeight, 250)
+    $( window ).on 'resize', ->
+      clearTimeout( _timer )
+      _timer = setTimeout( _setHeight, 250 )
 
   # -------------------------------------
   #   Public Methods
@@ -59,5 +59,5 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.equalHeights.init()
+# Spellbook.EqualHeights.init()
 #

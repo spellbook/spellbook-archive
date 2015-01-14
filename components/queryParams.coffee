@@ -19,7 +19,7 @@ class @Spellbook.QueryParams
   #   Constructor
   # -------------------------------------
 
-  constructor: (@options) ->
+  constructor: ( @options ) ->
     @_settings = $.extend
       url: null
     , @options
@@ -31,20 +31,20 @@ class @Spellbook.QueryParams
   # -------------------------------------
 
   init: ->
-    @_parseQueryString(@_settings.url)
+    @_parseQueryString( @_settings.url )
     @_sortParams()
 
   # -------------------------------------
   #   Parse Query String
   # -------------------------------------
 
-  _parseQueryString: (url) ->
+  _parseQueryString: ( url ) ->
     if url
-      queryString = url.split('?')[1]
+      queryString = url.split( '?' )[ 1 ]
     else
-      queryString = window.location.search.substring(1)
+      queryString = window.location.search.substring( 1 )
 
-    @variables = queryString.split('&')
+    @variables = queryString.split( '&' )
 
   # -------------------------------------
   #   Sort Parameters
@@ -52,8 +52,8 @@ class @Spellbook.QueryParams
 
   _sortParams: ->
     for param in @variables
-      pair = param.split('=')
-      @params[ pair[0] ] = pair[1] unless pair[1] is undefined
+      pair = param.split( '=' )
+      @params[ pair[ 0 ] ] = pair[ 1 ] unless pair[ 1 ] is undefined
 
   # -------------------------------------
   #   Get All Parameters
@@ -68,7 +68,7 @@ class @Spellbook.QueryParams
   # matcher - the key to match
   # -------------------------------------
 
-  matchParamKey: (matcher) ->
+  matchParamKey: ( matcher ) ->
     for key, value of @params
       return true if matcher is key
 
@@ -80,7 +80,7 @@ class @Spellbook.QueryParams
   # matcher - the value to match
   # -------------------------------------
 
-  matchParamValue: (matcher) ->
+  matchParamValue: ( matcher ) ->
     for key, value of @params
       return true if matcher is value
 
@@ -94,7 +94,6 @@ class @Spellbook.QueryParams
 #
 # qp.allParams()
 #
-# qp.matchParamKey('key')
-# qp.matchParamValue('key')
+# qp.matchParamKey( 'key' )
+# qp.matchParamValue( 'key' )
 #
-

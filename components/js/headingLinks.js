@@ -1,4 +1,4 @@
-this.Spellbook.headingLinks = (function() {
+this.Spellbook.HeadingLinks = (function() {
   var init, _addAnchors, _settings, _slugify;
   _settings = {};
   init = function(options) {

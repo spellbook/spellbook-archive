@@ -9,8 +9,8 @@
 #
 # *************************************
 
-@Spellbook.escapeOut = (options) ->
-  $(document).on 'keyup', (event) ->
+@Spellbook.escapeOut = ( options ) ->
+  $( document ).on 'keyup', ( event ) ->
     switch event.which
       when 27 then options.run()
 
@@ -22,4 +22,3 @@
 #   run: ->
 #     # ...
 #
-

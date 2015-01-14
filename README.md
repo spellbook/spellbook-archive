@@ -144,7 +144,7 @@ new SpellBook.ClassName
 # *************************************
 
 # CoffeeScript shortcut for a self-invoking anonymous function
-@Spellbook.moduleName = do ->
+@Spellbook.ModuleName = do ->
 
   privateVar = ''
 
@@ -164,7 +164,7 @@ new SpellBook.ClassName
 And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
 
 ```coffeescript
-SpellBook.moduleName.init()
+SpellBook.ModuleName.init()
 ```
 
 Document Ready

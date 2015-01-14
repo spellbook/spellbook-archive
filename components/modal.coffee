@@ -5,7 +5,7 @@
 #
 # *************************************
 
-@Spellbook.modal = do ->
+@Spellbook.Modal = do ->
 
   # -------------------------------------
   #   Private Variables
@@ -19,10 +19,10 @@
   #   Initialize
   # -------------------------------------
 
-  init = (options) ->
+  init = ( options ) ->
     _settings = $.extend
-      trigger         : $('.js-modal-trigger')
-      close           : $('.js-modal-close')
+      trigger         : $( '.js-modal-trigger' )
+      close           : $( '.js-modal-close' )
       dataAttribute   : 'modal'
       backdropClass   : 'modal-backdrop'
       activeClass     : 'is-active'
@@ -37,19 +37,19 @@
   #   Trigger
   # -------------------------------------
 
-  trigger = (element, event, removeBackdrop = false, callback = null) ->
+  trigger = ( element, event, removeBackdrop = false, callback = null ) ->
     _modal = element
 
     switch event
       when 'open'
-        element.addClass(_settings.activeClass)
-        $('body').addClass(_settings.activeBodyClass)
+        element.addClass( _settings.activeClass )
+        $( 'body' ).addClass( _settings.activeBodyClass )
       when 'close'
-        element.removeClass(_settings.activeClass)
-        $('body').removeClass(_settings.activeBodyClass)
+        element.removeClass( _settings.activeClass )
+        $( 'body' ).removeClass( _settings.activeBodyClass )
         _cleanupEvents()
 
-    _toggleOverlay(event) unless removeBackdrop
+    _toggleOverlay( event ) unless removeBackdrop
 
     callback() if callback
 
@@ -59,16 +59,16 @@
   #   Toggle Overlay
   # -------------------------------------
 
-  _toggleOverlay = (event) ->
+  _toggleOverlay = ( event ) ->
     switch event
       when 'open'
-        $('<div class=' + _settings.backdropClass + '></div>').appendTo( $('body') )
-        _backdrop = $(".#{ _settings.backdropClass }")
+        $( '<div class=' + _settings.backdropClass + '></div>' ).appendTo( $( 'body' ) )
+        _backdrop = $( ".#{ _settings.backdropClass }" )
         setTimeout ->
-          _backdrop.addClass(_settings.activeClass)
+          _backdrop.addClass( _settings.activeClass )
         , 25
       when 'close'
-        _backdrop.removeClass(_settings.activeClass)
+        _backdrop.removeClass( _settings.activeClass )
         setTimeout ->
           _backdrop.remove()
         , 500
@@ -78,37 +78,37 @@
   # -------------------------------------
 
   _setEventHandlers = ->
-    _settings.trigger.on 'click', (event) ->
+    _settings.trigger.on 'click', ( event ) ->
       event.preventDefault()
 
-      selector = $(@).data(_settings.dataAttribute)
-      _modal   = $(selector)
+      selector = $(@).data( _settings.dataAttribute )
+      _modal   = $( selector )
 
-      trigger(_modal, 'open')
+      trigger( _modal, 'open' )
 
   # -------------------------------------
   #   Set Active Event Handlers
   # -------------------------------------
 
   _setActiveEventHandlers = ->
-    _settings.close.on 'click', (event) ->
+    _settings.close.on 'click', ( event ) ->
       event.preventDefault()
-      trigger(_modal, 'close')
+      trigger( _modal, 'close' )
 
-    _backdrop.on 'click', (event) ->
-      trigger(_modal, 'close')
+    _backdrop.on 'click', ( event ) ->
+      trigger( _modal, 'close' )
 
-    $(document).on 'keydown', (event) ->
+    $( document ).on 'keydown', ( event ) ->
       switch event.which
-        when 27 then trigger(_modal, 'close')
+        when 27 then trigger( _modal, 'close' )
 
   # -------------------------------------
   #   Clean Up Events
   # -------------------------------------
 
   _cleanupEvents = ->
-    _settings.close.off('click')
-    $(document).off('keydown')
+    _settings.close.off( 'click' )
+    $( document ).off( 'keydown' )
 
   # -------------------------------------
   #   Public Methods
@@ -121,5 +121,5 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.modal.init()
+# Spellbook.Modal.init()
 #

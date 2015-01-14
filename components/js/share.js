@@ -1,4 +1,4 @@
-this.Spellbook.share = (function() {
+this.Spellbook.Share = (function() {
   var init, _setEventHandlers, _settings, _triggerPopup;
   _settings = {};
   init = function(options) {

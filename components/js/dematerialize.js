@@ -1,4 +1,4 @@
-this.Spellbook.dematerialize = (function() {
+this.Spellbook.Dematerialize = (function() {
   var init, _item, _setEventHandlers, _setInitialState, _settings, _toggleState, _toggleStateViaKey;
   _settings = {};
   _item = '';

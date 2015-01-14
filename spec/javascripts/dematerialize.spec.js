@@ -1,11 +1,11 @@
-describe('Spellbook.dematerialize', function() {
+describe('Spellbook.Dematerialize', function() {
   beforeEach(function() {
     loadFixtures('dematerialize.html');
     this.element = $('.js-dematerialize-element');
     this.trigger = $('.js-dematerialize-trigger');
     this.itemTitle = 'hidden_element';
     this.hiddenClass = 'is-hidden';
-    return Spellbook.dematerialize.init();
+    return Spellbook.Dematerialize.init();
   });
   afterEach(function() {
     return localStorage.removeItem(this.itemTitle);

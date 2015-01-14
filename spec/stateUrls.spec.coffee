@@ -1,46 +1,45 @@
-describe 'Spellbook.stateUrls', ->
+describe 'Spellbook.StateUrls', ->
   beforeEach ->
-    loadFixtures('state_urls.html')
+    loadFixtures( 'state_urls.html' )
 
-    @link        = $('.js-stateUrls-link')
-    @section     = $('.js-stateUrls-section')
+    @link        = $( '.js-stateUrls-link' )
+    @section     = $( '.js-stateUrls-section' )
     @hiddenClass = 'is-hidden'
     @activeClass = 'is-active'
 
   afterEach ->
-    @link.removeClass(@activeClass)
-    @section.removeClass(@hiddenClass)
+    @link.removeClass( @activeClass )
+    @section.removeClass( @hiddenClass )
     window.location.hash = ''
 
   it 'should set the state to the window hash, if present', ->
     window.location.hash = '#section-03'
-    Spellbook.stateUrls.init()
-    expect( $('#section-03') ).toBeVisible()
+    Spellbook.StateUrls.init()
+    expect( $( '#section-03' ) ).toBeVisible()
 
   it 'should set the first section to active when no hash is present', ->
-    Spellbook.stateUrls.init()
-    expect( $('#section-01') ).toBeVisible()
+    Spellbook.StateUrls.init()
+    expect( $( '#section-01' ) ).toBeVisible()
 
   it 'should trigger a click on the link', ->
-    Spellbook.stateUrls.init()
+    Spellbook.StateUrls.init()
 
-    spyOnEvent(@link, 'click')
+    spyOnEvent( @link, 'click' )
     @link.click()
 
-    expect('click').toHaveBeenTriggeredOn(@link)
+    expect( 'click' ).toHaveBeenTriggeredOn( @link )
 
   it 'should show the appropriate section when the link is clicked on', ->
-    Spellbook.stateUrls.init()
+    Spellbook.StateUrls.init()
 
     @link.last().click()
 
-    goto = @link.last().attr('href')
-    expect( $(goto) ).toBeVisible()
+    goto = @link.last().attr( 'href' )
+    expect( $( goto ) ).toBeVisible()
 
   it 'should add an active class to the clicked link', ->
-    Spellbook.stateUrls.init()
+    Spellbook.StateUrls.init()
 
     @link.first().click()
 
-    expect( @link.first() ).toHaveClass(@activeClass)
-
+    expect( @link.first() ).toHaveClass( @activeClass )

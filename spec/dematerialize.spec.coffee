@@ -1,27 +1,26 @@
-describe 'Spellbook.dematerialize', ->
+describe 'Spellbook.Dematerialize', ->
   beforeEach ->
-    loadFixtures('dematerialize.html')
+    loadFixtures( 'dematerialize.html' )
 
-    @element     = $('.js-dematerialize-element')
-    @trigger     = $('.js-dematerialize-trigger')
+    @element     = $( '.js-dematerialize-element' )
+    @trigger     = $( '.js-dematerialize-trigger' )
     @itemTitle   = 'hidden_element'
     @hiddenClass = 'is-hidden'
 
-    Spellbook.dematerialize.init()
+    Spellbook.Dematerialize.init()
 
   afterEach ->
-    localStorage.removeItem(@itemTitle)
+    localStorage.removeItem( @itemTitle )
 
   it 'should not be hidden by default', ->
-    expect(@element).not.toHaveClass(@hiddenClass)
+    expect( @element ).not.toHaveClass( @hiddenClass )
 
   it 'should register a click on the trigger', ->
-    spyOnEvent(@trigger, 'click')
+    spyOnEvent( @trigger, 'click' )
     @trigger.click()
 
-    expect('click').toHaveBeenTriggeredOn(@trigger)
+    expect( 'click' ).toHaveBeenTriggeredOn( @trigger )
 
   it 'should hide the element when the trigger is clicked', ->
     @trigger.click()
-    expect(@element).toHaveClass(@hiddenClass)
-
+    expect( @element ).toHaveClass( @hiddenClass )

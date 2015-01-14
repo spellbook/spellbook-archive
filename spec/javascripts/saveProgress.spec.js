@@ -1,4 +1,4 @@
-describe('Spellbook.saveProgress', function() {
+describe('Spellbook.SaveProgress', function() {
   beforeEach(function() {
     loadFixtures('save_progress.html');
     this.element = $('.js-saveProgress');
@@ -7,18 +7,18 @@ describe('Spellbook.saveProgress', function() {
     return this.value = 'string';
   });
   it('should save input element values to localStorage on input event', function() {
-    Spellbook.saveProgress.init();
+    Spellbook.SaveProgress.init();
     this.element.val(this.value);
     this.element.trigger('input');
     return expect(localStorage.getItem(this.key)).toEqual(this.element.val());
   });
   it('should fill input elements with localStorage values when initialized', function() {
     this.element.val('');
-    Spellbook.saveProgress.init();
+    Spellbook.SaveProgress.init();
     return expect(this.element.val()).toEqual(this.value);
   });
   return it('should remove container-specific localStorage items on form submission', function() {
-    Spellbook.saveProgress.init();
+    Spellbook.SaveProgress.init();
     localStorage.setItem(this.key, this.value);
     localStorage.setItem('keep', 'me');
     spyOnEvent(this.container, 'submit');

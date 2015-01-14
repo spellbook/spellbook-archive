@@ -5,7 +5,7 @@
 #
 # *************************************
 
-@Spellbook.share = do ->
+@Spellbook.Share = do ->
 
   # -------------------------------------
   #   Private Variables
@@ -17,9 +17,9 @@
   #   Initialize
   # -------------------------------------
 
-  init = (options) ->
+  init = ( options ) ->
     _settings = $.extend
-      service  : $('.js-share-service')
+      service  : $( '.js-share-service' )
       popup    :
         height : 400
         width  : 575
@@ -34,21 +34,21 @@
   # -------------------------------------
 
   _setEventHandlers = ->
-    _settings.service.on 'click', (event) ->
+    _settings.service.on 'click', ( event ) ->
       event.preventDefault()
 
       element = $(@)
-      url     = element.attr('href')
-      service = element.data('share-service')
-      content = element.data('share-text')
+      url     = element.attr( 'href' )
+      service = element.data( 'share-service' )
+      content = element.data( 'share-text' )
 
-      _triggerPopup(service, url, content)
+      _triggerPopup( service, url, content )
 
   # -------------------------------------
   #   Trigger Popup
   # -------------------------------------
 
-  _triggerPopup = (service, url, content) ->
+  _triggerPopup = ( service, url, content ) ->
     popupOptions =
       "width=#{ _settings.popup.width },
        height=#{ _settings.popup.height },
@@ -64,7 +64,7 @@
       when 'google'
         url = "https://plus.google.com/share?url=#{ url}"
 
-    window.open(url, service, popupOptions)
+    window.open( url, service, popupOptions )
 
   # -------------------------------------
   #   Public Methods
@@ -76,5 +76,5 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.share.init()
+# Spellbook.Share.init()
 #

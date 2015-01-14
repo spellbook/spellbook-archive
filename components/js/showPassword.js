@@ -1,4 +1,4 @@
-this.Spellbook.showPassword = (function() {
+this.Spellbook.ShowPassword = (function() {
   var init, _setEventHandlers, _settings, _showPassword;
   _settings = {};
   init = function(options) {

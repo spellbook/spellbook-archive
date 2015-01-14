@@ -1,14 +1,14 @@
-describe 'Spellbook.share', ->
+describe 'Spellbook.Share', ->
   beforeEach ->
-    loadFixtures('share.html')
+    loadFixtures( 'share.html' )
 
-    @element     = $('.js-share-service')
+    @element     = $( '.js-share-service' )
     @activeClass = 'is-active'
 
-    Spellbook.share.init()
+    Spellbook.Share.init()
 
   it 'should trigger a click on the service element', ->
-    spyOnEvent(@element, 'click')
+    spyOnEvent( @element, 'click' )
     @element.click()
 
-    expect('click').toHaveBeenTriggeredOn(@element)
+    expect( 'click' ).toHaveBeenTriggeredOn( @element )

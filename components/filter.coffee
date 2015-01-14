@@ -5,7 +5,7 @@
 #
 # *************************************
 
-@Spellbook.filter = (options) ->
+@Spellbook.filter = ( options ) ->
   settings = $.extend
     link           : $('.js-filter-link')
     item           : $('.js-filter-item')
@@ -16,26 +16,26 @@
     dataAttribute  : 'item'
   , options
 
-  settings.link.on 'click', (event) ->
+  settings.link.on 'click', ( event ) ->
     event.preventDefault()
 
     element    = $(@)
-    itemToShow = element.attr('href').split('#')[1]
+    itemToShow = element.attr( 'href' ).split( '#' )[ 1 ]
 
-    settings.link.removeClass(settings.activeClass)
-    element.toggleClass(settings.activeClass)
+    settings.link.removeClass( settings.activeClass )
+    element.toggleClass( settings.activeClass )
 
     unless itemToShow is 'all'
-      settings.item.addClass(settings.hiddenClass)
+      settings.item.addClass( settings.hiddenClass )
 
       dataItemToShow = $("[data-#{ settings.dataAttribute }=#{ itemToShow }]")
 
       if dataItemToShow.length > 0
-        dataItemToShow.removeClass(settings.hiddenClass)
+        dataItemToShow.removeClass( settings.hiddenClass )
       else
-        settings.itemsContainer.append(settings.emptyElement)
+        settings.itemsContainer.append( settings.emptyElement )
     else
-      settings.item.removeClass(settings.hiddenClass)
+      settings.item.removeClass( settings.hiddenClass )
 
 # -------------------------------------
 #   Usage

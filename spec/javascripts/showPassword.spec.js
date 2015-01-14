@@ -1,15 +1,15 @@
-describe('Spellbook.showPassword', function() {
+describe('Spellbook.ShowPassword', function() {
   beforeEach(function() {
     loadFixtures('show_password.html');
     this.input = $('.js-showPassword-input');
     this.toggle = $('.js-showPassword-toggle');
-    return Spellbook.showPassword.init();
+    return Spellbook.ShowPassword.init();
   });
   it('should show the standard password input by default', function() {
     return expect(this.input).toHaveAttr('type', 'password');
   });
   it('should show the password if showByDefault is true', function() {
-    Spellbook.showPassword.init({
+    Spellbook.ShowPassword.init({
       showByDefault: true
     });
     return expect(this.input).toHaveAttr('type', 'text');

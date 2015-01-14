@@ -5,7 +5,7 @@
 #
 # *************************************
 
-@Spellbook.showPassword = do ->
+@Spellbook.ShowPassword = do ->
 
   # -------------------------------------
   #   Private Variables
@@ -17,10 +17,10 @@
   #   Initialize
   # -------------------------------------
 
-  init = (options) ->
+  init = ( options ) ->
     _settings = $.extend
-      input         : $('.js-showPassword-input')
-      toggle        : $('.js-showPassword-toggle')
+      input         : $( '.js-showPassword-input' )
+      toggle        : $( '.js-showPassword-toggle' )
       showByDefault : false
     , options
 
@@ -32,8 +32,8 @@
   # -------------------------------------
 
   _setEventHandlers = ->
-    _settings.toggle.on 'change', (event) ->
-      show = $(@).prop('checked')
+    _settings.toggle.on 'change', ( event ) ->
+      show = $(@).prop( 'checked' )
 
       if show
         _showPassword()
@@ -58,5 +58,5 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.showPassword.init()
+# Spellbook.ShowPassword.init()
 #

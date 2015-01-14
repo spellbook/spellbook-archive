@@ -11,7 +11,7 @@
 #
 # *************************************
 
-@Spellbook.saveProgress = do ->
+@Spellbook.SaveProgress = do ->
 
   # -------------------------------------
   #   Private Variables
@@ -23,10 +23,10 @@
   #   Initialize
   # -------------------------------------
 
-  init = (options) ->
+  init = ( options ) ->
     _settings = $.extend
-      element       : $('.js-saveProgress')
-      container     : $('.js-saveProgress-container')
+      element       : $( '.js-saveProgress' )
+      container     : $( '.js-saveProgress-container' )
       dataAttribute : 'saveprogress'
     , options
 
@@ -37,11 +37,11 @@
   #   Erase Progress
   # -------------------------------------
 
-  _eraseProgress = (container) ->
-    container.find(_settings.element).each ->
-      key = $(@).data(_settings.dataAttribute)
+  _eraseProgress = ( container ) ->
+    container.find( _settings.element ).each ->
+      key = $(@).data( _settings.dataAttribute )
 
-      localStorage.removeItem(key)
+      localStorage.removeItem( key )
 
   # -------------------------------------
   #   Restore Progress
@@ -50,10 +50,10 @@
   _restoreProgress = ->
     _settings.element.each ->
       element = $(@)
-      key     = element.data(_settings.dataAttribute)
-      value   = localStorage.getItem(key)
+      key     = element.data( _settings.dataAttribute )
+      value   = localStorage.getItem( key )
 
-      element.val(value)
+      element.val( value )
 
   # -------------------------------------
   #   Set Event Handlers
@@ -62,12 +62,12 @@
   _setEventHandlers = ->
     _settings.element.on 'input', ->
       element = $(@)
-      key     = element.data(_settings.dataAttribute)
+      key     = element.data( _settings.dataAttribute )
       value   = element.val()
 
       _storeProgress( key, value )
 
-    _settings.container.on 'submit', (event) ->
+    _settings.container.on 'submit', ( event ) ->
       _eraseProgress( $(@) )
 
   # -------------------------------------
@@ -87,5 +87,5 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.saveProgress.init()
+# Spellbook.SaveProgress.init()
 #

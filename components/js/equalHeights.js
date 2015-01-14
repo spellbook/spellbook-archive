@@ -1,4 +1,4 @@
-this.Spellbook.equalHeights = (function() {
+this.Spellbook.EqualHeights = (function() {
   var init, _heights, _setEventHandlers, _setHeight, _settings, _timer;
   _settings = {};
   _heights = [];

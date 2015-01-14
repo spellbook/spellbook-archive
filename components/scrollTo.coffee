@@ -10,18 +10,18 @@
 #
 # *************************************
 
-@Spellbook.scrollTo = (options) ->
+@Spellbook.scrollTo = ( options ) ->
   settings = $.extend
-    element : $('.js-scrollTo')
+    element : $( '.js-scrollTo' )
     speed   : 250
   , options
 
-  settings.element.on 'click', (event) ->
+  settings.element.on 'click', ( event ) ->
     event.preventDefault()
-    to = settings.element.attr('href')
+    to = settings.element.attr( 'href' )
 
-    $('body, html').animate({
-      scrollTop: parseInt( $(to).offset().top )
+    $( 'body, html' ).animate({
+      scrollTop: parseInt( $( to ).offset().top )
     }, settings.speed)
 
 # -------------------------------------
@@ -30,4 +30,3 @@
 #
 # Spellbook.scrollTo()
 #
-

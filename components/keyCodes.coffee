@@ -60,4 +60,5 @@
 # -------------------------------------
 #
 # Spellbook.keyCodes.comma
+# Spellbook.keyCodes['1']
 #

@@ -1,10 +1,10 @@
-describe 'Spellbook.equalHeights', ->
+describe 'Spellbook.EqualHeights', ->
   beforeEach ->
-    loadFixtures('equal_heights.html')
+    loadFixtures( 'equal_heights.html' )
 
-    @element = $('.js-equalHeight')
+    @element = $( '.js-equalHeight' )
 
-    Spellbook.equalHeights.init()
+    Spellbook.EqualHeights.init()
 
   it 'should set equal heights on the elements', ->
-    expect(@element).toHaveProp('style')
+    expect( @element ).toHaveProp( 'style' )

@@ -5,7 +5,7 @@
 #
 # *************************************
 
-@Spellbook.slugify = (string) ->
+@Spellbook.slugify = ( string ) ->
   string
     .toLowerCase()
     .replace( /[^\w ]+/g, '' )
@@ -16,5 +16,5 @@
 # -------------------------------------
 #
 # string = 'This is my string!'
-# Spellbook.slugify(string)
+# Spellbook.slugify( string )
 #

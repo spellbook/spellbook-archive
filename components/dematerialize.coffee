@@ -5,7 +5,7 @@
 #
 # *************************************
 
-@Spellbook.dematerialize = do ->
+@Spellbook.Dematerialize = do ->
 
   # -------------------------------------
   #   Private Variables
@@ -87,6 +87,5 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.dematerialize.init()
+# Spellbook.Dematerialize.init()
 #
-

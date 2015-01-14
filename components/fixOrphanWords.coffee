@@ -10,19 +10,19 @@
 #
 # *************************************
 
-@Spellbook.fixOrphanWords = (options) ->
+@Spellbook.fixOrphanWords = ( options ) ->
   settings = $.extend
-    element: $('.js-orphan')
+    element: $( '.js-orphan' )
   , options
 
   settings.element.each ->
     element    = $(@)
-    wordArray  = element.text().split(' ')
+    wordArray  = element.text().split( ' ' )
     finalTitle = ''
 
     for i in [ 0..wordArray.length - 1 ]
 
-      finalTitle += wordArray[i]
+      finalTitle += wordArray[ i ]
 
       if i is ( wordArray.length - 2 )
         finalTitle += '&nbsp;'
@@ -31,7 +31,7 @@
       else
         finalTitle += ' '
 
-    element.html(finalTitle)
+    element.html( finalTitle )
 
 # -------------------------------------
 #   Usage

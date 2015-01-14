@@ -1,4 +1,4 @@
-this.Spellbook.stateUrls = (function() {
+this.Spellbook.StateUrls = (function() {
   var init, _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState, _settings, _showSection;
   _settings = {};
   init = function(options) {

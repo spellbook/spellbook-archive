@@ -5,10 +5,10 @@
 #
 # *************************************
 
-@Spellbook.limiter = (options) ->
+@Spellbook.limiter = ( options ) ->
   settings = $.extend
-    element     : $('.js-limiter-element')
-    toggle      : $('.js-limiter-toggle')
+    element     : $( '.js-limiter-element' )
+    toggle      : $( '.js-limiter-toggle' )
     limit       : 5
     hiddenClass : 'is-hidden'
   , options
@@ -18,12 +18,12 @@
   if count > settings.limit
     settings.element
       .not( ":lt(#{ settings.limit })" )
-      .addClass(settings.hiddenClass)
+      .addClass( settings.hiddenClass )
 
-    settings.toggle.on 'click', (event) ->
+    settings.toggle.on 'click', ( event ) ->
       event.preventDefault()
       $(@).remove()
-      settings.element.removeClass(settings.hiddenClass)
+      settings.element.removeClass( settings.hiddenClass )
   else
     settings.toggle.remove()
 
@@ -33,4 +33,3 @@
 #
 # Spellbook.limiter()
 #
-

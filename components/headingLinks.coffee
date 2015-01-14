@@ -10,7 +10,7 @@
 #
 # *************************************
 
-@Spellbook.headingLinks = do ->
+@Spellbook.HeadingLinks = do ->
 
   # -------------------------------------
   #   Private Variables
@@ -22,9 +22,9 @@
   #   Initialize
   # -------------------------------------
 
-  init = (options) ->
+  init = ( options ) ->
     _settings = $.extend
-      headings    : $('h1, h2, h3, h4, h5')
+      headings    : $( 'h1, h2, h3, h4, h5' )
       anchorClass : 'anchor'
     , options
 
@@ -36,7 +36,7 @@
   # string - the string to slugify
   # -------------------------------------
 
-  _slugify = (string) ->
+  _slugify = ( string ) ->
     string
       .toLowerCase()
       .replace( /[^\w ]+/g, '' )
@@ -64,5 +64,5 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.headingLinks.init()
+# Spellbook.HeadingLinks.init()
 #

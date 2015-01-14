@@ -5,14 +5,14 @@
 #
 # *************************************
 
-@Spellbook.randomizer = (collection) ->
+@Spellbook.randomizer = ( collection ) ->
   randomNumber = Math.floor( Math.random() * collection.length )
-  return collection[randomNumber]
+  return collection[ randomNumber ]
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# collection = ['one', 'two', 'three']
-# Spellbook.randomizer(collection)
+# collection = [ 'one', 'two', 'three' ]
+# Spellbook.randomizer( collection )
 #

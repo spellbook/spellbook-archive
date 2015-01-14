@@ -1,4 +1,4 @@
-this.Spellbook.modal = (function() {
+this.Spellbook.Modal = (function() {
   var init, trigger, _backdrop, _cleanupEvents, _modal, _setActiveEventHandlers, _setEventHandlers, _settings, _toggleOverlay;
   _modal = null;
   _backdrop = null;

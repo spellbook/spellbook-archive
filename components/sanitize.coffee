@@ -5,12 +5,12 @@
 #
 # *************************************
 
-@Spellbook.sanitize = (string) ->
+@Spellbook.sanitize = ( string ) ->
   string.replace( /(<([^>]+)>)/ig, '' )
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.santize('<h1>Hello!</h1>')
+# Spellbook.santize( '<h1>Hello!</h1>' )
 #
