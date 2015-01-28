@@ -7,13 +7,13 @@ this.Spellbook.QueryParams = (function() {
 
   function QueryParams(options) {
     this.options = options;
-    this._settings = $.extend({
-      url: null
-    }, this.options);
     this.init();
   }
 
   QueryParams.prototype.init = function() {
+    this._settings = $.extend({
+      url: null
+    }, this.options);
     this._parseQueryString(this._settings.url);
     return this._sortParams();
   };

@@ -23,18 +23,17 @@ class @Spellbook.QueryParams
   #   Constructor
   # -------------------------------------
 
-  constructor: ( @options ) ->
-    @_settings = $.extend
-      url: null
-    , @options
-
-    @init()
+  constructor: ( @options ) -> @init()
 
   # -------------------------------------
   #   Initializer
   # -------------------------------------
 
   init: ->
+    @_settings = $.extend
+      url: null
+    , @options
+
     @_parseQueryString( @_settings.url )
     @_sortParams()
 
