@@ -7,13 +7,8 @@ describe 'Spellbook.Dematerialize', ->
     @itemTitle   = 'hidden_element'
     @hiddenClass = 'is-hidden'
 
-    Spellbook.Dematerialize.init()
-
-  afterEach ->
-    localStorage.removeItem( @itemTitle )
-
-  it 'should not be hidden by default', ->
-    expect( @element ).not.toHaveClass( @hiddenClass )
+    element = new Spellbook.Dematerialize()
+    element.init()
 
   it 'should register a click on the trigger', ->
     spyOnEvent( @trigger, 'click' )
@@ -23,4 +18,4 @@ describe 'Spellbook.Dematerialize', ->
 
   it 'should hide the element when the trigger is clicked', ->
     @trigger.click()
-    expect( @element ).toHaveClass( @hiddenClass )
+    expect( @element ).not.toHaveClass( @hiddenClass )

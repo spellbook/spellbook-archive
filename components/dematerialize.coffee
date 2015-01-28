@@ -6,93 +6,87 @@
 # *************************************
 #
 # @param element     { jQuery object }
-# @param trigger     { jQuery object }
+# @param trigger     { jQuery object | integer }
 # @param itemTitle   { string }
 # @param hiddenClass { string }
 #
 # *************************************
 
-@Spellbook.Dematerialize = do ->
+class @Spellbook.Dematerialize
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings = {}
-  _item     = ''
+  @_settings : {}
+  @_item     : ''
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init = ( options ) ->
-    _settings = $.extend
+  init: ( options ) ->
+    @_settings = $.extend
       element     : $( '.js-dematerialize-element' )
       trigger     : $( '.js-dematerialize-trigger' )
       itemTitle   : 'hidden_element'
       hiddenClass : 'is-hidden'
     , options
 
-    _setEventHandlers()
-    _setInitialState()
+    @_setEventHandlers()
+    @_setInitialState()
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers = ->
-    if _settings.trigger instanceof jQuery
-      _settings.trigger.on 'click', ( event ) ->
+  _setEventHandlers: ->
+    if @_settings.trigger instanceof jQuery
+      @_settings.trigger.on 'click', ( event ) =>
         event.preventDefault()
-        _toggleState()
+        @_toggleState()
     else
-      _toggleStateViaKey()
+      @_toggleStateViaKey()
 
   # -------------------------------------
   #   Set Initial State
   # -------------------------------------
 
-  _setInitialState = ->
-    _item = localStorage.getItem( _settings.itemTitle )
+  _setInitialState: ->
+    @_item = localStorage.getItem( @_settings.itemTitle )
 
-    if _item is null
-      _settings.element.removeClass( _settings.hiddenClass )
-    else
-      _settings.element.addClass( _settings.hiddenClass )
+    unless @_item is 'true'
+      @_settings.element.removeClass( @_settings.hiddenClass )
 
   # -------------------------------------
   #   Toggle State
   # -------------------------------------
 
-  _toggleState = ->
-    unless _settings.element.hasClass( _settings.hiddenClass )
-      _settings.element.addClass( _settings.hiddenClass )
-      _item = localStorage.setItem( _settings.itemTitle, true )
+  _toggleState: ->
+    unless @_settings.element.hasClass( @_settings.hiddenClass )
+      @_settings.element.addClass( @_settings.hiddenClass )
+      @_item = localStorage.setItem( @_settings.itemTitle, 'true' )
     else
-      _settings.element.removeClass( _settings.hiddenClass )
-      _item = localStorage.removeItem( _settings.itemTitle )
+      @_settings.element.removeClass( @_settings.hiddenClass )
+      @_item = localStorage.removeItem( @_settings.itemTitle )
 
   # -------------------------------------
   #   Toggle State Via Key
   # -------------------------------------
 
-  _toggleStateViaKey = ->
-    $( document ).on 'keyup', ( event ) ->
+  _toggleStateViaKey: ->
+    $( document ).on 'keyup', ( event ) =>
       tag = event.target.tagName.toLowerCase()
+
       switch event.which
-        when _settings.trigger
+        when @_settings.trigger
           unless tag is 'input' or tag is 'textarea'
-            _toggleState()
-
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
-
-  init: init
+            @_toggleState()
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Dematerialize.init()
+# element = new Spellbook.Dematerialize()
+# element.init()
 #

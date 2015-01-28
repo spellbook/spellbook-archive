@@ -1,57 +1,66 @@
 this.Spellbook.Dematerialize = (function() {
-  var init, _item, _setEventHandlers, _setInitialState, _settings, _toggleState, _toggleStateViaKey;
-  _settings = {};
-  _item = '';
-  init = function(options) {
-    _settings = $.extend({
+  function Dematerialize() {}
+
+  Dematerialize._settings = {};
+
+  Dematerialize._item = '';
+
+  Dematerialize.prototype.init = function(options) {
+    this._settings = $.extend({
       element: $('.js-dematerialize-element'),
       trigger: $('.js-dematerialize-trigger'),
       itemTitle: 'hidden_element',
       hiddenClass: 'is-hidden'
     }, options);
-    _setEventHandlers();
-    return _setInitialState();
+    this._setEventHandlers();
+    return this._setInitialState();
   };
-  _setEventHandlers = function() {
-    if (_settings.trigger instanceof jQuery) {
-      return _settings.trigger.on('click', function(event) {
-        event.preventDefault();
-        return _toggleState();
-      });
+
+  Dematerialize.prototype._setEventHandlers = function() {
+    if (this._settings.trigger instanceof jQuery) {
+      return this._settings.trigger.on('click', (function(_this) {
+        return function(event) {
+          event.preventDefault();
+          return _this._toggleState();
+        };
+      })(this));
     } else {
-      return _toggleStateViaKey();
+      return this._toggleStateViaKey();
     }
   };
-  _setInitialState = function() {
-    _item = localStorage.getItem(_settings.itemTitle);
-    if (_item === null) {
-      return _settings.element.removeClass(_settings.hiddenClass);
-    } else {
-      return _settings.element.addClass(_settings.hiddenClass);
+
+  Dematerialize.prototype._setInitialState = function() {
+    this._item = localStorage.getItem(this._settings.itemTitle);
+    if (this._item !== 'true') {
+      return this._settings.element.removeClass(this._settings.hiddenClass);
     }
   };
-  _toggleState = function() {
-    if (!_settings.element.hasClass(_settings.hiddenClass)) {
-      _settings.element.addClass(_settings.hiddenClass);
-      return _item = localStorage.setItem(_settings.itemTitle, true);
+
+  Dematerialize.prototype._toggleState = function() {
+    if (!this._settings.element.hasClass(this._settings.hiddenClass)) {
+      this._settings.element.addClass(this._settings.hiddenClass);
+      return this._item = localStorage.setItem(this._settings.itemTitle, 'true');
     } else {
-      _settings.element.removeClass(_settings.hiddenClass);
-      return _item = localStorage.removeItem(_settings.itemTitle);
+      this._settings.element.removeClass(this._settings.hiddenClass);
+      return this._item = localStorage.removeItem(this._settings.itemTitle);
     }
   };
-  _toggleStateViaKey = function() {
-    return $(document).on('keyup', function(event) {
-      var tag;
-      tag = event.target.tagName.toLowerCase();
-      switch (event.which) {
-        case _settings.trigger:
-          if (!(tag === 'input' || tag === 'textarea')) {
-            return _toggleState();
-          }
-      }
-    });
+
+  Dematerialize.prototype._toggleStateViaKey = function() {
+    return $(document).on('keyup', (function(_this) {
+      return function(event) {
+        var tag;
+        tag = event.target.tagName.toLowerCase();
+        switch (event.which) {
+          case _this._settings.trigger:
+            if (!(tag === 'input' || tag === 'textarea')) {
+              return _this._toggleState();
+            }
+        }
+      };
+    })(this));
   };
-  return {
-    init: init
-  };
+
+  return Dematerialize;
+
 })();

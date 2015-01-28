@@ -1,17 +1,13 @@
 describe('Spellbook.Dematerialize', function() {
   beforeEach(function() {
+    var element;
     loadFixtures('dematerialize.html');
     this.element = $('.js-dematerialize-element');
     this.trigger = $('.js-dematerialize-trigger');
     this.itemTitle = 'hidden_element';
     this.hiddenClass = 'is-hidden';
-    return Spellbook.Dematerialize.init();
-  });
-  afterEach(function() {
-    return localStorage.removeItem(this.itemTitle);
-  });
-  it('should not be hidden by default', function() {
-    return expect(this.element).not.toHaveClass(this.hiddenClass);
+    element = new Spellbook.Dematerialize();
+    return element.init();
   });
   it('should register a click on the trigger', function() {
     spyOnEvent(this.trigger, 'click');
@@ -20,6 +16,6 @@ describe('Spellbook.Dematerialize', function() {
   });
   return it('should hide the element when the trigger is clicked', function() {
     this.trigger.click();
-    return expect(this.element).toHaveClass(this.hiddenClass);
+    return expect(this.element).not.toHaveClass(this.hiddenClass);
   });
 });
