@@ -1,17 +1,19 @@
 this.Spellbook.Dematerialize = (function() {
-  function Dematerialize() {}
-
   Dematerialize._settings = {};
 
   Dematerialize._item = '';
 
-  Dematerialize.prototype.init = function(options) {
+  function Dematerialize(options) {
+    this.options = options;
     this._settings = $.extend({
       element: $('.js-dematerialize-element'),
       trigger: $('.js-dematerialize-trigger'),
       itemTitle: 'hidden_element',
       hiddenClass: 'is-hidden'
-    }, options);
+    }, this.options);
+  }
+
+  Dematerialize.prototype.init = function() {
     this._setEventHandlers();
     return this._setInitialState();
   };

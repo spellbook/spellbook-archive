@@ -22,17 +22,22 @@ class @Spellbook.Dematerialize
   @_item     : ''
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init: ( options ) ->
+  constructor: ( @options ) ->
     @_settings = $.extend
       element     : $( '.js-dematerialize-element' )
       trigger     : $( '.js-dematerialize-trigger' )
       itemTitle   : 'hidden_element'
       hiddenClass : 'is-hidden'
-    , options
+    , @options
 
+  # -------------------------------------
+  #   Initialize
+  # -------------------------------------
+
+  init: ->
     @_setEventHandlers()
     @_setInitialState()
 
