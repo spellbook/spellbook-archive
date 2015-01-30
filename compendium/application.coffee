@@ -13,8 +13,7 @@
 # -------------------------------------
 #   Components
 # -------------------------------------
-##= require components/componentName (/className, /moduleName)
-##= ...
+##= require_tree ./components
 
 # -------------------------------------
 #   Document Ready
