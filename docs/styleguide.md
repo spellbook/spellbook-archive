@@ -168,6 +168,15 @@ event   = ''
 element = ''
 ```
 
+### jQuery Objects
+
+Prefix jQuery objects with `$`.
+
+```
+# GOOD
+$element = $( '.js-element' )
+```
+
 ### Boolean Variables
 
 Prefix boolean variables with `is`.
