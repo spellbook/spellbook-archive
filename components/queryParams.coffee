@@ -31,7 +31,7 @@ class @Spellbook.QueryParams
 
   init: ->
     @_settings = $.extend
-      url: null
+      url : null
     , @options
 
     @_parseQueryString( @_settings.url )

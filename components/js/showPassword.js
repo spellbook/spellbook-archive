@@ -3,8 +3,8 @@ this.Spellbook.ShowPassword = (function() {
   _settings = {};
   init = function(options) {
     _settings = $.extend({
-      input: $('.js-showPassword-input'),
-      toggle: $('.js-showPassword-toggle'),
+      $input: $('.js-showPassword-input'),
+      $toggle: $('.js-showPassword-toggle'),
       showByDefault: false
     }, options);
     _setEventHandlers();
@@ -13,19 +13,19 @@ this.Spellbook.ShowPassword = (function() {
     }
   };
   _setEventHandlers = function() {
-    return _settings.toggle.on('change', function(event) {
+    return _settings.$toggle.on('change', function(event) {
       var show;
       show = $(this).prop('checked');
       if (show) {
         return _showPassword();
       } else {
-        return _settings.input.attr('type', 'password');
+        return _settings.$input.attr('type', 'password');
       }
     });
   };
   _showPassword = function() {
-    _settings.input.attr('type', 'text');
-    return _settings.toggle.prop('checked', true);
+    _settings.$input.attr('type', 'text');
+    return _settings.$toggle.prop('checked', true);
   };
   return {
     init: init

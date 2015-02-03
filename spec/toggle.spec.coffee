@@ -2,170 +2,170 @@ describe 'Spellbook.toggle', ->
   beforeEach ->
     loadFixtures( 'toggle.html' )
 
-    @sender               = $( '.js-toggle-sender' )
-    @proximityToggleClass = 'is-hidden'
-    @senderActiveClass    = 'is-active'
+    @element     = $( '.js-toggle' )
+    @toggleClass = 'is-hidden'
+    @activeClass = 'is-active'
 
     Spellbook.toggle()
 
   describe 'click', ->
 
     it 'should register a click on the sender', ->
-      spyOnEvent( @sender, 'click' )
-      @sender.click()
+      spyOnEvent( @element, 'click' )
+      @element.click()
 
-      expect( 'click' ).toHaveBeenTriggeredOn( @sender )
+      expect( 'click' ).toHaveBeenTriggeredOn( @element )
 
     it 'should add an active class to the sender when clicked', ->
-      @sender.click()
+      @element.click()
 
-      expect( @sender ).toHaveClass( @senderActiveClass )
+      expect( @element ).toHaveClass( @activeClass )
 
     it 'should toggle the visibility of the next element when clicked', ->
-      @sender1   = $( '.js-toggle-sender-01' )
+      @element1  = $( '.js-toggle-sender-01' )
       @receiver1 = $( '#receiver-01' )
 
       Spellbook.toggle
-        sender: @sender1
+        $element : @element1
 
-      @sender1.trigger( 'click' )
-      expect( @receiver1 ).toHaveClass( @proximityToggleClass )
+      @element1.trigger( 'click' )
+      expect( @receiver1 ).toHaveClass( @toggleClass )
 
     it 'should toggle the visibility of the previous element when clicked', ->
-      @sender2   = $( '.js-toggle-sender-02' )
+      @element2  = $( '.js-toggle-sender-02' )
       @receiver2 = $( '#receiver-02' )
 
       Spellbook.toggle
-        sender    : @sender2
+        $element  : @element2
         proximity : 'prev'
 
-      @sender2.trigger( 'click' )
-      expect( @receiver2 ).toHaveClass( @proximityToggleClass )
+      @element2.trigger( 'click' )
+      expect( @receiver2 ).toHaveClass( @toggleClass )
 
     it 'should toggle the visibility of the next parent element when clicked', ->
-      @sender3   = $( '.js-toggle-sender-03' )
+      @element3  = $( '.js-toggle-sender-03' )
       @receiver3 = $( '#receiver-03' )
 
       Spellbook.toggle
-        sender    : @sender3
+        $element  : @element3
         proximity : 'nextParent'
 
-      @sender3.trigger( 'click' )
-      expect( @receiver3 ).toHaveClass( @proximityToggleClass )
+      @element3.trigger( 'click' )
+      expect( @receiver3 ).toHaveClass( @toggleClass )
 
     it 'should toggle the visibility of the previous parent element when clicked', ->
-      @sender4   = $( '.js-toggle-sender-04' )
+      @element4  = $( '.js-toggle-sender-04' )
       @receiver4 = $( '#receiver-04' )
 
       Spellbook.toggle
-        sender    : @sender4
+        $element  : @element4
         proximity : 'prevParent'
 
-      @sender4.trigger( 'click' )
-      expect( @receiver4 ).toHaveClass( @proximityToggleClass )
+      @element4.trigger( 'click' )
+      expect( @receiver4 ).toHaveClass( @toggleClass )
 
     it 'should toggle the visibility of the referenced element when clicked', ->
-      @sender   = $( '.js-toggle-sender-04' )
+      @element  = $( '.js-toggle-sender-04' )
       @receiver = $( '#receiver-04' )
 
       Spellbook.toggle
-        sender    : @sender
+        $element  : @element
         proximity : @receiver
 
-      @sender.trigger( 'click' )
-      expect( @receiver ).toHaveClass( @proximityToggleClass )
+      @element.trigger( 'click' )
+      expect( @receiver ).toHaveClass( @toggleClass )
 
   describe 'hover', ->
 
     it 'should register a mouseover on the sender', ->
       Spellbook.toggle
-        event: 'hover'
+        event : 'hover'
 
-      spyOnEvent( @sender, 'mouseover' )
-      @sender.trigger( 'mouseover' )
+      spyOnEvent( @element, 'mouseover' )
+      @element.trigger( 'mouseover' )
 
-      expect( 'mouseover' ).toHaveBeenTriggeredOn( @sender )
+      expect( 'mouseover' ).toHaveBeenTriggeredOn( @element )
 
     it 'should register a mouseout on the sender', ->
       Spellbook.toggle
-        event: 'hover'
+        event : 'hover'
 
-      spyOnEvent( @sender, 'mouseout' )
-      @sender.trigger( 'mouseout' )
+      spyOnEvent( @element, 'mouseout' )
+      @element.trigger( 'mouseout' )
 
-      expect( 'mouseout' ).toHaveBeenTriggeredOn( @sender )
+      expect( 'mouseout' ).toHaveBeenTriggeredOn( @element )
 
     it 'should add an active class to the sender when hovered on', ->
       Spellbook.toggle
-        event: 'hover'
+        event : 'hover'
 
-      @sender.trigger( 'mouseover' )
+      @element.trigger( 'mouseover' )
 
-      expect( @sender ).toHaveClass( @senderActiveClass )
+      expect( @element ).toHaveClass( @activeClass )
 
     it 'should remove the active class to the sender when hovered off', ->
       Spellbook.toggle
-        event: 'hover'
+        event : 'hover'
 
-      @sender.trigger( 'mouseout' )
+      @element.trigger( 'mouseout' )
 
-      expect( @sender ).not.toHaveClass( @senderActiveClass )
+      expect( @element ).not.toHaveClass( @activeClass )
 
     it 'should toggle the visibility of the next element when hovered on', ->
-      @sender1   = $( '.js-toggle-sender-01' )
+      @element1  = $( '.js-toggle-sender-01' )
       @receiver1 = $( '#receiver-01' )
 
       Spellbook.toggle
-        event  : 'hover'
-        sender : @sender1
+        $element : @element1
+        event    : 'hover'
 
-      @sender1.trigger( 'mouseover' )
-      expect( @receiver1 ).toHaveClass( @proximityToggleClass )
+      @element1.trigger( 'mouseover' )
+      expect( @receiver1 ).toHaveClass( @toggleClass )
 
     it 'should toggle the visibility of the previous element when hovered on', ->
-      @sender2   = $( '.js-toggle-sender-02' )
+      @element2  = $( '.js-toggle-sender-02' )
       @receiver2 = $( '#receiver-02' )
 
       Spellbook.toggle
+        $element  : @element2
         event     : 'hover'
-        sender    : @sender2
         proximity : 'prev'
 
-      @sender2.trigger( 'mouseover' )
-      expect( @receiver2 ).toHaveClass( @proximityToggleClass )
+      @element2.trigger( 'mouseover' )
+      expect( @receiver2 ).toHaveClass( @toggleClass )
 
     it 'should toggle the visibility of the next parent element when hovered on', ->
-      @sender3   = $( '.js-toggle-sender-03' )
+      @element3  = $( '.js-toggle-sender-03' )
       @receiver3 = $( '#receiver-03' )
 
       Spellbook.toggle
+        $element  : @element3
         event     : 'hover'
-        sender    : @sender3
         proximity : 'nextParent'
 
-      @sender3.trigger( 'mouseover' )
-      expect( @receiver3 ).toHaveClass( @proximityToggleClass )
+      @element3.trigger( 'mouseover' )
+      expect( @receiver3 ).toHaveClass( @toggleClass )
 
     it 'should toggle the visibility of the previous parent element when hovered on', ->
-      @sender4   = $( '.js-toggle-sender-04' )
+      @element4  = $( '.js-toggle-sender-04' )
       @receiver4 = $( '#receiver-04' )
 
       Spellbook.toggle
+        $element  : @element4
         event     : 'hover'
-        sender    : @sender4
         proximity : 'prevParent'
 
-      @sender4.trigger( 'mouseover' )
-      expect( @receiver4 ).toHaveClass( @proximityToggleClass )
+      @element4.trigger( 'mouseover' )
+      expect( @receiver4 ).toHaveClass( @toggleClass )
 
     it 'should toggle the visibility of the referenced element when hovered on', ->
-      @sender   = $( '.js-toggle-sender-04' )
+      @element  = $( '.js-toggle-sender-04' )
       @receiver = $( '#receiver-04' )
 
       Spellbook.toggle
+        $element  : @element
         event     : 'hover'
-        sender    : @sender
         proximity : @receiver
 
-      @sender.trigger( 'mouseover' )
-      expect( @receiver ).toHaveClass( @proximityToggleClass )
+      @element.trigger( 'mouseover' )
+      expect( @receiver ).toHaveClass( @toggleClass )

@@ -5,8 +5,8 @@
 #
 # *************************************
 #
-# @param input         { jQuery object }
-# @param toggle        { jQuery object }
+# @param $input        { jQuery object }
+# @param $toggle       { jQuery object }
 # @param showByDefault { boolean }
 #
 # *************************************
@@ -25,8 +25,8 @@
 
   init = ( options ) ->
     _settings = $.extend
-      input         : $( '.js-showPassword-input' )
-      toggle        : $( '.js-showPassword-toggle' )
+      $input        : $( '.js-showPassword-input' )
+      $toggle       : $( '.js-showPassword-toggle' )
       showByDefault : false
     , options
 
@@ -38,21 +38,21 @@
   # -------------------------------------
 
   _setEventHandlers = ->
-    _settings.toggle.on 'change', ( event ) ->
+    _settings.$toggle.on 'change', ( event ) ->
       show = $(@).prop( 'checked' )
 
       if show
         _showPassword()
       else
-        _settings.input.attr( 'type', 'password' )
+        _settings.$input.attr( 'type', 'password' )
 
   # -------------------------------------
   #   Show Password
   # -------------------------------------
 
   _showPassword = ->
-    _settings.input.attr( 'type', 'text' )
-    _settings.toggle.prop( 'checked', true )
+    _settings.$input.attr( 'type', 'text' )
+    _settings.$toggle.prop( 'checked', true )
 
   # -------------------------------------
   #   Public Methods

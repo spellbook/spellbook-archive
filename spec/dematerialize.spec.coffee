@@ -2,7 +2,7 @@ describe 'Spellbook.Dematerialize', ->
   beforeEach ->
     loadFixtures( 'dematerialize.html' )
 
-    @element     = $( '.js-dematerialize-element' )
+    @element     = $( '.js-dematerialize' )
     @trigger     = $( '.js-dematerialize-trigger' )
     @itemTitle   = 'hidden_element'
     @hiddenClass = 'is-hidden'

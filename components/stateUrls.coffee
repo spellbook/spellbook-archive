@@ -5,8 +5,8 @@
 #
 # *************************************
 #
-# @param link          { jQuery object }
-# @param section       { jQuery object }
+# @param $element      { jQuery object }
+# @param $link         { jQuery object }
 # @param hiddenClass   { string }
 # @param activeClass   { string }
 # @param dataAttribute { string }
@@ -27,8 +27,8 @@
 
   init = ( options ) ->
     _settings = $.extend
-      link          : $( '.js-stateUrls-link' )
-      section       : $( '.js-stateUrls-section' )
+      $element      : $( '.js-stateUrls' )
+      $link         : $( '.js-stateUrls-link' )
       hiddenClass   : 'is-hidden'
       activeClass   : 'is-active'
       dataAttribute : 'state'
@@ -60,7 +60,7 @@
     if window.location.hash
       state = _sanitizeHash( window.location.hash )
     else
-      state = _settings.link.first().attr( 'href' )
+      state = _settings.$link.first().attr( 'href' )
 
     return state
 
@@ -73,7 +73,7 @@
   # -------------------------------------
 
   _setInitialState = ( state ) ->
-    _settings.section
+    _settings.$element
       .not( state )
       .addClass( _settings.hiddenClass )
 
@@ -86,32 +86,32 @@
   # -------------------------------------
 
   _setEventHandlers = ->
-    _settings.link.on 'click', ( event ) ->
+    _settings.$link.on 'click', ( event ) ->
       event.preventDefault()
 
-      element = $(@)
-      state = element.attr( 'href' )
+      $element = $(@)
+      state    = $element.attr( 'href' )
 
       if history.pushState
         history.pushState( null, null, state )
       else
         window.location.hash = state
 
-      _showSection( element, state ) if $( state ).length > 0
+      _showSection( $element, state ) if $( state ).length > 0
 
   # -------------------------------------
   #   Show Section
   # -------------------------------------
   #
-  # @param element { jQuery object }
-  # @param state   { string }
+  # @param $element { jQuery object }
+  # @param state    { string }
   #
   # -------------------------------------
 
-  _showSection = ( element, state ) ->
-    _settings.link.removeClass( _settings.activeClass )
-    _settings.section.addClass( _settings.hiddenClass )
-    element.addClass( _settings.activeClass )
+  _showSection = ( $element, state ) ->
+    _settings.$link.removeClass( _settings.activeClass )
+    _settings.$element.addClass( _settings.hiddenClass )
+    $element.addClass( _settings.activeClass )
     $( state ).removeClass( _settings.hiddenClass )
 
   # -------------------------------------

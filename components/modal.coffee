@@ -5,8 +5,8 @@
 #
 # *************************************
 #
-# @param trigger         { jQuery object }
-# @param close           { jQuery object }
+# @param $trigger        { jQuery object }
+# @param $close          { jQuery object }
 # @param dataAttribute   { string }
 # @param backdropClass   { string }
 # @param activeClass     { string }
@@ -21,9 +21,9 @@
   #   Private Variables
   # -------------------------------------
 
-  _modal    = null
-  _backdrop = null
-  _settings = {}
+  $_modal    = null
+  $_backdrop = null
+  _settings  = {}
 
   # -------------------------------------
   #   Initialize
@@ -31,8 +31,8 @@
 
   init = ( options ) ->
     _settings = $.extend
-      trigger         : $( '.js-modal-trigger' )
-      close           : $( '.js-modal-close' )
+      $trigger        : $( '.js-modal-trigger' )
+      $close          : $( '.js-modal-close' )
       dataAttribute   : 'modal'
       backdropClass   : 'modal-backdrop'
       activeClass     : 'is-active'
@@ -47,22 +47,22 @@
   #   Trigger
   # -------------------------------------
   #
-  # @param element        { jQuery object }
+  # @param $element       { jQuery object }
   # @param event          { string }
   # @param removeBackdrop { boolean }
   # @param callback       { function }
   #
   # -------------------------------------
 
-  trigger = ( element, event, removeBackdrop = false, callback = null ) ->
-    _modal = element
+  trigger = ( $element, event, removeBackdrop = false, callback = null ) ->
+    $_modal = $element
 
     switch event
       when 'open'
-        element.addClass( _settings.activeClass )
+        $element.addClass( _settings.activeClass )
         $( 'body' ).addClass( _settings.activeBodyClass )
       when 'close'
-        element.removeClass( _settings.activeClass )
+        $element.removeClass( _settings.activeClass )
         $( 'body' ).removeClass( _settings.activeBodyClass )
         _cleanupEvents()
 
@@ -80,14 +80,14 @@
     switch event
       when 'open'
         $( '<div class=' + _settings.backdropClass + '></div>' ).appendTo( $( 'body' ) )
-        _backdrop = $( ".#{ _settings.backdropClass }" )
+        $_backdrop = $( ".#{ _settings.backdropClass }" )
         setTimeout ->
-          _backdrop.addClass( _settings.activeClass )
+          $_backdrop.addClass( _settings.activeClass )
         , 25
       when 'close'
-        _backdrop.removeClass( _settings.activeClass )
+        $_backdrop.removeClass( _settings.activeClass )
         setTimeout ->
-          _backdrop.remove()
+          $_backdrop.remove()
         , 500
 
   # -------------------------------------
@@ -95,36 +95,36 @@
   # -------------------------------------
 
   _setEventHandlers = ->
-    _settings.trigger.on 'click', ( event ) ->
+    _settings.$trigger.on 'click', ( event ) ->
       event.preventDefault()
 
       selector = $(@).data( _settings.dataAttribute )
-      _modal   = $( selector )
+      $_modal   = $( selector )
 
-      trigger( _modal, 'open' )
+      trigger( $_modal, 'open' )
 
   # -------------------------------------
   #   Set Active Event Handlers
   # -------------------------------------
 
   _setActiveEventHandlers = ->
-    _settings.close.on 'click', ( event ) ->
+    _settings.$close.on 'click', ( event ) ->
       event.preventDefault()
-      trigger( _modal, 'close' )
+      trigger( $_modal, 'close' )
 
-    _backdrop.on 'click', ( event ) ->
-      trigger( _modal, 'close' )
+    $_backdrop.on 'click', ( event ) ->
+      trigger( $_modal, 'close' )
 
     $( document ).on 'keydown', ( event ) ->
       switch event.which
-        when 27 then trigger( _modal, 'close' )
+        when 27 then trigger( $_modal, 'close' )
 
   # -------------------------------------
   #   Clean Up Events
   # -------------------------------------
 
   _cleanupEvents = ->
-    _settings.close.off( 'click' )
+    _settings.$close.off( 'click' )
     $( document ).off( 'keydown' )
 
   # -------------------------------------

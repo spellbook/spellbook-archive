@@ -10,7 +10,7 @@
 #
 # *************************************
 #
-# @param element       { jQuery object }
+# @param $element      { jQuery object }
 # @param dataAttribute { string }
 # @param keyCodes      { object }
 #
@@ -18,24 +18,24 @@
 
 @Spellbook.shortcut = ( options ) ->
   settings = $.extend
-    element       : $( '[data-shortcut]' )
+    $element      : $( '[data-shortcut]' )
     dataAttribute : 'shortcut'
     keyCodes      : Spellbook.keyCodes
   , options
 
-  settings.element.each ->
+  settings.$element.each ->
     key = settings.keyCodes[ $(@).data( settings.dataAttribute ) ]
 
     $( document ).on 'keyup', ( event ) =>
-      element = $(@)
-      tag     = event.target.tagName.toLowerCase()
+      $element = $(@)
+      tag      = event.target.tagName.toLowerCase()
 
       unless tag == 'input' or tag == 'textarea'
         if event.which == key
-          element.trigger( 'focus' ).trigger( 'click' )
+          $element.trigger( 'focus' ).trigger( 'click' )
 
-          if element.prop( 'tagName' ).toLowerCase() == 'a'
-            window.location = element.attr( 'href' )
+          if $element.prop( 'tagName' ).toLowerCase() == 'a'
+            window.location = $element.attr( 'href' )
 
 # -------------------------------------
 #   Usage

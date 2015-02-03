@@ -5,19 +5,19 @@ this.Spellbook.EqualHeights = (function() {
   _timer = null;
   init = function(options) {
     _settings = $.extend({
-      element: $('.js-equalHeight')
+      $element: $('.js-equalHeights')
     }, options);
     _setHeight();
     return _setEventHandlers();
   };
   _setHeight = function() {
     var height;
-    _settings.element.css('height', 'auto');
-    _settings.element.each(function() {
+    _settings.$element.css('height', 'auto');
+    _settings.$element.each(function() {
       return _heights.push($(this).height());
     });
     height = Math.max.apply(Math, _heights);
-    return _settings.element.css('height', height);
+    return _settings.$element.css('height', height);
   };
   _setEventHandlers = function() {
     return $(window).on('resize', function() {

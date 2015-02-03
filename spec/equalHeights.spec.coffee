@@ -2,7 +2,7 @@ describe 'Spellbook.EqualHeights', ->
   beforeEach ->
     loadFixtures( 'equal_heights.html' )
 
-    @element = $( '.js-equalHeight' )
+    @element = $( '.js-equalHeights' )
 
     Spellbook.EqualHeights.init()
 

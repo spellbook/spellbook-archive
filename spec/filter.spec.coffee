@@ -2,12 +2,12 @@ describe 'Spellbook.filter', ->
   beforeEach ->
     loadFixtures( 'filter.html' )
 
-    @link           = $( '.js-filter-link' )
-    @item           = $( '.js-filter-item' )
-    @itemsContainer = $( '.js-filter-items' )
-    @activeClass    = 'is-active'
-    @hiddenClass    = 'is-hidden'
-    @emptyElement   = $( '<p>There are no items to show.</p>' )
+    @element     = $( '.js-filter' )
+    @item        = $( '.js-filter-item' )
+    @link        = $( '.js-filter-link' )
+    @empty       = $( '<p>There are no items to show.</p>' )
+    @activeClass = 'is-active'
+    @hiddenClass = 'is-hidden'
 
     Spellbook.filter()
 
@@ -55,4 +55,4 @@ describe 'Spellbook.filter', ->
 
     thirdSetLink.click()
 
-    expect( @itemsContainer ).toContainHtml( @emptyElement )
+    expect( @element ).toContainHtml( @empty )

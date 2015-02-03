@@ -1,12 +1,12 @@
 this.Spellbook.fixOrphanWords = function(options) {
   var settings;
   settings = $.extend({
-    element: $('.js-orphan')
+    $element: $('.js-orphan')
   }, options);
-  return settings.element.each(function() {
-    var element, finalTitle, i, wordArray, _i, _ref;
-    element = $(this);
-    wordArray = element.text().split(' ');
+  return settings.$element.each(function() {
+    var $element, finalTitle, i, wordArray, _i, _ref;
+    $element = $(this);
+    wordArray = $element.text().split(' ');
     finalTitle = '';
     for (i = _i = 0, _ref = wordArray.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
       finalTitle += wordArray[i];
@@ -18,6 +18,6 @@ this.Spellbook.fixOrphanWords = function(options) {
         finalTitle += ' ';
       }
     }
-    return element.html(finalTitle);
+    return $element.html(finalTitle);
   });
 };

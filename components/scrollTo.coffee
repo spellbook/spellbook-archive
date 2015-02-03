@@ -5,23 +5,23 @@
 #
 # *************************************
 #
-# @param element { jQuery object }
-# @param speed   { integer }
+# @param $element { jQuery object }
+# @param speed    { integer }
 #
 # *************************************
 
 @Spellbook.scrollTo = ( options ) ->
   settings = $.extend
-    element : $( '.js-scrollTo' )
-    speed   : 250
+    $element : $( '.js-scrollTo' )
+    speed    : 250
   , options
 
-  settings.element.on 'click', ( event ) ->
+  settings.$element.on 'click', ( event ) ->
     event.preventDefault()
-    to = settings.element.attr( 'href' )
+    to = settings.$element.attr( 'href' )
 
     $( 'body, html' ).animate({
-      scrollTop: parseInt( $( to ).offset().top )
+      scrollTop : parseInt( $( to ).offset().top )
     }, settings.speed)
 
 # -------------------------------------

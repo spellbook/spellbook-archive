@@ -3,7 +3,7 @@ this.Spellbook.Share = (function() {
   _settings = {};
   init = function(options) {
     _settings = $.extend({
-      service: $('.js-share-service'),
+      $element: $('.js-share'),
       popup: {
         height: 400,
         width: 575,
@@ -14,13 +14,13 @@ this.Spellbook.Share = (function() {
     return _setEventHandlers();
   };
   _setEventHandlers = function() {
-    return _settings.service.on('click', function(event) {
-      var content, element, service, url;
+    return _settings.$element.on('click', function(event) {
+      var $element, content, service, url;
       event.preventDefault();
-      element = $(this);
-      url = element.attr('href');
-      service = element.data('share-service');
-      content = element.data('share-text');
+      $element = $(this);
+      url = $element.attr('href');
+      service = $element.data('share-service');
+      content = $element.data('share-text');
       return _triggerPopup(service, url, content);
     });
   };

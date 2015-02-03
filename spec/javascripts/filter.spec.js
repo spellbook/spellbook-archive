@@ -1,12 +1,12 @@
 describe('Spellbook.filter', function() {
   beforeEach(function() {
     loadFixtures('filter.html');
-    this.link = $('.js-filter-link');
+    this.element = $('.js-filter');
     this.item = $('.js-filter-item');
-    this.itemsContainer = $('.js-filter-items');
+    this.link = $('.js-filter-link');
+    this.empty = $('<p>There are no items to show.</p>');
     this.activeClass = 'is-active';
     this.hiddenClass = 'is-hidden';
-    this.emptyElement = $('<p>There are no items to show.</p>');
     return Spellbook.filter();
   });
   it('should trigger a click on the filter link', function() {
@@ -46,6 +46,6 @@ describe('Spellbook.filter', function() {
     var thirdSetLink;
     thirdSetLink = $('.link-third');
     thirdSetLink.click();
-    return expect(this.itemsContainer).toContainHtml(this.emptyElement);
+    return expect(this.element).toContainHtml(this.empty);
   });
 });

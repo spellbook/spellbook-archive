@@ -1,7 +1,7 @@
 describe('Spellbook.Share', function() {
   beforeEach(function() {
     loadFixtures('share.html');
-    this.element = $('.js-share-service');
+    this.element = $('.js-share');
     this.activeClass = 'is-active';
     return Spellbook.Share.init();
   });

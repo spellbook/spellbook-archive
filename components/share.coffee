@@ -5,7 +5,7 @@
 #
 # *************************************
 #
-# @param service      { jQuery object }
+# @param $service     { jQuery object }
 # @param popup.height { integer }
 # @param popup.width  { integer }
 # @param popup.left   { integer }
@@ -27,7 +27,7 @@
 
   init = ( options ) ->
     _settings = $.extend
-      service  : $( '.js-share-service' )
+      $element : $( '.js-share' )
       popup    :
         height : 400
         width  : 575
@@ -42,13 +42,13 @@
   # -------------------------------------
 
   _setEventHandlers = ->
-    _settings.service.on 'click', ( event ) ->
+    _settings.$element.on 'click', ( event ) ->
       event.preventDefault()
 
-      element = $(@)
-      url     = element.attr( 'href' )
-      service = element.data( 'share-service' )
-      content = element.data( 'share-text' )
+      $element = $(@)
+      url      = $element.attr( 'href' )
+      service  = $element.data( 'share-service' )
+      content  = $element.data( 'share-text' )
 
       _triggerPopup( service, url, content )
 

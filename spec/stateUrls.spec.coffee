@@ -2,14 +2,14 @@ describe 'Spellbook.StateUrls', ->
   beforeEach ->
     loadFixtures( 'state_urls.html' )
 
+    @element     = $( '.js-stateUrls' )
     @link        = $( '.js-stateUrls-link' )
-    @section     = $( '.js-stateUrls-section' )
     @hiddenClass = 'is-hidden'
     @activeClass = 'is-active'
 
   afterEach ->
     @link.removeClass( @activeClass )
-    @section.removeClass( @hiddenClass )
+    @element.removeClass( @hiddenClass )
     window.location.hash = ''
 
   it 'should set the state to the window hash, if present', ->

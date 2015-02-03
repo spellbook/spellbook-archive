@@ -1,14 +1,14 @@
 describe('Spellbook.StateUrls', function() {
   beforeEach(function() {
     loadFixtures('state_urls.html');
+    this.element = $('.js-stateUrls');
     this.link = $('.js-stateUrls-link');
-    this.section = $('.js-stateUrls-section');
     this.hiddenClass = 'is-hidden';
     return this.activeClass = 'is-active';
   });
   afterEach(function() {
     this.link.removeClass(this.activeClass);
-    this.section.removeClass(this.hiddenClass);
+    this.element.removeClass(this.hiddenClass);
     return window.location.hash = '';
   });
   it('should set the state to the window hash, if present', function() {

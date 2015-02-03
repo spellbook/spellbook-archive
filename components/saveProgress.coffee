@@ -5,9 +5,9 @@
 #
 # *************************************
 #
-# @param element       { jQuery object }
-# @param container     { jQuery object }
-# @param dataAttribute { jQuery object }
+# @param $element      { jQuery object }
+# @param $container    { jQuery object }
+# @param dataAttribute { string }
 #
 # *************************************
 
@@ -25,8 +25,8 @@
 
   init = ( options ) ->
     _settings = $.extend
-      element       : $( '.js-saveProgress' )
-      container     : $( '.js-saveProgress-container' )
+      $element      : $( '.js-saveProgress' )
+      $container    : $( '.js-saveProgress-container' )
       dataAttribute : 'saveprogress'
     , options
 
@@ -42,7 +42,7 @@
   # -------------------------------------
 
   _eraseProgress = ( container ) ->
-    container.find( _settings.element ).each ->
+    container.find( _settings.$element ).each ->
       key = $(@).data( _settings.dataAttribute )
 
       localStorage.removeItem( key )
@@ -52,26 +52,26 @@
   # -------------------------------------
 
   _restoreProgress = ->
-    _settings.element.each ->
-      element = $(@)
-      key     = element.data( _settings.dataAttribute )
-      value   = localStorage.getItem( key )
+    _settings.$element.each ->
+      $element = $(@)
+      key      = $element.data( _settings.dataAttribute )
+      value    = localStorage.getItem( key )
 
-      element.val( value )
+      $element.val( value )
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
   _setEventHandlers = ->
-    _settings.element.on 'input', ->
-      element = $(@)
-      key     = element.data( _settings.dataAttribute )
-      value   = element.val()
+    _settings.$element.on 'input', ->
+      $element = $(@)
+      key      = $element.data( _settings.dataAttribute )
+      value    = $element.val()
 
       _storeProgress( key, value )
 
-    _settings.container.on 'submit', ( event ) ->
+    _settings.$container.on 'submit', ( event ) ->
       _eraseProgress( $(@) )
 
   # -------------------------------------

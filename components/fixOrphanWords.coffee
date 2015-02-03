@@ -6,18 +6,18 @@
 #
 # *************************************
 #
-# @param element { jQuery object }
+# @param $element { jQuery object }
 #
 # *************************************
 
 @Spellbook.fixOrphanWords = ( options ) ->
   settings = $.extend
-    element: $( '.js-orphan' )
+    $element : $( '.js-orphan' )
   , options
 
-  settings.element.each ->
-    element    = $(@)
-    wordArray  = element.text().split( ' ' )
+  settings.$element.each ->
+    $element    = $(@)
+    wordArray  = $element.text().split( ' ' )
     finalTitle = ''
 
     for i in [ 0..wordArray.length - 1 ]
@@ -31,7 +31,7 @@
       else
         finalTitle += ' '
 
-    element.html( finalTitle )
+    $element.html( finalTitle )
 
 # -------------------------------------
 #   Usage

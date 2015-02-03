@@ -5,19 +5,20 @@
 #
 # *************************************
 #
-# @param run     { function }
-# @param element { jQuery object }
+# @param $element { jQuery object }
+# @param run      { function }
 #
 # *************************************
 
 @Spellbook.clickOut = ( options ) ->
   settings = $.extend
-    element: $( '.js-clickout' )
+    $element : $( '.js-clickout' )
+    run      : null
   , options
 
   $( document ).on 'click', -> settings.run()
 
-  settings.element.on 'click', ( event ) ->
+  settings.$element.on 'click', ( event ) ->
     event.stopPropagation()
 
 # -------------------------------------

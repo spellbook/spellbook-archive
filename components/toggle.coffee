@@ -5,21 +5,21 @@
 #
 # *************************************
 #
-# @param sender               { jQuery object }
-# @param proximity            { string }
-# @param event                { string }
-# @param proximityToggleClass { string }
-# @param senderActiveClass    { string }
+# @param $element    { jQuery object }
+# @param proximity   { string }
+# @param event       { string }
+# @param toggleClass { string }
+# @param activeClass { string }
 #
 # *************************************
 
 @Spellbook.toggle = ( options ) ->
   settings = $.extend
-    sender               : $( '.js-toggle-sender' )
+    $element             : $( '.js-toggle' )
     proximity            : 'next' # prev, parent, nextParent, prevParent, $('.element')
     event                : 'click' # hover
-    proximityToggleClass : 'is-hidden'
-    senderActiveClass    : 'is-active'
+    toggleClass : 'is-hidden'
+    activeClass    : 'is-active'
   , options
 
   switch settings.event
@@ -30,34 +30,34 @@
 
     when 'click'
 
-      settings.sender.on 'click', ( event ) ->
+      settings.$element.on 'click', ( event ) ->
         event.preventDefault()
-        element = $(@)
+        $element = $(@)
 
-        settings.sender.toggleClass( settings.senderActiveClass )
+        settings.$element.toggleClass( settings.activeClass )
 
         switch settings.proximity
           when 'next'
-            element
+            $element
               .next()
-              .toggleClass( settings.proximityToggleClass )
+              .toggleClass( settings.toggleClass )
           when 'prev'
-            element
+            $element
               .prev()
-              .toggleClass( settings.proximityToggleClass )
+              .toggleClass( settings.toggleClass )
           when 'nextParent'
-            element
+            $element
               .parent()
               .next()
-              .toggleClass( settings.proximityToggleClass )
+              .toggleClass( settings.toggleClass )
           when 'prevParent'
-            element
+            $element
               .parent()
               .prev()
-              .toggleClass( settings.proximityToggleClass )
+              .toggleClass( settings.toggleClass )
           else
             settings.proximity
-              .toggleClass( settings.proximityToggleClass )
+              .toggleClass( settings.toggleClass )
 
     # -------------------------------------
     #   Hover
@@ -67,68 +67,69 @@
 
       settings.initialState() if settings.initialState
 
-      settings.sender.on
+      settings.$element.on
 
         # ----- Mouse Enter ----- #
 
         mouseenter: ->
 
-          element = $(@)
-          element.addClass( settings.senderActiveClass )
+          $element = $(@)
+
+          $element.addClass( settings.activeClass )
 
           switch settings.proximity
             when 'next'
-              element
+              $element
                 .next()
-                .addClass( settings.proximityToggleClass )
+                .addClass( settings.toggleClass )
             when 'prev'
-              element
+              $element
                 .prev()
-                .addClass( settings.proximityToggleClass )
+                .addClass( settings.toggleClass )
             when 'nextParent'
-              element
+              $element
                 .parent()
                 .next()
-                .addClass( settings.proximityToggleClass )
+                .addClass( settings.toggleClass )
             when 'prevParent'
-              element
+              $element
                 .parent()
                 .prev()
-                .addClass( settings.proximityToggleClass )
+                .addClass( settings.toggleClass )
             else
               settings.proximity
-                .addClass( settings.proximityToggleClass )
+                .addClass( settings.toggleClass )
 
         # ----- Mouse Leave ----- #
 
         mouseleave: ->
 
-          element = $(@)
+          $element = $(@)
 
-          element.removeClass( settings.senderActiveClass )
+          $element.removeClass( settings.activeClass )
 
           switch settings.proximity
             when 'next'
-              element
+              $element
                 .next()
-                .removeClass( settings.proximityToggleClass )
+                .removeClass( settings.toggleClass )
             when 'prev'
-              element
+              $element
                 .prev()
-                .removeClass( settings.proximityToggleClass )
+                .removeClass( settings.toggleClass )
             when 'nextParent'
-              element
+              $element
                 .parent()
                 .next()
-                .removeClass( settings.proximityToggleClass )
+                .removeClass( settings.toggleClass )
             when 'prevParent'
-              element
+              $element
                 .parent()
                 .prev()
-                .removeClass( settings.proximityToggleClass )
+                .removeClass( settings.toggleClass )
             else
               settings.proximity
-                .removeClass( settings.proximityToggleClass )
+                .removeClass( settings.toggleClass )
 
 # -------------------------------------
 #   Usage

@@ -2,7 +2,7 @@ describe('Spellbook.Dematerialize', function() {
   beforeEach(function() {
     var element;
     loadFixtures('dematerialize.html');
-    this.element = $('.js-dematerialize-element');
+    this.element = $('.js-dematerialize');
     this.trigger = $('.js-dematerialize-trigger');
     this.itemTitle = 'hidden_element';
     this.hiddenClass = 'is-hidden';

@@ -5,7 +5,7 @@
 #
 # *************************************
 #
-# @param element { jQuery object }
+# @param $element { jQuery object }
 #
 # *************************************
 
@@ -25,7 +25,7 @@
 
   init = ( options ) ->
     _settings = $.extend
-      element: $( '.js-equalHeight' )
+      $element : $( '.js-equalHeights' )
     , options
 
     _setHeight()
@@ -36,13 +36,13 @@
   # -------------------------------------
 
   _setHeight = ->
-    _settings.element.css( 'height', 'auto' )
+    _settings.$element.css( 'height', 'auto' )
 
-    _settings.element.each -> _heights.push $(@).height()
+    _settings.$element.each -> _heights.push $(@).height()
 
     height = Math.max.apply( Math, _heights )
 
-    _settings.element.css( 'height', height )
+    _settings.$element.css( 'height', height )
 
   # -------------------------------------
   #   Set Event Handlers
