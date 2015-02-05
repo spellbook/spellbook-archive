@@ -28,13 +28,13 @@ Components
 #
 # *************************************
 #
-# @param element   { jQuery object }
+# @param $element  { jQuery object }
 # @param className { string }
 #
 # *************************************
 
 @Spellbook.componentName = ( options ) ->
-  options.element.on 'click', ( event ) ->
+  options.$element.on 'click', ( event ) ->
     event.preventDefault()
 
     $(@).toggleClass( options.className )
@@ -52,7 +52,7 @@ And to call your Component, put it in `javascripts/domready.js.coffee` or, if yo
 
 ```coffeescript
 Spellbook.componentName
-  element   : $( '.js-element' )
+  $element  : $( '.js-element' )
   className : 'is-active'
 ```
 
@@ -68,7 +68,7 @@ Spellbook.componentName
 #
 # *************************************
 #
-# @param element   { jQuery object }
+# @param $element  { jQuery object }
 # @param className { string }
 #
 # *************************************
@@ -95,7 +95,7 @@ class @Spellbook.ClassName
     @setEventHandlers()
 
   setEventHandlers: ->
-    @options.element.on 'click', ( event ) => @doSomething()
+    @options.$element.on 'click', ( event ) => @doSomething()
 
   doSomething: ->
     # ...
@@ -138,7 +138,7 @@ new SpellBook.ClassName
 #
 # *************************************
 #
-# @param element   { jQuery object }
+# @param $element  { jQuery object }
 # @param className { string }
 #
 # *************************************
@@ -190,7 +190,7 @@ If applicable, each Component sets default options to standardize calls. For exa
 ```coffeescript
 @Spellbook.componentName = ( options ) ->
   _settings = $.extend
-    element     : $( '.js-component' ),
+    $element    : $( '.js-component' ),
     activeClass : 'is-active'
   , options
 ```
@@ -251,4 +251,3 @@ Now you can go to `http://localhost:1234/` to see the tests.
 ```shell
 bundle exec rake jasmine:ci
 ```
-
