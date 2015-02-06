@@ -202,7 +202,7 @@ Development
 
 Install Gulp:
 
-```shell
+```
 # Install grunt-cli globally
 npm install -g grunt-cli
 
@@ -219,7 +219,7 @@ You have two options:
 
 ### Running CoffeeLint
 
-```shell
+```
 gulp lint
 ```
 
@@ -233,14 +233,14 @@ gulp lint
 
 **Install Bundler**
 
-```shell
+```
 gem install bundler
 bundle install --binstubs
 ```
 
 **Run Jasmine Server**
 
-```shell
+```
 bundle exec rake jasmine
 ```
 
@@ -248,6 +248,6 @@ Now you can go to `http://localhost:1234/` to see the tests.
 
 **Run Tests via Command Line**
 
-```shell
+```
 bundle exec rake jasmine:ci
 ```
