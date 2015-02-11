@@ -27,6 +27,7 @@ this.Spellbook.LiveSearch = (function() {
     });
   };
   _parseDom = function() {
+    console.log($(_settings.itemNode).hasClass(_settings.hiddenClass));
     return _settings.$query.each(function(index) {
       var $element;
       $element = $(this);

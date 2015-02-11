@@ -5,13 +5,15 @@
 #
 # *************************************
 #
-# @param $element    { jQuery object }
-# @param $query      { jQuery object }
-# @param itemNode    { string (selector) }
-# @param hiddenClass { string }
-# @param onKeyup     { function }
-# @param onFound     { function }
-# @param onEmpty     { function }
+# @param $element     { jQuery object }
+# @param $query       { jQuery object }
+# @param itemNode     { string (selector) }
+# @param hiddenClass  { string }
+# @param emptyMessage { boolean }
+# @param emptyNode    { string (selector) }
+# @param onClear      { function }
+# @param onEmpty      { function }
+# @param onKeyup      { function }
 #
 # *************************************
 
@@ -30,13 +32,16 @@
 
   init = ( options ) ->
     _settings = $.extend
-      $element    : $( '.js-search' )
-      $query      : $( '.js-search-query' )
-      itemNode    : '.js-search-item'
-      hiddenClass : 'is-hidden'
-      onKeyup     : null
-      onFound     : null
-      onEmpty     : null
+      $element     : $( '.js-search' )
+      $query       : $( '.js-search-query' )
+      itemNode     : '.js-search-item'
+      hiddenClass  : 'is-hidden'
+      emptyMessage : true
+      emptyNode    : '.js-search-empty'
+      onClear      : null
+      onEmpty      : null
+      onFound      : null
+      onKeyup      : null
     , options
 
     _setEventHandlers()
@@ -53,7 +58,11 @@
 
       if _query == ''
         $( _settings.itemNode ).removeClass( _settings.hiddenClass )
+        _clearEmptyMessage()
 
+        _settings.onClear( _settings ) unless _settings.onClear is null
+
+      _clearEmptyMessage()
       _parseDom()
 
   # -------------------------------------
@@ -64,29 +73,56 @@
     _settings.$query.each ( index ) ->
       $element = $(@)
 
-      if _isQueryFound( $element )
+      if _isQueryAbsent( $element )
         $element
           .closest( _settings.itemNode )
           .addClass( _settings.hiddenClass )
-
-        _settings.onFound( _settings ) unless _settings.onFound is null
       else
         $element
           .closest( _settings.itemNode )
           .removeClass( _settings.hiddenClass )
 
-        _settings.onEmpty( _settings ) unless _settings.onEmpty is null
+    _handleEmptyResults()
 
   # -------------------------------------
-  #   Is Query Found
+  #   Clear Empty Message
+  # -------------------------------------
+
+  _clearEmptyMessage = ->
+    if _settings.emptyMessage and $( _settings.emptyNode ).length > 0
+      $( _settings.emptyNode ).remove()
+
+  # -------------------------------------
+  #   Handle Empty Results
+  # -------------------------------------
+
+  _handleEmptyResults = ->
+    if _isEmpty()
+      if _settings.emptyMessage
+        emptyClass = _settings.emptyNode.replace('.', '')
+
+        $( "<p class='#{ emptyClass }'>There are no results matching '#{ _query }'.</p>" )
+          .insertAfter( $( _settings.itemNode ).last() )
+
+      _settings.onEmpty( _settings ) unless _settings.onEmpty is null
+
+  # -------------------------------------
+  #   Is Query Absent
   # -------------------------------------
   #
   # @param element { jQuery object }
   #
   # -------------------------------------
 
-  _isQueryFound = ( element ) ->
+  _isQueryAbsent = ( element ) ->
     element.text().search( new RegExp( _query, 'i' ) ) < 0
+
+  # -------------------------------------
+  #   Is Empty
+  # -------------------------------------
+
+  _isEmpty = ->
+    $( "#{ _settings.itemNode }.#{ _settings.hiddenClass }" ).length == $( _settings.itemNode ).length
 
   # -------------------------------------
   #   Public Methods
