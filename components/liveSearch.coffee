@@ -13,6 +13,7 @@
 # @param emptyNode    { string (selector) }
 # @param onClear      { function }
 # @param onEmpty      { function }
+# @param onFound      { function }
 # @param onKeyup      { function }
 #
 # *************************************
@@ -81,6 +82,8 @@
         $element
           .closest( _settings.itemNode )
           .removeClass( _settings.hiddenClass )
+
+        _settings.onFound( _settings ) unless _settings.onFound is null
 
     _handleEmptyResults()
 
