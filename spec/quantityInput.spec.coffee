@@ -78,7 +78,6 @@ describe 'Spellbook.QuantityInput', ->
 
     expect( newTargetValue ).toEqual( @targetBaseValue * 2 )
 
-
   it 'should not go below the specified minimun value', ->
     @element.attr( 'value', @minValue )
 
