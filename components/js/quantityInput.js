@@ -26,7 +26,7 @@ this.Spellbook.QuantityInput = (function() {
   _setEventHandlers = function() {
     _settings.$element.on('keyup', function(event) {
       _setValue();
-      if (!isNaN(_value)) {
+      if (!(isNaN(_value) || _value < _settings.minValue || _value > _settings.maxValue)) {
         return _updateValue();
       }
     });

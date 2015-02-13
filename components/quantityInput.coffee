@@ -69,7 +69,8 @@
 
     _settings.$element.on 'keyup', ( event ) ->
       _setValue()
-      _updateValue() unless isNaN( _value )
+      unless isNaN( _value ) or _value < _settings.minValue or _value > _settings.maxValue
+        _updateValue()
 
     # ----- Increase ----- #
 
