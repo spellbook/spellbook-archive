@@ -11,7 +11,7 @@
 # @param $decrease         { jQuery object }
 # @param $target           { jQuery object }
 # @param targetBaseValue   { integer }
-# @param targetValuePrevix { string }
+# @param targetValuePrefix { string }
 # @param minValue          { integer }
 # @param maxValue          { integer }
 # @param onIncrease        { function }
