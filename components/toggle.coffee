@@ -15,11 +15,11 @@
 
 @Spellbook.toggle = ( options ) ->
   settings = $.extend
-    $element             : $( '.js-toggle' )
-    proximity            : 'next' # prev, parent, nextParent, prevParent, $('.element')
-    event                : 'click' # hover
+    $element    : $( '.js-toggle' )
+    proximity   : 'next' # prev, parent, nextParent, prevParent, $('.element')
+    event       : 'click' # hover
     toggleClass : 'is-hidden'
-    activeClass    : 'is-active'
+    activeClass : 'is-active'
   , options
 
   switch settings.event

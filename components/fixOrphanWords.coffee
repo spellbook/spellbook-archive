@@ -16,7 +16,7 @@
   , options
 
   settings.$element.each ->
-    $element    = $(@)
+    $element   = $(@)
     wordArray  = $element.text().split( ' ' )
     finalTitle = ''
 
