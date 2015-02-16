@@ -131,8 +131,8 @@
   #   Public Methods
   # -------------------------------------
 
-  init: init
-  trigger: trigger
+  init    : init
+  trigger : trigger
 
 # -------------------------------------
 #   Usage
