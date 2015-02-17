@@ -58,7 +58,7 @@
       # Keyup Event
       _settings.onKeyup( _settings ) unless _settings.onKeyup is null
 
-      if _query == ''
+      if _query is ''
         $( _settings.itemNode ).removeClass( _settings.hiddenClass )
         _clearEmptyMessage()
 
@@ -129,7 +129,7 @@
   # -------------------------------------
 
   _isEmpty = ->
-    $( "#{ _settings.itemNode }.#{ _settings.hiddenClass }" ).length == $( _settings.itemNode ).length
+    $( "#{ _settings.itemNode }.#{ _settings.hiddenClass }" ).length is $( _settings.itemNode ).length
 
   # -------------------------------------
   #   Public Methods

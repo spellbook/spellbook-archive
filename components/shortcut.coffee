@@ -30,11 +30,11 @@
       $element = $(@)
       tag      = event.target.tagName.toLowerCase()
 
-      unless tag == 'input' or tag == 'textarea'
-        if event.which == key
+      unless tag is 'input' or tag is 'textarea'
+        if event.which is key
           $element.trigger( 'focus' ).trigger( 'click' )
 
-          if $element.prop( 'tagName' ).toLowerCase() == 'a'
+          if $element.prop( 'tagName' ).toLowerCase() is 'a'
             window.location = $element.attr( 'href' )
 
 # -------------------------------------
