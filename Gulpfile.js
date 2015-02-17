@@ -1,4 +1,4 @@
-var gulp       = require('gulp');
+var gulp       = require('gulp'),
     coffee     = require('gulp-coffee'),
     gutil      = require('gulp-util'),
     watch      = require('gulp-watch'),
