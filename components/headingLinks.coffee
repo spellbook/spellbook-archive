@@ -54,7 +54,9 @@
       slug     = _slugify( $element.text() )
 
       $element.attr( 'id', slug )
-      $element.prepend( "<a class='#{ _settings.anchorClass }' href='##{ slug }'>#</a>" )
+      $element.prepend( """
+        <a class='#{ _settings.anchorClass }' href='##{ slug }'>#</a>
+      """ )
 
   # -------------------------------------
   #   Public Methods

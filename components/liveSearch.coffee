@@ -107,8 +107,11 @@
       if _settings.emptyMessage
         emptyClass = _settings.emptyNode.replace('.', '')
 
-        $( "<p class='#{ emptyClass }'>There are no results matching '#{ _query }'.</p>" )
-          .insertAfter( $( _settings.itemNode ).last() )
+      $( """
+        <p class='#{ emptyClass }'>
+          There are no results matching '#{ _query }'.
+        </p>
+      """ ).insertAfter( $( _settings.itemNode ).last() )
 
       # Empty Event
       _settings.onEmpty( _settings ) unless _settings.onEmpty is null

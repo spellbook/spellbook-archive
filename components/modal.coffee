@@ -58,12 +58,17 @@
     $_modal = $element
 
     switch event
+
       when 'open'
+
         $element.addClass( _settings.activeClass )
         $( 'body' ).addClass( _settings.activeBodyClass )
+
       when 'close'
+
         $element.removeClass( _settings.activeClass )
         $( 'body' ).removeClass( _settings.activeBodyClass )
+
         _cleanupEvents()
 
     _toggleOverlay( event ) unless removeBackdrop
@@ -78,14 +83,22 @@
 
   _toggleOverlay = ( event ) ->
     switch event
+
       when 'open'
-        $( '<div class=' + _settings.backdropClass + '></div>' ).appendTo( $( 'body' ) )
+
+        $( '<div class=' + _settings.backdropClass + '></div>' )
+          .appendTo( $( 'body' ) )
+
         $_backdrop = $( ".#{ _settings.backdropClass }" )
+
         setTimeout ->
           $_backdrop.addClass( _settings.activeClass )
         , 25
+
       when 'close'
+
         $_backdrop.removeClass( _settings.activeClass )
+
         setTimeout ->
           $_backdrop.remove()
         , 500
@@ -108,12 +121,19 @@
   # -------------------------------------
 
   _setActiveEventHandlers = ->
+
+    # ----- Close ----- #
+
     _settings.$close.on 'click', ( event ) ->
       event.preventDefault()
       trigger( $_modal, 'close' )
 
+    # ----- Backdrop ----- #
+
     $_backdrop.on 'click', ( event ) ->
       trigger( $_modal, 'close' )
+
+    # ----- Escape ----- #
 
     $( document ).on 'keydown', ( event ) ->
       switch event.which
