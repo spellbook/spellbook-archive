@@ -53,12 +53,12 @@ gulp.task( 'default', function() {
 gulp.task( 'coffee', function() {
 
   var components = gulp.src( options.coffee.files[0] )
-    .pipe(  coffee( { bare: true } ).on( 'error', gutil.log ) )
-    .pipe(  gulp.dest( options.coffee.destination[0] ) );
+    .pipe( coffee( { bare: true } ).on( 'error', gutil.log ) )
+    .pipe( gulp.dest( options.coffee.destination[0] ) );
 
   var tests = gulp.src( options.coffee.files[1] )
-    .pipe(  coffee( { bare: true } ).on( 'error', gutil.log ) )
-    .pipe(  gulp.dest( options.coffee.destination[1] ) );
+    .pipe( coffee( { bare: true } ).on( 'error', gutil.log ) )
+    .pipe( gulp.dest( options.coffee.destination[1] ) );
 
   return es.concat(components, tests);
 
