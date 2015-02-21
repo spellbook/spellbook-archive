@@ -1,33 +1,78 @@
-var gulp       = require('gulp'),
-    coffee     = require('gulp-coffee'),
-    gutil      = require('gulp-util'),
-    watch      = require('gulp-watch'),
-    es         = require('event-stream'),
-    coffeelint = require('gulp-coffeelint');
+// *************************************
+//
+//   Gulpfile
+//
+// *************************************
 
-var srcFiles  = 'components/*.coffee';
-var specFiles = 'spec/*.coffee';
+// -------------------------------------
+//   Modules
+// -------------------------------------
 
-gulp.task('default', function() {
-  watch([srcFiles, specFiles], function(files) {
-    gulp.start('coffee');
-  });
-});
+var gulp       = require( 'gulp' );
+var coffee     = require( 'gulp-coffee' );
+var coffeelint = require( 'gulp-coffeelint' );
+var es         = require( 'event-stream' );
+var gutil      = require( 'gulp-util' );
+var watch      = require( 'gulp-watch' );
 
-gulp.task('coffee', function() {
-  var components = gulp.src(srcFiles)
-    .pipe( coffee({ bare: true }).on('error', gutil.log) )
-    .pipe( gulp.dest('components/js/') );
+// -------------------------------------
+//   Options
+// -------------------------------------
 
-  var tests = gulp.src(specFiles)
-    .pipe( coffee({ bare: true }).on('error', gutil.log) )
-    .pipe( gulp.dest('spec/javascripts/') );
+var options = {
+
+  coffee : {
+    files       : [ 'components/*.coffee', 'spec/*.coffee' ],
+    destination : [ 'components/js/', 'spec/javascripts/' ]
+  },
+
+  watch : function() {
+    return this.coffee.files;
+  }
+
+};
+
+// -------------------------------------
+//   Task: Default
+// -------------------------------------
+
+gulp.task( 'default', function() {
+
+  watch( options.watch(), function( files ) {
+
+    gulp.start( 'coffee' );
+
+  } );
+
+} );
+
+// -------------------------------------
+//   Task: Coffee
+// -------------------------------------
+
+gulp.task( 'coffee', function() {
+
+  var components = gulp.src( options.coffee.files[0] )
+    .pipe(  coffee( { bare: true } ).on( 'error', gutil.log ) )
+    .pipe(  gulp.dest( options.coffee.destination[0] ) );
+
+  var tests = gulp.src( options.coffee.files[1] )
+    .pipe(  coffee( { bare: true } ).on( 'error', gutil.log ) )
+    .pipe(  gulp.dest( options.coffee.destination[1] ) );
 
   return es.concat(components, tests);
-});
 
-gulp.task('lint', function () {
-    gulp.src(srcFiles)
-        .pipe(coffeelint())
-        .pipe(coffeelint.reporter())
-});
+} );
+
+// -------------------------------------
+//   Task: Lint
+// -------------------------------------
+
+gulp.task( 'lint', function () {
+
+  gulp.src( options.coffee.files[0] )
+      .pipe( coffeelint() )
+      .on( 'error', function( error ) { console.log( error.message ); } )
+      .pipe( coffeelint.reporter( ) )
+
+} );
