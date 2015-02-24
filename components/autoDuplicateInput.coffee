@@ -58,7 +58,7 @@
 
       _field = $(@)
 
-      if _validate()
+      if _isValid()
         _setInputState( 'valid' )
         _settings.onValid( _settings ) unless _settings.onValid is null
 
@@ -76,10 +76,10 @@
     _field.data( _settings.validateDataAttribute )
 
   # -------------------------------------
-  #   Validate
+  #   Is Valid
   # -------------------------------------
 
-  _validate = ->
+  _isValid = ->
     validator = _getValidationType( _field )
 
     _validators[ "#{ validator }" ].test( _field.val() )

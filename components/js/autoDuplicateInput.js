@@ -1,5 +1,5 @@
 this.Spellbook.AutoDuplicateInput = (function() {
-  var getCount, init, _count, _duplicate, _field, _getValidationType, _setEventHandlers, _setInputState, _settings, _validate, _validators;
+  var getCount, init, _count, _duplicate, _field, _getValidationType, _isValid, _setEventHandlers, _setInputState, _settings, _validators;
   _settings = {};
   _count = 0;
   _field = null;
@@ -24,7 +24,7 @@ this.Spellbook.AutoDuplicateInput = (function() {
     return _settings.$element.on('keyup', function(event) {
       event.preventDefault();
       _field = $(this);
-      if (_validate()) {
+      if (_isValid()) {
         _setInputState('valid');
         if (_settings.onValid !== null) {
           _settings.onValid(_settings);
@@ -46,7 +46,7 @@ this.Spellbook.AutoDuplicateInput = (function() {
   _getValidationType = function() {
     return _field.data(_settings.validateDataAttribute);
   };
-  _validate = function() {
+  _isValid = function() {
     var validator;
     validator = _getValidationType(_field);
     return _validators["" + validator].test(_field.val());
