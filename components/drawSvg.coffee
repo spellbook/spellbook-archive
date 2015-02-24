@@ -70,13 +70,13 @@ class @Spellbook.DrawSvg
     @_progress = @_currentFrame / @_totalFrames
 
     if @_progress > 1
-      window.cancelAnimationFrame( handle )
+      window.cancelAnimationFrame( @_handle )
     else
       @_currentFrame++
 
       @_setStroke()
 
-      handle = window.requestAnimationFrame( @draw )
+      @_handle = window.requestAnimationFrame( @draw )
 
 # -------------------------------------
 #   Usage

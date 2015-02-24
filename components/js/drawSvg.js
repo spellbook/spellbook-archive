@@ -53,14 +53,13 @@ this.Spellbook.DrawSvg = (function() {
   };
 
   DrawSvg.prototype.draw = function() {
-    var handle;
     this._progress = this._currentFrame / this._totalFrames;
     if (this._progress > 1) {
-      return window.cancelAnimationFrame(handle);
+      return window.cancelAnimationFrame(this._handle);
     } else {
       this._currentFrame++;
       this._setStroke();
-      return handle = window.requestAnimationFrame(this.draw);
+      return this._handle = window.requestAnimationFrame(this.draw);
     }
   };
 
