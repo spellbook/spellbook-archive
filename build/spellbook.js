@@ -200,7 +200,7 @@ this.Spellbook.DrawSvg = (function() {
 
   DrawSvg.prototype._setStorage = function() {
     var index, length, numberOfPaths, _i, _results;
-    numberOfPaths = this._settings.$element.find('path').length;
+    numberOfPaths = this._settings.$element.find('path[id]').length;
     _results = [];
     for (index = _i = 0; 0 <= numberOfPaths ? _i < numberOfPaths : _i > numberOfPaths; index = 0 <= numberOfPaths ? ++_i : --_i) {
       this._paths[index] = document.getElementById("" + this._settings.prefix + "-" + index);
