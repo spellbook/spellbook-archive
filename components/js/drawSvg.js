@@ -30,10 +30,10 @@ this.Spellbook.DrawSvg = (function() {
   };
 
   DrawSvg.prototype._setStorage = function() {
-    var index, length, numberOfPaths, _i, _ref, _results;
+    var index, length, numberOfPaths, _i, _results;
     numberOfPaths = this._settings.$element.find('path').length;
     _results = [];
-    for (index = _i = 0, _ref = numberOfPaths - 1; 0 <= _ref ? _i < _ref : _i > _ref; index = 0 <= _ref ? ++_i : --_i) {
+    for (index = _i = 0; 0 <= numberOfPaths ? _i < numberOfPaths : _i > numberOfPaths; index = 0 <= numberOfPaths ? ++_i : --_i) {
       this._paths[index] = document.getElementById("" + this._settings.prefix + "-" + index);
       length = this._paths[index].getTotalLength();
       this._lengths[index] = length;

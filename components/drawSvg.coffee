@@ -46,7 +46,7 @@ class @Spellbook.DrawSvg
   _setStorage: ->
     numberOfPaths = @_settings.$element.find( 'path' ).length
 
-    for index in [ 0...numberOfPaths - 1 ]
+    for index in [ 0...numberOfPaths ]
       @_paths[ index ]   = document.getElementById( "#{ @_settings.prefix }-#{ index }" )
       length             = @_paths[ index ].getTotalLength()
       @_lengths[ index ] = length
