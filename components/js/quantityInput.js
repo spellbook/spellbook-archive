@@ -35,7 +35,7 @@ this.Spellbook.QuantityInput = (function() {
       if (_value !== _settings.maxValue) {
         _updateValue('up');
       }
-      if (_settings.onIncrease !== null) {
+      if (_settings.onIncrease != null) {
         return _settings.onIncrease(_settings);
       }
     });
@@ -44,7 +44,7 @@ this.Spellbook.QuantityInput = (function() {
       if (_value !== _settings.minValue) {
         _updateValue('down');
       }
-      if (_settings.onDecrease !== null) {
+      if (_settings.onDecrease != null) {
         return _settings.onDecrease(_settings);
       }
     });
@@ -64,7 +64,7 @@ this.Spellbook.QuantityInput = (function() {
         _settings.$element.val(_value);
     }
     _updateTarget();
-    if (_settings.onTargetUpdate !== null) {
+    if (_settings.onTargetUpdate != null) {
       return _settings.onTargetUpdate(_settings);
     }
   };

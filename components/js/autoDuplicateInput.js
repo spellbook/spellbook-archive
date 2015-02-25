@@ -26,18 +26,18 @@ this.Spellbook.AutoDuplicateInput = (function() {
       _field = $(this);
       if (_isValid()) {
         _setInputState('valid');
-        if (_settings.onValid !== null) {
+        if (_settings.onValid != null) {
           _settings.onValid(_settings);
         }
         if (_field.data('cloned') !== 'true') {
           _duplicate();
         }
-        if (_settings.onDuplicate !== null) {
+        if (_settings.onDuplicate != null) {
           return _settings.onDuplicate(_settings, _count);
         }
       } else {
         _setInputState('invalid');
-        if (_settings.onInvalid !== null) {
+        if (_settings.onInvalid != null) {
           return _settings.onInvalid(_settings);
         }
       }

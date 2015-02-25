@@ -20,13 +20,13 @@ this.Spellbook.LiveSearch = (function() {
   _setEventHandlers = function() {
     return _settings.$element.on('keyup', function(event) {
       _query = $(this).val();
-      if (_settings.onKeyup !== null) {
+      if (_settings.onKeyup != null) {
         _settings.onKeyup(_settings);
       }
       if (_query === '') {
         $(_settings.itemNode).removeClass(_settings.hiddenClass);
         _clearEmptyMessage();
-        if (_settings.onClear !== null) {
+        if (_settings.onClear != null) {
           _settings.onClear(_settings);
         }
       }
@@ -42,7 +42,7 @@ this.Spellbook.LiveSearch = (function() {
         return $element.closest(_settings.itemNode).addClass(_settings.hiddenClass);
       } else {
         $element.closest(_settings.itemNode).removeClass(_settings.hiddenClass);
-        if (_settings.onFound !== null) {
+        if (_settings.onFound != null) {
           return _settings.onFound(_settings);
         }
       }
@@ -61,7 +61,7 @@ this.Spellbook.LiveSearch = (function() {
         emptyClass = _settings.emptyNode.replace('.', '');
       }
       $("<p class='" + emptyClass + "'>\n  There are no results matching '" + _query + "'.\n</p>").insertAfter($(_settings.itemNode).last());
-      if (_settings.onEmpty !== null) {
+      if (_settings.onEmpty != null) {
         return _settings.onEmpty(_settings);
       }
     }
