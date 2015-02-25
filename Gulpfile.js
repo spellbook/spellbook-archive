@@ -14,6 +14,8 @@ var coffeelint = require( 'gulp-coffeelint' );
 var concat     = require( 'gulp-concat' );
 var es         = require( 'event-stream' );
 var gutil      = require( 'gulp-util' );
+var rename     = require( 'gulp-rename' );
+var uglify     = require( 'gulp-uglify' );
 var watch      = require( 'gulp-watch' );
 
 // -------------------------------------
@@ -63,6 +65,8 @@ gulp.task( 'build', function() {
     .pipe( concat( options.build.destinationFile ) )
     .pipe( gulp.dest( options.build.destinationDirectory ) );
 
+  gulp.start( 'uglify' );
+
 });
 
 // -------------------------------------
@@ -97,5 +101,18 @@ gulp.task( 'lint', function () {
       .pipe( coffeelint() )
       .on( 'error', function( error ) { console.log( error.message ); } )
       .pipe( coffeelint.reporter() )
+
+} );
+
+// -------------------------------------
+//   Task: Uglify
+// -------------------------------------
+
+gulp.task( 'uglify', function () {
+
+  gulp.src( options.build.destinationDirectory + '/' + options.build.destinationFile )
+      .pipe( uglify() )
+      .pipe( rename( { suffix: '.min' } ) )
+      .pipe( gulp.dest( options.build.destinationDirectory ) );
 
 } );
