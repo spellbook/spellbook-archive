@@ -20,19 +20,19 @@ describe 'Spellbook.AutoDuplicateInput', ->
     expect( 'keyup' ).toHaveBeenTriggeredOn( @element )
 
   it 'should mark the input as invalid and give the appropriate class', ->
-    @element.val('thisisapartialemail')
+    @element.val( 'thisisapartialemail' )
     @element.trigger( 'keyup' )
 
     expect( @element ).toHaveClass( @invalidClass )
 
   it 'should mark the input as valid and give the appropriate class', ->
-    @element.val('email@example.com')
+    @element.val( 'email@example.com' )
     @element.trigger( 'keyup' )
 
     expect( @element ).toHaveClass( @validClass )
 
   it 'should duplicate the input when a valid string is provided', ->
-    @element.val('email@example.com')
+    @element.val( 'email@example.com' )
     @element.trigger( 'keyup' )
 
     expect( $( @selector ).length ).toEqual( 2 )

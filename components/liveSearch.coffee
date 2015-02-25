@@ -105,7 +105,7 @@
   _handleEmptyResults = ->
     if _isEmpty()
       if _settings.emptyMessage
-        emptyClass = _settings.emptyNode.replace('.', '')
+        emptyClass = _settings.emptyNode.replace( '.', '' )
 
       $( """
         <p class='#{ emptyClass }'>

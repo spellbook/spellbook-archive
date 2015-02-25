@@ -29,7 +29,7 @@ describe 'Spellbook.limiter', ->
     Spellbook.limiter
       limit: 4
 
-    expect( '.js-limiter-element:nth-child(5)' ).toHaveClass( @hiddenClass )
+    expect( '.js-limiter-element:nth-child( 5 )' ).toHaveClass( @hiddenClass )
 
   it 'should trigger a click on the toggle', ->
     Spellbook.limiter

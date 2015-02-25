@@ -27,7 +27,7 @@ describe('Spellbook.limiter', function() {
     Spellbook.limiter({
       limit: 4
     });
-    return expect('.js-limiter-element:nth-child(5)').toHaveClass(this.hiddenClass);
+    return expect('.js-limiter-element:nth-child( 5 )').toHaveClass(this.hiddenClass);
   });
   return it('should trigger a click on the toggle', function() {
     Spellbook.limiter({
