@@ -11,6 +11,7 @@
 var gulp       = require( 'gulp' );
 var coffee     = require( 'gulp-coffee' );
 var coffeelint = require( 'gulp-coffeelint' );
+var concat     = require( 'gulp-concat' );
 var es         = require( 'event-stream' );
 var gutil      = require( 'gulp-util' );
 var watch      = require( 'gulp-watch' );
@@ -20,6 +21,12 @@ var watch      = require( 'gulp-watch' );
 // -------------------------------------
 
 var options = {
+
+  build : {
+    files                : [ 'compendium/js/*.js', 'components/js/*.js' ],
+    destinationFile      : 'spellbook.js',
+    destinationDirectory : 'build/'
+  },
 
   coffee : {
     files       : [ 'compendium/spellbook.coffee', 'components/*.coffee', 'spec/*.coffee' ],
@@ -45,6 +52,18 @@ gulp.task( 'default', function() {
   } );
 
 } );
+
+// -------------------------------------
+//   Task: Build
+// -------------------------------------
+
+gulp.task( 'build', function() {
+
+  gulp.src( options.build.files )
+    .pipe( concat( options.build.destinationFile ) )
+    .pipe( gulp.dest( options.build.destinationDirectory ) );
+
+});
 
 // -------------------------------------
 //   Task: Coffee
