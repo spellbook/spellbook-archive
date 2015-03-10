@@ -10,13 +10,31 @@
 #
 # *************************************
 
-@Spellbook.selectText = ( options ) ->
-  settings = $.extend
-    $element : $( '.js-selectText' )
-    onClick  : null
-  , options
+@Spellbook.selectText = do ->
 
-  selectElement = ( $element ) ->
+  # -------------------------------------
+  #   Private Variables
+  # -------------------------------------
+
+  _settings = {}
+
+  # -------------------------------------
+  #   Initialize
+  # -------------------------------------
+
+  init = ( options ) ->
+    _settings = $.extend
+      $element : $( '.js-selectText' )
+      onClick  : null
+    , options
+
+    _setEventHandlers()
+
+  # -------------------------------------
+  #   Select Element
+  # -------------------------------------
+
+  _selectElement = ( $element ) ->
     node = $element[ 0 ]
 
     if ( document.body.createTextRange )
@@ -33,14 +51,25 @@
       selection.removeAllRanges()
       selection.addRange( range )
 
-  settings.$element.on 'click', ->
-    selectElement( $element )
-    $(@).trigger( 'focus' ).trigger( 'select' )
-    settings.onClick( settings ) if settings.onClick?
+  # -------------------------------------
+  #   Set Event Handlers
+  # -------------------------------------
+
+  _setEventHandlers = ->
+    _settings.$element.on 'click', ->
+      _selectElement( _settings.$element )
+      $(@).trigger( 'focus' ).trigger( 'select' )
+      _settings.onClick( _settings ) if _settings.onClick?
+
+  # -------------------------------------
+  #   Public Methods
+  # -------------------------------------
+
+  init : init
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.selectText()
+# Spellbook.selectText.init()
 #
