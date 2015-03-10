@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Scroll Trigger
-#   -> Description
+#   -> Apply class on viewport entry
 #
 # *************************************
 #

@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Sanitize
-#   -> Sanitizes a string to make it safe
+#   -> Sanitize a string to make it safe
 #
 # *************************************
 #

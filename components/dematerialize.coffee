@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Dematerialize
-#   -> Hides an element and keeps it hidden
+#   -> Hide an element and keep it hidden
 #
 # *************************************
 #

@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Slugify
-#   -> Converts a string to a URL-friendly slug
+#   -> Convert a string to a URL-friendly slug
 #
 # *************************************
 #

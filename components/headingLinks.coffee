@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Heading Links
-#   -> Named anchor links on headings
+#   -> Create anchor links on headings
 #
 # *************************************
 #

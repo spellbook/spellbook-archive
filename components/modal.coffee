@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Modal
-#   -> Triggers a dialog window
+#   -> Trigger a dialog window
 #
 # *************************************
 #

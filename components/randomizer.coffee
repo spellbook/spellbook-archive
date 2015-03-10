@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Randomize
-#   -> Randomly select a value
+#   -> Select a random value
 #
 # *************************************
 #

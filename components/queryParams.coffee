@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Get Query Parameters
-#   -> Gets URL query parameters
+#   -> Get URL query parameters
 #
 # *************************************
 #

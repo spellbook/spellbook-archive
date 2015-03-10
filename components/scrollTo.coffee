@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Scroll To
-#   -> Animated scroll to element
+#   -> Animate scrolling to element
 #
 # *************************************
 #

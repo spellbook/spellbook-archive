@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Toggle
-#   -> Toggles state on given elements
+#   -> Toggle state on given elements
 #
 # *************************************
 #

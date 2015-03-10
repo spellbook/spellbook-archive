@@ -1,7 +1,7 @@
 # *************************************
 #
 #   Show Password
-#   -> Allows a user to hide/show password field
+#   -> Allow a user to hide/show password field
 #
 # *************************************
 #
