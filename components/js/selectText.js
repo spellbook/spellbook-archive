@@ -1,10 +1,14 @@
-this.Spellbook.selectText = function(options) {
-  var selectElement, settings;
-  settings = $.extend({
-    $element: $('.js-selectText'),
-    onClick: null
-  }, options);
-  selectElement = function($element) {
+this.Spellbook.selectText = (function() {
+  var init, _selectElement, _setEventHandlers, _settings;
+  _settings = {};
+  init = function(options) {
+    _settings = $.extend({
+      $element: $('.js-selectText'),
+      onClick: null
+    }, options);
+    return _setEventHandlers();
+  };
+  _selectElement = function($element) {
     var node, range, selection;
     node = $element[0];
     if (document.body.createTextRange) {
@@ -19,11 +23,16 @@ this.Spellbook.selectText = function(options) {
       return selection.addRange(range);
     }
   };
-  return settings.$element.on('click', function() {
-    selectElement($element);
-    $(this).trigger('focus').trigger('select');
-    if (settings.onClick != null) {
-      return settings.onClick(settings);
-    }
-  });
-};
+  _setEventHandlers = function() {
+    return _settings.$element.on('click', function() {
+      _selectElement(_settings.$element);
+      $(this).trigger('focus').trigger('select');
+      if (_settings.onClick != null) {
+        return _settings.onClick(_settings);
+      }
+    });
+  };
+  return {
+    init: init
+  };
+})();
