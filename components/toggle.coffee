@@ -20,6 +20,9 @@
     event       : 'click' # hover
     toggleClass : 'is-hidden'
     activeClass : 'is-active'
+    onClick     : null
+    onMouseover : null
+    onMouseout  : null
   , options
 
   switch settings.event
@@ -33,6 +36,8 @@
       settings.$element.on 'click', ( event ) ->
         event.preventDefault()
         $element = $(@)
+
+        settings.onClick( settings ) if settings.onClick?
 
         settings.$element.toggleClass( settings.activeClass )
 
@@ -75,6 +80,8 @@
 
           $element = $(@)
 
+          settings.onMouseover( settings ) if settings.onMouseover?
+
           $element.addClass( settings.activeClass )
 
           switch settings.proximity
@@ -105,6 +112,8 @@
         mouseleave: ->
 
           $element = $(@)
+
+          settings.onMouseout( settings ) if settings.onMouseout?
 
           $element.removeClass( settings.activeClass )
 

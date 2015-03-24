@@ -5,7 +5,10 @@ this.Spellbook.toggle = function(options) {
     proximity: 'next',
     event: 'click',
     toggleClass: 'is-hidden',
-    activeClass: 'is-active'
+    activeClass: 'is-active',
+    onClick: null,
+    onMouseover: null,
+    onMouseout: null
   }, options);
   switch (settings.event) {
     case 'click':
@@ -13,6 +16,9 @@ this.Spellbook.toggle = function(options) {
         var $element;
         event.preventDefault();
         $element = $(this);
+        if (settings.onClick != null) {
+          settings.onClick(settings);
+        }
         settings.$element.toggleClass(settings.activeClass);
         switch (settings.proximity) {
           case 'next':
@@ -35,6 +41,9 @@ this.Spellbook.toggle = function(options) {
         mouseenter: function() {
           var $element;
           $element = $(this);
+          if (settings.onMouseover != null) {
+            settings.onMouseover(settings);
+          }
           $element.addClass(settings.activeClass);
           switch (settings.proximity) {
             case 'next':
@@ -52,6 +61,9 @@ this.Spellbook.toggle = function(options) {
         mouseleave: function() {
           var $element;
           $element = $(this);
+          if (settings.onMouseout != null) {
+            settings.onMouseout(settings);
+          }
           $element.removeClass(settings.activeClass);
           switch (settings.proximity) {
             case 'next':
