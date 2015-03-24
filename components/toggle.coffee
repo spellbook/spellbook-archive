@@ -10,6 +10,9 @@
 # @param event       { string }
 # @param toggleClass { string }
 # @param activeClass { string }
+# @param onClick     { function }
+# @param onMouseover { function }
+# @param onMouseout  { function }
 #
 # *************************************
 
