@@ -7,6 +7,7 @@
 #
 # @param $element     { jQuery object }
 # @param $query       { jQuery object }
+# @param $container   { jQuery object }
 # @param itemNode     { string (selector) }
 # @param hiddenClass  { string }
 # @param emptyMessage { boolean }
@@ -35,6 +36,7 @@
     _settings = $.extend
       $element     : $( '.js-search' )
       $query       : $( '.js-search-query' )
+      $container   : $( '.js-search-container' )
       itemNode     : '.js-search-item'
       hiddenClass  : 'is-hidden'
       emptyMessage : true
@@ -111,7 +113,7 @@
         <p class='#{ emptyClass }'>
           There are no results matching '#{ _query }'.
         </p>
-      """ ).insertAfter( $( _settings.itemNode ).last() )
+      """ ).insertAfter( _settings.$container )
 
       # Empty Event
       _settings.onEmpty( _settings ) if _settings.onEmpty?
