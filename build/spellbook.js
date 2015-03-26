@@ -444,6 +444,7 @@ this.Spellbook.LiveSearch = (function() {
     _settings = $.extend({
       $element: $('.js-search'),
       $query: $('.js-search-query'),
+      $container: $('.js-search-container'),
       itemNode: '.js-search-item',
       hiddenClass: 'is-hidden',
       emptyMessage: true,
@@ -498,7 +499,7 @@ this.Spellbook.LiveSearch = (function() {
       if (_settings.emptyMessage) {
         emptyClass = _settings.emptyNode.replace('.', '');
       }
-      $("<p class='" + emptyClass + "'>\n  There are no results matching '" + _query + "'.\n</p>").insertAfter($(_settings.itemNode).last());
+      $("<p class='" + emptyClass + "'>\n  There are no results matching '" + _query + "'.\n</p>").insertAfter(_settings.$container);
       if (_settings.onEmpty != null) {
         return _settings.onEmpty(_settings);
       }
