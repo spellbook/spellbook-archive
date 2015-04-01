@@ -1,5 +1,5 @@
 this.Spellbook.Modal = (function() {
-  var $_backdrop, $_modal, init, trigger, _cleanupEvents, _setActiveEventHandlers, _setEventHandlers, _settings, _toggleOverlay;
+  var $_backdrop, $_modal, _cleanupEvents, _setActiveEventHandlers, _setEventHandlers, _settings, _toggleOverlay, init, trigger;
   $_modal = null;
   $_backdrop = null;
   _settings = {};

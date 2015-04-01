@@ -1,5 +1,5 @@
 this.Spellbook.QuantityInput = (function() {
-  var init, _setEventHandlers, _setValue, _settings, _updateTarget, _updateValue, _value;
+  var _setEventHandlers, _setValue, _settings, _updateTarget, _updateValue, _value, init;
   _settings = {};
   _value = null;
   init = function(options) {

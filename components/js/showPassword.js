@@ -1,5 +1,5 @@
 this.Spellbook.ShowPassword = (function() {
-  var init, _setEventHandlers, _settings, _showPassword;
+  var _setEventHandlers, _settings, _showPassword, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({

@@ -1,5 +1,5 @@
 this.Spellbook.AutoDuplicateInput = (function() {
-  var getCount, init, _count, _duplicate, _field, _getValidationType, _isValid, _setEventHandlers, _setInputState, _settings, _validators;
+  var _count, _duplicate, _field, _getValidationType, _isValid, _setEventHandlers, _setInputState, _settings, _validators, getCount, init;
   _settings = {};
   _count = 0;
   _field = null;

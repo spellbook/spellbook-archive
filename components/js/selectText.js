@@ -1,5 +1,5 @@
 this.Spellbook.selectText = (function() {
-  var init, _selectElement, _setEventHandlers, _settings;
+  var _selectElement, _setEventHandlers, _settings, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({

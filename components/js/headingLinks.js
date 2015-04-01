@@ -1,5 +1,5 @@
 this.Spellbook.HeadingLinks = (function() {
-  var init, _addAnchors, _settings, _slugify;
+  var _addAnchors, _settings, _slugify, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({

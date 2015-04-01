@@ -1,5 +1,5 @@
 this.Spellbook.StateUrls = (function() {
-  var init, _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState, _settings, _showSection;
+  var _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState, _settings, _showSection, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({

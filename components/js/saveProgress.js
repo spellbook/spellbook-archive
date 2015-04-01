@@ -1,5 +1,5 @@
 this.Spellbook.SaveProgress = (function() {
-  var init, _eraseProgress, _restoreProgress, _setEventHandlers, _settings, _storeProgress;
+  var _eraseProgress, _restoreProgress, _setEventHandlers, _settings, _storeProgress, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({

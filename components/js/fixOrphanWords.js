@@ -4,11 +4,11 @@ this.Spellbook.fixOrphanWords = function(options) {
     $element: $('.js-orphan')
   }, options);
   return settings.$element.each(function() {
-    var $element, finalTitle, i, wordArray, _i, _ref;
+    var $element, finalTitle, i, j, ref, wordArray;
     $element = $(this);
     wordArray = $element.text().split(' ');
     finalTitle = '';
-    for (i = _i = 0, _ref = wordArray.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+    for (i = j = 0, ref = wordArray.length - 1; 0 <= ref ? j <= ref : j >= ref; i = 0 <= ref ? ++j : --j) {
       finalTitle += wordArray[i];
       if (i === (wordArray.length - 2)) {
         finalTitle += '&nbsp;';

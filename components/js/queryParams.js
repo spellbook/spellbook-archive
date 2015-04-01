@@ -29,19 +29,19 @@ this.Spellbook.QueryParams = (function() {
   };
 
   QueryParams.prototype._sortParams = function() {
-    var pair, param, _i, _len, _ref, _results;
-    _ref = this.variables;
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      param = _ref[_i];
+    var i, len, pair, param, ref, results;
+    ref = this.variables;
+    results = [];
+    for (i = 0, len = ref.length; i < len; i++) {
+      param = ref[i];
       pair = param.split('=');
       if (pair[1] !== void 0) {
-        _results.push(this.params[pair[0]] = pair[1]);
+        results.push(this.params[pair[0]] = pair[1]);
       } else {
-        _results.push(void 0);
+        results.push(void 0);
       }
     }
-    return _results;
+    return results;
   };
 
   QueryParams.prototype.allParams = function() {
@@ -49,10 +49,10 @@ this.Spellbook.QueryParams = (function() {
   };
 
   QueryParams.prototype.matchParamKey = function(matcher) {
-    var key, value, _ref;
-    _ref = this.params;
-    for (key in _ref) {
-      value = _ref[key];
+    var key, ref, value;
+    ref = this.params;
+    for (key in ref) {
+      value = ref[key];
       if (matcher === key) {
         return true;
       }
@@ -61,10 +61,10 @@ this.Spellbook.QueryParams = (function() {
   };
 
   QueryParams.prototype.matchParamValue = function(matcher) {
-    var key, value, _ref;
-    _ref = this.params;
-    for (key in _ref) {
-      value = _ref[key];
+    var key, ref, value;
+    ref = this.params;
+    for (key in ref) {
+      value = ref[key];
       if (matcher === value) {
         return true;
       }

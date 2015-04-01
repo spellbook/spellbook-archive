@@ -1,4 +1,4 @@
-var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 this.Spellbook.DrawSvg = (function() {
   DrawSvg.prototype._settings = {};
@@ -17,7 +17,7 @@ this.Spellbook.DrawSvg = (function() {
 
   function DrawSvg(options) {
     this.options = options;
-    this.draw = __bind(this.draw, this);
+    this.draw = bind(this.draw, this);
     this.init();
   }
 
@@ -30,26 +30,26 @@ this.Spellbook.DrawSvg = (function() {
   };
 
   DrawSvg.prototype._setStorage = function() {
-    var index, length, numberOfPaths, _i, _results;
+    var i, index, length, numberOfPaths, ref, results;
     numberOfPaths = this._settings.$element.find('path[id]').length;
-    _results = [];
-    for (index = _i = 0; 0 <= numberOfPaths ? _i < numberOfPaths : _i > numberOfPaths; index = 0 <= numberOfPaths ? ++_i : --_i) {
-      this._paths[index] = document.getElementById("" + this._settings.prefix + "-" + index);
+    results = [];
+    for (index = i = 0, ref = numberOfPaths; 0 <= ref ? i < ref : i > ref; index = 0 <= ref ? ++i : --i) {
+      this._paths[index] = document.getElementById(this._settings.prefix + "-" + index);
       length = this._paths[index].getTotalLength();
       this._lengths[index] = length;
-      this._paths[index].style.strokeDasharray = "" + length + " " + length;
-      _results.push(this._paths[index].style.strokeDashoffset = length);
+      this._paths[index].style.strokeDasharray = length + " " + length;
+      results.push(this._paths[index].style.strokeDashoffset = length);
     }
-    return _results;
+    return results;
   };
 
   DrawSvg.prototype._setStroke = function() {
-    var index, _i, _ref, _results;
-    _results = [];
-    for (index = _i = 0, _ref = this._paths.length; 0 <= _ref ? _i < _ref : _i > _ref; index = 0 <= _ref ? ++_i : --_i) {
-      _results.push(this._paths[index].style.strokeDashoffset = Math.floor(this._lengths[index] * (1 - this._progress)));
+    var i, index, ref, results;
+    results = [];
+    for (index = i = 0, ref = this._paths.length; 0 <= ref ? i < ref : i > ref; index = 0 <= ref ? ++i : --i) {
+      results.push(this._paths[index].style.strokeDashoffset = Math.floor(this._lengths[index] * (1 - this._progress)));
     }
-    return _results;
+    return results;
   };
 
   DrawSvg.prototype.draw = function() {

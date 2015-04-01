@@ -1,5 +1,5 @@
 this.Spellbook.LiveSearch = (function() {
-  var init, _clearEmptyMessage, _handleEmptyResults, _isEmpty, _isQueryAbsent, _parseDom, _query, _setEventHandlers, _settings;
+  var _clearEmptyMessage, _handleEmptyResults, _isEmpty, _isQueryAbsent, _parseDom, _query, _setEventHandlers, _settings, init;
   _settings = {};
   _query = '';
   init = function(options) {
@@ -71,7 +71,7 @@ this.Spellbook.LiveSearch = (function() {
     return element.text().search(new RegExp(_query, 'i')) < 0;
   };
   _isEmpty = function() {
-    return $("" + _settings.itemNode + "." + _settings.hiddenClass).length === $(_settings.itemNode).length;
+    return $(_settings.itemNode + "." + _settings.hiddenClass).length === $(_settings.itemNode).length;
   };
   return {
     init: init

@@ -1,5 +1,5 @@
 this.Spellbook.Share = (function() {
-  var init, _setEventHandlers, _settings, _triggerPopup;
+  var _setEventHandlers, _settings, _triggerPopup, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({
