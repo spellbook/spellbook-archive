@@ -1,7 +1,7 @@
 this.Spellbook = {};
 
 this.Spellbook.AutoDuplicateInput = (function() {
-  var getCount, init, _count, _duplicate, _field, _getValidationType, _isValid, _setEventHandlers, _setInputState, _settings, _validators;
+  var _count, _duplicate, _field, _getValidationType, _isValid, _setEventHandlers, _setInputState, _settings, _validators, getCount, init;
   _settings = {};
   _count = 0;
   _field = null;
@@ -167,7 +167,7 @@ this.Spellbook.Dematerialize = (function() {
 
 })();
 
-var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 this.Spellbook.DrawSvg = (function() {
   DrawSvg.prototype._settings = {};
@@ -186,7 +186,7 @@ this.Spellbook.DrawSvg = (function() {
 
   function DrawSvg(options) {
     this.options = options;
-    this.draw = __bind(this.draw, this);
+    this.draw = bind(this.draw, this);
     this.init();
   }
 
@@ -199,26 +199,26 @@ this.Spellbook.DrawSvg = (function() {
   };
 
   DrawSvg.prototype._setStorage = function() {
-    var index, length, numberOfPaths, _i, _results;
+    var i, index, length, numberOfPaths, ref, results;
     numberOfPaths = this._settings.$element.find('path[id]').length;
-    _results = [];
-    for (index = _i = 0; 0 <= numberOfPaths ? _i < numberOfPaths : _i > numberOfPaths; index = 0 <= numberOfPaths ? ++_i : --_i) {
-      this._paths[index] = document.getElementById("" + this._settings.prefix + "-" + index);
+    results = [];
+    for (index = i = 0, ref = numberOfPaths; 0 <= ref ? i < ref : i > ref; index = 0 <= ref ? ++i : --i) {
+      this._paths[index] = document.getElementById(this._settings.prefix + "-" + index);
       length = this._paths[index].getTotalLength();
       this._lengths[index] = length;
-      this._paths[index].style.strokeDasharray = "" + length + " " + length;
-      _results.push(this._paths[index].style.strokeDashoffset = length);
+      this._paths[index].style.strokeDasharray = length + " " + length;
+      results.push(this._paths[index].style.strokeDashoffset = length);
     }
-    return _results;
+    return results;
   };
 
   DrawSvg.prototype._setStroke = function() {
-    var index, _i, _ref, _results;
-    _results = [];
-    for (index = _i = 0, _ref = this._paths.length; 0 <= _ref ? _i < _ref : _i > _ref; index = 0 <= _ref ? ++_i : --_i) {
-      _results.push(this._paths[index].style.strokeDashoffset = Math.floor(this._lengths[index] * (1 - this._progress)));
+    var i, index, ref, results;
+    results = [];
+    for (index = i = 0, ref = this._paths.length; 0 <= ref ? i < ref : i > ref; index = 0 <= ref ? ++i : --i) {
+      results.push(this._paths[index].style.strokeDashoffset = Math.floor(this._lengths[index] * (1 - this._progress)));
     }
-    return _results;
+    return results;
   };
 
   DrawSvg.prototype.draw = function() {
@@ -237,7 +237,7 @@ this.Spellbook.DrawSvg = (function() {
 })();
 
 this.Spellbook.EqualHeights = (function() {
-  var init, _heights, _setEventHandlers, _setHeight, _settings, _timer;
+  var _heights, _setEventHandlers, _setHeight, _settings, _timer, init;
   _settings = {};
   _heights = [];
   _timer = null;
@@ -319,11 +319,11 @@ this.Spellbook.fixOrphanWords = function(options) {
     $element: $('.js-orphan')
   }, options);
   return settings.$element.each(function() {
-    var $element, finalTitle, i, wordArray, _i, _ref;
+    var $element, finalTitle, i, j, ref, wordArray;
     $element = $(this);
     wordArray = $element.text().split(' ');
     finalTitle = '';
-    for (i = _i = 0, _ref = wordArray.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+    for (i = j = 0, ref = wordArray.length - 1; 0 <= ref ? j <= ref : j >= ref; i = 0 <= ref ? ++j : --j) {
       finalTitle += wordArray[i];
       if (i === (wordArray.length - 2)) {
         finalTitle += '&nbsp;';
@@ -338,7 +338,7 @@ this.Spellbook.fixOrphanWords = function(options) {
 };
 
 this.Spellbook.HeadingLinks = (function() {
-  var init, _addAnchors, _settings, _slugify;
+  var _addAnchors, _settings, _slugify, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({
@@ -437,7 +437,7 @@ this.Spellbook.limiter = function(options) {
 };
 
 this.Spellbook.LiveSearch = (function() {
-  var init, _clearEmptyMessage, _handleEmptyResults, _isEmpty, _isQueryAbsent, _parseDom, _query, _setEventHandlers, _settings;
+  var _clearEmptyMessage, _handleEmptyResults, _isEmpty, _isQueryAbsent, _parseDom, _query, _setEventHandlers, _settings, init;
   _settings = {};
   _query = '';
   init = function(options) {
@@ -509,7 +509,7 @@ this.Spellbook.LiveSearch = (function() {
     return element.text().search(new RegExp(_query, 'i')) < 0;
   };
   _isEmpty = function() {
-    return $("" + _settings.itemNode + "." + _settings.hiddenClass).length === $(_settings.itemNode).length;
+    return $(_settings.itemNode + "." + _settings.hiddenClass).length === $(_settings.itemNode).length;
   };
   return {
     init: init
@@ -537,7 +537,7 @@ this.Spellbook.loader = function(options) {
 };
 
 this.Spellbook.Modal = (function() {
-  var $_backdrop, $_modal, init, trigger, _cleanupEvents, _setActiveEventHandlers, _setEventHandlers, _settings, _toggleOverlay;
+  var $_backdrop, $_modal, _cleanupEvents, _setActiveEventHandlers, _setEventHandlers, _settings, _toggleOverlay, init, trigger;
   $_modal = null;
   $_backdrop = null;
   _settings = {};
@@ -629,8 +629,28 @@ this.Spellbook.Modal = (function() {
   };
 })();
 
+this.Spellbook.prefixClasses = function(options) {
+  var settings;
+  settings = $.extend({
+    $element: $('.js-prefixClasses'),
+    query: '[ class ]',
+    prefix: 'prefix'
+  }, options);
+  return settings.$element.find(settings.query).each(function() {
+    var classArray, className, i, len, node, prefixedClasses;
+    node = this;
+    classArray = node.className.split(' ');
+    prefixedClasses = '';
+    for (i = 0, len = classArray.length; i < len; i++) {
+      className = classArray[i];
+      prefixedClasses = prefixedClasses + " " + settings.prefix + "-" + className;
+    }
+    return node.className = prefixedClasses;
+  });
+};
+
 this.Spellbook.QuantityInput = (function() {
-  var init, _setEventHandlers, _setValue, _settings, _updateTarget, _updateValue, _value;
+  var _setEventHandlers, _setValue, _settings, _updateTarget, _updateValue, _value, init;
   _settings = {};
   _value = null;
   init = function(options) {
@@ -740,19 +760,19 @@ this.Spellbook.QueryParams = (function() {
   };
 
   QueryParams.prototype._sortParams = function() {
-    var pair, param, _i, _len, _ref, _results;
-    _ref = this.variables;
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      param = _ref[_i];
+    var i, len, pair, param, ref, results;
+    ref = this.variables;
+    results = [];
+    for (i = 0, len = ref.length; i < len; i++) {
+      param = ref[i];
       pair = param.split('=');
       if (pair[1] !== void 0) {
-        _results.push(this.params[pair[0]] = pair[1]);
+        results.push(this.params[pair[0]] = pair[1]);
       } else {
-        _results.push(void 0);
+        results.push(void 0);
       }
     }
-    return _results;
+    return results;
   };
 
   QueryParams.prototype.allParams = function() {
@@ -760,10 +780,10 @@ this.Spellbook.QueryParams = (function() {
   };
 
   QueryParams.prototype.matchParamKey = function(matcher) {
-    var key, value, _ref;
-    _ref = this.params;
-    for (key in _ref) {
-      value = _ref[key];
+    var key, ref, value;
+    ref = this.params;
+    for (key in ref) {
+      value = ref[key];
       if (matcher === key) {
         return true;
       }
@@ -772,10 +792,10 @@ this.Spellbook.QueryParams = (function() {
   };
 
   QueryParams.prototype.matchParamValue = function(matcher) {
-    var key, value, _ref;
-    _ref = this.params;
-    for (key in _ref) {
-      value = _ref[key];
+    var key, ref, value;
+    ref = this.params;
+    for (key in ref) {
+      value = ref[key];
       if (matcher === value) {
         return true;
       }
@@ -798,7 +818,7 @@ this.Spellbook.sanitize = function(string) {
 };
 
 this.Spellbook.SaveProgress = (function() {
-  var init, _eraseProgress, _restoreProgress, _setEventHandlers, _settings, _storeProgress;
+  var _eraseProgress, _restoreProgress, _setEventHandlers, _settings, _storeProgress, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({
@@ -878,7 +898,7 @@ this.Spellbook.scrollTrigger = function(options) {
 };
 
 this.Spellbook.selectText = (function() {
-  var init, _selectElement, _setEventHandlers, _settings;
+  var _selectElement, _setEventHandlers, _settings, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({
@@ -917,7 +937,7 @@ this.Spellbook.selectText = (function() {
 })();
 
 this.Spellbook.Share = (function() {
-  var init, _setEventHandlers, _settings, _triggerPopup;
+  var _setEventHandlers, _settings, _triggerPopup, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({
@@ -992,7 +1012,7 @@ this.Spellbook.shortcut = function(options) {
 };
 
 this.Spellbook.ShowPassword = (function() {
-  var init, _setEventHandlers, _settings, _showPassword;
+  var _setEventHandlers, _settings, _showPassword, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({
@@ -1030,7 +1050,7 @@ this.Spellbook.slugify = function(string) {
 };
 
 this.Spellbook.StateUrls = (function() {
-  var init, _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState, _settings, _showSection;
+  var _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState, _settings, _showSection, init;
   _settings = {};
   init = function(options) {
     _settings = $.extend({
