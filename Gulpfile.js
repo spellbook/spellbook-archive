@@ -17,6 +17,7 @@ var gutil      = require( 'gulp-util' );
 var rename     = require( 'gulp-rename' );
 var uglify     = require( 'gulp-uglify' );
 var watch      = require( 'gulp-watch' );
+var run        = require( 'run-sequence' );
 
 // -------------------------------------
 //   Options
@@ -61,11 +62,7 @@ gulp.task( 'default', function() {
 
 gulp.task( 'build', function() {
 
-  gulp.src( options.build.files )
-    .pipe( concat( options.build.destinationFile ) )
-    .pipe( gulp.dest( options.build.destinationDirectory ) );
-
-  gulp.start( 'uglify' );
+  run( 'coffee', 'concat', 'uglify' );
 
 });
 
@@ -88,6 +85,18 @@ gulp.task( 'coffee', function() {
     .pipe( gulp.dest( options.coffee.destination[2] ) );
 
   return es.concat(compendium, components, tests);
+
+} );
+
+// -------------------------------------
+//   Task: Concat
+// -------------------------------------
+
+gulp.task( 'concat', function() {
+
+  gulp.src( options.build.files )
+    .pipe( concat( options.build.destinationFile ) )
+    .pipe( gulp.dest( options.build.destinationDirectory ) );
 
 } );
 
