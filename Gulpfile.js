@@ -32,7 +32,7 @@ var options = {
   },
 
   coffee : {
-    files       : [ 'compendium/spellbook.coffee', 'components/*.coffee', 'spec/*.coffee' ],
+    files       : [ 'compendium/spellbook.coffee', 'components/**/*.coffee', 'spec/**/*.coffee' ],
     destination : [ 'compendium/js/', 'components/js/', 'spec/javascripts/' ]
   },
 
