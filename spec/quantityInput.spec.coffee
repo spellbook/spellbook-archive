@@ -43,8 +43,6 @@ describe 'Spellbook.QuantityInput', ->
   it 'should decrease the input value when the decrease link is clicked', ->
     @element.attr( 'value', '2' )
 
-    console.log @element.val()
-
     startValue = parseInt( @element.val() )
 
     @increase.click()

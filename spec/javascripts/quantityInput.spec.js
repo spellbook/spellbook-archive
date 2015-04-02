@@ -36,7 +36,6 @@ describe('Spellbook.QuantityInput', function() {
   it('should decrease the input value when the decrease link is clicked', function() {
     var newValue, startValue;
     this.element.attr('value', '2');
-    console.log(this.element.val());
     startValue = parseInt(this.element.val());
     this.increase.click();
     this.decrease.click();
