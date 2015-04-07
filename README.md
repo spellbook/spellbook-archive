@@ -8,164 +8,54 @@ Compendium
 
 `compendium/application.coffee` is the compendium file, which is what you would load in your application. It shows you the order in which you would include the individual setup files, as well as each individual Component. This obviously changes if you're not in a Rails environment with Sprockets.
 
-Namespace
----------
+Namespaces
+----------
 
-`compendium/spellbook.coffee` simply sets up the namespace for the application. Be sure to change this file and namespace to the name of your application.
+`compendium/spellbook.coffee` sets up the namespaces for the application. Be sure to change this file and namespaces to the name of _your_ application.
+
+Globals
+-------
+
+If you need any global variables set across the entire namespace, add them to `Spellbook.Globals` in the `compendium/spellbook.coffee` file.
 
 Components
 ----------
 
-### Functions
+A "component" is either a **Function**, **Class**, or **Module**.
 
-```coffeescript
-# javascripts/components/componentName.coffee
+### Function
 
-# *************************************
-#
-#   Component Name
-#   -> Description
-#
-# *************************************
-#
-# @param $element  { jQuery object }
-# @param className { string }
-#
-# *************************************
+A Function is either classified as a **Helper** or a **Service**.
 
-@Spellbook.componentName = ( options ) ->
-  options.$element.on 'click', ( event ) ->
-    event.preventDefault()
+#### Helper
 
-    $(@).toggleClass( options.className )
+A helper is a one-off utility function that performs a single action. Some examples:
 
-# -------------------------------------
-#   Usage
-# -------------------------------------
-#
-# Spellbook.componentName
-#   # ...
-#
-```
+- `Spellbook.sanitize()`
+- `Spellbook.slugify()`
 
-And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
+_You can find a template file in `components/templates/helper.coffee`._
 
-```coffeescript
-Spellbook.componentName
-  $element  : $( '.js-element' )
-  className : 'is-active'
-```
+#### Service
 
-### Classes
+A service is a function that can perform multiple actions, but a single service, and it is neither a class or module. For example:
 
-```coffeescript
-# javascripts/components/className.coffee
+- `Spellbook.autoSubmit()`
+- `Spellbook.scrollTo()`
 
-# *************************************
-#
-#   Class Name
-#   -> Description
-#
-# *************************************
-#
-# @param $element  { jQuery object }
-# @param className { string }
-#
-# *************************************
+_You can find a template file in `components/templates/service.coffee`._
 
-class @Spellbook.ClassName
+### Class
 
-  ###
-    Called when the object is instantiated, and it immediately
-    defers to an 'init' method, which can be called without having
-    to instantiate an object.
+A class is, as you'd expect, a CoffeeScript class.
 
-    @options sets instance variables for all of the options that are
-    passed in.
-  ###
-  constructor: ( @options ) -> @init()
+_You can find a template file in `components/templates/class.coffee`._
 
-  init: ->
-    # Initialize things here...
+### Module
 
-    ### 
-      Call 'setEventHandlers' method to set up all of the
-      individual event handlers for the elements of the class
-    ###
-    @setEventHandlers()
+A module is written in the Revealing Module Pattern.
 
-  setEventHandlers: ->
-    @options.$element.on 'click', ( event ) => @doSomething()
-
-  doSomething: ->
-    # ...
-
-  ###
-    Class methods start with an '@' sign before the name, and
-    they aren't called by the instantiated object but, rather,
-    from within the class
-
-    e.g. ClassName.klassMethod()
-  ###
-  @klassMethod: ->
-    # ...
-
-# -------------------------------------
-#   Usage
-# -------------------------------------
-#
-# new Spellbook.ClassName
-#   # ...
-#
-```
-
-And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
-
-```coffeescript
-new SpellBook.ClassName
-  # ...
-```
-
-### Modules
-
-```coffeescript
-# javascripts/components/moduleName.coffee
-
-# *************************************
-#
-#   Module Name
-#   -> Description
-#
-# *************************************
-#
-# @param $element  { jQuery object }
-# @param className { string }
-#
-# *************************************
-
-# CoffeeScript shortcut for a self-invoking anonymous function
-@Spellbook.ModuleName = do ->
-
-  privateVar = ''
-
-  init = ->
-
-  init: init
-
-# -------------------------------------
-#   Usage
-# -------------------------------------
-#
-# Spellbook.moduleName.init
-#   # ...
-#
-```
-
-And to call your Component, put it in `javascripts/domready.js.coffee` or, if you only make the call on one page, add it to the bottom of that page.:
-
-```coffeescript
-SpellBook.ModuleName.init()
-```
+_You can find a template file in `components/templates/module.coffee`._
 
 Document Ready
 --------------
@@ -177,10 +67,12 @@ Inbox
 
 This is a good place to put JavaScript that you aren't ready to organize and sort; or, simply as a testing environment.
 
+**Note**: You can also use the `Spellbook.Inbox` namespace to write in **if you aren't sure where to place it temporarily.**
+
 jQuery
 ------
 
-There is a jQuery dependency in Spellbook, but you could easily swap out the underlying jQuery with vanilla JavaScript.
+There is a jQuery dependency in Spellbook, but you could easily swap out the underlying jQuery with vanilla JavaScript or another similar library.
 
 Defaults
 --------
@@ -188,14 +80,14 @@ Defaults
 If applicable, each Component sets default options to standardize calls. For example:
 
 ```coffeescript
-@Spellbook.componentName = ( options ) ->
+@Spellbook.Namespace.componentName = ( options ) ->
   _settings = $.extend
     $element    : $( '.js-component' ),
     activeClass : 'is-active'
   , options
 ```
 
-Use `js-` selectors to standardize the class applied to elements. Now, in the call, you can either leave out the options (using the defaults), or pass in overrides to the default options.
+**Note**: Use `js-` selectors to standardize the class applied to elements. Now, in the call, you can either leave out the options (using the defaults), or pass in overrides to the default options.
 
 Development
 -----------
