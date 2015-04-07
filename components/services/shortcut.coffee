@@ -6,7 +6,7 @@
 # *************************************
 #
 #   Dependencies
-#   - Spellbook.keyCodes
+#   - Spellbook.Helpers.keyCodes
 #
 # *************************************
 #
@@ -20,7 +20,7 @@
   settings = $.extend
     $element      : $( '[data-shortcut]' )
     dataAttribute : 'shortcut'
-    keyCodes      : Spellbook.keyCodes
+    keyCodes      : Spellbook.Helpers.keyCodes
   , options
 
   settings.$element.each ->
