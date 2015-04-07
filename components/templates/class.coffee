@@ -12,45 +12,39 @@
 
 class @Spellbook.Classes.ClassName
 
-  ###
-    Called when the object is instantiated, and it immediately
-    defers to an 'init' method, which can be called without having
-    to instantiate an object.
+  # -------------------------------------
+  #   Private Variables
+  # -------------------------------------
 
-    @options sets instance variables for all of the options that are
-    passed in.
-  ###
+  _settings : {}
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
   constructor: ( @options ) -> @init()
 
+  # -------------------------------------
+  #   Initialize
+  # -------------------------------------
+
   init: ->
-    # Initialize things here...
+    @_settings = $.extend
+      $element : $( '.js-element' )
+    , @options
 
-    ### 
-      Call 'setEventHandlers' method to set up all of the
-      individual event handlers for the elements of the class
-    ###
-    @setEventHandlers()
+    @_setEventHandlers()
 
-  setEventHandlers: ->
-    @options.$element.on 'click', ( event ) => @doSomething()
+  # -------------------------------------
+  #   Set Event Handlers
+  # -------------------------------------
 
-  doSomething: ->
-    # ...
-
-  ###
-    Class methods start with an '@' sign before the name, and
-    they aren't called by the instantiated object but, rather,
-    from within the class
-
-    e.g. ClassName.klassMethod()
-  ###
-  @klassMethod: ->
+  _setEventHandlers: ->
     # ...
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# new Spellbook.Classes.ClassName
-#   # ...
+# new Spellbook.Classes.ClassName()
 #

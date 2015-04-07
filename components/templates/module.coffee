@@ -6,22 +6,44 @@
 # *************************************
 #
 # @param $element  { jQuery object }
-# @param className { string }
 #
 # *************************************
 
-@Spellbook.Modules.ModuleName = do -> # CoffeeScript shortcut for a self-invoking anonymous function
+@Spellbook.Modules.ModuleName = do ->
 
-  privateVar = ''
+  # -------------------------------------
+  #   Private Variables
+  # -------------------------------------
 
-  init = ->
+  _settings = {}
 
-  init: init
+  # -------------------------------------
+  #   Initialize
+  # -------------------------------------
+
+  init = ( options ) ->
+    _settings = $.extend
+      $element : $( '.js-element' )
+    , options
+
+    _setEventHandlers()
+
+  # -------------------------------------
+  #   Set Event Handlers
+  # -------------------------------------
+
+  _setEventHandlers = ->
+    # ...
+
+  # -------------------------------------
+  #   Public Methods
+  # -------------------------------------
+
+  init : init
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.ModuleName.init
-#   # ...
+# Spellbook.Modules.ModuleName.init()
 #
