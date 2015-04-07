@@ -1,1 +1,1 @@
-this.Spellbook.Helpers.helperName = function(options) {};
+this.Spellbook.Helpers.helperName = function(item) {};

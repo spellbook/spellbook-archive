@@ -6,11 +6,14 @@
 # *************************************
 #
 # @param $element  { jQuery object }
-# @param className { string }
 #
 # *************************************
 
 @Spellbook.Services.serviceName = ( options ) ->
+  settings = $.extend
+    $element: $( '.js-element' )
+  , options
+
   # ...
 
 # -------------------------------------

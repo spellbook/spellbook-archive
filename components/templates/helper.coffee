@@ -5,18 +5,16 @@
 #
 # *************************************
 #
-# @param $element  { jQuery object }
-# @param className { string }
+# @param item { string }
 #
 # *************************************
 
-@Spellbook.Helpers.helperName = ( options ) ->
+@Spellbook.Helpers.helperName = ( item ) ->
   # ...
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Helpers.helperName
-#   # ...
+# Spellbook.Helpers.helperName()
 #
