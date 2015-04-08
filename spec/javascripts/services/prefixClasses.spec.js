@@ -1,4 +1,4 @@
-describe('Spellbook.prefixClasses', function() {
+describe('Spellbook.Services.prefixClasses', function() {
   beforeEach(function() {
     loadFixtures('prefix_classes.html');
     this.element = $('.js-prefixClasses');

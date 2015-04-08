@@ -1,4 +1,4 @@
-describe('Spellbook.EqualHeights', function() {
+describe('Spellbook.Modules.EqualHeights', function() {
   beforeEach(function() {
     loadFixtures('equal_heights.html');
     this.element = $('.js-equalHeights');

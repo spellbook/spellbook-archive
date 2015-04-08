@@ -1,4 +1,4 @@
-describe 'Spellbook.slugify', ->
+describe 'Spellbook.Helpers.slugify', ->
   beforeEach ->
     @string        = 'This is my title!'
     @sluggedString = Spellbook.Helpers.slugify( @string )

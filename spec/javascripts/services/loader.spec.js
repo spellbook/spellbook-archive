@@ -1,4 +1,4 @@
-describe('Spellbook.loader', function() {
+describe('Spellbook.Services.loader', function() {
   beforeEach(function() {
     loadFixtures('loader.html');
     this.toggle = $('.js-loader-toggle');

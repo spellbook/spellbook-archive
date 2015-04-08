@@ -1,4 +1,4 @@
-describe('Spellbook.StateUrls', function() {
+describe('Spellbook.Modules.StateUrls', function() {
   beforeEach(function() {
     loadFixtures('state_urls.html');
     this.element = $('.js-stateUrls');

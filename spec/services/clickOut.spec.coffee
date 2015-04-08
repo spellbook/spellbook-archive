@@ -1,4 +1,4 @@
-describe 'Spellbook.clickOut', ->
+describe 'Spellbook.Services.clickOut', ->
   beforeEach ->
     @document = $( document )
     @element  = $( '<div class = "js-clickout"></div>' )

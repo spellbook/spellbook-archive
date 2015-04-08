@@ -1,4 +1,4 @@
-describe 'Spellbook.uid', ->
+describe 'Spellbook.Helpers.uid', ->
 
   it 'should generate a ten-digit unique ID', ->
     id = Spellbook.Helpers.uid()

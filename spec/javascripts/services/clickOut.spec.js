@@ -1,4 +1,4 @@
-describe('Spellbook.clickOut', function() {
+describe('Spellbook.Services.clickOut', function() {
   beforeEach(function() {
     this.document = $(document);
     this.element = $('<div class = "js-clickout"></div>');

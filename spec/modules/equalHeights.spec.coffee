@@ -1,4 +1,4 @@
-describe 'Spellbook.EqualHeights', ->
+describe 'Spellbook.Modules.EqualHeights', ->
   beforeEach ->
     loadFixtures( 'equal_heights.html' )
 

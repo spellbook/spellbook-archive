@@ -1,4 +1,4 @@
-describe('Spellbook.HeadingLinks', function() {
+describe('Spellbook.Modules.HeadingLinks', function() {
   beforeEach(function() {
     loadFixtures('heading_links.html');
     this.firstHeading = $('h1');

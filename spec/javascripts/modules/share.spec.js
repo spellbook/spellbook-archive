@@ -1,4 +1,4 @@
-describe('Spellbook.Share', function() {
+describe('Spellbook.Modules.Share', function() {
   beforeEach(function() {
     loadFixtures('share.html');
     this.element = $('.js-share');

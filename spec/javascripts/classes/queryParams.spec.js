@@ -1,4 +1,4 @@
-describe('Spellbook.QueryParams', function() {
+describe('Spellbook.Classes.QueryParams', function() {
   it('should instantiate a new object', function() {
     this.qp = new Spellbook.Classes.QueryParams();
     return expect(this.qp).not.toBe(false);

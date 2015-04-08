@@ -1,4 +1,4 @@
-describe 'Spellbook.limiter', ->
+describe 'Spellbook.Services.limiter', ->
   beforeEach ->
     loadFixtures( 'limiter.html' )
 

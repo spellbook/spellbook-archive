@@ -1,4 +1,4 @@
-describe 'Spellbook.prefixClasses', ->
+describe 'Spellbook.Services.prefixClasses', ->
   beforeEach ->
     loadFixtures( 'prefix_classes.html' )
 

@@ -1,4 +1,4 @@
-describe('Spellbook.filter', function() {
+describe('Spellbook.Services.filter', function() {
   beforeEach(function() {
     loadFixtures('filter.html');
     this.element = $('.js-filter');

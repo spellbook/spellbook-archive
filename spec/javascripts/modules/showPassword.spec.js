@@ -1,4 +1,4 @@
-describe('Spellbook.ShowPassword', function() {
+describe('Spellbook.Modules.ShowPassword', function() {
   beforeEach(function() {
     loadFixtures('show_password.html');
     this.input = $('.js-showPassword-input');

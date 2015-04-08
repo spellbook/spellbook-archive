@@ -1,4 +1,4 @@
-describe 'Spellbook.AutoDuplicateInput', ->
+describe 'Spellbook.Modules.AutoDuplicateInput', ->
   beforeEach ->
     loadFixtures( 'auto_duplicate_input.html' )
 

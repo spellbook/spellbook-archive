@@ -1,4 +1,4 @@
-describe 'Spellbook.toggle', ->
+describe 'Spellbook.Services.toggle', ->
   beforeEach ->
     loadFixtures( 'toggle.html' )
 

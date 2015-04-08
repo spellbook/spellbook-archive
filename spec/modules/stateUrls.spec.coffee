@@ -1,4 +1,4 @@
-describe 'Spellbook.StateUrls', ->
+describe 'Spellbook.Modules.StateUrls', ->
   beforeEach ->
     loadFixtures( 'state_urls.html' )
 

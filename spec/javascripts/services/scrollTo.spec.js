@@ -1,4 +1,4 @@
-describe('Spellbook.scrollTo', function() {
+describe('Spellbook.Services.scrollTo', function() {
   beforeEach(function() {
     loadFixtures('scroll_to.html');
     this.element = $('.js-scrollTo');

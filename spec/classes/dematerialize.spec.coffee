@@ -1,4 +1,4 @@
-describe 'Spellbook.Dematerialize', ->
+describe 'Spellbook.Classes.Dematerialize', ->
   beforeEach ->
     loadFixtures( 'dematerialize.html' )
 

@@ -1,4 +1,4 @@
-describe 'Spellbook.ShowPassword', ->
+describe 'Spellbook.Modules.ShowPassword', ->
   beforeEach ->
     loadFixtures( 'show_password.html' )
 

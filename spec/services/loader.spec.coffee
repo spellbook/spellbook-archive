@@ -1,4 +1,4 @@
-describe 'Spellbook.loader', ->
+describe 'Spellbook.Services.loader', ->
   beforeEach ->
     loadFixtures( 'loader.html' )
 

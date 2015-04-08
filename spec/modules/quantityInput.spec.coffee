@@ -1,4 +1,4 @@
-describe 'Spellbook.QuantityInput', ->
+describe 'Spellbook.Modules.QuantityInput', ->
   beforeEach ->
     loadFixtures( 'quantity-input.html' )
 

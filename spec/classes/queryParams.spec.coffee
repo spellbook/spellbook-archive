@@ -1,4 +1,4 @@
-describe 'Spellbook.QueryParams', ->
+describe 'Spellbook.Classes.QueryParams', ->
 
   it 'should instantiate a new object', ->
     @qp = new Spellbook.Classes.QueryParams()

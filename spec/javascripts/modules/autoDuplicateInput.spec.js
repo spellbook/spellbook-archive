@@ -1,4 +1,4 @@
-describe('Spellbook.AutoDuplicateInput', function() {
+describe('Spellbook.Modules.AutoDuplicateInput', function() {
   beforeEach(function() {
     loadFixtures('auto_duplicate_input.html');
     this.selector = '.js-autoDuplicateInput';

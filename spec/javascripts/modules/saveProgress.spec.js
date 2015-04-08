@@ -1,4 +1,4 @@
-describe('Spellbook.SaveProgress', function() {
+describe('Spellbook.Modules.SaveProgress', function() {
   beforeEach(function() {
     loadFixtures('save_progress.html');
     this.element = $('.js-saveProgress');

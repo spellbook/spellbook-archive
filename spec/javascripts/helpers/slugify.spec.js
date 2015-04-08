@@ -1,4 +1,4 @@
-describe('Spellbook.slugify', function() {
+describe('Spellbook.Helpers.slugify', function() {
   beforeEach(function() {
     this.string = 'This is my title!';
     return this.sluggedString = Spellbook.Helpers.slugify(this.string);

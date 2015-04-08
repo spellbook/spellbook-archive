@@ -1,4 +1,4 @@
-describe('Spellbook.limiter', function() {
+describe('Spellbook.Services.limiter', function() {
   beforeEach(function() {
     loadFixtures('limiter.html');
     this.container = $('.fixture--limiter');

@@ -1,4 +1,4 @@
-describe 'Spellbook.Modal', ->
+describe 'Spellbook.Modules.Modal', ->
   beforeEach ->
     loadFixtures( 'modal.html' )
 

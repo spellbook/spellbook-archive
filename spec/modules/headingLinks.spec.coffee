@@ -1,4 +1,4 @@
-describe 'Spellbook.HeadingLinks', ->
+describe 'Spellbook.Modules.HeadingLinks', ->
   beforeEach ->
     loadFixtures( 'heading_links.html' )
 

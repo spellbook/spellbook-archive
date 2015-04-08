@@ -1,4 +1,4 @@
-describe('Spellbook.QuantityInput', function() {
+describe('Spellbook.Modules.QuantityInput', function() {
   beforeEach(function() {
     loadFixtures('quantity-input.html');
     this.element = $('.js-quantityInput');

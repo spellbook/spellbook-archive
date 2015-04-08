@@ -1,4 +1,4 @@
-describe 'Spellbook.Share', ->
+describe 'Spellbook.Modules.Share', ->
   beforeEach ->
     loadFixtures( 'share.html' )
 

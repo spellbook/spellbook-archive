@@ -1,4 +1,4 @@
-describe 'Spellbook.fixOrphanWords', ->
+describe 'Spellbook.Helpers.fixOrphanWords', ->
   beforeEach ->
     loadFixtures( 'fix_orphan_words.html' )
 

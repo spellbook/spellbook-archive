@@ -1,4 +1,4 @@
-describe('Spellbook.sanitize', function() {
+describe('Spellbook.Helpers.sanitize', function() {
   it('should sanitize HTML input in a string', function() {
     var string;
     string = '<h1>This is a string.</h1>';

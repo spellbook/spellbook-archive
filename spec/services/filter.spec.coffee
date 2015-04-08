@@ -1,4 +1,4 @@
-describe 'Spellbook.filter', ->
+describe 'Spellbook.Services.filter', ->
   beforeEach ->
     loadFixtures( 'filter.html' )
 

@@ -1,4 +1,4 @@
-describe 'Spellbook.scrollTo', ->
+describe 'Spellbook.Services.scrollTo', ->
   beforeEach ->
     loadFixtures( 'scroll_to.html' )
 

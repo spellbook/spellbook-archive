@@ -1,4 +1,4 @@
-describe('Spellbook.Dematerialize', function() {
+describe('Spellbook.Classes.Dematerialize', function() {
   beforeEach(function() {
     var element;
     loadFixtures('dematerialize.html');

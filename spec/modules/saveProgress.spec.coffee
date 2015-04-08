@@ -1,4 +1,4 @@
-describe 'Spellbook.SaveProgress', ->
+describe 'Spellbook.Modules.SaveProgress', ->
   beforeEach ->
     loadFixtures( 'save_progress.html' )
 

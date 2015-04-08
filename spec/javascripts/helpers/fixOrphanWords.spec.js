@@ -1,4 +1,4 @@
-describe('Spellbook.fixOrphanWords', function() {
+describe('Spellbook.Helpers.fixOrphanWords', function() {
   beforeEach(function() {
     loadFixtures('fix_orphan_words.html');
     this.element = $('.js-orphan');

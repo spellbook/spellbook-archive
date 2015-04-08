@@ -1,4 +1,4 @@
-describe('Spellbook.Modal', function() {
+describe('Spellbook.Modules.Modal', function() {
   beforeEach(function() {
     loadFixtures('modal.html');
     this.trigger = $('.js-modal-trigger');

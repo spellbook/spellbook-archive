@@ -1,4 +1,4 @@
-describe('Spellbook.uid', function() {
+describe('Spellbook.Helpers.uid', function() {
   it('should generate a ten-digit unique ID', function() {
     var id;
     id = Spellbook.Helpers.uid();
