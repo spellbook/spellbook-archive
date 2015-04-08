@@ -2,7 +2,7 @@
 #
 #   Dispatcher
 #   -> Run JS events based on current page
-#   Credit: https://github.com/gitlabhq/gitlabhq/blob/master/app/assets/javascripts/dispatcher.js.coffee
+#      Credit: https://github.com/gitlabhq/gitlabhq/blob/master/app/assets/javascripts/dispatcher.js.coffee
 #
 # *************************************
 #
