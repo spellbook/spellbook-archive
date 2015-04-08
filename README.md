@@ -123,11 +123,11 @@ gulp lint
 
 ### Running Tests
 
-**Install Bundler**
+**Install/Run Bundler**
 
 ```
 gem install bundler
-bundle install --binstubs
+bundle
 ```
 
 **Run Jasmine Server**
