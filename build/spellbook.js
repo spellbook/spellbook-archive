@@ -104,6 +104,9 @@ this.Spellbook.Classes.Dispatcher = (function() {
       event = null;
     }
     page = this._getCurrentPage();
+    if (!page) {
+      return false;
+    }
     if (event == null) {
       ref = this._settings.events;
       results = [];

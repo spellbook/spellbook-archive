@@ -2,6 +2,7 @@
 #
 #   Dispatcher
 #   -> Run JS events based on current page
+#   Credit: https://github.com/gitlabhq/gitlabhq/blob/master/app/assets/javascripts/dispatcher.js.coffee
 #
 # *************************************
 #
@@ -44,6 +45,8 @@ class @Spellbook.Classes.Dispatcher
 
   dispatch: ( event = null ) ->
     page = @_getCurrentPage()
+
+    return false unless page
 
     unless event?
       for event in @_settings.events
