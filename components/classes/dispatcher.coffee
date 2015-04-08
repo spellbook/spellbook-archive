@@ -42,6 +42,10 @@ class @Spellbook.Classes.Dispatcher
   # -------------------------------------
   #   Dispatch
   # -------------------------------------
+  #
+  # @param event { object }
+  #
+  # -------------------------------------
 
   dispatch: ( event = null ) ->
     page = @_getCurrentPage()
