@@ -53,7 +53,7 @@ _You can find a template file in `components/templates/class.coffee`._
 
 ### Module
 
-A module is written in the Revealing Module Pattern.
+A module is written in the [Revealing Module Pattern](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#revealingmodulepatternjavascript).
 
 _You can find a template file in `components/templates/module.coffee`._
 
