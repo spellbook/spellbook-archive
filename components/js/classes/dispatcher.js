@@ -10,7 +10,7 @@ this.Spellbook.Classes.Dispatcher = (function() {
     this._settings = $.extend({
       $element: $('.js-dispatcher'),
       dataAttr: 'dispatcher-page',
-      events: {}
+      events: []
     }, this.options);
     return this.dispatch();
   };

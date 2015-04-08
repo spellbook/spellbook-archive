@@ -34,7 +34,7 @@ class @Spellbook.Classes.Dispatcher
     @_settings = $.extend
       $element : $( '.js-dispatcher' )
       dataAttr : 'dispatcher-page'
-      events   : {}
+      events   : []
     , @options
 
     @dispatch()
