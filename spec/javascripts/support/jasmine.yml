@@ -11,8 +11,8 @@
 #   - dist/**/*.js
 #
 src_files:
-  - spec/javascripts/helpers/test.js
-  - components/js/*.js
+  - spec/javascripts/test.js
+  - components/js/**/*.js
 
 # stylesheets
 #

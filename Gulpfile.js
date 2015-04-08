@@ -26,13 +26,13 @@ var run        = require( 'run-sequence' );
 var options = {
 
   build : {
-    files                : [ 'compendium/js/*.js', 'components/js/*.js' ],
+    files                : [ 'compendium/js/*.js', 'components/js/**/*.js' ],
     destinationFile      : 'spellbook.js',
     destinationDirectory : 'build/'
   },
 
   coffee : {
-    files       : [ 'compendium/spellbook.coffee', 'components/*.coffee', 'spec/*.coffee' ],
+    files       : [ 'compendium/spellbook.coffee', 'components/**/*.coffee', 'spec/**/*.coffee' ],
     destination : [ 'compendium/js/', 'components/js/', 'spec/javascripts/' ]
   },
 
