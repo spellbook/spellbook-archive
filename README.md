@@ -11,7 +11,7 @@ Compendium
 Namespaces
 ----------
 
-`compendium/spellbook.coffee` sets up the namespaces for the application. Be sure to change this file and namespaces to the name of _your_ application.
+`compendium/spellbook.coffee` sets up the namespaces for the application. Be sure to change this file (and the namespaces) to the name of _your_ application.
 
 Globals
 -------
