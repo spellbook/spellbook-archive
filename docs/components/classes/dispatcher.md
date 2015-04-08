@@ -26,3 +26,12 @@ new Spellbook.Classes.Dispatcher
     }
   ]
 ```
+
+Alternitavely, you can call the `dispatch` method, passing in a single event:
+
+```coffeescript
+dispatcher = new Spellbook.Classes.Dispatcher
+dispatcher.dispatch
+  page: 'home'
+  run: -> Home.init()
+```
