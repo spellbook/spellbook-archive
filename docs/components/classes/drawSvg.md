@@ -1,5 +1,5 @@
-Spellbook.DrawSvg
-=================
+Spellbook.Classes.DrawSvg
+=========================
 
 Markup
 ------
@@ -21,6 +21,6 @@ JavaScript (CoffeeScript)
 Next, create an instance and call the `draw()` method.
 
 ```coffeescript
-svg = new Spellbook.DrawSvg()
+svg = new Spellbook.Classes.DrawSvg()
 svg.draw()
 ```

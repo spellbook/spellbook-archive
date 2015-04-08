@@ -1,5 +1,5 @@
-Spellbook.filter
-================
+Spellbook.Services.filter
+=========================
 
 Markup
 ------
@@ -42,5 +42,5 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.filter()
+Spellbook.Services.filter()
 ```

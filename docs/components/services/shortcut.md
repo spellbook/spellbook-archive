@@ -1,5 +1,5 @@
-Spellbook.shortcut
-==================
+Spellbook.Services.shortcut
+===========================
 
 Markup
 ------
@@ -16,6 +16,6 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.shortcut()
+Spellbook.Services.shortcut()
 ```
 

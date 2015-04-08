@@ -1,5 +1,5 @@
-Spellbook.QuantityInput
-=======================
+Spellbook.Modules.QuantityInput
+===============================
 
 Markup
 ------
@@ -20,5 +20,5 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.QuantityInput.init()
+Spellbook.Modules.QuantityInput.init()
 ```

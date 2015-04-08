@@ -1,5 +1,5 @@
-Spellbook.scrollTo
-==================
+Spellbook.Services.scrollTo
+===========================
 
 Markup
 ------
@@ -18,7 +18,7 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.scrollTo
+Spellbook.Services.scrollTo
   element : $( '.js-scrollTo' )
   speed   : 250
 ```
