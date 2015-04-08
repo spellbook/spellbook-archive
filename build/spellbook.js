@@ -137,27 +137,6 @@ this.Spellbook.Classes.Dispatcher = (function() {
 
 })();
 
-new Spellbook.Classes.Dispatcher({
-  events: [
-    {
-      page: 'home',
-      run: function() {
-        return console.log('home');
-      }
-    }, {
-      page: 'about',
-      run: function() {
-        return console.log('about');
-      }
-    }, {
-      page: 'contact',
-      run: function() {
-        return console.log('contact');
-      }
-    }
-  ]
-});
-
 var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 this.Spellbook.Classes.DrawSvg = (function() {

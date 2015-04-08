@@ -53,24 +53,3 @@ this.Spellbook.Classes.Dispatcher = (function() {
   return Dispatcher;
 
 })();
-
-new Spellbook.Classes.Dispatcher({
-  events: [
-    {
-      page: 'home',
-      run: function() {
-        return console.log('home');
-      }
-    }, {
-      page: 'about',
-      run: function() {
-        return console.log('about');
-      }
-    }, {
-      page: 'contact',
-      run: function() {
-        return console.log('contact');
-      }
-    }
-  ]
-});

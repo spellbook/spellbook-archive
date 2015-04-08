@@ -77,19 +77,3 @@ class @Spellbook.Classes.Dispatcher
 #     { ... }
 #   ]
 #
-
-new Spellbook.Classes.Dispatcher
-  events: [
-    {
-      page: 'home'
-      run: -> console.log( 'home' )
-    },
-    {
-      page: 'about'
-      run: -> console.log( 'about' )
-    },
-    {
-      page: 'contact'
-      run: -> console.log( 'contact' )
-    }
-  ]
