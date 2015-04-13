@@ -57,6 +57,9 @@ class @Spellbook.Classes.Dispatcher
         switch event.page
           when page then event.run()
 
+        if event.matcher
+          event.run() if page.match( event.matcher )
+
     else
       switch event.page
         when page then event.run()

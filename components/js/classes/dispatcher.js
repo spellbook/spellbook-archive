@@ -31,10 +31,16 @@ this.Spellbook.Classes.Dispatcher = (function() {
         event = ref[i];
         switch (event.page) {
           case page:
+            event.run();
+        }
+        if (event.matcher) {
+          if (page.match(event.matcher)) {
             results.push(event.run());
-            break;
-          default:
+          } else {
             results.push(void 0);
+          }
+        } else {
+          results.push(void 0);
         }
       }
       return results;

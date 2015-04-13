@@ -35,3 +35,21 @@ dispatcher.dispatch
   page: 'home'
   run: -> Home.init()
 ```
+
+If you want to run code based on the page having part of a string, just pass in `event.matcher` instead of `event.page`:
+
+```coffeescript
+new Spellbook.Classes.Dispatcher
+  events: [
+    {
+      matcher: 'users',
+      run: -> Users.init()
+    },
+    {
+      page: 'users:edit',
+      run: -> Users.Edit.init()
+    }
+  ]
+```
+
+With that, the `Users.init()` method will run on any pages that contain the word `users`.
