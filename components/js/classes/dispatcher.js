@@ -33,8 +33,8 @@ this.Spellbook.Classes.Dispatcher = (function() {
           case page:
             event.run();
         }
-        if (event.matcher) {
-          if (page.match(event.matcher)) {
+        if (event.match) {
+          if (page.match(event.match)) {
             results.push(event.run());
           } else {
             results.push(void 0);

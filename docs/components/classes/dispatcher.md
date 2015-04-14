@@ -42,7 +42,7 @@ If you want to run code based on the page having part of a string, just pass in 
 new Spellbook.Classes.Dispatcher
   events: [
     {
-      matcher: 'users',
+      match: 'users',
       run: -> Users.init()
     },
     {
