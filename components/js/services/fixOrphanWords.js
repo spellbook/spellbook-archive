@@ -1,4 +1,4 @@
-this.Spellbook.Helpers.fixOrphanWords = function(options) {
+this.Spellbook.Services.fixOrphanWords = function(options) {
   var settings;
   settings = $.extend({
     $element: $('.js-orphan')

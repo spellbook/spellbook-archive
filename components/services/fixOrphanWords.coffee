@@ -10,7 +10,7 @@
 #
 # *************************************
 
-@Spellbook.Helpers.fixOrphanWords = ( options ) ->
+@Spellbook.Services.fixOrphanWords = ( options ) ->
   settings = $.extend
     $element : $( '.js-orphan' )
   , options
@@ -37,5 +37,5 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Helpers.fixOrphanWords()
+# Spellbook.Services.fixOrphanWords()
 #
