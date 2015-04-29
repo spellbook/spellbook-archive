@@ -77,7 +77,7 @@
     _settings.$increase.on 'click', ( event ) ->
       event.preventDefault()
 
-      _updateValue( 'up' ) unless _value is _settings.maxValue
+      _updateValue( 'up' ) unless _value >= _settings.maxValue
 
       # Increase Event
       _settings.onIncrease( _settings ) if _settings.onIncrease?
@@ -87,7 +87,7 @@
     _settings.$decrease.on 'click', ( event ) ->
       event.preventDefault()
 
-      _updateValue( 'down' ) unless _value is _settings.minValue
+      _updateValue( 'down' ) unless _value <= _settings.minValue
 
       # Decrease Event
       _settings.onDecrease( _settings ) if _settings.onDecrease?

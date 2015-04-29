@@ -32,7 +32,7 @@ this.Spellbook.Modules.QuantityInput = (function() {
     });
     _settings.$increase.on('click', function(event) {
       event.preventDefault();
-      if (_value !== _settings.maxValue) {
+      if (!(_value >= _settings.maxValue)) {
         _updateValue('up');
       }
       if (_settings.onIncrease != null) {
@@ -41,7 +41,7 @@ this.Spellbook.Modules.QuantityInput = (function() {
     });
     return _settings.$decrease.on('click', function(event) {
       event.preventDefault();
-      if (_value !== _settings.minValue) {
+      if (!(_value <= _settings.minValue)) {
         _updateValue('down');
       }
       if (_settings.onDecrease != null) {
