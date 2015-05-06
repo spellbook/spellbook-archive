@@ -22,7 +22,7 @@ this.Spellbook.Modules.CharacterCounter = (function() {
       if (_count > _settings.maxChars) {
         $element.addClass(_settings.errorClass);
         if (_settings.onMaxExceeded != null) {
-          return _settings.onMaxExceeded();
+          return _settings.onMaxExceeded(_settings);
         }
       } else {
         return $element.removeClass(_settings.errorClass);

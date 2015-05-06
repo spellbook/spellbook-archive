@@ -55,7 +55,7 @@
 
       if _count > _settings.maxChars
         $element.addClass( _settings.errorClass )
-        _settings.onMaxExceeded() if _settings.onMaxExceeded?
+        _settings.onMaxExceeded( _settings ) if _settings.onMaxExceeded?
       else
         $element.removeClass( _settings.errorClass )
 
