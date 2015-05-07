@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.1.0 - 2015-05-07
+------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Convert `Services.toggle` to `Modules.Toggle`
+
 1.0.1 - 2015-05-06
 ------------------
 
