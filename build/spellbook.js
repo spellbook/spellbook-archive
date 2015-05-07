@@ -1157,16 +1157,6 @@ this.Spellbook.Modules.Toggle = (function() {
       }
     });
   };
-  _toggleClass = function($element, classToToggle) {
-    if (classToToggle == null) {
-      classToToggle = _settings.toggleClass;
-    }
-    if ($element.hasClass(classToToggle)) {
-      return $element.removeClass(classToToggle);
-    } else {
-      return $element.addClass(classToToggle);
-    }
-  };
   _handleHoverStateEvent = function($element, state) {
     switch (state) {
       case 'on':
@@ -1190,6 +1180,16 @@ this.Spellbook.Modules.Toggle = (function() {
         } else {
           return _toggleClass($element.find(_settings.proximity));
         }
+    }
+  };
+  _toggleClass = function($element, classToToggle) {
+    if (classToToggle == null) {
+      classToToggle = _settings.toggleClass;
+    }
+    if ($element.hasClass(classToToggle)) {
+      return $element.removeClass(classToToggle);
+    } else {
+      return $element.addClass(classToToggle);
     }
   };
   return {
