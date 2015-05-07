@@ -106,21 +106,6 @@
       mouseleave: -> _handleHoverStateEvent( $(@), 'off' )
 
   # -------------------------------------
-  #   Toggle Class
-  # -------------------------------------
-  #
-  # @param $element      { object }
-  # @param classToToggle { string }
-  #
-  # -------------------------------------
-
-  _toggleClass = ( $element, classToToggle = _settings.toggleClass ) ->
-    if $element.hasClass( classToToggle )
-      $element.removeClass( classToToggle )
-    else
-      $element.addClass( classToToggle )
-
-  # -------------------------------------
   #   Handle Hover State Event
   # -------------------------------------
   #
@@ -148,6 +133,21 @@
           _toggleClass( _settings.proximity )
         else
           _toggleClass( $element.find( _settings.proximity) )
+
+  # -------------------------------------
+  #   Toggle Class
+  # -------------------------------------
+  #
+  # @param $element      { object }
+  # @param classToToggle { string }
+  #
+  # -------------------------------------
+
+  _toggleClass = ( $element, classToToggle = _settings.toggleClass ) ->
+    if $element.hasClass( classToToggle )
+      $element.removeClass( classToToggle )
+    else
+      $element.addClass( classToToggle )
 
   # -------------------------------------
   #   Public Methods
