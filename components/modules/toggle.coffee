@@ -116,8 +116,12 @@
 
   _handleHoverStateEvent = ( $element, state ) ->
     switch state
-      when 'on'  then $element.addClass( _settings.activeClass )
-      when 'off' then $element.removeClass( _settings.activeClass )
+      when 'on'
+        _settings.onMouseover( _settings ) if _settings.onMouseover?
+        $element.addClass( _settings.activeClass )
+      when 'off'
+        _settings.onMouseout( _settings ) if _settings.onMouseout?
+        $element.removeClass( _settings.activeClass )
 
     switch _settings.proximity
       when 'next'
