@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.1.1 - 2015-05-07
+------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Add back `Modules.Toggle` mouseover and mouseout callback functions
+
 1.1.0 - 2015-05-07
 ------------------
 
