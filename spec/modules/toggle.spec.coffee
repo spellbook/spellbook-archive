@@ -1,4 +1,4 @@
-describe 'Spellbook.Services.toggle', ->
+describe 'Spellbook.Modules.Toggle', ->
   beforeEach ->
     loadFixtures( 'toggle.html' )
 
@@ -6,7 +6,7 @@ describe 'Spellbook.Services.toggle', ->
     @toggleClass = 'is-hidden'
     @activeClass = 'is-active'
 
-    Spellbook.Services.toggle()
+    Spellbook.Modules.Toggle.init()
 
   describe 'click', ->
 
@@ -25,7 +25,7 @@ describe 'Spellbook.Services.toggle', ->
       @element1  = $( '.js-toggle-sender-01' )
       @receiver1 = $( '#receiver-01' )
 
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         $element : @element1
 
       @element1.trigger( 'click' )
@@ -35,7 +35,7 @@ describe 'Spellbook.Services.toggle', ->
       @element2  = $( '.js-toggle-sender-02' )
       @receiver2 = $( '#receiver-02' )
 
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         $element  : @element2
         proximity : 'prev'
 
@@ -46,7 +46,7 @@ describe 'Spellbook.Services.toggle', ->
       @element3  = $( '.js-toggle-sender-03' )
       @receiver3 = $( '#receiver-03' )
 
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         $element  : @element3
         proximity : 'nextParent'
 
@@ -57,7 +57,7 @@ describe 'Spellbook.Services.toggle', ->
       @element4  = $( '.js-toggle-sender-04' )
       @receiver4 = $( '#receiver-04' )
 
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         $element  : @element4
         proximity : 'prevParent'
 
@@ -68,7 +68,7 @@ describe 'Spellbook.Services.toggle', ->
       @element  = $( '.js-toggle-sender-04' )
       @receiver = $( '#receiver-04' )
 
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         $element  : @element
         proximity : @receiver
 
@@ -78,7 +78,7 @@ describe 'Spellbook.Services.toggle', ->
   describe 'hover', ->
 
     it 'should register a mouseover on the sender', ->
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         event : 'hover'
 
       spyOnEvent( @element, 'mouseover' )
@@ -87,7 +87,7 @@ describe 'Spellbook.Services.toggle', ->
       expect( 'mouseover' ).toHaveBeenTriggeredOn( @element )
 
     it 'should register a mouseout on the sender', ->
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         event : 'hover'
 
       spyOnEvent( @element, 'mouseout' )
@@ -96,7 +96,7 @@ describe 'Spellbook.Services.toggle', ->
       expect( 'mouseout' ).toHaveBeenTriggeredOn( @element )
 
     it 'should add an active class to the sender when hovered on', ->
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         event : 'hover'
 
       @element.trigger( 'mouseover' )
@@ -104,7 +104,7 @@ describe 'Spellbook.Services.toggle', ->
       expect( @element ).toHaveClass( @activeClass )
 
     it 'should remove the active class to the sender when hovered off', ->
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         event : 'hover'
 
       @element.trigger( 'mouseout' )
@@ -115,7 +115,7 @@ describe 'Spellbook.Services.toggle', ->
       @element1  = $( '.js-toggle-sender-01' )
       @receiver1 = $( '#receiver-01' )
 
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         $element : @element1
         event    : 'hover'
 
@@ -126,7 +126,7 @@ describe 'Spellbook.Services.toggle', ->
       @element2  = $( '.js-toggle-sender-02' )
       @receiver2 = $( '#receiver-02' )
 
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         $element  : @element2
         event     : 'hover'
         proximity : 'prev'
@@ -138,7 +138,7 @@ describe 'Spellbook.Services.toggle', ->
       @element3  = $( '.js-toggle-sender-03' )
       @receiver3 = $( '#receiver-03' )
 
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         $element  : @element3
         event     : 'hover'
         proximity : 'nextParent'
@@ -150,7 +150,7 @@ describe 'Spellbook.Services.toggle', ->
       @element4  = $( '.js-toggle-sender-04' )
       @receiver4 = $( '#receiver-04' )
 
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         $element  : @element4
         event     : 'hover'
         proximity : 'prevParent'
@@ -162,7 +162,7 @@ describe 'Spellbook.Services.toggle', ->
       @element  = $( '.js-toggle-sender-04' )
       @receiver = $( '#receiver-04' )
 
-      Spellbook.Services.toggle
+      Spellbook.Modules.Toggle.init
         $element  : @element
         event     : 'hover'
         proximity : @receiver

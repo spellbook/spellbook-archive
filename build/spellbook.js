@@ -1092,6 +1092,111 @@ this.Spellbook.Modules.StateUrls = (function() {
   };
 })();
 
+this.Spellbook.Modules.Toggle = (function() {
+  var _handleClickEvent, _handleHoverEvent, _handleHoverStateEvent, _setEventHandlers, _settings, _toggleClass, init;
+  _settings = {};
+  init = function(options) {
+    _settings = $.extend({
+      $element: $('.js-toggle'),
+      proximity: 'next',
+      event: 'click',
+      toggleClass: 'is-hidden',
+      activeClass: 'is-active',
+      initialState: null,
+      onClick: null,
+      onMouseover: null,
+      onMouseout: null
+    }, options);
+    return _setEventHandlers();
+  };
+  _setEventHandlers = function() {
+    switch (_settings.event) {
+      case 'click':
+        return _handleClickEvent();
+      case 'hover':
+        return _handleHoverEvent();
+    }
+  };
+  _handleClickEvent = function() {
+    return _settings.$element.on('click', function(event) {
+      var $element;
+      event.preventDefault();
+      $element = $(this);
+      if (_settings.onClick != null) {
+        _settings.onClick(_settings);
+      }
+      _settings.$element.toggleClass(_settings.activeClass);
+      switch (_settings.proximity) {
+        case 'next':
+          return $element.next().toggleClass(_settings.toggleClass);
+        case 'prev':
+          return $element.prev().toggleClass(_settings.toggleClass);
+        case 'nextParent':
+          return $element.parent().next().toggleClass(_settings.toggleClass);
+        case 'prevParent':
+          return $element.parent().prev().toggleClass(_settings.toggleClass);
+        default:
+          if (typeof _settings.proximity === 'object') {
+            return _settings.proximity.toggleClass(_settings.toggleClass);
+          } else {
+            return $element.find(_settings.proximity).toggleClass(_settings.toggleClass);
+          }
+      }
+    });
+  };
+  _handleHoverEvent = function() {
+    if (_settings.initialState) {
+      _settings.initialState(_settings);
+    }
+    return _settings.$element.on({
+      mouseenter: function() {
+        return _handleHoverStateEvent($(this), 'on');
+      },
+      mouseleave: function() {
+        return _handleHoverStateEvent($(this), 'off');
+      }
+    });
+  };
+  _toggleClass = function($element, classToToggle) {
+    if (classToToggle == null) {
+      classToToggle = _settings.toggleClass;
+    }
+    if ($element.hasClass(classToToggle)) {
+      return $element.removeClass(classToToggle);
+    } else {
+      return $element.addClass(classToToggle);
+    }
+  };
+  _handleHoverStateEvent = function($element, state) {
+    switch (state) {
+      case 'on':
+        $element.addClass(_settings.activeClass);
+        break;
+      case 'off':
+        $element.removeClass(_settings.activeClass);
+    }
+    switch (_settings.proximity) {
+      case 'next':
+        return _toggleClass($element.next());
+      case 'prev':
+        return _toggleClass($element.prev());
+      case 'nextParent':
+        return _toggleClass($element.parent().next());
+      case 'prevParent':
+        return _toggleClass($element.parent().prev());
+      default:
+        if (typeof _settings.proximity === 'object') {
+          return _toggleClass(_settings.proximity);
+        } else {
+          return _toggleClass($element.find(_settings.proximity));
+        }
+    }
+  };
+  return {
+    init: init
+  };
+})();
+
 this.Spellbook.Services.autoSubmit = function(options) {
   var settings;
   settings = $.extend({
@@ -1304,90 +1409,6 @@ this.Spellbook.Services.shortcut = function(options) {
       };
     })(this));
   });
-};
-
-this.Spellbook.Services.toggle = function(options) {
-  var settings;
-  settings = $.extend({
-    $element: $('.js-toggle'),
-    proximity: 'next',
-    event: 'click',
-    toggleClass: 'is-hidden',
-    activeClass: 'is-active',
-    onClick: null,
-    onMouseover: null,
-    onMouseout: null
-  }, options);
-  switch (settings.event) {
-    case 'click':
-      return settings.$element.on('click', function(event) {
-        var $element;
-        event.preventDefault();
-        $element = $(this);
-        if (settings.onClick != null) {
-          settings.onClick(settings);
-        }
-        settings.$element.toggleClass(settings.activeClass);
-        switch (settings.proximity) {
-          case 'next':
-            return $element.next().toggleClass(settings.toggleClass);
-          case 'prev':
-            return $element.prev().toggleClass(settings.toggleClass);
-          case 'nextParent':
-            return $element.parent().next().toggleClass(settings.toggleClass);
-          case 'prevParent':
-            return $element.parent().prev().toggleClass(settings.toggleClass);
-          default:
-            return settings.proximity.toggleClass(settings.toggleClass);
-        }
-      });
-    case 'hover':
-      if (settings.initialState) {
-        settings.initialState();
-      }
-      return settings.$element.on({
-        mouseenter: function() {
-          var $element;
-          $element = $(this);
-          if (settings.onMouseover != null) {
-            settings.onMouseover(settings);
-          }
-          $element.addClass(settings.activeClass);
-          switch (settings.proximity) {
-            case 'next':
-              return $element.next().addClass(settings.toggleClass);
-            case 'prev':
-              return $element.prev().addClass(settings.toggleClass);
-            case 'nextParent':
-              return $element.parent().next().addClass(settings.toggleClass);
-            case 'prevParent':
-              return $element.parent().prev().addClass(settings.toggleClass);
-            default:
-              return settings.proximity.addClass(settings.toggleClass);
-          }
-        },
-        mouseleave: function() {
-          var $element;
-          $element = $(this);
-          if (settings.onMouseout != null) {
-            settings.onMouseout(settings);
-          }
-          $element.removeClass(settings.activeClass);
-          switch (settings.proximity) {
-            case 'next':
-              return $element.next().removeClass(settings.toggleClass);
-            case 'prev':
-              return $element.prev().removeClass(settings.toggleClass);
-            case 'nextParent':
-              return $element.parent().next().removeClass(settings.toggleClass);
-            case 'prevParent':
-              return $element.parent().prev().removeClass(settings.toggleClass);
-            default:
-              return settings.proximity.removeClass(settings.toggleClass);
-          }
-        }
-      });
-  }
 };
 
 this.Spellbook.Classes.ClassName = (function() {
