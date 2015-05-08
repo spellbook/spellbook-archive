@@ -5,7 +5,7 @@
 #
 # *************************************
 #
-# @param $element  { jQuery object }
+# @param $element { jQuery object }
 #
 # *************************************
 
