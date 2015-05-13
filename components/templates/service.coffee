@@ -11,7 +11,7 @@
 
 @Spellbook.Services.serviceName = ( options ) ->
   settings = $.extend
-    $element: $( '.js-element' )
+    $element : $( '.js-element' )
   , options
 
   # ...

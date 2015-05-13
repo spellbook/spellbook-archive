@@ -2,8 +2,8 @@ describe 'Spellbook.Services.prefixClasses', ->
   beforeEach ->
     loadFixtures( 'prefix_classes.html' )
 
-    @element    = $( '.js-prefixClasses' )
-    @firstChild = @element.find( '.first' )
+    @element     = $( '.js-prefixClasses' )
+    @firstChild  = @element.find( '.first' )
     @secondChild = @element.find( '.second' )
 
   it "should prepend a string the matched elements' classes", ->

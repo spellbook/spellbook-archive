@@ -1,7 +1,7 @@
 describe('Spellbook.Services.clickOut', function() {
   beforeEach(function() {
     this.document = $(document);
-    this.element = $('<div class = "js-clickout"></div>');
+    this.element = $('<div class="js-clickout"></div>');
     return Spellbook.Services.clickOut({
       element: this.element,
       run: function() {

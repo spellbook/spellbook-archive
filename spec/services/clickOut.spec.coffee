@@ -1,7 +1,7 @@
 describe 'Spellbook.Services.clickOut', ->
   beforeEach ->
     @document = $( document )
-    @element  = $( '<div class = "js-clickout"></div>' )
+    @element  = $( '<div class="js-clickout"></div>' )
 
     Spellbook.Services.clickOut
       element : @element

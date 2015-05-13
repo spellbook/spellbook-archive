@@ -12,161 +12,6 @@ this.Spellbook.Services = {};
 
 this.Spellbook.Inbox = {};
 
-this.Spellbook.Helpers.keyCodes = {
-  'enter': 13,
-  'shift': 16,
-  'ctrl': 17,
-  'alt': 18,
-  'esc': 27,
-  'leftarrow': 37,
-  'uparrow': 38,
-  'rightarrow': 39,
-  'downarrow': 40,
-  'comma': 188,
-  'slash': 191,
-  'backslash': 220,
-  '0': 48,
-  '1': 49,
-  '2': 50,
-  '3': 51,
-  '4': 52,
-  '5': 53,
-  '6': 54,
-  '7': 55,
-  '8': 56,
-  '9': 57,
-  'a': 65,
-  'b': 66,
-  'c': 67,
-  'd': 68,
-  'e': 69,
-  'f': 70,
-  'g': 71,
-  'h': 72,
-  'i': 73,
-  'j': 74,
-  'k': 75,
-  'l': 76,
-  'm': 77,
-  'n': 78,
-  'o': 79,
-  'p': 80,
-  'q': 81,
-  'r': 82,
-  's': 83,
-  't': 84,
-  'u': 85,
-  'v': 86,
-  'w': 87,
-  'x': 88,
-  'y': 89,
-  'z': 90
-};
-
-this.Spellbook.QueryParams = (function() {
-  QueryParams.prototype.params = {};
-
-  QueryParams.prototype.variables = [];
-
-  QueryParams.prototype._settings = {};
-
-  function QueryParams(options) {
-    this.options = options;
-    this.init();
-  }
-
-  QueryParams.prototype.init = function() {
-    this._settings = $.extend({
-      url: null
-    }, this.options);
-    this._parseQueryString(this._settings.url);
-    return this._sortParams();
-  };
-
-  QueryParams.prototype._parseQueryString = function(url) {
-    var queryString;
-    if (url) {
-      queryString = url.split('?')[1];
-    } else {
-      queryString = window.location.search.substring(1);
-    }
-    return this.variables = queryString.split('&');
-  };
-
-  QueryParams.prototype._sortParams = function() {
-    var i, len, pair, param, ref, results;
-    ref = this.variables;
-    results = [];
-    for (i = 0, len = ref.length; i < len; i++) {
-      param = ref[i];
-      pair = param.split('=');
-      if (pair[1] !== void 0) {
-        results.push(this.params[pair[0]] = pair[1]);
-      } else {
-        results.push(void 0);
-      }
-    }
-    return results;
-  };
-
-  QueryParams.prototype.allParams = function() {
-    return this.params;
-  };
-
-  QueryParams.prototype.matchParamKey = function(matcher) {
-    var key, ref, value;
-    ref = this.params;
-    for (key in ref) {
-      value = ref[key];
-      if (matcher === key) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  QueryParams.prototype.matchParamValue = function(matcher) {
-    var key, ref, value;
-    ref = this.params;
-    for (key in ref) {
-      value = ref[key];
-      if (matcher === value) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  return QueryParams;
-
-})();
-
-this.Spellbook.Helpers.randomizer = function(collection) {
-  var randomNumber;
-  randomNumber = Math.floor(Math.random() * collection.length);
-  return collection[randomNumber];
-};
-
-this.Spellbook.Helpers.sanitize = function(string) {
-  return string.replace(/(<([^>]+)>)/ig, '');
-};
-
-this.Spellbook.Helpers.slugify = function(string) {
-  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-};
-
-this.Spellbook.Helpers.uid = function(length) {
-  var id;
-  if (length == null) {
-    length = 10;
-  }
-  id = '';
-  while (id.length < length) {
-    id += Math.random().toString(36).substr(2);
-  }
-  return id.substr(0, length);
-};
-
 this.Spellbook.Classes.Dematerialize = (function() {
   Dematerialize._settings = {};
 
@@ -445,218 +290,159 @@ this.Spellbook.Classes.QueryParams = (function() {
 
 })();
 
-this.Spellbook.Services.autoSubmit = function(options) {
-  var settings;
-  settings = $.extend({
-    $element: $('.js-autoSubmit')
-  }, options);
-  return settings.$element.on('change', function() {
-    return $(this).closest('form').trigger('submit');
-  });
+this.Spellbook.Helpers.keyCodes = {
+  'enter': 13,
+  'shift': 16,
+  'ctrl': 17,
+  'alt': 18,
+  'esc': 27,
+  'leftarrow': 37,
+  'uparrow': 38,
+  'rightarrow': 39,
+  'downarrow': 40,
+  'comma': 188,
+  'slash': 191,
+  'backslash': 220,
+  '0': 48,
+  '1': 49,
+  '2': 50,
+  '3': 51,
+  '4': 52,
+  '5': 53,
+  '6': 54,
+  '7': 55,
+  '8': 56,
+  '9': 57,
+  'a': 65,
+  'b': 66,
+  'c': 67,
+  'd': 68,
+  'e': 69,
+  'f': 70,
+  'g': 71,
+  'h': 72,
+  'i': 73,
+  'j': 74,
+  'k': 75,
+  'l': 76,
+  'm': 77,
+  'n': 78,
+  'o': 79,
+  'p': 80,
+  'q': 81,
+  'r': 82,
+  's': 83,
+  't': 84,
+  'u': 85,
+  'v': 86,
+  'w': 87,
+  'x': 88,
+  'y': 89,
+  'z': 90
 };
 
-this.Spellbook.Services.clickOut = function(options) {
-  var settings;
-  settings = $.extend({
-    $element: $('.js-clickout'),
-    run: null
-  }, options);
-  $(document).on('click', function() {
-    return settings.run();
-  });
-  return settings.$element.on('click', function(event) {
-    return event.stopPropagation();
-  });
-};
+this.Spellbook.QueryParams = (function() {
+  QueryParams.prototype.params = {};
 
-this.Spellbook.Services.escapeOut = function(options) {
-  var settings;
-  settings = $.extend({
-    run: null
-  }, options);
-  return $(document).on('keyup', function(event) {
-    switch (event.which) {
-      case 27:
-        return settings.run();
-    }
-  });
-};
+  QueryParams.prototype.variables = [];
 
-this.Spellbook.Services.filter = function(options) {
-  var settings;
-  settings = $.extend({
-    $element: $('.js-filter'),
-    $item: $('.js-filter-item'),
-    $link: $('.js-filter-link'),
-    $empty: $('<p>There are no items to show.</p>'),
-    activeClass: 'is-active',
-    hiddenClass: 'is-hidden',
-    dataAttribute: 'item'
-  }, options);
-  return settings.$link.on('click', function(event) {
-    var $element, dataItemToShow, itemToShow;
-    event.preventDefault();
-    $element = $(this);
-    itemToShow = $element.attr('href').split('#')[1];
-    settings.$link.removeClass(settings.activeClass);
-    $element.toggleClass(settings.activeClass);
-    if (itemToShow !== 'all') {
-      settings.$item.addClass(settings.hiddenClass);
-      dataItemToShow = $("[data-" + settings.dataAttribute + "=" + itemToShow + "]");
-      if (dataItemToShow.length > 0) {
-        return dataItemToShow.removeClass(settings.hiddenClass);
-      } else {
-        return settings.$element.append(settings.$empty);
-      }
+  QueryParams.prototype._settings = {};
+
+  function QueryParams(options) {
+    this.options = options;
+    this.init();
+  }
+
+  QueryParams.prototype.init = function() {
+    this._settings = $.extend({
+      url: null
+    }, this.options);
+    this._parseQueryString(this._settings.url);
+    return this._sortParams();
+  };
+
+  QueryParams.prototype._parseQueryString = function(url) {
+    var queryString;
+    if (url) {
+      queryString = url.split('?')[1];
     } else {
-      return settings.$item.removeClass(settings.hiddenClass);
+      queryString = window.location.search.substring(1);
     }
-  });
-};
+    return this.variables = queryString.split('&');
+  };
 
-this.Spellbook.Services.fixOrphanWords = function(options) {
-  var settings;
-  settings = $.extend({
-    $element: $('.js-orphan')
-  }, options);
-  return settings.$element.each(function() {
-    var $element, finalTitle, i, j, ref, wordArray;
-    $element = $(this);
-    wordArray = $element.text().split(' ');
-    finalTitle = '';
-    for (i = j = 0, ref = wordArray.length - 1; 0 <= ref ? j <= ref : j >= ref; i = 0 <= ref ? ++j : --j) {
-      finalTitle += wordArray[i];
-      if (i === (wordArray.length - 2)) {
-        finalTitle += '&nbsp;';
-      } else if (i === (wordArray.length - 1)) {
-        finalTitle += '';
+  QueryParams.prototype._sortParams = function() {
+    var i, len, pair, param, ref, results;
+    ref = this.variables;
+    results = [];
+    for (i = 0, len = ref.length; i < len; i++) {
+      param = ref[i];
+      pair = param.split('=');
+      if (pair[1] !== void 0) {
+        results.push(this.params[pair[0]] = pair[1]);
       } else {
-        finalTitle += ' ';
+        results.push(void 0);
       }
     }
-    return $element.html(finalTitle);
-  });
-};
+    return results;
+  };
 
-this.Spellbook.Services.limiter = function(options) {
-  var count, settings;
-  settings = $.extend({
-    $element: $('.js-limiter-element'),
-    $toggle: $('.js-limiter-toggle'),
-    hiddenClass: 'is-hidden',
-    limit: 5
-  }, options);
-  count = settings.$element.length;
-  if (count > settings.limit) {
-    settings.$element.not(":lt(" + settings.limit + ")").addClass(settings.hiddenClass);
-    return settings.$toggle.on('click', function(event) {
-      event.preventDefault();
-      $(this).remove();
-      return settings.$element.removeClass(settings.hiddenClass);
-    });
-  } else {
-    return settings.$toggle.remove();
-  }
-};
+  QueryParams.prototype.allParams = function() {
+    return this.params;
+  };
 
-this.Spellbook.Services.loader = function(options) {
-  var settings;
-  settings = $.extend({
-    $element: $('.js-loader-element'),
-    $toggle: $('.js-loader-toggle'),
-    $spinner: $('<span></span>'),
-    $overlay: $('<div></div>'),
-    spinnerClass: 'loader',
-    overlayClass: 'loader-overlay',
-    loadingClass: 'is-loading'
-  }, options);
-  return settings.$toggle.on('click', function(event) {
-    settings.$element.toggleClass(settings.loadingClass);
-    settings.$element.append(settings.$spinner);
-    settings.$spinner.addClass(settings.spinnerClass);
-    settings.$element.append(settings.$overlay);
-    return settings.$overlay.addClass(settings.overlayClass);
-  });
-};
-
-this.Spellbook.Services.prefixClasses = function(options) {
-  var settings;
-  settings = $.extend({
-    $element: $('.js-prefixClasses'),
-    query: '[ class ]',
-    prefix: 'prefix'
-  }, options);
-  return settings.$element.find(settings.query).each(function() {
-    var classArray, className, i, len, node, prefixedClasses;
-    node = this;
-    classArray = node.className.split(' ');
-    prefixedClasses = '';
-    for (i = 0, len = classArray.length; i < len; i++) {
-      className = classArray[i];
-      prefixedClasses = prefixedClasses + " " + settings.prefix + "-" + className;
+  QueryParams.prototype.matchParamKey = function(matcher) {
+    var key, ref, value;
+    ref = this.params;
+    for (key in ref) {
+      value = ref[key];
+      if (matcher === key) {
+        return true;
+      }
     }
-    return node.className = prefixedClasses;
-  });
+    return false;
+  };
+
+  QueryParams.prototype.matchParamValue = function(matcher) {
+    var key, ref, value;
+    ref = this.params;
+    for (key in ref) {
+      value = ref[key];
+      if (matcher === value) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  return QueryParams;
+
+})();
+
+this.Spellbook.Helpers.randomizer = function(collection) {
+  var randomNumber;
+  randomNumber = Math.floor(Math.random() * collection.length);
+  return collection[randomNumber];
 };
 
-this.Spellbook.Services.scrollTo = function(options) {
-  var settings;
-  settings = $.extend({
-    $element: $('.js-scrollTo'),
-    speed: 250
-  }, options);
-  return settings.$element.on('click', function(event) {
-    var to;
-    event.preventDefault();
-    to = settings.$element.attr('href');
-    return $('body, html').animate({
-      scrollTop: parseInt($(to).offset().top)
-    }, settings.speed);
-  });
+this.Spellbook.Helpers.sanitize = function(string) {
+  return string.replace(/(<([^>]+)>)/ig, '');
 };
 
-this.Spellbook.Services.scrollTrigger = function(options) {
-  var active, scrolled, settings;
-  settings = $.extend({
-    $element: $('.js-scrollTrigger'),
-    scrollPadding: 400,
-    activeClass: 'is-active'
-  }, options);
-  scrolled = $(window).scrollTop();
-  if (settings.$element.offset().top >= 0) {
-    active = scrolled - settings.$element.offset().top - settings.scrollPadding;
+this.Spellbook.Helpers.slugify = function(string) {
+  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
+};
+
+this.Spellbook.Helpers.uid = function(length) {
+  var id;
+  if (length == null) {
+    length = 10;
   }
-  if (!settings.$element.hasClass(settings.activeClass) && active) {
-    return settings.$element.addClass(settings.activeClass);
+  id = '';
+  while (id.length < length) {
+    id += Math.random().toString(36).substr(2);
   }
-};
-
-this.Spellbook.Services.shortcut = function(options) {
-  var settings;
-  settings = $.extend({
-    $element: $('[data-shortcut]'),
-    dataAttribute: 'shortcut',
-    keyCodes: Spellbook.Helpers.keyCodes
-  }, options);
-  return settings.$element.each(function() {
-    var key;
-    key = settings.keyCodes[$(this).data(settings.dataAttribute)];
-    return $(document).on('keyup', (function(_this) {
-      return function(event) {
-        var $element, tag;
-        $element = $(_this);
-        tag = event.target.tagName.toLowerCase();
-        if (!(tag === 'input' || tag === 'textarea')) {
-          if (event.which === key) {
-            $element.trigger('focus').trigger('click');
-            if ($element.prop('tagName').toLowerCase() === 'a') {
-              return window.location = $element.attr('href');
-            }
-          }
-        }
-      };
-    })(this));
-  });
+  return id.substr(0, length);
 };
 
 this.Spellbook.Modules.AutoDuplicateInput = (function() {
@@ -1416,6 +1202,238 @@ this.Spellbook.Modules.Toggle = (function() {
     init: init
   };
 })();
+
+this.Spellbook.Services.autoSubmit = function(options) {
+  var settings;
+  settings = $.extend({
+    $element: $('.js-autoSubmit')
+  }, options);
+  return settings.$element.on('change', function() {
+    return $(this).closest('form').trigger('submit');
+  });
+};
+
+this.Spellbook.Services.clickOut = function(options) {
+  var settings;
+  settings = $.extend({
+    $element: $('.js-clickout'),
+    run: null
+  }, options);
+  $(document).on('click', function() {
+    return settings.run();
+  });
+  return settings.$element.on('click', function(event) {
+    return event.stopPropagation();
+  });
+};
+
+this.Spellbook.Services.contextMenu = function(options) {
+  var settings;
+  settings = $.extend({
+    $element: $('.js-contextMenu'),
+    activeClass: 'is-active'
+  }, options);
+  $(document).on('contextmenu', function(event) {
+    event.preventDefault();
+    return settings.$element.css({
+      top: event.pageY + 'px',
+      left: event.pageX + 'px'
+    }).addClass(settings.activeClass);
+  });
+  return $(document).on('click', function(event) {
+    return settings.$element.removeClass(settings.activeClass);
+  });
+};
+
+this.Spellbook.Services.escapeOut = function(options) {
+  var settings;
+  settings = $.extend({
+    run: null
+  }, options);
+  return $(document).on('keyup', function(event) {
+    switch (event.which) {
+      case 27:
+        return settings.run();
+    }
+  });
+};
+
+this.Spellbook.Services.filter = function(options) {
+  var settings;
+  settings = $.extend({
+    $element: $('.js-filter'),
+    $item: $('.js-filter-item'),
+    $link: $('.js-filter-link'),
+    $empty: $('<p>There are no items to show.</p>'),
+    activeClass: 'is-active',
+    hiddenClass: 'is-hidden',
+    dataAttribute: 'item'
+  }, options);
+  return settings.$link.on('click', function(event) {
+    var $element, dataItemToShow, itemToShow;
+    event.preventDefault();
+    $element = $(this);
+    itemToShow = $element.attr('href').split('#')[1];
+    settings.$link.removeClass(settings.activeClass);
+    $element.toggleClass(settings.activeClass);
+    if (itemToShow !== 'all') {
+      settings.$item.addClass(settings.hiddenClass);
+      dataItemToShow = $("[data-" + settings.dataAttribute + "=" + itemToShow + "]");
+      if (dataItemToShow.length > 0) {
+        return dataItemToShow.removeClass(settings.hiddenClass);
+      } else {
+        return settings.$element.append(settings.$empty);
+      }
+    } else {
+      return settings.$item.removeClass(settings.hiddenClass);
+    }
+  });
+};
+
+this.Spellbook.Services.fixOrphanWords = function(options) {
+  var settings;
+  settings = $.extend({
+    $element: $('.js-orphan')
+  }, options);
+  return settings.$element.each(function() {
+    var $element, finalTitle, i, j, ref, wordArray;
+    $element = $(this);
+    wordArray = $element.text().split(' ');
+    finalTitle = '';
+    for (i = j = 0, ref = wordArray.length - 1; 0 <= ref ? j <= ref : j >= ref; i = 0 <= ref ? ++j : --j) {
+      finalTitle += wordArray[i];
+      if (i === (wordArray.length - 2)) {
+        finalTitle += '&nbsp;';
+      } else if (i === (wordArray.length - 1)) {
+        finalTitle += '';
+      } else {
+        finalTitle += ' ';
+      }
+    }
+    return $element.html(finalTitle);
+  });
+};
+
+this.Spellbook.Services.limiter = function(options) {
+  var count, settings;
+  settings = $.extend({
+    $element: $('.js-limiter-element'),
+    $toggle: $('.js-limiter-toggle'),
+    hiddenClass: 'is-hidden',
+    limit: 5
+  }, options);
+  count = settings.$element.length;
+  if (count > settings.limit) {
+    settings.$element.not(":lt(" + settings.limit + ")").addClass(settings.hiddenClass);
+    return settings.$toggle.on('click', function(event) {
+      event.preventDefault();
+      $(this).remove();
+      return settings.$element.removeClass(settings.hiddenClass);
+    });
+  } else {
+    return settings.$toggle.remove();
+  }
+};
+
+this.Spellbook.Services.loader = function(options) {
+  var settings;
+  settings = $.extend({
+    $element: $('.js-loader-element'),
+    $toggle: $('.js-loader-toggle'),
+    $spinner: $('<span></span>'),
+    $overlay: $('<div></div>'),
+    spinnerClass: 'loader',
+    overlayClass: 'loader-overlay',
+    loadingClass: 'is-loading'
+  }, options);
+  return settings.$toggle.on('click', function(event) {
+    settings.$element.toggleClass(settings.loadingClass);
+    settings.$element.append(settings.$spinner);
+    settings.$spinner.addClass(settings.spinnerClass);
+    settings.$element.append(settings.$overlay);
+    return settings.$overlay.addClass(settings.overlayClass);
+  });
+};
+
+this.Spellbook.Services.prefixClasses = function(options) {
+  var settings;
+  settings = $.extend({
+    $element: $('.js-prefixClasses'),
+    query: '[ class ]',
+    prefix: 'prefix'
+  }, options);
+  return settings.$element.find(settings.query).each(function() {
+    var classArray, className, i, len, node, prefixedClasses;
+    node = this;
+    classArray = node.className.split(' ');
+    prefixedClasses = '';
+    for (i = 0, len = classArray.length; i < len; i++) {
+      className = classArray[i];
+      prefixedClasses = prefixedClasses + " " + settings.prefix + "-" + className;
+    }
+    return node.className = prefixedClasses;
+  });
+};
+
+this.Spellbook.Services.scrollTo = function(options) {
+  var settings;
+  settings = $.extend({
+    $element: $('.js-scrollTo'),
+    speed: 250
+  }, options);
+  return settings.$element.on('click', function(event) {
+    var to;
+    event.preventDefault();
+    to = settings.$element.attr('href');
+    return $('body, html').animate({
+      scrollTop: parseInt($(to).offset().top)
+    }, settings.speed);
+  });
+};
+
+this.Spellbook.Services.scrollTrigger = function(options) {
+  var active, scrolled, settings;
+  settings = $.extend({
+    $element: $('.js-scrollTrigger'),
+    scrollPadding: 400,
+    activeClass: 'is-active'
+  }, options);
+  scrolled = $(window).scrollTop();
+  if (settings.$element.offset().top >= 0) {
+    active = scrolled - settings.$element.offset().top - settings.scrollPadding;
+  }
+  if (!settings.$element.hasClass(settings.activeClass) && active) {
+    return settings.$element.addClass(settings.activeClass);
+  }
+};
+
+this.Spellbook.Services.shortcut = function(options) {
+  var settings;
+  settings = $.extend({
+    $element: $('[data-shortcut]'),
+    dataAttribute: 'shortcut',
+    keyCodes: Spellbook.Helpers.keyCodes
+  }, options);
+  return settings.$element.each(function() {
+    var key;
+    key = settings.keyCodes[$(this).data(settings.dataAttribute)];
+    return $(document).on('keyup', (function(_this) {
+      return function(event) {
+        var $element, tag;
+        $element = $(_this);
+        tag = event.target.tagName.toLowerCase();
+        if (!(tag === 'input' || tag === 'textarea')) {
+          if (event.which === key) {
+            $element.trigger('focus').trigger('click');
+            if ($element.prop('tagName').toLowerCase() === 'a') {
+              return window.location = $element.attr('href');
+            }
+          }
+        }
+      };
+    })(this));
+  });
+};
 
 this.Spellbook.Classes.ClassName = (function() {
   ClassName.prototype._settings = {};
