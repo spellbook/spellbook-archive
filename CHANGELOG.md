@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.2.0 - 2015-05-13
+------------------
+
+### Added
+
+- `Services.contextMenu`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 1.1.1 - 2015-05-07
 ------------------
 
