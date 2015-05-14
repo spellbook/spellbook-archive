@@ -5,11 +5,13 @@
 #
 # *************************************
 #
-# @param $element      { jQuery object }
-# @param $label        { jQuery object }
-# @param errorClass    { string }
-# @param maxChars      { integer }
-# @param onMaxExceeded { function }
+# @param $element       { jQuery object }
+# @param $label         { jQuery object }
+# @param errorClass     { string }
+# @param minChars       { integer }
+# @param maxChars       { integer }
+# @param onMinPreceeded { function }
+# @param onMaxExceeded  { function }
 #
 # *************************************
 
@@ -31,6 +33,7 @@
       $element      : $( '.js-characterCounter' )
       $label        : $( '.js-characterCounter-label' )
       errorClass    : 'is-error'
+      minChars      : 0
       maxChars      : 140
       onMaxExceeded : null
     , options
@@ -56,6 +59,9 @@
       if _count > _settings.maxChars
         $element.addClass( _settings.errorClass )
         _settings.onMaxExceeded( _settings ) if _settings.onMaxExceeded?
+      else if _count < _settings.minChars
+        $element.addClass( _settings.errorClass )
+        _settings.onMinPreceeded( _settings ) if _settings.onMinPreceeded?
       else
         $element.removeClass( _settings.errorClass )
 
