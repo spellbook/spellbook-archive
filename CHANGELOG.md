@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.2.1 - 2015-05-14
+------------------
+
+### Added
+
+- `minChars` to `Modules.CharacterCounter`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 1.2.0 - 2015-05-13
 ------------------
 
