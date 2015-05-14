@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.2.2 - 2015-05-14
+------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- `Modules.CharacterCounter` label elements
+
 1.2.1 - 2015-05-14
 ------------------
 
