@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.2.3 - 2015-05-14
+------------------
+
+### Added
+
+- Additional callback function to `Modules.CharacterCounter`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 1.2.2 - 2015-05-14
 ------------------
 
