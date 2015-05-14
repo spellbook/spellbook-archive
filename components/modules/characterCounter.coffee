@@ -5,14 +5,15 @@
 #
 # *************************************
 #
-# @param $element       { jQuery object }
-# @param $label         { jQuery object }
-# @param $number        { jQuery object }
-# @param errorClass     { string }
-# @param minChars       { integer }
-# @param maxChars       { integer }
-# @param onMinPreceeded { function }
-# @param onMaxExceeded  { function }
+# @param $element        { jQuery object }
+# @param $label          { jQuery object }
+# @param $number         { jQuery object }
+# @param errorClass      { string }
+# @param minChars        { integer }
+# @param maxChars        { integer }
+# @param onMinPreceeded  { function }
+# @param onMaxExceeded   { function }
+# @param onConditionsMet { function }
 #
 # *************************************
 
@@ -39,6 +40,7 @@
       maxChars        : 140
       onMinPreceeded  : null
       onMaxExceeded   : null
+      onConditionsMet : null
     , options
 
     _setEventHandlers()
@@ -77,6 +79,8 @@
 
         $element.removeClass( _settings.errorClass )
         _settings.$label.removeClass( _settings.errorClass )
+
+        _settings.onConditionsMet( _settings ) if _settings.onConditionsMet?
 
   # -------------------------------------
   #   Public Methods

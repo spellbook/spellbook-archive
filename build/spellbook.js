@@ -532,7 +532,8 @@ this.Spellbook.Modules.CharacterCounter = (function() {
       minChars: 0,
       maxChars: 140,
       onMinPreceeded: null,
-      onMaxExceeded: null
+      onMaxExceeded: null,
+      onConditionsMet: null
     }, options);
     return _setEventHandlers();
   };
@@ -557,7 +558,10 @@ this.Spellbook.Modules.CharacterCounter = (function() {
         }
       } else {
         $element.removeClass(_settings.errorClass);
-        return _settings.$label.removeClass(_settings.errorClass);
+        _settings.$label.removeClass(_settings.errorClass);
+        if (_settings.onConditionsMet != null) {
+          return _settings.onConditionsMet(_settings);
+        }
       }
     });
   };
