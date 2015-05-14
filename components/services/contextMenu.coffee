@@ -24,7 +24,7 @@
     event.preventDefault()
 
     settings.$element
-      .css( { top: event.pageY + 'px', left: event.pageX + 'px'} )
+      .css( { top: event.pageY + 'px', left: event.pageX + 'px' } )
       .addClass( settings.activeClass )
 
   # -------------------------------------
