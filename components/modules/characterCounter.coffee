@@ -7,6 +7,7 @@
 #
 # @param $element       { jQuery object }
 # @param $label         { jQuery object }
+# @param $number        { jQuery object }
 # @param errorClass     { string }
 # @param minChars       { integer }
 # @param maxChars       { integer }
@@ -30,12 +31,14 @@
 
   init = ( options ) ->
     _settings = $.extend
-      $element      : $( '.js-characterCounter' )
-      $label        : $( '.js-characterCounter-label' )
-      errorClass    : 'is-error'
-      minChars      : 0
-      maxChars      : 140
-      onMaxExceeded : null
+      $element        : $( '.js-characterCounter' )
+      $label          : $( '.js-characterCounter-label' )
+      $number         : $( '.js-characterCounter-number' )
+      errorClass      : 'is-error'
+      minChars        : 0
+      maxChars        : 140
+      onMinPreceeded  : null
+      onMaxExceeded   : null
     , options
 
     _setEventHandlers()
@@ -52,18 +55,28 @@
       event.preventDefault()
 
       $element = $(@)
-      _count   = $(@).val().length
+      _count   = $element.val().length
 
-      _settings.$label.text( _count )
+      _settings.$number.text( _count )
 
       if _count > _settings.maxChars
+
         $element.addClass( _settings.errorClass )
+        _settings.$label.addClass( _settings.errorClass )
+
         _settings.onMaxExceeded( _settings ) if _settings.onMaxExceeded?
+
       else if _count < _settings.minChars
+
         $element.addClass( _settings.errorClass )
+        _settings.$label.addClass( _settings.errorClass )
+
         _settings.onMinPreceeded( _settings ) if _settings.onMinPreceeded?
+
       else
+
         $element.removeClass( _settings.errorClass )
+        _settings.$label.removeClass( _settings.errorClass )
 
   # -------------------------------------
   #   Public Methods

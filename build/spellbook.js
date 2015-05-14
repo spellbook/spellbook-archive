@@ -527,9 +527,11 @@ this.Spellbook.Modules.CharacterCounter = (function() {
     _settings = $.extend({
       $element: $('.js-characterCounter'),
       $label: $('.js-characterCounter-label'),
+      $number: $('.js-characterCounter-number'),
       errorClass: 'is-error',
       minChars: 0,
       maxChars: 140,
+      onMinPreceeded: null,
       onMaxExceeded: null
     }, options);
     return _setEventHandlers();
@@ -539,20 +541,23 @@ this.Spellbook.Modules.CharacterCounter = (function() {
       var $element;
       event.preventDefault();
       $element = $(this);
-      _count = $(this).val().length;
-      _settings.$label.text(_count);
+      _count = $element.val().length;
+      _settings.$number.text(_count);
       if (_count > _settings.maxChars) {
         $element.addClass(_settings.errorClass);
+        _settings.$label.addClass(_settings.errorClass);
         if (_settings.onMaxExceeded != null) {
           return _settings.onMaxExceeded(_settings);
         }
       } else if (_count < _settings.minChars) {
         $element.addClass(_settings.errorClass);
+        _settings.$label.addClass(_settings.errorClass);
         if (_settings.onMinPreceeded != null) {
           return _settings.onMinPreceeded(_settings);
         }
       } else {
-        return $element.removeClass(_settings.errorClass);
+        $element.removeClass(_settings.errorClass);
+        return _settings.$label.removeClass(_settings.errorClass);
       }
     });
   };
