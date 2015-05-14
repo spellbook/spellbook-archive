@@ -2,10 +2,11 @@ describe 'Spellbook.Modules.CharacterCounter', ->
   beforeEach ->
     loadFixtures( 'character_counter.html' )
 
-    @element    = $( '.js-characterCounter' )
-    @label      = $( '.js-characterCounter-label' )
-    @number     = $( '.js-characterCounter-number' )
-    @errorClass = 'is-error'
+    @element      = $( '.js-characterCounter' )
+    @label        = $( '.js-characterCounter-label' )
+    @number       = $( '.js-characterCounter-number' )
+    @errorClass   = 'is-error'
+    @successClass = 'is-success'
 
     Spellbook.Modules.CharacterCounter.init()
 
@@ -33,3 +34,14 @@ describe 'Spellbook.Modules.CharacterCounter', ->
 
     expect( @element ).toHaveClass( @errorClass )
     expect( @label ).toHaveClass( @errorClass )
+
+  it 'should add a success class when conditions are met', ->
+    Spellbook.Modules.CharacterCounter.init
+      minChars : 10
+      maxChars : 20
+
+    @element.val( 'Hello, friend!' )
+    @element.trigger( 'keyup' )
+
+    expect( @element ).toHaveClass( @successClass )
+    expect( @label ).toHaveClass( @successClass )

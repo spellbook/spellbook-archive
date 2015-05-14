@@ -5,6 +5,7 @@ describe('Spellbook.Modules.CharacterCounter', function() {
     this.label = $('.js-characterCounter-label');
     this.number = $('.js-characterCounter-number');
     this.errorClass = 'is-error';
+    this.successClass = 'is-success';
     return Spellbook.Modules.CharacterCounter.init();
   });
   it('should initialize with a zero character count', function() {
@@ -20,7 +21,7 @@ describe('Spellbook.Modules.CharacterCounter', function() {
     expect(this.element).toHaveClass(this.errorClass);
     return expect(this.label).toHaveClass(this.errorClass);
   });
-  return it('should add an error class when the min is not met', function() {
+  it('should add an error class when the min is not met', function() {
     Spellbook.Modules.CharacterCounter.init({
       minChars: 100
     });
@@ -28,5 +29,15 @@ describe('Spellbook.Modules.CharacterCounter', function() {
     this.element.trigger('keyup');
     expect(this.element).toHaveClass(this.errorClass);
     return expect(this.label).toHaveClass(this.errorClass);
+  });
+  return it('should add a success class when conditions are met', function() {
+    Spellbook.Modules.CharacterCounter.init({
+      minChars: 10,
+      maxChars: 20
+    });
+    this.element.val('Hello, friend!');
+    this.element.trigger('keyup');
+    expect(this.element).toHaveClass(this.successClass);
+    return expect(this.label).toHaveClass(this.successClass);
   });
 });
