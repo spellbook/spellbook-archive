@@ -10,7 +10,9 @@ For the modal, you can use the following HTML:
 
 ```html
 <div class="modal modal--center" id="modal">
-  <a class="modal-close js-modal-close" data-modal="#modal" href="#"></a>
+  <a class="modal-close js-modal-close" data-modal="#modal" href="#">
+    <b class="srt">Close</b>
+  </a>
   <div class="modal-dialog">
     <div class="modal-content">
       <h1>I am a modal.</h1>
@@ -219,7 +221,7 @@ $modal-close-fontSize: 150% !default
   position: absolute
   right: 0
   top: 0
-  transition: opacity $modal-transition
+  transition: opacity $modal-transition, visibility $modal-transition
   visibility: hidden
   width: 100%
   z-index: 1
@@ -268,6 +270,7 @@ $modal-close-fontSize: 150% !default
   border-radius: 50%
   color: $modal-close-color
   font-size: $modal-close-fontSize
+  line-height: $modal-close-size
   height: $modal-close-size
   opacity: 0
   right: $modal-space-s
