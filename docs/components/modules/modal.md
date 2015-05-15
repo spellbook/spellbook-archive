@@ -218,7 +218,7 @@ $modal-close-fontSize: 150% !default
   height: 100%
   left: 0
   opacity: 0
-  position: absolute
+  position: fixed
   right: 0
   top: 0
   transition: opacity $modal-transition, visibility $modal-transition
