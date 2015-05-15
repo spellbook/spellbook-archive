@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.3.0 - 2015-05-15
+------------------
+
+### Added
+
+- `Modules.KeyboardEvents`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 1.2.4 - 2015-05-14
 ------------------
 
