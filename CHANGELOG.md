@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.4.0 - 2015-05-15
+------------------
+
+### Added
+
+- `Services.formPreview`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 1.3.0 - 2015-05-15
 ------------------
 
