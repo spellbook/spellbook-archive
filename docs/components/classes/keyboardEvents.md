@@ -1,11 +1,11 @@
-Spellbook.Modules.KeyboardEvents
+Spellbook.Classes.KeyboardEvents
 ================================
 
 JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.Modules.KeyboardEvents
+new Spellbook.Classes.KeyboardEvents
   events : [
     {
       key: 27
@@ -21,7 +21,9 @@ Spellbook.Modules.KeyboardEvents
 Alternitavely, you can call the `emit` method, passing in a single event:
 
 ```coffeescript
-Spellbook.Classes.KeyboardEvents.emit
+keyboardEvents = new Spellbook.Classes.KeyboardEvents
+
+KeyboardEvents.emit
   key: 13
   run: -> someEvent()
 ```
