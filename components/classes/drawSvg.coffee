@@ -6,6 +6,11 @@
 #      Credit: http://24ways.org/2013/animating-vectors-with-svg/
 #
 # *************************************
+#
+# @param $element  { jQuery object }
+# @param prefix    { string }
+#
+# *************************************
 
 class @Spellbook.Classes.DrawSvg
 
