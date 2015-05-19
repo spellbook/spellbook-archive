@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.5.0 - 2015-05-19
+------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Convert `Modules.KeyboardEvents` to `Classes.KeyboardEvents`
+
 1.4.0 - 2015-05-15
 ------------------
 
