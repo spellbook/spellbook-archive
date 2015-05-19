@@ -12,161 +12,6 @@ this.Spellbook.Services = {};
 
 this.Spellbook.Inbox = {};
 
-this.Spellbook.Helpers.keyCodes = {
-  'enter': 13,
-  'shift': 16,
-  'ctrl': 17,
-  'alt': 18,
-  'esc': 27,
-  'leftarrow': 37,
-  'uparrow': 38,
-  'rightarrow': 39,
-  'downarrow': 40,
-  'comma': 188,
-  'slash': 191,
-  'backslash': 220,
-  '0': 48,
-  '1': 49,
-  '2': 50,
-  '3': 51,
-  '4': 52,
-  '5': 53,
-  '6': 54,
-  '7': 55,
-  '8': 56,
-  '9': 57,
-  'a': 65,
-  'b': 66,
-  'c': 67,
-  'd': 68,
-  'e': 69,
-  'f': 70,
-  'g': 71,
-  'h': 72,
-  'i': 73,
-  'j': 74,
-  'k': 75,
-  'l': 76,
-  'm': 77,
-  'n': 78,
-  'o': 79,
-  'p': 80,
-  'q': 81,
-  'r': 82,
-  's': 83,
-  't': 84,
-  'u': 85,
-  'v': 86,
-  'w': 87,
-  'x': 88,
-  'y': 89,
-  'z': 90
-};
-
-this.Spellbook.QueryParams = (function() {
-  QueryParams.prototype.params = {};
-
-  QueryParams.prototype.variables = [];
-
-  QueryParams.prototype._settings = {};
-
-  function QueryParams(options) {
-    this.options = options;
-    this.init();
-  }
-
-  QueryParams.prototype.init = function() {
-    this._settings = $.extend({
-      url: null
-    }, this.options);
-    this._parseQueryString(this._settings.url);
-    return this._sortParams();
-  };
-
-  QueryParams.prototype._parseQueryString = function(url) {
-    var queryString;
-    if (url) {
-      queryString = url.split('?')[1];
-    } else {
-      queryString = window.location.search.substring(1);
-    }
-    return this.variables = queryString.split('&');
-  };
-
-  QueryParams.prototype._sortParams = function() {
-    var i, len, pair, param, ref, results;
-    ref = this.variables;
-    results = [];
-    for (i = 0, len = ref.length; i < len; i++) {
-      param = ref[i];
-      pair = param.split('=');
-      if (pair[1] !== void 0) {
-        results.push(this.params[pair[0]] = pair[1]);
-      } else {
-        results.push(void 0);
-      }
-    }
-    return results;
-  };
-
-  QueryParams.prototype.allParams = function() {
-    return this.params;
-  };
-
-  QueryParams.prototype.matchParamKey = function(matcher) {
-    var key, ref, value;
-    ref = this.params;
-    for (key in ref) {
-      value = ref[key];
-      if (matcher === key) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  QueryParams.prototype.matchParamValue = function(matcher) {
-    var key, ref, value;
-    ref = this.params;
-    for (key in ref) {
-      value = ref[key];
-      if (matcher === value) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  return QueryParams;
-
-})();
-
-this.Spellbook.Helpers.randomizer = function(collection) {
-  var randomNumber;
-  randomNumber = Math.floor(Math.random() * collection.length);
-  return collection[randomNumber];
-};
-
-this.Spellbook.Helpers.sanitize = function(string) {
-  return string.replace(/(<([^>]+)>)/ig, '');
-};
-
-this.Spellbook.Helpers.slugify = function(string) {
-  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-};
-
-this.Spellbook.Helpers.uid = function(length) {
-  var id;
-  if (length == null) {
-    length = 10;
-  }
-  id = '';
-  while (id.length < length) {
-    id += Math.random().toString(36).substr(2);
-  }
-  return id.substr(0, length);
-};
-
 this.Spellbook.Classes.Dematerialize = (function() {
   Dematerialize._settings = {};
 
@@ -367,6 +212,61 @@ this.Spellbook.Classes.DrawSvg = (function() {
 
 })();
 
+this.Spellbook.Classes.KeyboardEvents = (function() {
+  KeyboardEvents.prototype._settings = {};
+
+  function KeyboardEvents(options) {
+    this.options = options;
+    this.init();
+  }
+
+  KeyboardEvents.prototype.init = function() {
+    this._settings = $.extend({
+      events: []
+    }, this.options);
+    return this.emit();
+  };
+
+  KeyboardEvents.prototype._match = function(event) {
+    return $(document).on('keyup', (function(_this) {
+      return function(e) {
+        switch (_this._getKeyCode(e)) {
+          case event.key:
+            return event.run();
+        }
+      };
+    })(this));
+  };
+
+  KeyboardEvents.prototype._getKeyCode = function(event) {
+    var charCode;
+    event = event || window.event;
+    charCode = event.keyCode || event.which;
+    return charCode;
+  };
+
+  KeyboardEvents.prototype.emit = function(event) {
+    var i, len, ref, results;
+    if (event == null) {
+      event = null;
+    }
+    if (event == null) {
+      ref = this._settings.events;
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        event = ref[i];
+        results.push(this._match(event));
+      }
+      return results;
+    } else {
+      return this._match(event);
+    }
+  };
+
+  return KeyboardEvents;
+
+})();
+
 this.Spellbook.Classes.QueryParams = (function() {
   QueryParams.prototype.params = {};
 
@@ -444,6 +344,161 @@ this.Spellbook.Classes.QueryParams = (function() {
   return QueryParams;
 
 })();
+
+this.Spellbook.Helpers.keyCodes = {
+  'enter': 13,
+  'shift': 16,
+  'ctrl': 17,
+  'alt': 18,
+  'esc': 27,
+  'leftarrow': 37,
+  'uparrow': 38,
+  'rightarrow': 39,
+  'downarrow': 40,
+  'comma': 188,
+  'slash': 191,
+  'backslash': 220,
+  '0': 48,
+  '1': 49,
+  '2': 50,
+  '3': 51,
+  '4': 52,
+  '5': 53,
+  '6': 54,
+  '7': 55,
+  '8': 56,
+  '9': 57,
+  'a': 65,
+  'b': 66,
+  'c': 67,
+  'd': 68,
+  'e': 69,
+  'f': 70,
+  'g': 71,
+  'h': 72,
+  'i': 73,
+  'j': 74,
+  'k': 75,
+  'l': 76,
+  'm': 77,
+  'n': 78,
+  'o': 79,
+  'p': 80,
+  'q': 81,
+  'r': 82,
+  's': 83,
+  't': 84,
+  'u': 85,
+  'v': 86,
+  'w': 87,
+  'x': 88,
+  'y': 89,
+  'z': 90
+};
+
+this.Spellbook.QueryParams = (function() {
+  QueryParams.prototype.params = {};
+
+  QueryParams.prototype.variables = [];
+
+  QueryParams.prototype._settings = {};
+
+  function QueryParams(options) {
+    this.options = options;
+    this.init();
+  }
+
+  QueryParams.prototype.init = function() {
+    this._settings = $.extend({
+      url: null
+    }, this.options);
+    this._parseQueryString(this._settings.url);
+    return this._sortParams();
+  };
+
+  QueryParams.prototype._parseQueryString = function(url) {
+    var queryString;
+    if (url) {
+      queryString = url.split('?')[1];
+    } else {
+      queryString = window.location.search.substring(1);
+    }
+    return this.variables = queryString.split('&');
+  };
+
+  QueryParams.prototype._sortParams = function() {
+    var i, len, pair, param, ref, results;
+    ref = this.variables;
+    results = [];
+    for (i = 0, len = ref.length; i < len; i++) {
+      param = ref[i];
+      pair = param.split('=');
+      if (pair[1] !== void 0) {
+        results.push(this.params[pair[0]] = pair[1]);
+      } else {
+        results.push(void 0);
+      }
+    }
+    return results;
+  };
+
+  QueryParams.prototype.allParams = function() {
+    return this.params;
+  };
+
+  QueryParams.prototype.matchParamKey = function(matcher) {
+    var key, ref, value;
+    ref = this.params;
+    for (key in ref) {
+      value = ref[key];
+      if (matcher === key) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  QueryParams.prototype.matchParamValue = function(matcher) {
+    var key, ref, value;
+    ref = this.params;
+    for (key in ref) {
+      value = ref[key];
+      if (matcher === value) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  return QueryParams;
+
+})();
+
+this.Spellbook.Helpers.randomizer = function(collection) {
+  var randomNumber;
+  randomNumber = Math.floor(Math.random() * collection.length);
+  return collection[randomNumber];
+};
+
+this.Spellbook.Helpers.sanitize = function(string) {
+  return string.replace(/(<([^>]+)>)/ig, '');
+};
+
+this.Spellbook.Helpers.slugify = function(string) {
+  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
+};
+
+this.Spellbook.Helpers.uid = function(length) {
+  var id;
+  if (length == null) {
+    length = 10;
+  }
+  id = '';
+  while (id.length < length) {
+    id += Math.random().toString(36).substr(2);
+  }
+  return id.substr(0, length);
+};
 
 this.Spellbook.Modules.AutoDuplicateInput = (function() {
   var _count, _duplicate, _field, _getValidationType, _isValid, _setEventHandlers, _setInputState, _settings, _validators, getCount, init;
@@ -1276,6 +1331,58 @@ this.Spellbook.Modules.Toggle = (function() {
   };
 })();
 
+this.Spellbook.Classes.ClassName = (function() {
+  ClassName.prototype._settings = {};
+
+  function ClassName(options) {
+    this.options = options;
+    this.init();
+  }
+
+  ClassName.prototype.init = function() {
+    this._settings = $.extend({
+      $element: $('.js-element')
+    }, this.options);
+    return this._setEventHandlers();
+  };
+
+  ClassName.prototype._setEventHandlers = function() {};
+
+  return ClassName;
+
+})();
+
+this.Spellbook.Namespace.functionName = function(options) {
+  return options.$element.on('click', function(event) {
+    event.preventDefault();
+    return $(this).toggleClass(options.className);
+  });
+};
+
+this.Spellbook.Helpers.helperName = function(item) {};
+
+this.Spellbook.Modules.ModuleName = (function() {
+  var _setEventHandlers, _settings, init;
+  _settings = {};
+  init = function(options) {
+    _settings = $.extend({
+      $element: $('.js-element')
+    }, options);
+    return _setEventHandlers();
+  };
+  _setEventHandlers = function() {};
+  return {
+    init: init
+  };
+})();
+
+this.Spellbook.Services.serviceName = function(options) {
+  var settings;
+  return settings = $.extend({
+    $element: $('.js-element')
+  }, options);
+};
+
 this.Spellbook.Services.autoSubmit = function(options) {
   var settings;
   settings = $.extend({
@@ -1526,56 +1633,4 @@ this.Spellbook.Services.shortcut = function(options) {
       };
     })(this));
   });
-};
-
-this.Spellbook.Classes.ClassName = (function() {
-  ClassName.prototype._settings = {};
-
-  function ClassName(options) {
-    this.options = options;
-    this.init();
-  }
-
-  ClassName.prototype.init = function() {
-    this._settings = $.extend({
-      $element: $('.js-element')
-    }, this.options);
-    return this._setEventHandlers();
-  };
-
-  ClassName.prototype._setEventHandlers = function() {};
-
-  return ClassName;
-
-})();
-
-this.Spellbook.Namespace.functionName = function(options) {
-  return options.$element.on('click', function(event) {
-    event.preventDefault();
-    return $(this).toggleClass(options.className);
-  });
-};
-
-this.Spellbook.Helpers.helperName = function(item) {};
-
-this.Spellbook.Modules.ModuleName = (function() {
-  var _setEventHandlers, _settings, init;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('.js-element')
-    }, options);
-    return _setEventHandlers();
-  };
-  _setEventHandlers = function() {};
-  return {
-    init: init
-  };
-})();
-
-this.Spellbook.Services.serviceName = function(options) {
-  var settings;
-  return settings = $.extend({
-    $element: $('.js-element')
-  }, options);
 };

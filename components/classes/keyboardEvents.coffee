@@ -9,24 +9,29 @@
 #
 # *************************************
 
-@Spellbook.Modules.KeyboardEvents = do ->
+class @Spellbook.Classes.KeyboardEvents
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings = {}
+  _settings : {}
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor: ( @options ) -> @init()
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
-
-  init = ( options ) ->
-    _settings = $.extend
+  init: ->
+    @_settings = $.extend
       events : []
-    , options
+    , @options
 
-    emit()
+    @emit()
 
   # -------------------------------------
   #   Match
@@ -36,9 +41,9 @@
   #
   # -------------------------------------
 
-  _match = ( event ) ->
-    $( document ).on 'keyup', ( e ) ->
-      switch _getKeyCode( e )
+  _match : ( event ) ->
+    $( document ).on 'keyup', ( e ) =>
+      switch @_getKeyCode( e )
         when event.key then event.run()
 
   # -------------------------------------
@@ -49,7 +54,7 @@
   #
   # -------------------------------------
 
-  _getKeyCode = ( event ) ->
+  _getKeyCode : ( event ) ->
     event    = event  || window.event
     charCode = event.keyCode || event.which
 
@@ -63,28 +68,19 @@
   #
   # -------------------------------------
 
-  emit = ( event = null ) ->
+  emit : ( event = null ) ->
     unless event?
-      for event in _settings.events
-        _match( event )
+      for event in @_settings.events
+        @_match( event )
     else
-      _match( event )
-
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
-
-  init : init
-  emit : emit
+      @_match( event )
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.KeyboardEvents.init
+# new Spellbook.Classes.KeyboardEvents
 #   events: [
 #     { ... }
 #   ]
-#
-# Spellbook.Modules.KeyboardEvents.emit( { ... } )
 #
