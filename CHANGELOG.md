@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.6.0 - 2015-05-20
+------------------
+
+### Added
+
+- `Classes.Singleton`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 1.5.0 - 2015-05-19
 ------------------
 
