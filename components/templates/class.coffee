@@ -6,7 +6,6 @@
 # *************************************
 #
 # @param $element  { jQuery object }
-# @param className { string }
 #
 # *************************************
 
