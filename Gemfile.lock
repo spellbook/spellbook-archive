@@ -1,15 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    jasmine (2.0.2)
-      jasmine-core (~> 2.0.0)
+    jasmine (2.3.0)
+      jasmine-core (~> 2.3)
       phantomjs
       rack (>= 1.2.1)
       rake
-    jasmine-core (2.0.2)
-    phantomjs (1.9.7.1)
-    rack (1.5.2)
-    rake (10.3.2)
+    jasmine-core (2.3.4)
+    phantomjs (1.9.8.0)
+    rack (1.6.1)
+    rake (10.4.2)
 
 PLATFORMS
   ruby
