@@ -13,11 +13,11 @@ describe 'Spellbook.Classes.QueryParams', ->
 
   describe '#sortParams', ->
     it 'should sort the parameters', ->
-      expect( @qp.params).toEqual( { 'param1': 'true', 'param2': 'false' } )
+      expect( @qp.params ).toEqual( { 'param1': 'true', 'param2': 'false', throwFailures: 'false' } )
 
   describe '.allParams', ->
     it 'should return a list of the parameters', ->
-      expect( @qp.allParams() ).toEqual( { 'param1': 'true', 'param2': 'false' } )
+      expect( @qp.allParams() ).toEqual( { 'param1': 'true', 'param2': 'false', throwFailures: 'false' } )
 
   describe '.matchParamKey', ->
     it 'should return a correct match on a parameter key', ->

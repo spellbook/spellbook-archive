@@ -17,7 +17,8 @@ describe('Spellbook.Classes.QueryParams', function() {
     return it('should sort the parameters', function() {
       return expect(this.qp.params).toEqual({
         'param1': 'true',
-        'param2': 'false'
+        'param2': 'false',
+        throwFailures: 'false'
       });
     });
   });
@@ -25,7 +26,8 @@ describe('Spellbook.Classes.QueryParams', function() {
     return it('should return a list of the parameters', function() {
       return expect(this.qp.allParams()).toEqual({
         'param1': 'true',
-        'param2': 'false'
+        'param2': 'false',
+        throwFailures: 'false'
       });
     });
   });
