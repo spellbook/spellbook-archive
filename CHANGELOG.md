@@ -1,6 +1,22 @@
 Changelog
 =========
 
+1.7.0 - 2015-05-28
+------------------
+
+### Added
+
+- `Classes.FormValidator`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- A bug in `Classes.QueryParams` spec
+- Updated Jasmine
+
 1.6.0 - 2015-05-20
 ------------------
 
