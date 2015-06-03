@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.7.1 - 2015-06-02
+------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Protect against `null` value in `Modules.SaveProgress`
+
 1.7.0 - 2015-05-28
 ------------------
 
