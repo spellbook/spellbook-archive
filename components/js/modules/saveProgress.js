@@ -23,7 +23,9 @@ this.Spellbook.Modules.SaveProgress = (function() {
       $element = $(this);
       key = $element.data(_settings.dataAttribute);
       value = localStorage.getItem(key);
-      return $element.val(value);
+      if (value !== null) {
+        return $element.val(value);
+      }
     });
   };
   _setEventHandlers = function() {

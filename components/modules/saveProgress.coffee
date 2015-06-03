@@ -57,7 +57,7 @@
       key      = $element.data( _settings.dataAttribute )
       value    = localStorage.getItem( key )
 
-      $element.val( value )
+      $element.val( value ) unless value is null
 
   # -------------------------------------
   #   Set Event Handlers
