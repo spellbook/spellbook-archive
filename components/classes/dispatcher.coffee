@@ -55,14 +55,16 @@ class @Spellbook.Classes.Dispatcher
     unless event?
       for event in @_settings.events
         switch event.page
-          when page then event.run()
+          when page  then event.run()
+          when 'all' then event.run()
 
         if event.match
           event.run() if page.match( event.match )
 
     else
       switch event.page
-        when page then event.run()
+        when page  then event.run()
+        when 'all' then event.run()
 
   # -------------------------------------
   #   Get Current Page

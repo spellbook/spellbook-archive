@@ -24,7 +24,24 @@ describe('Spellbook.Classes.Dispatcher', function() {
       ]
     });
   });
-  return it('should add an active class to the home container when on the home page', function() {
+  it('should add an active class to the home container when on the home page', function() {
     return expect($('#home')).toHaveClass('is-active');
+  });
+  return it('should add an active class to all containers', function() {
+    new Spellbook.Classes.Dispatcher({
+      events: [
+        {
+          page: 'all',
+          run: function() {
+            $('#home').addClass('is-active');
+            $('#about').addClass('is-active');
+            return $('#contact').addClass('is-active');
+          }
+        }
+      ]
+    });
+    expect($('#home')).toHaveClass('is-active');
+    expect($('#about')).toHaveClass('is-active');
+    return expect($('#contact')).toHaveClass('is-active');
   });
 });

@@ -115,6 +115,9 @@ this.Spellbook.Classes.Dispatcher = (function() {
         switch (event.page) {
           case page:
             event.run();
+            break;
+          case 'all':
+            event.run();
         }
         if (event.match) {
           if (page.match(event.match)) {
@@ -130,6 +133,8 @@ this.Spellbook.Classes.Dispatcher = (function() {
     } else {
       switch (event.page) {
         case page:
+          return event.run();
+        case 'all':
           return event.run();
       }
     }
