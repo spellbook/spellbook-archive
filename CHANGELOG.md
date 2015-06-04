@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.7.2 - 2015-06-04
+------------------
+
+### Added
+
+- `page: 'all'` global flag in `Classes.Dispatcher`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 1.7.1 - 2015-06-02
 ------------------
 
