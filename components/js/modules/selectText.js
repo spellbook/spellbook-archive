@@ -27,9 +27,7 @@ this.Spellbook.Modules.selectText = (function() {
     return _settings.$element.on('click', function() {
       _selectElement(_settings.$element);
       $(this).trigger('focus').trigger('select');
-      if (_settings.onClick != null) {
-        return _settings.onClick(_settings);
-      }
+      return typeof _settings.onClick === "function" ? _settings.onClick(_settings) : void 0;
     });
   };
   return {

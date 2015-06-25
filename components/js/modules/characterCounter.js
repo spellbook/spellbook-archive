@@ -26,19 +26,13 @@ this.Spellbook.Modules.CharacterCounter = (function() {
       _settings.$number.text(_count);
       if (_count > _settings.maxChars) {
         _toggleState($element, 'error');
-        if (_settings.onMaxExceeded != null) {
-          return _settings.onMaxExceeded(_settings);
-        }
+        return typeof _settings.onMaxExceeded === "function" ? _settings.onMaxExceeded(_settings) : void 0;
       } else if (_count < _settings.minChars) {
         _toggleState($element, 'error');
-        if (_settings.onMinPreceeded != null) {
-          return _settings.onMinPreceeded(_settings);
-        }
+        return typeof _settings.onMinPreceeded === "function" ? _settings.onMinPreceeded(_settings) : void 0;
       } else {
         _toggleState($element, 'success');
-        if (_settings.onConditionsMet != null) {
-          return _settings.onConditionsMet(_settings);
-        }
+        return typeof _settings.onConditionsMet === "function" ? _settings.onConditionsMet(_settings) : void 0;
       }
     });
   };

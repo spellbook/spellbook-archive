@@ -122,11 +122,11 @@ class @Spellbook.Classes.FormValidator
       when 'error'
         @_setError( message )
         @_setInputState( message )
-        @_settings.onError( @_settings ) if @_settings.onError?
+        @_settings.onError?( @_settings )
       when 'success'
         @_removeError()
         @_removeInputState()
-        @_settings.onSuccess( @_settings ) if @_settings.onSuccess?
+        @_settings.onSuccess?( @_settings )
 
   # -------------------------------------
   #   Parse Validators

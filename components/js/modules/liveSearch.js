@@ -21,13 +21,13 @@ this.Spellbook.Modules.LiveSearch = (function() {
   _setEventHandlers = function() {
     return _settings.$element.on('keyup', function(event) {
       _query = $(this).val();
-      if (_settings.onKeyup != null) {
+      if (typeof _settings.onKeyup === "function") {
         _settings.onKeyup(_settings);
       }
       if (_query === '') {
         $(_settings.itemNode).removeClass(_settings.hiddenClass);
         _clearEmptyMessage();
-        if (_settings.onClear != null) {
+        if (typeof _settings.onClear === "function") {
           _settings.onClear(_settings);
         }
       }
@@ -43,9 +43,7 @@ this.Spellbook.Modules.LiveSearch = (function() {
         return $element.closest(_settings.itemNode).addClass(_settings.hiddenClass);
       } else {
         $element.closest(_settings.itemNode).removeClass(_settings.hiddenClass);
-        if (_settings.onFound != null) {
-          return _settings.onFound(_settings);
-        }
+        return typeof _settings.onFound === "function" ? _settings.onFound(_settings) : void 0;
       }
     });
     return _handleEmptyResults();
@@ -62,9 +60,7 @@ this.Spellbook.Modules.LiveSearch = (function() {
         emptyClass = _settings.emptyNode.replace('.', '');
       }
       $("<p class='" + emptyClass + "'>\n  There are no results matching '" + _query + "'.\n</p>").insertAfter(_settings.$container);
-      if (_settings.onEmpty != null) {
-        return _settings.onEmpty(_settings);
-      }
+      return typeof _settings.onEmpty === "function" ? _settings.onEmpty(_settings) : void 0;
     }
   };
   _isQueryAbsent = function(element) {

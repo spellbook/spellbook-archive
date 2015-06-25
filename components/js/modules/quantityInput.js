@@ -35,18 +35,14 @@ this.Spellbook.Modules.QuantityInput = (function() {
       if (!(_value >= _settings.maxValue)) {
         _updateValue('up');
       }
-      if (_settings.onIncrease != null) {
-        return _settings.onIncrease(_settings);
-      }
+      return typeof _settings.onIncrease === "function" ? _settings.onIncrease(_settings) : void 0;
     });
     return _settings.$decrease.on('click', function(event) {
       event.preventDefault();
       if (!(_value <= _settings.minValue)) {
         _updateValue('down');
       }
-      if (_settings.onDecrease != null) {
-        return _settings.onDecrease(_settings);
-      }
+      return typeof _settings.onDecrease === "function" ? _settings.onDecrease(_settings) : void 0;
     });
   };
   _updateValue = function(direction) {
@@ -64,9 +60,7 @@ this.Spellbook.Modules.QuantityInput = (function() {
         _settings.$element.val(_value);
     }
     _updateTarget();
-    if (_settings.onTargetUpdate != null) {
-      return _settings.onTargetUpdate(_settings);
-    }
+    return typeof _settings.onTargetUpdate === "function" ? _settings.onTargetUpdate(_settings) : void 0;
   };
   _updateTarget = function() {
     var updatedValue;

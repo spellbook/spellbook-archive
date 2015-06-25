@@ -28,7 +28,7 @@ this.Spellbook.Modules.Toggle = (function() {
       var $element;
       event.preventDefault();
       $element = $(this);
-      if (_settings.onClick != null) {
+      if (typeof _settings.onClick === "function") {
         _settings.onClick(_settings);
       }
       _settings.$element.toggleClass(_settings.activeClass);
@@ -66,13 +66,13 @@ this.Spellbook.Modules.Toggle = (function() {
   _handleHoverStateEvent = function($element, state) {
     switch (state) {
       case 'on':
-        if (_settings.onMouseover != null) {
+        if (typeof _settings.onMouseover === "function") {
           _settings.onMouseover(_settings);
         }
         $element.addClass(_settings.activeClass);
         break;
       case 'off':
-        if (_settings.onMouseout != null) {
+        if (typeof _settings.onMouseout === "function") {
           _settings.onMouseout(_settings);
         }
         $element.removeClass(_settings.activeClass);

@@ -80,7 +80,7 @@
       _updateValue( 'up' ) unless _value >= _settings.maxValue
 
       # Increase Event
-      _settings.onIncrease( _settings ) if _settings.onIncrease?
+      _settings.onIncrease?( _settings )
 
     # ----- Decrease ----- #
 
@@ -90,7 +90,7 @@
       _updateValue( 'down' ) unless _value <= _settings.minValue
 
       # Decrease Event
-      _settings.onDecrease( _settings ) if _settings.onDecrease?
+      _settings.onDecrease?( _settings )
 
   # -------------------------------------
   #   Update Value
@@ -109,7 +109,7 @@
     _updateTarget()
 
       # Target Update Event
-    _settings.onTargetUpdate( _settings ) if _settings.onTargetUpdate?
+    _settings.onTargetUpdate?( _settings )
 
   # -------------------------------------
   #   Update Target

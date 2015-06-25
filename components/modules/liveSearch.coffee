@@ -58,14 +58,14 @@
       _query = $(@).val()
 
       # Keyup Event
-      _settings.onKeyup( _settings ) if _settings.onKeyup?
+      _settings.onKeyup?( _settings )
 
       if _query is ''
         $( _settings.itemNode ).removeClass( _settings.hiddenClass )
         _clearEmptyMessage()
 
         # Clear Event
-        _settings.onClear( _settings ) if _settings.onClear?
+        _settings.onClear?( _settings )
 
       _clearEmptyMessage()
       _parseDom()
@@ -88,7 +88,7 @@
           .removeClass( _settings.hiddenClass )
 
         # Found Event
-        _settings.onFound( _settings ) if _settings.onFound?
+        _settings.onFound?( _settings )
 
     _handleEmptyResults()
 
@@ -116,7 +116,7 @@
       """ ).insertAfter( _settings.$container )
 
       # Empty Event
-      _settings.onEmpty( _settings ) if _settings.onEmpty?
+      _settings.onEmpty?( _settings )
 
   # -------------------------------------
   #   Is Query Absent

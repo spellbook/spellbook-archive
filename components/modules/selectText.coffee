@@ -59,7 +59,7 @@
     _settings.$element.on 'click', ->
       _selectElement( _settings.$element )
       $(@).trigger( 'focus' ).trigger( 'select' )
-      _settings.onClick( _settings ) if _settings.onClick?
+      _settings.onClick?( _settings )
 
   # -------------------------------------
   #   Public Methods

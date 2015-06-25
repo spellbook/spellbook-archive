@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.7.3 - 2015-06-25
+-------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Shorten function existential operator syntax
+
 1.7.2 - 2015-06-04
 ------------------
 

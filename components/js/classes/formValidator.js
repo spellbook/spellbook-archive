@@ -86,20 +86,16 @@ this.Spellbook.Classes.FormValidator = (function() {
   };
 
   FormValidator.prototype._setValidationState = function(state, message) {
+    var base, base1;
     switch (state) {
       case 'error':
         this._setError(message);
         this._setInputState(message);
-        if (this._settings.onError != null) {
-          return this._settings.onError(this._settings);
-        }
-        break;
+        return typeof (base = this._settings).onError === "function" ? base.onError(this._settings) : void 0;
       case 'success':
         this._removeError();
         this._removeInputState();
-        if (this._settings.onSuccess != null) {
-          return this._settings.onSuccess(this._settings);
-        }
+        return typeof (base1 = this._settings).onSuccess === "function" ? base1.onSuccess(this._settings) : void 0;
     }
   };
 

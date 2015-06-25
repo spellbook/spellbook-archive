@@ -26,20 +26,16 @@ this.Spellbook.Modules.AutoDuplicateInput = (function() {
       _field = $(this);
       if (_isValid()) {
         _setInputState('valid');
-        if (_settings.onValid != null) {
+        if (typeof _settings.onValid === "function") {
           _settings.onValid(_settings);
         }
         if (_field.data('cloned') !== 'true') {
           _duplicate();
         }
-        if (_settings.onDuplicate != null) {
-          return _settings.onDuplicate(_settings, _count);
-        }
+        return typeof _settings.onDuplicate === "function" ? _settings.onDuplicate(_settings, _count) : void 0;
       } else {
         _setInputState('invalid');
-        if (_settings.onInvalid != null) {
-          return _settings.onInvalid(_settings);
-        }
+        return typeof _settings.onInvalid === "function" ? _settings.onInvalid(_settings) : void 0;
       }
     });
   };

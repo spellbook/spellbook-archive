@@ -67,19 +67,19 @@
 
         _toggleState( $element, 'error' )
 
-        _settings.onMaxExceeded( _settings ) if _settings.onMaxExceeded?
+        _settings.onMaxExceeded?( _settings )
 
       else if _count < _settings.minChars
 
         _toggleState( $element, 'error' )
 
-        _settings.onMinPreceeded( _settings ) if _settings.onMinPreceeded?
+        _settings.onMinPreceeded?( _settings )
 
       else
 
         _toggleState( $element, 'success' )
 
-        _settings.onConditionsMet( _settings ) if _settings.onConditionsMet?
+        _settings.onConditionsMet?( _settings )
 
   # -------------------------------------
   #   Toggle State

@@ -62,7 +62,7 @@
       event.preventDefault()
       $element = $(@)
 
-      _settings.onClick( _settings ) if _settings.onClick?
+      _settings.onClick?( _settings )
 
       _settings.$element.toggleClass( _settings.activeClass )
 
@@ -117,10 +117,10 @@
   _handleHoverStateEvent = ( $element, state ) ->
     switch state
       when 'on'
-        _settings.onMouseover( _settings ) if _settings.onMouseover?
+        _settings.onMouseover?( _settings )
         $element.addClass( _settings.activeClass )
       when 'off'
-        _settings.onMouseout( _settings ) if _settings.onMouseout?
+        _settings.onMouseout?( _settings )
         $element.removeClass( _settings.activeClass )
 
     switch _settings.proximity

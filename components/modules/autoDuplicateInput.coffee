@@ -60,13 +60,13 @@
 
       if _isValid()
         _setInputState( 'valid' )
-        _settings.onValid( _settings ) if _settings.onValid?
+        _settings.onValid?( _settings )
 
         _duplicate() unless _field.data( 'cloned' ) is 'true'
-        _settings.onDuplicate( _settings, _count ) if _settings.onDuplicate?
+        _settings.onDuplicate?( _settings, _count )
       else
         _setInputState( 'invalid' )
-        _settings.onInvalid( _settings ) if _settings.onInvalid?
+        _settings.onInvalid?( _settings )
 
   # -------------------------------------
   #   Get Validation Type
