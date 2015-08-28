@@ -305,20 +305,16 @@ this.Spellbook.Classes.FormValidator = (function() {
   };
 
   FormValidator.prototype._setValidationState = function(state, message) {
+    var base, base1;
     switch (state) {
       case 'error':
         this._setError(message);
         this._setInputState(message);
-        if (this._settings.onError != null) {
-          return this._settings.onError(this._settings);
-        }
-        break;
+        return typeof (base = this._settings).onError === "function" ? base.onError(this._settings) : void 0;
       case 'success':
         this._removeError();
         this._removeInputState();
-        if (this._settings.onSuccess != null) {
-          return this._settings.onSuccess(this._settings);
-        }
+        return typeof (base1 = this._settings).onSuccess === "function" ? base1.onSuccess(this._settings) : void 0;
     }
   };
 
@@ -531,6 +527,14 @@ this.Spellbook.Classes.Singleton = (function() {
 
 })();
 
+this.Spellbook.Helpers.isBlank = function(string) {
+  if (string.trim().length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 this.Spellbook.Helpers.keyCodes = {
   'enter': 13,
   'shift': 16,
@@ -636,20 +640,16 @@ this.Spellbook.Modules.AutoDuplicateInput = (function() {
       _field = $(this);
       if (_isValid()) {
         _setInputState('valid');
-        if (_settings.onValid != null) {
+        if (typeof _settings.onValid === "function") {
           _settings.onValid(_settings);
         }
         if (_field.data('cloned') !== 'true') {
           _duplicate();
         }
-        if (_settings.onDuplicate != null) {
-          return _settings.onDuplicate(_settings, _count);
-        }
+        return typeof _settings.onDuplicate === "function" ? _settings.onDuplicate(_settings, _count) : void 0;
       } else {
         _setInputState('invalid');
-        if (_settings.onInvalid != null) {
-          return _settings.onInvalid(_settings);
-        }
+        return typeof _settings.onInvalid === "function" ? _settings.onInvalid(_settings) : void 0;
       }
     });
   };
@@ -710,19 +710,13 @@ this.Spellbook.Modules.CharacterCounter = (function() {
       _settings.$number.text(_count);
       if (_count > _settings.maxChars) {
         _toggleState($element, 'error');
-        if (_settings.onMaxExceeded != null) {
-          return _settings.onMaxExceeded(_settings);
-        }
+        return typeof _settings.onMaxExceeded === "function" ? _settings.onMaxExceeded(_settings) : void 0;
       } else if (_count < _settings.minChars) {
         _toggleState($element, 'error');
-        if (_settings.onMinPreceeded != null) {
-          return _settings.onMinPreceeded(_settings);
-        }
+        return typeof _settings.onMinPreceeded === "function" ? _settings.onMinPreceeded(_settings) : void 0;
       } else {
         _toggleState($element, 'success');
-        if (_settings.onConditionsMet != null) {
-          return _settings.onConditionsMet(_settings);
-        }
+        return typeof _settings.onConditionsMet === "function" ? _settings.onConditionsMet(_settings) : void 0;
       }
     });
   };
@@ -873,13 +867,13 @@ this.Spellbook.Modules.LiveSearch = (function() {
   _setEventHandlers = function() {
     return _settings.$element.on('keyup', function(event) {
       _query = $(this).val();
-      if (_settings.onKeyup != null) {
+      if (typeof _settings.onKeyup === "function") {
         _settings.onKeyup(_settings);
       }
       if (_query === '') {
         $(_settings.itemNode).removeClass(_settings.hiddenClass);
         _clearEmptyMessage();
-        if (_settings.onClear != null) {
+        if (typeof _settings.onClear === "function") {
           _settings.onClear(_settings);
         }
       }
@@ -895,9 +889,7 @@ this.Spellbook.Modules.LiveSearch = (function() {
         return $element.closest(_settings.itemNode).addClass(_settings.hiddenClass);
       } else {
         $element.closest(_settings.itemNode).removeClass(_settings.hiddenClass);
-        if (_settings.onFound != null) {
-          return _settings.onFound(_settings);
-        }
+        return typeof _settings.onFound === "function" ? _settings.onFound(_settings) : void 0;
       }
     });
     return _handleEmptyResults();
@@ -914,9 +906,7 @@ this.Spellbook.Modules.LiveSearch = (function() {
         emptyClass = _settings.emptyNode.replace('.', '');
       }
       $("<p class='" + emptyClass + "'>\n  There are no results matching '" + _query + "'.\n</p>").insertAfter(_settings.$container);
-      if (_settings.onEmpty != null) {
-        return _settings.onEmpty(_settings);
-      }
+      return typeof _settings.onEmpty === "function" ? _settings.onEmpty(_settings) : void 0;
     }
   };
   _isQueryAbsent = function(element) {
@@ -1060,18 +1050,14 @@ this.Spellbook.Modules.QuantityInput = (function() {
       if (!(_value >= _settings.maxValue)) {
         _updateValue('up');
       }
-      if (_settings.onIncrease != null) {
-        return _settings.onIncrease(_settings);
-      }
+      return typeof _settings.onIncrease === "function" ? _settings.onIncrease(_settings) : void 0;
     });
     return _settings.$decrease.on('click', function(event) {
       event.preventDefault();
       if (!(_value <= _settings.minValue)) {
         _updateValue('down');
       }
-      if (_settings.onDecrease != null) {
-        return _settings.onDecrease(_settings);
-      }
+      return typeof _settings.onDecrease === "function" ? _settings.onDecrease(_settings) : void 0;
     });
   };
   _updateValue = function(direction) {
@@ -1089,9 +1075,7 @@ this.Spellbook.Modules.QuantityInput = (function() {
         _settings.$element.val(_value);
     }
     _updateTarget();
-    if (_settings.onTargetUpdate != null) {
-      return _settings.onTargetUpdate(_settings);
-    }
+    return typeof _settings.onTargetUpdate === "function" ? _settings.onTargetUpdate(_settings) : void 0;
   };
   _updateTarget = function() {
     var updatedValue;
@@ -1182,9 +1166,7 @@ this.Spellbook.Modules.selectText = (function() {
     return _settings.$element.on('click', function() {
       _selectElement(_settings.$element);
       $(this).trigger('focus').trigger('select');
-      if (_settings.onClick != null) {
-        return _settings.onClick(_settings);
-      }
+      return typeof _settings.onClick === "function" ? _settings.onClick(_settings) : void 0;
     });
   };
   return {
@@ -1360,7 +1342,7 @@ this.Spellbook.Modules.Toggle = (function() {
       var $element;
       event.preventDefault();
       $element = $(this);
-      if (_settings.onClick != null) {
+      if (typeof _settings.onClick === "function") {
         _settings.onClick(_settings);
       }
       _settings.$element.toggleClass(_settings.activeClass);
@@ -1398,13 +1380,13 @@ this.Spellbook.Modules.Toggle = (function() {
   _handleHoverStateEvent = function($element, state) {
     switch (state) {
       case 'on':
-        if (_settings.onMouseover != null) {
+        if (typeof _settings.onMouseover === "function") {
           _settings.onMouseover(_settings);
         }
         $element.addClass(_settings.activeClass);
         break;
       case 'off':
-        if (_settings.onMouseout != null) {
+        if (typeof _settings.onMouseout === "function") {
           _settings.onMouseout(_settings);
         }
         $element.removeClass(_settings.activeClass);

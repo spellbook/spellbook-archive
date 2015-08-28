@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.8.0 - 2015-08-27
+-------------------
+
+### Added
+
+- `Helpers.isBlank`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 1.7.3 - 2015-06-25
 -------------------
 
