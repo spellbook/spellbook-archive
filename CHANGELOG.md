@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.9.1 - 2015-09-18
+------------------
+
+### Added
+
+- Placeholder to `compendium/globals.coffee`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Updated spacing in `compendium/application.coffee`
+
 1.9.0 - 2015-09-18
 ------------------
 
