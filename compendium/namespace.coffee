@@ -11,9 +11,3 @@
 @Spellbook.Modules  = {}
 @Spellbook.Services = {}
 @Spellbook.Inbox    = {}
-
-# -------------------------------------
-#   Globals
-# -------------------------------------
-
-# ...

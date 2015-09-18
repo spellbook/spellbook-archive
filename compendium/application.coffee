@@ -8,7 +8,8 @@
 # -------------------------------------
 #   Base
 # -------------------------------------
-#= require spellbook
+#= require namespace
+#= require globals
 
 # -------------------------------------
 #   Components
