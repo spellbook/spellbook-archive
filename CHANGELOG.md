@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.9.0 - 2015-09-18
+------------------
+
+### Added
+
+- `compendium/globals.coffee`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Renamed `compendium/application.coffee` to `compendium/namespace.coffee`
+
 1.8.0 - 2015-08-27
 -------------------
 
