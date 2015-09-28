@@ -1,6 +1,22 @@
 Changelog
 =========
 
+1.9.2 - 2015-09-28
+------------------
+
+### Added
+
+- Callback function to `Services.scrollTrigger`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
+
 1.9.1 - 2015-09-18
 ------------------
 
