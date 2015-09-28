@@ -16,6 +16,7 @@
     $element      : $( '.js-scrollTrigger' )
     scrollPadding : 400
     activeClass   : 'is-active'
+    onTrigger     : null
   , options
 
   scrolled = $( window ).scrollTop()
@@ -25,6 +26,8 @@
 
   if not settings.$element.hasClass( settings.activeClass ) and active
     settings.$element.addClass( settings.activeClass )
+
+    settings.onTrigger?( settings )
 
 # -------------------------------------
 #   Usage

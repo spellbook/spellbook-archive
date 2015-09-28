@@ -527,91 +527,6 @@ this.Spellbook.Classes.Singleton = (function() {
 
 })();
 
-this.Spellbook.Helpers.isBlank = function(string) {
-  if (string.trim().length === 0) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-this.Spellbook.Helpers.keyCodes = {
-  'enter': 13,
-  'shift': 16,
-  'ctrl': 17,
-  'alt': 18,
-  'esc': 27,
-  'leftarrow': 37,
-  'uparrow': 38,
-  'rightarrow': 39,
-  'downarrow': 40,
-  'comma': 188,
-  'slash': 191,
-  'backslash': 220,
-  '0': 48,
-  '1': 49,
-  '2': 50,
-  '3': 51,
-  '4': 52,
-  '5': 53,
-  '6': 54,
-  '7': 55,
-  '8': 56,
-  '9': 57,
-  'a': 65,
-  'b': 66,
-  'c': 67,
-  'd': 68,
-  'e': 69,
-  'f': 70,
-  'g': 71,
-  'h': 72,
-  'i': 73,
-  'j': 74,
-  'k': 75,
-  'l': 76,
-  'm': 77,
-  'n': 78,
-  'o': 79,
-  'p': 80,
-  'q': 81,
-  'r': 82,
-  's': 83,
-  't': 84,
-  'u': 85,
-  'v': 86,
-  'w': 87,
-  'x': 88,
-  'y': 89,
-  'z': 90
-};
-
-this.Spellbook.Helpers.randomizer = function(collection) {
-  var randomNumber;
-  randomNumber = Math.floor(Math.random() * collection.length);
-  return collection[randomNumber];
-};
-
-this.Spellbook.Helpers.sanitize = function(string) {
-  return string.replace(/(<([^>]+)>)/ig, '');
-};
-
-this.Spellbook.Helpers.slugify = function(string) {
-  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-};
-
-this.Spellbook.Helpers.uid = function(length) {
-  var id;
-  if (length == null) {
-    length = 10;
-  }
-  id = '';
-  while (id.length < length) {
-    id += Math.random().toString(36).substr(2);
-  }
-  return id.substr(0, length);
-};
-
 this.Spellbook.Modules.AutoDuplicateInput = (function() {
   var _count, _duplicate, _field, _getValidationType, _isValid, _setEventHandlers, _setInputState, _settings, _validators, getCount, init;
   _settings = {};
@@ -1423,6 +1338,91 @@ this.Spellbook.Modules.Toggle = (function() {
   };
 })();
 
+this.Spellbook.Helpers.isBlank = function(string) {
+  if (string.trim().length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+this.Spellbook.Helpers.keyCodes = {
+  'enter': 13,
+  'shift': 16,
+  'ctrl': 17,
+  'alt': 18,
+  'esc': 27,
+  'leftarrow': 37,
+  'uparrow': 38,
+  'rightarrow': 39,
+  'downarrow': 40,
+  'comma': 188,
+  'slash': 191,
+  'backslash': 220,
+  '0': 48,
+  '1': 49,
+  '2': 50,
+  '3': 51,
+  '4': 52,
+  '5': 53,
+  '6': 54,
+  '7': 55,
+  '8': 56,
+  '9': 57,
+  'a': 65,
+  'b': 66,
+  'c': 67,
+  'd': 68,
+  'e': 69,
+  'f': 70,
+  'g': 71,
+  'h': 72,
+  'i': 73,
+  'j': 74,
+  'k': 75,
+  'l': 76,
+  'm': 77,
+  'n': 78,
+  'o': 79,
+  'p': 80,
+  'q': 81,
+  'r': 82,
+  's': 83,
+  't': 84,
+  'u': 85,
+  'v': 86,
+  'w': 87,
+  'x': 88,
+  'y': 89,
+  'z': 90
+};
+
+this.Spellbook.Helpers.randomizer = function(collection) {
+  var randomNumber;
+  randomNumber = Math.floor(Math.random() * collection.length);
+  return collection[randomNumber];
+};
+
+this.Spellbook.Helpers.sanitize = function(string) {
+  return string.replace(/(<([^>]+)>)/ig, '');
+};
+
+this.Spellbook.Helpers.slugify = function(string) {
+  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
+};
+
+this.Spellbook.Helpers.uid = function(length) {
+  var id;
+  if (length == null) {
+    length = 10;
+  }
+  id = '';
+  while (id.length < length) {
+    id += Math.random().toString(36).substr(2);
+  }
+  return id.substr(0, length);
+};
+
 this.Spellbook.Services.autoSubmit = function(options) {
   var settings;
   settings = $.extend({
@@ -1636,14 +1636,16 @@ this.Spellbook.Services.scrollTrigger = function(options) {
   settings = $.extend({
     $element: $('.js-scrollTrigger'),
     scrollPadding: 400,
-    activeClass: 'is-active'
+    activeClass: 'is-active',
+    onTrigger: null
   }, options);
   scrolled = $(window).scrollTop();
   if (settings.$element.offset().top >= 0) {
     active = scrolled - settings.$element.offset().top - settings.scrollPadding;
   }
   if (!settings.$element.hasClass(settings.activeClass) && active) {
-    return settings.$element.addClass(settings.activeClass);
+    settings.$element.addClass(settings.activeClass);
+    return typeof settings.onTrigger === "function" ? settings.onTrigger(settings) : void 0;
   }
 };
 
