@@ -1,6 +1,22 @@
 Changelog
 =========
 
+1.9.3 - 2015-10-07
+-------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Remove keyboardEvents.js from build
+- Remove function.js from build
+
+### Fixed
+
+- Nothing
+
 1.9.2 - 2015-09-28
 ------------------
 
