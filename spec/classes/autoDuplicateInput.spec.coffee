@@ -1,4 +1,4 @@
-describe 'Spellbook.Modules.AutoDuplicateInput', ->
+describe 'Spellbook.Classes.AutoDuplicateInput', ->
   beforeEach ->
     loadFixtures( 'auto_duplicate_input.html' )
 
@@ -10,8 +10,7 @@ describe 'Spellbook.Modules.AutoDuplicateInput', ->
     @invalidClass          = 'is-invalid'
     @validClass            = 'is-valid'
 
-    @adi = Spellbook.Modules.AutoDuplicateInput
-    @adi.init()
+    @adi = new Spellbook.Classes.AutoDuplicateInput
 
   it 'should register a keyup event on the input', ->
     spyOnEvent( @element, 'keyup' )
@@ -38,7 +37,7 @@ describe 'Spellbook.Modules.AutoDuplicateInput', ->
     expect( $( @selector ).length ).toEqual( 2 )
 
   it 'should keep a count of valid fields', ->
-    @element.val('email@example.com')
+    @element.val( 'email@example.com' )
     @element.trigger( 'keyup' )
 
-    expect( @adi.getCount() ).toEqual( 3 )
+    expect( @adi.getCount() ).toEqual( 1 )

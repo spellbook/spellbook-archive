@@ -1,4 +1,4 @@
-describe('Spellbook.Modules.AutoDuplicateInput', function() {
+describe('Spellbook.Classes.AutoDuplicateInput', function() {
   beforeEach(function() {
     loadFixtures('auto_duplicate_input.html');
     this.selector = '.js-autoDuplicateInput';
@@ -8,8 +8,7 @@ describe('Spellbook.Modules.AutoDuplicateInput', function() {
     this.validateDataAttribute = 'validate';
     this.invalidClass = 'is-invalid';
     this.validClass = 'is-valid';
-    this.adi = Spellbook.Modules.AutoDuplicateInput;
-    return this.adi.init();
+    return this.adi = new Spellbook.Classes.AutoDuplicateInput;
   });
   it('should register a keyup event on the input', function() {
     spyOnEvent(this.element, 'keyup');
@@ -34,6 +33,6 @@ describe('Spellbook.Modules.AutoDuplicateInput', function() {
   return it('should keep a count of valid fields', function() {
     this.element.val('email@example.com');
     this.element.trigger('keyup');
-    return expect(this.adi.getCount()).toEqual(3);
+    return expect(this.adi.getCount()).toEqual(1);
   });
 });
