@@ -19,20 +19,26 @@
 #
 # *************************************
 
-@Spellbook.Modules.LiveSearch = do ->
+class @Spellbook.Classes.LiveSearch
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings = {}
-  _query    = ''
+  _settings : {}
+  _query    : ''
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init = ( options ) ->
+  init: ( options ) ->
     _settings = $.extend
       $element     : $( '.js-search' )
       $query       : $( '.js-search-query' )
@@ -47,76 +53,76 @@
       onKeyup      : null
     , options
 
-    _setEventHandlers()
+    @_setEventHandlers()
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers = ->
-    _settings.$element.on 'keyup', ( event ) ->
-      _query = $(@).val()
+  _setEventHandlers: ->
+    @_settings.$element.on 'keyup', ( event ) =>
+      @_query = $( event.currentTarget ).val()
 
       # Keyup Event
-      _settings.onKeyup?( _settings )
+      @_settings.onKeyup?( @_settings )
 
-      if _query is ''
-        $( _settings.itemNode ).removeClass( _settings.hiddenClass )
-        _clearEmptyMessage()
+      if @_query is ''
+        $( @_settings.itemNode ).removeClass( @_settings.hiddenClass )
+        @_clearEmptyMessage()
 
         # Clear Event
-        _settings.onClear?( _settings )
+        @_settings.onClear?( @_settings )
 
-      _clearEmptyMessage()
-      _parseDom()
+      @_clearEmptyMessage()
+      @_parseDom()
 
   # -------------------------------------
   #   Parse DOM
   # -------------------------------------
 
-  _parseDom = ->
-    _settings.$query.each ( index ) ->
-      $element = $(@)
+  _parseDom: ->
+    @_settings.$query.each ( index, elementNode ) =>
+      $element = $( elementNode )
 
-      if _isQueryAbsent( $element )
+      if @_isQueryAbsent( $element )
         $element
-          .closest( _settings.itemNode )
-          .addClass( _settings.hiddenClass )
+          .closest( @_settings.itemNode )
+          .addClass( @_settings.hiddenClass )
       else
         $element
-          .closest( _settings.itemNode )
-          .removeClass( _settings.hiddenClass )
+          .closest( @_settings.itemNode )
+          .removeClass( @_settings.hiddenClass )
 
         # Found Event
-        _settings.onFound?( _settings )
+        @_settings.onFound?( @_settings )
 
-    _handleEmptyResults()
+    @_handleEmptyResults()
 
   # -------------------------------------
   #   Clear Empty Message
   # -------------------------------------
 
-  _clearEmptyMessage = ->
-    if _settings.emptyMessage and $( _settings.emptyNode ).length > 0
-      $( _settings.emptyNode ).remove()
+  _clearEmptyMessages: ->
+    if @_settings.emptyMessage and $( @_settings.emptyNode ).length > 0
+      $( @_settings.emptyNode ).remove()
 
   # -------------------------------------
   #   Handle Empty Results
   # -------------------------------------
 
-  _handleEmptyResults = ->
-    if _isEmpty()
-      if _settings.emptyMessage
-        emptyClass = _settings.emptyNode.replace( '.', '' )
+  _handleEmptyResults: ->
+    if @_isEmpty()
+      if @_settings.emptyMessage
+        emptyClass = @_settings.emptyNode.replace( '.', '' )
 
       $( """
         <p class='#{ emptyClass }'>
-          There are no results matching '#{ _query }'.
+          There are no results matching '#{ @_query }'.
         </p>
-      """ ).insertAfter( _settings.$container )
+      """ ).insertAfter( @_settings.$container )
 
       # Empty Event
-      _settings.onEmpty?( _settings )
+      @_settings.onEmpty?( @_settings )
 
   # -------------------------------------
   #   Is Query Absent
@@ -126,25 +132,19 @@
   #
   # -------------------------------------
 
-  _isQueryAbsent = ( element ) ->
-    element.text().search( new RegExp( _query, 'i' ) ) < 0
+  _isQueryAbsent: ( element ) ->
+    element.text().search( new RegExp( @_query, 'i' ) ) < 0
 
   # -------------------------------------
   #   Is Empty
   # -------------------------------------
 
-  _isEmpty = ->
-    $( "#{ _settings.itemNode }.#{ _settings.hiddenClass }" ).length is $( _settings.itemNode ).length
-
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
-
-  init : init
+  _isEmpty: ->
+    $( "#{ @_settings.itemNode }.#{ @_settings.hiddenClass }" ).length is $( @_settings.itemNode ).length
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.LiveSearch.init()
+# new Spellbook.Classes.LiveSearch()
 #
