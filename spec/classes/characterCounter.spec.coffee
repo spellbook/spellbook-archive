@@ -1,4 +1,4 @@
-describe 'Spellbook.Modules.CharacterCounter', ->
+describe 'Spellbook.Classes.CharacterCounter', ->
   beforeEach ->
     loadFixtures( 'character_counter.html' )
 
@@ -8,7 +8,7 @@ describe 'Spellbook.Modules.CharacterCounter', ->
     @errorClass   = 'is-error'
     @successClass = 'is-success'
 
-    Spellbook.Modules.CharacterCounter.init()
+    new Spellbook.Classes.CharacterCounter()
 
   it 'should initialize with a zero character count', ->
     expect( @label ).toContainText( '0' )
@@ -26,7 +26,7 @@ describe 'Spellbook.Modules.CharacterCounter', ->
     expect( @label ).toHaveClass( @errorClass )
 
   it 'should add an error class when the min is not met', ->
-    Spellbook.Modules.CharacterCounter.init
+    new Spellbook.Classes.CharacterCounter
       minChars : 100
 
     @element.val( 'This is some text here.' )
@@ -36,7 +36,7 @@ describe 'Spellbook.Modules.CharacterCounter', ->
     expect( @label ).toHaveClass( @errorClass )
 
   it 'should add a success class when conditions are met', ->
-    Spellbook.Modules.CharacterCounter.init
+    new Spellbook.Classes.CharacterCounter
       minChars : 10
       maxChars : 20
 

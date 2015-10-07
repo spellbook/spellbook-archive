@@ -18,21 +18,27 @@
 #
 # *************************************
 
-@Spellbook.Modules.CharacterCounter = do ->
+class @Spellbook.Classes.CharacterCounter
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings = {}
-  _count    = 0
+  _settings : {}
+  _count    : 0
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init = ( options ) ->
-    _settings = $.extend
+  init: ( options ) ->
+    @_settings = $.extend
       $element        : $( '.js-characterCounter' )
       $label          : $( '.js-characterCounter-label' )
       $number         : $( '.js-characterCounter-number' )
@@ -45,41 +51,41 @@
       onConditionsMet : null
     , options
 
-    _setEventHandlers()
+    @_setEventHandlers()
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers = ->
+  _setEventHandlers: ->
 
     # ----- Element: Keyup ----- #
 
-    _settings.$element.on 'keyup', ( event ) ->
+    @_settings.$element.on 'keyup', ( event ) =>
       event.preventDefault()
 
-      $element = $(@)
-      _count   = $element.val().length
+      $element = $( event.currentTarget )
+      @_count  = $element.val().length
 
-      _settings.$number.text( _count )
+      @_settings.$number.text( @_count )
 
-      if _count > _settings.maxChars
+      if @_count > @_settings.maxChars
 
-        _toggleState( $element, 'error' )
+        @_toggleState( $element, 'error' )
 
-        _settings.onMaxExceeded?( _settings )
+        @_settings.onMaxExceeded?( @_settings )
 
-      else if _count < _settings.minChars
+      else if @_count < @_settings.minChars
 
-        _toggleState( $element, 'error' )
+        @_toggleState( $element, 'error' )
 
-        _settings.onMinPreceeded?( _settings )
+        @_settings.onMinPreceeded?( @_settings )
 
       else
 
-        _toggleState( $element, 'success' )
+        @_toggleState( $element, 'success' )
 
-        _settings.onConditionsMet?( _settings )
+        @_settings.onConditionsMet?( @_settings )
 
   # -------------------------------------
   #   Toggle State
@@ -90,28 +96,22 @@
   #
   # -------------------------------------
 
-  _toggleState = ( element, state ) ->
+  _toggleState: ( element, state ) ->
     switch state
       when 'error'
-        element.removeClass( _settings.successClass )
-        _settings.$label.removeClass( _settings.successClass )
-        element.addClass( _settings.errorClass )
-        _settings.$label.addClass( _settings.errorClass )
+        element.removeClass( @_settings.successClass )
+        @_settings.$label.removeClass( @_settings.successClass )
+        element.addClass( @_settings.errorClass )
+        @_settings.$label.addClass( @_settings.errorClass )
       when 'success'
-        element.removeClass( _settings.errorClass )
-        _settings.$label.removeClass( _settings.errorClass )
-        element.addClass( _settings.successClass )
-        _settings.$label.addClass( _settings.successClass )
-
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
-
-  init : init
+        element.removeClass( @_settings.errorClass )
+        @_settings.$label.removeClass( @_settings.errorClass )
+        element.addClass( @_settings.successClass )
+        @_settings.$label.addClass( @_settings.successClass )
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.CharacterCounter.init()
+# new Spellbook.Classes.CharacterCounter()
 #
