@@ -1,9 +1,9 @@
-describe('Spellbook.Modules.HeadingLinks', function() {
+describe('Spellbook.Classes.HeadingLinks', function() {
   beforeEach(function() {
     loadFixtures('heading_links.html');
     this.firstHeading = $('h1');
     this.headings = $('h1, h2, h3, h4');
-    return Spellbook.Modules.HeadingLinks.init({
+    return new Spellbook.Classes.HeadingLinks({
       headings: this.headings
     });
   });

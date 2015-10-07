@@ -1,11 +1,11 @@
-describe 'Spellbook.Modules.HeadingLinks', ->
+describe 'Spellbook.Classes.HeadingLinks', ->
   beforeEach ->
     loadFixtures( 'heading_links.html' )
 
     @firstHeading = $( 'h1' )
     @headings     = $( 'h1, h2, h3, h4' )
 
-    Spellbook.Modules.HeadingLinks.init
+    new Spellbook.Classes.HeadingLinks
       headings: @headings
 
   it 'should slugify the heading string as an ID', ->
