@@ -9,59 +9,60 @@
 #
 # *************************************
 
-@Spellbook.Modules.EqualHeights = do ->
+class @Spellbook.Classes.EqualHeights
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings = {}
-  _heights  = []
-  _timer    = null
+  _settings : {}
+  _heights  : []
+  _timer    : null
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init = ( options ) ->
-    _settings = $.extend
+  init: ( options ) ->
+    @_settings = $.extend
       $element : $( '.js-equalHeights' )
     , options
 
-    _setHeight()
-    _setEventHandlers()
+    @_setHeight()
+    @_setEventHandlers()
 
   # -------------------------------------
   #   Set Height
   # -------------------------------------
 
-  _setHeight = ->
-    _settings.$element.css( 'height', 'auto' )
+  _setHeight: ->
+    @_settings.$element.css( 'height', 'auto' )
 
-    _settings.$element.each -> _heights.push $(@).height()
+    @_settings.$element.each ( index, elementNode ) =>
+      @_heights.push $( elementNode ).height()
 
-    height = Math.max.apply( Math, _heights )
+    height = Math.max.apply( Math, @_heights )
 
-    _settings.$element.css( 'height', height )
+    @_settings.$element.css( 'height', height )
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers = ->
-    $( window ).on 'resize', ->
-      clearTimeout( _timer )
-      _timer = setTimeout( _setHeight, 250 )
-
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
-
-  init : init
+  _setEventHandlers: ->
+    $( window ).on 'resize', =>
+      clearTimeout( @_timer )
+      @_timer = setTimeout( @_setHeight, 250 )
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.EqualHeights.init()
+# new Spellbook.Classes.EqualHeights()
 #
