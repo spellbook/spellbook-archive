@@ -15,22 +15,28 @@
 #
 # *************************************
 
-@Spellbook.Modules.Modal = do ->
+class @Spellbook.Classes.Modal
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  $_modal    = null
-  $_backdrop = null
-  _settings  = {}
+  _$modal    : null
+  _$backdrop : null
+  _settings  : {}
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init = ( options ) ->
-    _settings = $.extend
+  init: ( options ) ->
+    @_settings = $.extend
       $trigger        : $( '.js-modal-trigger' )
       $close          : $( '.js-modal-close' )
       dataAttribute   : 'modal'
@@ -40,8 +46,7 @@
       activeBodyClass : 'is-modal-active'
     , options
 
-    _setEventHandlers()
-    @
+    @_setEventHandlers()
 
   # -------------------------------------
   #   Trigger
@@ -54,109 +59,102 @@
   #
   # -------------------------------------
 
-  trigger = ( $element, event, removeBackdrop = false, callback = null ) ->
-    $_modal = $element
+  trigger: ( $element, event, removeBackdrop = false, callback = null ) ->
+    @_$modal = $element
 
     switch event
 
       when 'open'
 
-        $element.addClass( _settings.activeClass )
-        $( 'body' ).addClass( _settings.activeBodyClass )
+        $element.addClass( @_settings.activeClass )
+        $( 'body' ).addClass( @_settings.activeBodyClass )
 
       when 'close'
 
-        $element.removeClass( _settings.activeClass )
-        $( 'body' ).removeClass( _settings.activeBodyClass )
+        $element.removeClass( @_settings.activeClass )
+        $( 'body' ).removeClass( @_settings.activeBodyClass )
 
-        _cleanupEvents()
+        @_cleanupEvents()
 
-    _toggleOverlay( event ) unless removeBackdrop
+    @_toggleOverlay( event ) unless removeBackdrop
 
-    callback() if callback
+    callback?()
 
-    _setActiveEventHandlers()
+    @_setActiveEventHandlers()
 
   # -------------------------------------
   #   Toggle Overlay
   # -------------------------------------
 
-  _toggleOverlay = ( event ) ->
+  _toggleOverlay: ( event ) ->
     switch event
 
       when 'open'
 
-        $( '<div class=' + _settings.backdropClass + '></div>' )
+        $( '<div class=' + @_settings.backdropClass + '></div>' )
           .appendTo( $( 'body' ) )
 
-        $_backdrop = $( ".#{ _settings.backdropClass }" )
+        @_$backdrop = $( ".#{ @_settings.backdropClass }" )
 
-        setTimeout ->
-          $_backdrop.addClass( _settings.activeClass )
+        setTimeout =>
+          @_$backdrop.addClass( @_settings.activeClass )
         , 25
 
       when 'close'
 
-        $_backdrop.removeClass( _settings.activeClass )
+        @_$backdrop.removeClass( @_settings.activeClass )
 
         setTimeout ->
-          $_backdrop.remove()
+          @_$backdrop.remove()
         , 500
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers = ->
-    _settings.$trigger.on 'click', ( event ) ->
+  _setEventHandlers: ->
+    @_settings.$trigger.on 'click', ( event ) =>
       event.preventDefault()
 
-      selector = $(@).data( _settings.dataAttribute )
-      $_modal   = $( selector )
+      selector = $( event.currentTarget ).data( @_settings.dataAttribute )
+      @_$modal = $( selector )
 
-      trigger( $_modal, 'open' )
+      @trigger( @_$modal, 'open' )
 
   # -------------------------------------
   #   Set Active Event Handlers
   # -------------------------------------
 
-  _setActiveEventHandlers = ->
+  _setActiveEventHandlers: ->
 
     # ----- Close ----- #
 
-    _settings.$close.on 'click', ( event ) ->
+    @_settings.$close.on 'click', ( event ) =>
       event.preventDefault()
-      trigger( $_modal, 'close' )
+      @trigger( @_$modal, 'close' )
 
     # ----- Backdrop ----- #
 
-    $_backdrop.on 'click', ( event ) ->
-      trigger( $_modal, 'close' )
+    @_$backdrop.on 'click', ( event ) =>
+      @trigger( @_$modal, 'close' )
 
     # ----- Escape ----- #
 
-    $( document ).on 'keydown', ( event ) ->
+    $( document ).on 'keydown', ( event ) =>
       switch event.which
-        when 27 then trigger( $_modal, 'close' )
+        when 27 then @trigger( @_$modal, 'close' )
 
   # -------------------------------------
   #   Clean Up Events
   # -------------------------------------
 
-  _cleanupEvents = ->
-    _settings.$close.off( 'click' )
+  _cleanupEvents: ->
+    @_settings.$close.off( 'click' )
     $( document ).off( 'keydown' )
-
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
-
-  init    : init
-  trigger : trigger
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.Modal.init()
+# new Spellbook.Classes.Modal()
 #

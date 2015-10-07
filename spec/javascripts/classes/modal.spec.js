@@ -1,4 +1,4 @@
-describe('Spellbook.Modules.Modal', function() {
+describe('Spellbook.Classes.Modal', function() {
   beforeEach(function() {
     loadFixtures('modal.html');
     this.trigger = $('.js-modal-trigger');
@@ -6,7 +6,7 @@ describe('Spellbook.Modules.Modal', function() {
     this.modal = $('#modal');
     this.backdrop = $('.modal-backdrop');
     this.activeClass = 'is-active';
-    return Spellbook.Modules.Modal.init();
+    return new Spellbook.Classes.Modal();
   });
   it('should trigger a click event when the link is clicked', function() {
     spyOnEvent(this.trigger, 'click');

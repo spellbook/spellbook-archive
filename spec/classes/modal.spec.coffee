@@ -1,4 +1,4 @@
-describe 'Spellbook.Modules.Modal', ->
+describe 'Spellbook.Classes.Modal', ->
   beforeEach ->
     loadFixtures( 'modal.html' )
 
@@ -8,7 +8,7 @@ describe 'Spellbook.Modules.Modal', ->
     @backdrop    = $( '.modal-backdrop' )
     @activeClass = 'is-active'
 
-    Spellbook.Modules.Modal.init()
+    new Spellbook.Classes.Modal()
 
   it 'should trigger a click event when the link is clicked', ->
     spyOnEvent( @trigger, 'click' )
