@@ -61,9 +61,11 @@ this.Spellbook.Classes.Modal = (function() {
         })(this), 25);
       case 'close':
         this._$backdrop.removeClass(this._settings.activeClass);
-        return setTimeout(function() {
-          return this._$backdrop.remove();
-        }, 500);
+        return setTimeout((function(_this) {
+          return function() {
+            return _this._$backdrop.remove();
+          };
+        })(this), 500);
     }
   };
 

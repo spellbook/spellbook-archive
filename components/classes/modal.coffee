@@ -104,7 +104,7 @@ class @Spellbook.Classes.Modal
 
         @_$backdrop.removeClass( @_settings.activeClass )
 
-        setTimeout ->
+        setTimeout =>
           @_$backdrop.remove()
         , 500
 
