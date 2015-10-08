@@ -1,19 +1,21 @@
-this.Spellbook.Classes.QueryParams = (function() {
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.QueryParams = (function(superClass) {
+  extend(QueryParams, superClass);
+
+  function QueryParams() {
+    return QueryParams.__super__.constructor.apply(this, arguments);
+  }
+
   QueryParams.prototype.params = {};
 
   QueryParams.prototype.variables = [];
 
-  QueryParams.prototype._settings = {};
-
-  function QueryParams(options) {
-    this.options = options;
-    this.init();
-  }
-
-  QueryParams.prototype.init = function() {
+  QueryParams.prototype.init = function(options) {
     this._settings = $.extend({
       url: null
-    }, this.options);
+    }, options);
     this._parseQueryString(this._settings.url);
     return this._sortParams();
   };
@@ -74,4 +76,4 @@ this.Spellbook.Classes.QueryParams = (function() {
 
   return QueryParams;
 
-})();
+})(Spellbook.Classes.Base);

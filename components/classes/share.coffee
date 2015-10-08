@@ -13,19 +13,7 @@
 #
 # *************************************
 
-class @Spellbook.Classes.Share
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.Share extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize

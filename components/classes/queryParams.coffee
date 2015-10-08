@@ -9,7 +9,7 @@
 #
 # *************************************
 
-class @Spellbook.Classes.QueryParams
+class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Instance Variables
@@ -17,22 +17,15 @@ class @Spellbook.Classes.QueryParams
 
   params    : {}
   variables : []
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor: ( @options ) -> @init()
 
   # -------------------------------------
   #   Initializer
   # -------------------------------------
 
-  init: ->
+  init: ( options ) ->
     @_settings = $.extend
       url : null
-    , @options
+    , options
 
     @_parseQueryString( @_settings.url )
     @_sortParams()

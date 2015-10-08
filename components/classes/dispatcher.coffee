@@ -12,30 +12,18 @@
 #
 # *************************************
 
-class @Spellbook.Classes.Dispatcher
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor: ( @options ) -> @init()
+class @Spellbook.Classes.Dispatcher extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init: ( options ) ->
     @_settings = $.extend
       $element : $( '.js-dispatcher' )
       dataAttr : 'dispatcher-page'
       events   : []
-    , @options
+    , options
 
     @dispatch()
 

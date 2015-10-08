@@ -18,20 +18,13 @@
 #
 # *************************************
 
-class @Spellbook.Classes.CharacterCounter
+class @Spellbook.Classes.CharacterCounter extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings : {}
-  _count    : 0
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+  _count : 0
 
   # -------------------------------------
   #   Initialize

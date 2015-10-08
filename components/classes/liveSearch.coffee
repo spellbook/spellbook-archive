@@ -19,20 +19,13 @@
 #
 # *************************************
 
-class @Spellbook.Classes.LiveSearch
+class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings : {}
-  _query    : ''
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+  _query : ''
 
   # -------------------------------------
   #   Initialize

@@ -10,19 +10,7 @@
 #
 # *************************************
 
-class @Spellbook.Classes.HeadingLinks
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings = {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize

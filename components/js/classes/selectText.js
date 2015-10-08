@@ -1,8 +1,11 @@
-this.Spellbook.Classes.SelectText = (function() {
-  SelectText.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function SelectText(options) {
-    this.init(options);
+this.Spellbook.Classes.SelectText = (function(superClass) {
+  extend(SelectText, superClass);
+
+  function SelectText() {
+    return SelectText.__super__.constructor.apply(this, arguments);
   }
 
   SelectText.prototype.init = function(options) {
@@ -42,4 +45,4 @@ this.Spellbook.Classes.SelectText = (function() {
 
   return SelectText;
 
-})();
+})(Spellbook.Classes.Base);

@@ -1,19 +1,22 @@
-this.Spellbook.Classes.Dematerialize = (function() {
-  Dematerialize._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  Dematerialize._item = '';
+this.Spellbook.Classes.Dematerialize = (function(superClass) {
+  extend(Dematerialize, superClass);
 
-  function Dematerialize(options) {
-    this.options = options;
+  function Dematerialize() {
+    return Dematerialize.__super__.constructor.apply(this, arguments);
+  }
+
+  Dematerialize.prototype._item = '';
+
+  Dematerialize.prototype.init = function(options) {
     this._settings = $.extend({
       $element: $('.js-dematerialize'),
       $trigger: $('.js-dematerialize-trigger'),
       itemTitle: 'hidden_element',
       hiddenClass: 'is-hidden'
-    }, this.options);
-  }
-
-  Dematerialize.prototype.init = function() {
+    }, options);
     this._setEventHandlers();
     return this._setInitialState();
   };
@@ -65,4 +68,4 @@ this.Spellbook.Classes.Dematerialize = (function() {
 
   return Dematerialize;
 
-})();
+})(Spellbook.Classes.Base);

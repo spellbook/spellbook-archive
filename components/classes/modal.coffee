@@ -15,7 +15,7 @@
 #
 # *************************************
 
-class @Spellbook.Classes.Modal
+class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
@@ -23,13 +23,6 @@ class @Spellbook.Classes.Modal
 
   _$modal    : null
   _$backdrop : null
-  _settings  : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize

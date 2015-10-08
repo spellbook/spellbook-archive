@@ -13,19 +13,7 @@
 #
 # *************************************
 
-class @Spellbook.Classes.StateUrls
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize

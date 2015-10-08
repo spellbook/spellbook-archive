@@ -1,17 +1,19 @@
-this.Spellbook.Classes.Dispatcher = (function() {
-  Dispatcher.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function Dispatcher(options) {
-    this.options = options;
-    this.init();
+this.Spellbook.Classes.Dispatcher = (function(superClass) {
+  extend(Dispatcher, superClass);
+
+  function Dispatcher() {
+    return Dispatcher.__super__.constructor.apply(this, arguments);
   }
 
-  Dispatcher.prototype.init = function() {
+  Dispatcher.prototype.init = function(options) {
     this._settings = $.extend({
       $element: $('.js-dispatcher'),
       dataAttr: 'dispatcher-page',
       events: []
-    }, this.options);
+    }, options);
     return this.dispatch();
   };
 
@@ -63,4 +65,4 @@ this.Spellbook.Classes.Dispatcher = (function() {
 
   return Dispatcher;
 
-})();
+})(Spellbook.Classes.Base);

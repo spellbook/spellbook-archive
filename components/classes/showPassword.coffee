@@ -11,19 +11,7 @@
 #
 # *************************************
 
-class @Spellbook.Classes.ShowPassword
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.ShowPassword extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize

@@ -9,21 +9,14 @@
 #
 # *************************************
 
-class @Spellbook.Classes.EqualHeights
+class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings : {}
   _heights  : []
   _timer    : null
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize

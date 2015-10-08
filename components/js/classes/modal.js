@@ -1,13 +1,16 @@
-this.Spellbook.Classes.Modal = (function() {
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.Modal = (function(superClass) {
+  extend(Modal, superClass);
+
+  function Modal() {
+    return Modal.__super__.constructor.apply(this, arguments);
+  }
+
   Modal.prototype._$modal = null;
 
   Modal.prototype._$backdrop = null;
-
-  Modal.prototype._settings = {};
-
-  function Modal(options) {
-    this.init(options);
-  }
 
   Modal.prototype.init = function(options) {
     this._settings = $.extend({
@@ -110,4 +113,4 @@ this.Spellbook.Classes.Modal = (function() {
 
   return Modal;
 
-})();
+})(Spellbook.Classes.Base);

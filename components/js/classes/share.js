@@ -1,8 +1,11 @@
-this.Spellbook.Classes.Share = (function() {
-  Share.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function Share(options) {
-    this.init(options);
+this.Spellbook.Classes.Share = (function(superClass) {
+  extend(Share, superClass);
+
+  function Share() {
+    return Share.__super__.constructor.apply(this, arguments);
   }
 
   Share.prototype.init = function(options) {
@@ -51,4 +54,4 @@ this.Spellbook.Classes.Share = (function() {
 
   return Share;
 
-})();
+})(Spellbook.Classes.Base);

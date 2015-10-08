@@ -11,19 +11,7 @@
 #
 # *************************************
 
-class @Spellbook.Classes.SaveProgress
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize

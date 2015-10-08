@@ -20,20 +20,13 @@
 #
 # *************************************
 
-class @Spellbook.Classes.QuantityInput
+class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings : {}
-  _value    : null
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+  _value : null
 
   # -------------------------------------
   #   Initialize

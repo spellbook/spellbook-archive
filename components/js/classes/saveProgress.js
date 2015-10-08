@@ -1,8 +1,11 @@
-this.Spellbook.Classes.SaveProgress = (function() {
-  SaveProgress.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function SaveProgress(options) {
-    this.init(options);
+this.Spellbook.Classes.SaveProgress = (function(superClass) {
+  extend(SaveProgress, superClass);
+
+  function SaveProgress() {
+    return SaveProgress.__super__.constructor.apply(this, arguments);
   }
 
   SaveProgress.prototype.init = function(options) {
@@ -62,4 +65,4 @@ this.Spellbook.Classes.SaveProgress = (function() {
 
   return SaveProgress;
 
-})();
+})(Spellbook.Classes.Base);

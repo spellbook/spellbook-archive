@@ -1,11 +1,14 @@
-this.Spellbook.Classes.QuantityInput = (function() {
-  QuantityInput.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.QuantityInput = (function(superClass) {
+  extend(QuantityInput, superClass);
+
+  function QuantityInput() {
+    return QuantityInput.__super__.constructor.apply(this, arguments);
+  }
 
   QuantityInput.prototype._value = null;
-
-  function QuantityInput(options) {
-    this.init(options);
-  }
 
   QuantityInput.prototype.init = function(options) {
     this._settings = $.extend({
@@ -88,4 +91,4 @@ this.Spellbook.Classes.QuantityInput = (function() {
 
   return QuantityInput;
 
-})();
+})(Spellbook.Classes.Base);

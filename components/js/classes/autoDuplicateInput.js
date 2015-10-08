@@ -1,5 +1,12 @@
-this.Spellbook.Classes.AutoDuplicateInput = (function() {
-  AutoDuplicateInput.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
+  extend(AutoDuplicateInput, superClass);
+
+  function AutoDuplicateInput() {
+    return AutoDuplicateInput.__super__.constructor.apply(this, arguments);
+  }
 
   AutoDuplicateInput.prototype._count = 0;
 
@@ -8,10 +15,6 @@ this.Spellbook.Classes.AutoDuplicateInput = (function() {
   AutoDuplicateInput.prototype._validators = {
     email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   };
-
-  function AutoDuplicateInput(options) {
-    this.init(options);
-  }
 
   AutoDuplicateInput.prototype.init = function(options) {
     this._settings = $.extend({
@@ -81,4 +84,4 @@ this.Spellbook.Classes.AutoDuplicateInput = (function() {
 
   return AutoDuplicateInput;
 
-})();
+})(Spellbook.Classes.Base);

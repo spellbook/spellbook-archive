@@ -17,19 +17,7 @@
 #
 # *************************************
 
-class @Spellbook.Classes.Toggle
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize

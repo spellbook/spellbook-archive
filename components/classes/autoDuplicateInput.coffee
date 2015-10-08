@@ -17,23 +17,16 @@
 #
 # *************************************
 
-class @Spellbook.Classes.AutoDuplicateInput
+class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings   : {}
   _count      : 0
   _field      : null
   _validators :
     email : /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize

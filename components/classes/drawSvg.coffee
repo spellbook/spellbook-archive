@@ -12,13 +12,12 @@
 #
 # *************************************
 
-class @Spellbook.Classes.DrawSvg
+class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Instance Variables
   # -------------------------------------
 
-  _settings     : {}
   _paths        : []
   _lengths      : []
   _currentFrame : 0
@@ -27,20 +26,14 @@ class @Spellbook.Classes.DrawSvg
   _progress     : 0
 
   # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor: ( @options ) -> @init()
-
-  # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init: ( options ) ->
     @_settings = $.extend
-      $element : $( '.js-drawSvg' ),
+      $element : $( '.js-drawSvg' )
       prefix   : 'path'
-    , @options
+    , options
 
     @_setStorage()
 

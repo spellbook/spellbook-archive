@@ -1,7 +1,14 @@
-var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-this.Spellbook.Classes.DrawSvg = (function() {
-  DrawSvg.prototype._settings = {};
+this.Spellbook.Classes.DrawSvg = (function(superClass) {
+  extend(DrawSvg, superClass);
+
+  function DrawSvg() {
+    this.draw = bind(this.draw, this);
+    return DrawSvg.__super__.constructor.apply(this, arguments);
+  }
 
   DrawSvg.prototype._paths = [];
 
@@ -15,17 +22,11 @@ this.Spellbook.Classes.DrawSvg = (function() {
 
   DrawSvg.prototype._progress = 0;
 
-  function DrawSvg(options) {
-    this.options = options;
-    this.draw = bind(this.draw, this);
-    this.init();
-  }
-
-  DrawSvg.prototype.init = function() {
+  DrawSvg.prototype.init = function(options) {
     this._settings = $.extend({
       $element: $('.js-drawSvg'),
       prefix: 'path'
-    }, this.options);
+    }, options);
     return this._setStorage();
   };
 
@@ -65,4 +66,4 @@ this.Spellbook.Classes.DrawSvg = (function() {
 
   return DrawSvg;
 
-})();
+})(Spellbook.Classes.Base);

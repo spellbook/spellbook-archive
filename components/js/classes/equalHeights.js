@@ -1,13 +1,16 @@
-this.Spellbook.Classes.EqualHeights = (function() {
-  EqualHeights.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.EqualHeights = (function(superClass) {
+  extend(EqualHeights, superClass);
+
+  function EqualHeights() {
+    return EqualHeights.__super__.constructor.apply(this, arguments);
+  }
 
   EqualHeights.prototype._heights = [];
 
   EqualHeights.prototype._timer = null;
-
-  function EqualHeights(options) {
-    this.init(options);
-  }
 
   EqualHeights.prototype.init = function(options) {
     this._settings = $.extend({
@@ -40,4 +43,4 @@ this.Spellbook.Classes.EqualHeights = (function() {
 
   return EqualHeights;
 
-})();
+})(Spellbook.Classes.Base);

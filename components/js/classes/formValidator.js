@@ -1,5 +1,12 @@
-this.Spellbook.Classes.FormValidator = (function() {
-  FormValidator.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.FormValidator = (function(superClass) {
+  extend(FormValidator, superClass);
+
+  function FormValidator() {
+    return FormValidator.__super__.constructor.apply(this, arguments);
+  }
 
   FormValidator.prototype._input = null;
 
@@ -7,12 +14,7 @@ this.Spellbook.Classes.FormValidator = (function() {
 
   FormValidator.prototype._validators = ['required'];
 
-  function FormValidator(options) {
-    this.options = options;
-    this.init();
-  }
-
-  FormValidator.prototype.init = function() {
+  FormValidator.prototype.init = function(options) {
     this._settings = $.extend({
       $element: $('.js-formValidator'),
       $input: $('.js-formValidator-input'),
@@ -24,7 +26,7 @@ this.Spellbook.Classes.FormValidator = (function() {
       showMessage: true,
       onError: null,
       onSuccess: null
-    }, this.options);
+    }, options);
     return this._setEventHandlers();
   };
 
@@ -156,4 +158,4 @@ this.Spellbook.Classes.FormValidator = (function() {
 
   return FormValidator;
 
-})();
+})(Spellbook.Classes.Base);

@@ -1,8 +1,11 @@
-this.Spellbook.Classes.Toggle = (function() {
-  Toggle.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function Toggle(options) {
-    this.init(options);
+this.Spellbook.Classes.Toggle = (function(superClass) {
+  extend(Toggle, superClass);
+
+  function Toggle() {
+    return Toggle.__super__.constructor.apply(this, arguments);
   }
 
   Toggle.prototype.init = function(options) {
@@ -123,4 +126,4 @@ this.Spellbook.Classes.Toggle = (function() {
 
   return Toggle;
 
-})();
+})(Spellbook.Classes.Base);
