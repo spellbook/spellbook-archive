@@ -21,7 +21,7 @@ If you need any global variables set across the entire namespace, add them to `S
 Components
 ----------
 
-A "component" is either a **Function**, **Class**, or **Module**.
+A "component" is either a **Function** or **Class**.
 
 ### Function
 
@@ -38,7 +38,7 @@ _You can find a template file in `components/templates/helper.coffee`._
 
 #### Service
 
-A service is a function that can perform multiple actions, but a single service, and it is neither a class or module. For example:
+A service is a function that can perform multiple actions, but a single service, and it is not a class. For example:
 
 - `Spellbook.autoSubmit()`
 - `Spellbook.scrollTo()`
@@ -50,12 +50,6 @@ _You can find a template file in `components/templates/service.coffee`._
 A class is, as you'd expect, a CoffeeScript class.
 
 _You can find a template file in `components/templates/class.coffee`._
-
-### Module
-
-A module is written in the [Revealing Module Pattern](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#revealingmodulepatternjavascript).
-
-_You can find a template file in `components/templates/module.coffee`._
 
 Document Ready
 --------------
