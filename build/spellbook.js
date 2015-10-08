@@ -10,8 +10,131 @@ this.Spellbook.Services = {};
 
 this.Spellbook.Inbox = {};
 
-this.Spellbook.Classes.AutoDuplicateInput = (function() {
-  AutoDuplicateInput.prototype._settings = {};
+this.Spellbook.Classes.Base = (function() {
+  Base.prototype._settings = {};
+
+  function Base(options) {
+    this.options = options;
+    if (typeof this.init === "function") {
+      this.init();
+    }
+  }
+
+  return Base;
+
+})();
+
+this.Spellbook.Classes.Singleton = (function() {
+  function Singleton() {}
+
+  Singleton.prototype._instance = null;
+
+  Singleton.getInstance = function() {
+    return this._instance != null ? this._instance : this._instance = (function(func, args, ctor) {
+      ctor.prototype = func.prototype;
+      var child = new ctor, result = func.apply(child, args);
+      return Object(result) === result ? result : child;
+    })(this, arguments, function(){});
+  };
+
+  return Singleton;
+
+})();
+
+this.Spellbook.Helpers.isBlank = function(string) {
+  if (string.trim().length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+this.Spellbook.Helpers.keyCodes = {
+  'enter': 13,
+  'shift': 16,
+  'ctrl': 17,
+  'alt': 18,
+  'esc': 27,
+  'leftarrow': 37,
+  'uparrow': 38,
+  'rightarrow': 39,
+  'downarrow': 40,
+  'comma': 188,
+  'slash': 191,
+  'backslash': 220,
+  '0': 48,
+  '1': 49,
+  '2': 50,
+  '3': 51,
+  '4': 52,
+  '5': 53,
+  '6': 54,
+  '7': 55,
+  '8': 56,
+  '9': 57,
+  'a': 65,
+  'b': 66,
+  'c': 67,
+  'd': 68,
+  'e': 69,
+  'f': 70,
+  'g': 71,
+  'h': 72,
+  'i': 73,
+  'j': 74,
+  'k': 75,
+  'l': 76,
+  'm': 77,
+  'n': 78,
+  'o': 79,
+  'p': 80,
+  'q': 81,
+  'r': 82,
+  's': 83,
+  't': 84,
+  'u': 85,
+  'v': 86,
+  'w': 87,
+  'x': 88,
+  'y': 89,
+  'z': 90
+};
+
+this.Spellbook.Helpers.randomizer = function(collection) {
+  var randomNumber;
+  randomNumber = Math.floor(Math.random() * collection.length);
+  return collection[randomNumber];
+};
+
+this.Spellbook.Helpers.sanitize = function(string) {
+  return string.replace(/(<([^>]+)>)/ig, '');
+};
+
+this.Spellbook.Helpers.slugify = function(string) {
+  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
+};
+
+this.Spellbook.Helpers.uid = function(length) {
+  var id;
+  if (length == null) {
+    length = 10;
+  }
+  id = '';
+  while (id.length < length) {
+    id += Math.random().toString(36).substr(2);
+  }
+  return id.substr(0, length);
+};
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
+  extend(AutoDuplicateInput, superClass);
+
+  function AutoDuplicateInput() {
+    return AutoDuplicateInput.__super__.constructor.apply(this, arguments);
+  }
 
   AutoDuplicateInput.prototype._count = 0;
 
@@ -21,11 +144,7 @@ this.Spellbook.Classes.AutoDuplicateInput = (function() {
     email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   };
 
-  function AutoDuplicateInput(options) {
-    this.init(options);
-  }
-
-  AutoDuplicateInput.prototype.init = function(options) {
+  AutoDuplicateInput.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-autoDuplicateInput'),
       $container: $('.js-autoDuplicateInput-container'),
@@ -36,7 +155,7 @@ this.Spellbook.Classes.AutoDuplicateInput = (function() {
       onDuplicate: null,
       onInvalid: null,
       onValid: null
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 
@@ -93,18 +212,21 @@ this.Spellbook.Classes.AutoDuplicateInput = (function() {
 
   return AutoDuplicateInput;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.CharacterCounter = (function() {
-  CharacterCounter.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.CharacterCounter = (function(superClass) {
+  extend(CharacterCounter, superClass);
+
+  function CharacterCounter() {
+    return CharacterCounter.__super__.constructor.apply(this, arguments);
+  }
 
   CharacterCounter.prototype._count = 0;
 
-  function CharacterCounter(options) {
-    this.init(options);
-  }
-
-  CharacterCounter.prototype.init = function(options) {
+  CharacterCounter.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-characterCounter'),
       $label: $('.js-characterCounter-label'),
@@ -116,7 +238,7 @@ this.Spellbook.Classes.CharacterCounter = (function() {
       onMinPreceeded: null,
       onMaxExceeded: null,
       onConditionsMet: null
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 
@@ -159,24 +281,27 @@ this.Spellbook.Classes.CharacterCounter = (function() {
 
   return CharacterCounter;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.Dematerialize = (function() {
-  Dematerialize._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  Dematerialize._item = '';
+this.Spellbook.Classes.Dematerialize = (function(superClass) {
+  extend(Dematerialize, superClass);
 
-  function Dematerialize(options) {
-    this.options = options;
+  function Dematerialize() {
+    return Dematerialize.__super__.constructor.apply(this, arguments);
+  }
+
+  Dematerialize.prototype._item = '';
+
+  Dematerialize.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-dematerialize'),
       $trigger: $('.js-dematerialize-trigger'),
       itemTitle: 'hidden_element',
       hiddenClass: 'is-hidden'
     }, this.options);
-  }
-
-  Dematerialize.prototype.init = function() {
     this._setEventHandlers();
     return this._setInitialState();
   };
@@ -228,14 +353,16 @@ this.Spellbook.Classes.Dematerialize = (function() {
 
   return Dematerialize;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.Dispatcher = (function() {
-  Dispatcher.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function Dispatcher(options) {
-    this.options = options;
-    this.init();
+this.Spellbook.Classes.Dispatcher = (function(superClass) {
+  extend(Dispatcher, superClass);
+
+  function Dispatcher() {
+    return Dispatcher.__super__.constructor.apply(this, arguments);
   }
 
   Dispatcher.prototype.init = function() {
@@ -295,12 +422,19 @@ this.Spellbook.Classes.Dispatcher = (function() {
 
   return Dispatcher;
 
-})();
+})(Spellbook.Classes.Base);
 
-var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-this.Spellbook.Classes.DrawSvg = (function() {
-  DrawSvg.prototype._settings = {};
+this.Spellbook.Classes.DrawSvg = (function(superClass) {
+  extend(DrawSvg, superClass);
+
+  function DrawSvg() {
+    this.draw = bind(this.draw, this);
+    return DrawSvg.__super__.constructor.apply(this, arguments);
+  }
 
   DrawSvg.prototype._paths = [];
 
@@ -313,12 +447,6 @@ this.Spellbook.Classes.DrawSvg = (function() {
   DrawSvg.prototype._handle = 0;
 
   DrawSvg.prototype._progress = 0;
-
-  function DrawSvg(options) {
-    this.options = options;
-    this.draw = bind(this.draw, this);
-    this.init();
-  }
 
   DrawSvg.prototype.init = function() {
     this._settings = $.extend({
@@ -364,23 +492,26 @@ this.Spellbook.Classes.DrawSvg = (function() {
 
   return DrawSvg;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.EqualHeights = (function() {
-  EqualHeights.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.EqualHeights = (function(superClass) {
+  extend(EqualHeights, superClass);
+
+  function EqualHeights() {
+    return EqualHeights.__super__.constructor.apply(this, arguments);
+  }
 
   EqualHeights.prototype._heights = [];
 
   EqualHeights.prototype._timer = null;
 
-  function EqualHeights(options) {
-    this.init(options);
-  }
-
-  EqualHeights.prototype.init = function(options) {
+  EqualHeights.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-equalHeights')
-    }, options);
+    }, this.options);
     this._setHeight();
     return this._setEventHandlers();
   };
@@ -408,21 +539,23 @@ this.Spellbook.Classes.EqualHeights = (function() {
 
   return EqualHeights;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.FormValidator = (function() {
-  FormValidator.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.FormValidator = (function(superClass) {
+  extend(FormValidator, superClass);
+
+  function FormValidator() {
+    return FormValidator.__super__.constructor.apply(this, arguments);
+  }
 
   FormValidator.prototype._input = null;
 
   FormValidator.prototype._errors = [];
 
   FormValidator.prototype._validators = ['required'];
-
-  function FormValidator(options) {
-    this.options = options;
-    this.init();
-  }
 
   FormValidator.prototype.init = function() {
     this._settings = $.extend({
@@ -568,22 +701,23 @@ this.Spellbook.Classes.FormValidator = (function() {
 
   return FormValidator;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.HeadingLinks = (function() {
-  var _settings;
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  _settings = {};
+this.Spellbook.Classes.HeadingLinks = (function(superClass) {
+  extend(HeadingLinks, superClass);
 
-  function HeadingLinks(options) {
-    this.init(options);
+  function HeadingLinks() {
+    return HeadingLinks.__super__.constructor.apply(this, arguments);
   }
 
-  HeadingLinks.prototype.init = function(options) {
+  HeadingLinks.prototype.init = function() {
     this._settings = $.extend({
       $element: $('h1, h2, h3, h4, h5'),
       anchorClass: 'anchor'
-    }, options);
+    }, this.options);
     return this._addAnchors();
   };
 
@@ -605,14 +739,16 @@ this.Spellbook.Classes.HeadingLinks = (function() {
 
   return HeadingLinks;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.KeyboardEvents = (function() {
-  KeyboardEvents.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function KeyboardEvents(options) {
-    this.options = options;
-    this.init();
+this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
+  extend(KeyboardEvents, superClass);
+
+  function KeyboardEvents() {
+    return KeyboardEvents.__super__.constructor.apply(this, arguments);
   }
 
   KeyboardEvents.prototype.init = function() {
@@ -660,18 +796,21 @@ this.Spellbook.Classes.KeyboardEvents = (function() {
 
   return KeyboardEvents;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.LiveSearch = (function() {
-  LiveSearch.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.LiveSearch = (function(superClass) {
+  extend(LiveSearch, superClass);
+
+  function LiveSearch() {
+    return LiveSearch.__super__.constructor.apply(this, arguments);
+  }
 
   LiveSearch.prototype._query = '';
 
-  function LiveSearch(options) {
-    this.init(options);
-  }
-
-  LiveSearch.prototype.init = function(options) {
+  LiveSearch.prototype.init = function() {
     var _settings;
     _settings = $.extend({
       $element: $('.js-search'),
@@ -685,7 +824,7 @@ this.Spellbook.Classes.LiveSearch = (function() {
       onEmpty: null,
       onFound: null,
       onKeyup: null
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 
@@ -753,20 +892,23 @@ this.Spellbook.Classes.LiveSearch = (function() {
 
   return LiveSearch;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.Modal = (function() {
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.Modal = (function(superClass) {
+  extend(Modal, superClass);
+
+  function Modal() {
+    return Modal.__super__.constructor.apply(this, arguments);
+  }
+
   Modal.prototype._$modal = null;
 
   Modal.prototype._$backdrop = null;
 
-  Modal.prototype._settings = {};
-
-  function Modal(options) {
-    this.init(options);
-  }
-
-  Modal.prototype.init = function(options) {
+  Modal.prototype.init = function() {
     this._settings = $.extend({
       $trigger: $('.js-modal-trigger'),
       $close: $('.js-modal-close'),
@@ -775,7 +917,7 @@ this.Spellbook.Classes.Modal = (function() {
       activeClass: 'is-active',
       inactiveClass: 'is-inactive',
       activeBodyClass: 'is-modal-active'
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 
@@ -818,9 +960,11 @@ this.Spellbook.Classes.Modal = (function() {
         })(this), 25);
       case 'close':
         this._$backdrop.removeClass(this._settings.activeClass);
-        return setTimeout(function() {
-          return this._$backdrop.remove();
-        }, 500);
+        return setTimeout((function(_this) {
+          return function() {
+            return _this._$backdrop.remove();
+          };
+        })(this), 500);
     }
   };
 
@@ -865,18 +1009,21 @@ this.Spellbook.Classes.Modal = (function() {
 
   return Modal;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.QuantityInput = (function() {
-  QuantityInput.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.QuantityInput = (function(superClass) {
+  extend(QuantityInput, superClass);
+
+  function QuantityInput() {
+    return QuantityInput.__super__.constructor.apply(this, arguments);
+  }
 
   QuantityInput.prototype._value = null;
 
-  function QuantityInput(options) {
-    this.init(options);
-  }
-
-  QuantityInput.prototype.init = function(options) {
+  QuantityInput.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-quantityInput'),
       $field: $('.js-quantityInput-field'),
@@ -890,7 +1037,7 @@ this.Spellbook.Classes.QuantityInput = (function() {
       onIncrease: null,
       onDecrease: null,
       onTargetUpdate: null
-    }, options);
+    }, this.options);
     this._setValue();
     return this._setEventHandlers();
   };
@@ -957,19 +1104,21 @@ this.Spellbook.Classes.QuantityInput = (function() {
 
   return QuantityInput;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.QueryParams = (function() {
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.QueryParams = (function(superClass) {
+  extend(QueryParams, superClass);
+
+  function QueryParams() {
+    return QueryParams.__super__.constructor.apply(this, arguments);
+  }
+
   QueryParams.prototype.params = {};
 
   QueryParams.prototype.variables = [];
-
-  QueryParams.prototype._settings = {};
-
-  function QueryParams(options) {
-    this.options = options;
-    this.init();
-  }
 
   QueryParams.prototype.init = function() {
     this._settings = $.extend({
@@ -1035,21 +1184,24 @@ this.Spellbook.Classes.QueryParams = (function() {
 
   return QueryParams;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.SaveProgress = (function() {
-  SaveProgress.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function SaveProgress(options) {
-    this.init(options);
+this.Spellbook.Classes.SaveProgress = (function(superClass) {
+  extend(SaveProgress, superClass);
+
+  function SaveProgress() {
+    return SaveProgress.__super__.constructor.apply(this, arguments);
   }
 
-  SaveProgress.prototype.init = function(options) {
+  SaveProgress.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-saveProgress'),
       $container: $('.js-saveProgress-container'),
       dataAttribute: 'saveprogress'
-    }, options);
+    }, this.options);
     this._restoreProgress();
     return this._setEventHandlers();
   };
@@ -1101,20 +1253,23 @@ this.Spellbook.Classes.SaveProgress = (function() {
 
   return SaveProgress;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.SelectText = (function() {
-  SelectText.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function SelectText(options) {
-    this.init(options);
+this.Spellbook.Classes.SelectText = (function(superClass) {
+  extend(SelectText, superClass);
+
+  function SelectText() {
+    return SelectText.__super__.constructor.apply(this, arguments);
   }
 
-  SelectText.prototype.init = function(options) {
+  SelectText.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-selectText'),
       onClick: null
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 
@@ -1147,16 +1302,19 @@ this.Spellbook.Classes.SelectText = (function() {
 
   return SelectText;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.Share = (function() {
-  Share.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function Share(options) {
-    this.init(options);
+this.Spellbook.Classes.Share = (function(superClass) {
+  extend(Share, superClass);
+
+  function Share() {
+    return Share.__super__.constructor.apply(this, arguments);
   }
 
-  Share.prototype.init = function(options) {
+  Share.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-share'),
       popup: {
@@ -1165,7 +1323,7 @@ this.Spellbook.Classes.Share = (function() {
         left: 0,
         top: 0
       }
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 
@@ -1202,21 +1360,24 @@ this.Spellbook.Classes.Share = (function() {
 
   return Share;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.ShowPassword = (function() {
-  ShowPassword.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function ShowPassword(options) {
-    this.init(options);
+this.Spellbook.Classes.ShowPassword = (function(superClass) {
+  extend(ShowPassword, superClass);
+
+  function ShowPassword() {
+    return ShowPassword.__super__.constructor.apply(this, arguments);
   }
 
-  ShowPassword.prototype.init = function(options) {
+  ShowPassword.prototype.init = function() {
     this._settings = $.extend({
       $input: $('.js-showPassword-input'),
       $toggle: $('.js-showPassword-toggle'),
       showByDefault: false
-    }, options);
+    }, this.options);
     this._setEventHandlers();
     if (this._settings.showByDefault) {
       return this._showPassword();
@@ -1244,40 +1405,26 @@ this.Spellbook.Classes.ShowPassword = (function() {
 
   return ShowPassword;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.Singleton = (function() {
-  function Singleton() {}
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  Singleton.prototype._instance = null;
+this.Spellbook.Classes.StateUrls = (function(superClass) {
+  extend(StateUrls, superClass);
 
-  Singleton.getInstance = function() {
-    return this._instance != null ? this._instance : this._instance = (function(func, args, ctor) {
-      ctor.prototype = func.prototype;
-      var child = new ctor, result = func.apply(child, args);
-      return Object(result) === result ? result : child;
-    })(this, arguments, function(){});
-  };
-
-  return Singleton;
-
-})();
-
-this.Spellbook.Classes.StateUrls = (function() {
-  StateUrls.prototype._settings = {};
-
-  function StateUrls(options) {
-    this.init(options);
+  function StateUrls() {
+    return StateUrls.__super__.constructor.apply(this, arguments);
   }
 
-  StateUrls.prototype.init = function(options) {
+  StateUrls.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-stateUrls'),
       $link: $('.js-stateUrls-link'),
       hiddenClass: 'is-hidden',
       activeClass: 'is-active',
       dataAttribute: 'state'
-    }, options);
+    }, this.options);
     this._setInitialState(this._getCurrentState());
     return this._setEventHandlers();
   };
@@ -1329,16 +1476,19 @@ this.Spellbook.Classes.StateUrls = (function() {
 
   return StateUrls;
 
-})();
+})(Spellbook.Classes.Base);
 
-this.Spellbook.Classes.Toggle = (function() {
-  Toggle.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function Toggle(options) {
-    this.init(options);
+this.Spellbook.Classes.Toggle = (function(superClass) {
+  extend(Toggle, superClass);
+
+  function Toggle() {
+    return Toggle.__super__.constructor.apply(this, arguments);
   }
 
-  Toggle.prototype.init = function(options) {
+  Toggle.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-toggle'),
       proximity: 'next',
@@ -1349,7 +1499,7 @@ this.Spellbook.Classes.Toggle = (function() {
       onClick: null,
       onMouseover: null,
       onMouseout: null
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 
@@ -1456,92 +1606,7 @@ this.Spellbook.Classes.Toggle = (function() {
 
   return Toggle;
 
-})();
-
-this.Spellbook.Helpers.isBlank = function(string) {
-  if (string.trim().length === 0) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-this.Spellbook.Helpers.keyCodes = {
-  'enter': 13,
-  'shift': 16,
-  'ctrl': 17,
-  'alt': 18,
-  'esc': 27,
-  'leftarrow': 37,
-  'uparrow': 38,
-  'rightarrow': 39,
-  'downarrow': 40,
-  'comma': 188,
-  'slash': 191,
-  'backslash': 220,
-  '0': 48,
-  '1': 49,
-  '2': 50,
-  '3': 51,
-  '4': 52,
-  '5': 53,
-  '6': 54,
-  '7': 55,
-  '8': 56,
-  '9': 57,
-  'a': 65,
-  'b': 66,
-  'c': 67,
-  'd': 68,
-  'e': 69,
-  'f': 70,
-  'g': 71,
-  'h': 72,
-  'i': 73,
-  'j': 74,
-  'k': 75,
-  'l': 76,
-  'm': 77,
-  'n': 78,
-  'o': 79,
-  'p': 80,
-  'q': 81,
-  'r': 82,
-  's': 83,
-  't': 84,
-  'u': 85,
-  'v': 86,
-  'w': 87,
-  'x': 88,
-  'y': 89,
-  'z': 90
-};
-
-this.Spellbook.Helpers.randomizer = function(collection) {
-  var randomNumber;
-  randomNumber = Math.floor(Math.random() * collection.length);
-  return collection[randomNumber];
-};
-
-this.Spellbook.Helpers.sanitize = function(string) {
-  return string.replace(/(<([^>]+)>)/ig, '');
-};
-
-this.Spellbook.Helpers.slugify = function(string) {
-  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-};
-
-this.Spellbook.Helpers.uid = function(length) {
-  var id;
-  if (length == null) {
-    length = 10;
-  }
-  id = '';
-  while (id.length < length) {
-    id += Math.random().toString(36).substr(2);
-  }
-  return id.substr(0, length);
-};
+})(Spellbook.Classes.Base);
 
 this.Spellbook.Services.autoSubmit = function(options) {
   var settings;
