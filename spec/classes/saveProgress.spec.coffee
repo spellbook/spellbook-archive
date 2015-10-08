@@ -1,4 +1,4 @@
-describe 'Spellbook.Modules.SaveProgress', ->
+describe 'Spellbook.Classes.SaveProgress', ->
   beforeEach ->
     loadFixtures( 'save_progress.html' )
 
@@ -8,7 +8,7 @@ describe 'Spellbook.Modules.SaveProgress', ->
     @value     = 'string'
 
   it 'should save input element values to localStorage on input event', ->
-    Spellbook.Modules.SaveProgress.init()
+    new Spellbook.Classes.SaveProgress()
 
     @element.val( @value )
     @element.trigger( 'input' )
@@ -18,12 +18,12 @@ describe 'Spellbook.Modules.SaveProgress', ->
   it 'should fill input elements with localStorage values when initialized', ->
     @element.val( '' )
 
-    Spellbook.Modules.SaveProgress.init()
+    new Spellbook.Classes.SaveProgress()
 
     expect( @element.val() ).toEqual( @value )
 
   it 'should remove container-specific localStorage items on form submission', ->
-    Spellbook.Modules.SaveProgress.init()
+    new Spellbook.Classes.SaveProgress()
 
     localStorage.setItem( @key, @value )
     localStorage.setItem( 'keep', 'me' )
