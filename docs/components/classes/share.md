@@ -1,4 +1,4 @@
-Spellbook.Modules.Share
+Spellbook.Classes.Share
 =======================
 
 Markup
@@ -14,5 +14,5 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.Modules.Share.init()
+new Spellbook.Classes.Share()
 ```

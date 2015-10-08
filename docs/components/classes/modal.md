@@ -1,4 +1,4 @@
-Spellbook.Modules.Modal
+Spellbook.Classes.Modal
 =======================
 
 [CodePen](http://codepen.io/drewbarontini/pen/7ecffac2796ca9a1826c519184298097)
@@ -34,17 +34,17 @@ JavaScript (CoffeeScript)
 To instantiate the modal:
 
 ```coffeescript
-Spellbook.Modules.Modal.init()
+modal = new Spellbook.Classes.Modal()
 ```
 
 To trigger the modal via JavaScript:
 
 ```coffeescript
 # Open the modal
-Spellbook.Modules.Modal.init().trigger( $( '#modal' ), 'open' )
+modal.trigger( $( '#modal' ), 'open' )
 
 # Close the modal
-Spellbook.Modules.Modal.init().trigger( $( '#modal' ), 'close' )
+modal.trigger( $( '#modal' ), 'close' )
 ```
 
 CSS (Sass)
@@ -292,4 +292,3 @@ $modal-close-fontSize: 150% !default
   @if $modal-close-position == 'inside'
     position: absolute
 ```
-

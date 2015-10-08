@@ -1,4 +1,4 @@
-Spellbook.Modules.SaveProgress
+Spellbook.Classes.SaveProgress
 ==============================
 
 Markup
@@ -15,5 +15,5 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.Modules.SaveProgress.init()
+new Spellbook.Classes.SaveProgress()
 ```

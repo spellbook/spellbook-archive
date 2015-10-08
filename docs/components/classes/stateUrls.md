@@ -1,4 +1,4 @@
-Spellbook.Modules.StateUrls
+Spellbook.Classes.StateUrls
 ===========================
 
 Markup
@@ -41,5 +41,5 @@ JavaScript (CoffeeScript)
 -------------------------
 
 ```coffeescript
-Spellbook.Modules.StateUrls.init()
+new Spellbook.Classes.StateUrls()
 ```
