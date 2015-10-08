@@ -1,13 +1,16 @@
-this.Spellbook.Classes.CharacterCounter = (function() {
-  CharacterCounter.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.CharacterCounter = (function(superClass) {
+  extend(CharacterCounter, superClass);
+
+  function CharacterCounter() {
+    return CharacterCounter.__super__.constructor.apply(this, arguments);
+  }
 
   CharacterCounter.prototype._count = 0;
 
-  function CharacterCounter(options) {
-    this.init(options);
-  }
-
-  CharacterCounter.prototype.init = function(options) {
+  CharacterCounter.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-characterCounter'),
       $label: $('.js-characterCounter-label'),
@@ -19,7 +22,7 @@ this.Spellbook.Classes.CharacterCounter = (function() {
       onMinPreceeded: null,
       onMaxExceeded: null,
       onConditionsMet: null
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 
@@ -62,4 +65,4 @@ this.Spellbook.Classes.CharacterCounter = (function() {
 
   return CharacterCounter;
 
-})();
+})(Spellbook.Classes.Base);

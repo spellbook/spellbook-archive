@@ -1,17 +1,18 @@
-this.Spellbook.Classes.HeadingLinks = (function() {
-  var _settings;
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  _settings = {};
+this.Spellbook.Classes.HeadingLinks = (function(superClass) {
+  extend(HeadingLinks, superClass);
 
-  function HeadingLinks(options) {
-    this.init(options);
+  function HeadingLinks() {
+    return HeadingLinks.__super__.constructor.apply(this, arguments);
   }
 
-  HeadingLinks.prototype.init = function(options) {
+  HeadingLinks.prototype.init = function() {
     this._settings = $.extend({
       $element: $('h1, h2, h3, h4, h5'),
       anchorClass: 'anchor'
-    }, options);
+    }, this.options);
     return this._addAnchors();
   };
 
@@ -33,4 +34,4 @@ this.Spellbook.Classes.HeadingLinks = (function() {
 
   return HeadingLinks;
 
-})();
+})(Spellbook.Classes.Base);

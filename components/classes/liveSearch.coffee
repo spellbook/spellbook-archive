@@ -19,26 +19,19 @@
 #
 # *************************************
 
-class @Spellbook.Classes.LiveSearch
+class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings : {}
-  _query    : ''
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+  _query : ''
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     _settings = $.extend
       $element     : $( '.js-search' )
       $query       : $( '.js-search-query' )
@@ -51,7 +44,7 @@ class @Spellbook.Classes.LiveSearch
       onEmpty      : null
       onFound      : null
       onKeyup      : null
-    , options
+    , @options
 
     @_setEventHandlers()
 

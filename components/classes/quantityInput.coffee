@@ -20,26 +20,19 @@
 #
 # *************************************
 
-class @Spellbook.Classes.QuantityInput
+class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings : {}
-  _value    : null
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+  _value : null
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element          : $( '.js-quantityInput' )
       $field            : $( '.js-quantityInput-field' )
@@ -53,7 +46,7 @@ class @Spellbook.Classes.QuantityInput
       onIncrease        : null
       onDecrease        : null
       onTargetUpdate    : null
-    , options
+    , @options
 
     @_setValue()
     @_setEventHandlers()

@@ -13,25 +13,13 @@
 #
 # *************************************
 
-class @Spellbook.Classes.Share
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.Share extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element : $( '.js-share' )
       popup    :
@@ -39,7 +27,7 @@ class @Spellbook.Classes.Share
         width  : 575
         left   : 0
         top    : 0
-    , options
+    , @options
 
     @_setEventHandlers()
 

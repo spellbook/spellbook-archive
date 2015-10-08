@@ -1,6 +1,22 @@
 Changelog
 =========
 
+2.1.0 - 2015-10-08
+-------------------
+
+### Added
+
+- Spellbook.Classes.Base
+- Update classes to extend Base class
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 2.0.1 - 2015-10-08
 -------------------
 

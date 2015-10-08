@@ -10,29 +10,17 @@
 #
 # *************************************
 
-class @Spellbook.Classes.SelectText
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.SelectText extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element : $( '.js-selectText' )
       onClick  : null
-    , options
+    , @options
 
     @_setEventHandlers()
 

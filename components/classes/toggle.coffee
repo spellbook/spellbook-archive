@@ -17,25 +17,13 @@
 #
 # *************************************
 
-class @Spellbook.Classes.Toggle
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element     : $( '.js-toggle' )
       proximity    : 'next' # prev, parent, nextParent, prevParent, $( '.element' ), '> span'
@@ -46,7 +34,7 @@ class @Spellbook.Classes.Toggle
       onClick      : null
       onMouseover  : null
       onMouseout   : null
-    , options
+    , @options
 
     @_setEventHandlers()
 

@@ -11,30 +11,18 @@
 #
 # *************************************
 
-class @Spellbook.Classes.ShowPassword
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.ShowPassword extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $input        : $( '.js-showPassword-input' )
       $toggle       : $( '.js-showPassword-toggle' )
       showByDefault : false
-    , options
+    , @options
 
     @_setEventHandlers()
     @_showPassword() if @_settings.showByDefault

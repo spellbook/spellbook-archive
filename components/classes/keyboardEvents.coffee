@@ -9,23 +9,12 @@
 #
 # *************************************
 
-class @Spellbook.Classes.KeyboardEvents
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor: ( @options ) -> @init()
+class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
+
   init: ->
     @_settings = $.extend
       events : []

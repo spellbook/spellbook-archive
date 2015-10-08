@@ -1,9 +1,11 @@
-this.Spellbook.Classes.KeyboardEvents = (function() {
-  KeyboardEvents.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function KeyboardEvents(options) {
-    this.options = options;
-    this.init();
+this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
+  extend(KeyboardEvents, superClass);
+
+  function KeyboardEvents() {
+    return KeyboardEvents.__super__.constructor.apply(this, arguments);
   }
 
   KeyboardEvents.prototype.init = function() {
@@ -51,4 +53,4 @@ this.Spellbook.Classes.KeyboardEvents = (function() {
 
   return KeyboardEvents;
 
-})();
+})(Spellbook.Classes.Base);

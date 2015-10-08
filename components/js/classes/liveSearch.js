@@ -1,13 +1,16 @@
-this.Spellbook.Classes.LiveSearch = (function() {
-  LiveSearch.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.LiveSearch = (function(superClass) {
+  extend(LiveSearch, superClass);
+
+  function LiveSearch() {
+    return LiveSearch.__super__.constructor.apply(this, arguments);
+  }
 
   LiveSearch.prototype._query = '';
 
-  function LiveSearch(options) {
-    this.init(options);
-  }
-
-  LiveSearch.prototype.init = function(options) {
+  LiveSearch.prototype.init = function() {
     var _settings;
     _settings = $.extend({
       $element: $('.js-search'),
@@ -21,7 +24,7 @@ this.Spellbook.Classes.LiveSearch = (function() {
       onEmpty: null,
       onFound: null,
       onKeyup: null
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 
@@ -89,4 +92,4 @@ this.Spellbook.Classes.LiveSearch = (function() {
 
   return LiveSearch;
 
-})();
+})(Spellbook.Classes.Base);

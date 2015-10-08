@@ -18,26 +18,19 @@
 #
 # *************************************
 
-class @Spellbook.Classes.CharacterCounter
+class @Spellbook.Classes.CharacterCounter extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings : {}
-  _count    : 0
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+  _count : 0
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element        : $( '.js-characterCounter' )
       $label          : $( '.js-characterCounter-label' )
@@ -49,7 +42,7 @@ class @Spellbook.Classes.CharacterCounter
       onMinPreceeded  : null
       onMaxExceeded   : null
       onConditionsMet : null
-    , options
+    , @options
 
     @_setEventHandlers()
 

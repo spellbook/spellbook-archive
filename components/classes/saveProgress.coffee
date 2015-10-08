@@ -11,30 +11,18 @@
 #
 # *************************************
 
-class @Spellbook.Classes.SaveProgress
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( options ) -> @init( options )
+class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element      : $( '.js-saveProgress' )
       $container    : $( '.js-saveProgress-container' )
       dataAttribute : 'saveprogress'
-    , options
+    , @options
 
     @_restoreProgress()
     @_setEventHandlers()

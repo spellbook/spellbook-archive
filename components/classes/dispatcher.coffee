@@ -12,19 +12,7 @@
 #
 # *************************************
 
-class @Spellbook.Classes.Dispatcher
-
-  # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor: ( @options ) -> @init()
+class @Spellbook.Classes.Dispatcher extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Initialize

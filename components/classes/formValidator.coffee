@@ -18,22 +18,15 @@
 #
 # *************************************
 
-class @Spellbook.Classes.FormValidator
+class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings   : {}
   _input      : null
   _errors     : []
   _validators : [ 'required' ]
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor: ( @options ) -> @init()
 
   # -------------------------------------
   #   Initialize

@@ -12,20 +12,19 @@
 #
 # *************************************
 
-class @Spellbook.Classes.Dematerialize
+class @Spellbook.Classes.Dematerialize extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  @_settings : {}
-  @_item     : ''
+  _item : ''
 
   # -------------------------------------
-  #   Constructor
+  #   Initialize
   # -------------------------------------
 
-  constructor: ( @options ) ->
+  init: ->
     @_settings = $.extend
       $element    : $( '.js-dematerialize' )
       $trigger    : $( '.js-dematerialize-trigger' )
@@ -33,11 +32,6 @@ class @Spellbook.Classes.Dematerialize
       hiddenClass : 'is-hidden'
     , @options
 
-  # -------------------------------------
-  #   Initialize
-  # -------------------------------------
-
-  init: ->
     @_setEventHandlers()
     @_setInitialState()
 
@@ -93,5 +87,4 @@ class @Spellbook.Classes.Dematerialize
 # -------------------------------------
 #
 # element = new Spellbook.Classes.Dematerialize()
-# element.init()
 #

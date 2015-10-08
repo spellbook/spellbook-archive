@@ -9,7 +9,7 @@
 #
 # *************************************
 
-class @Spellbook.Classes.QueryParams
+class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
 
   # -------------------------------------
   #   Instance Variables
@@ -17,13 +17,6 @@ class @Spellbook.Classes.QueryParams
 
   params    : {}
   variables : []
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor: ( @options ) -> @init()
 
   # -------------------------------------
   #   Initializer
