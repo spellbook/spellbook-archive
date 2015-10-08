@@ -11,58 +11,58 @@
 #
 # *************************************
 
-@Spellbook.Modules.ShowPassword = do ->
+class @Spellbook.Classes.ShowPassword
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings = {}
+  _settings : {}
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init = ( options ) ->
-    _settings = $.extend
+  init: ( options ) ->
+    @_settings = $.extend
       $input        : $( '.js-showPassword-input' )
       $toggle       : $( '.js-showPassword-toggle' )
       showByDefault : false
     , options
 
-    _setEventHandlers()
-    _showPassword() if _settings.showByDefault
+    @_setEventHandlers()
+    @_showPassword() if @_settings.showByDefault
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers = ->
-    _settings.$toggle.on 'change', ( event ) ->
-      show = $(@).prop( 'checked' )
+  _setEventHandlers: ->
+    @_settings.$toggle.on 'change', ( event ) =>
+      show = $( event.currentTarget ).prop( 'checked' )
 
       if show
-        _showPassword()
+        @_showPassword()
       else
-        _settings.$input.attr( 'type', 'password' )
+        @_settings.$input.attr( 'type', 'password' )
 
   # -------------------------------------
   #   Show Password
   # -------------------------------------
 
-  _showPassword = ->
-    _settings.$input.attr( 'type', 'text' )
-    _settings.$toggle.prop( 'checked', true )
-
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
-
-  init : init
+  _showPassword: ->
+    @_settings.$input.attr( 'type', 'text' )
+    @_settings.$toggle.prop( 'checked', true )
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.ShowPassword.init()
+# new Spellbook.Classes.ShowPassword()
 #

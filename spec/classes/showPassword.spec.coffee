@@ -1,17 +1,17 @@
-describe 'Spellbook.Modules.ShowPassword', ->
+describe 'Spellbook.Classes.ShowPassword', ->
   beforeEach ->
     loadFixtures( 'show_password.html' )
 
     @input  = $( '.js-showPassword-input' )
     @toggle = $( '.js-showPassword-toggle' )
 
-    Spellbook.Modules.ShowPassword.init()
+    new Spellbook.Classes.ShowPassword()
 
   it 'should show the standard password input by default', ->
     expect( @input ).toHaveAttr( 'type', 'password' )
 
   it 'should show the password if showByDefault is true', ->
-    Spellbook.Modules.ShowPassword.init
+    new Spellbook.Classes.ShowPassword
       showByDefault: true
 
     expect( @input ).toHaveAttr( 'type', 'text' )
