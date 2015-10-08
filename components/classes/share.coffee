@@ -13,20 +13,26 @@
 #
 # *************************************
 
-@Spellbook.Modules.Share = do ->
+class @Spellbook.Classes.Share
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings = {}
+  _settings : {}
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init = ( options ) ->
-    _settings = $.extend
+  init: ( options ) ->
+    @_settings = $.extend
       $element : $( '.js-share' )
       popup    :
         height : 400
@@ -35,22 +41,22 @@
         top    : 0
     , options
 
-    _setEventHandlers()
+    @_setEventHandlers()
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers = ->
-    _settings.$element.on 'click', ( event ) ->
+  _setEventHandlers: ->
+    @_settings.$element.on 'click', ( event ) =>
       event.preventDefault()
 
-      $element = $(@)
+      $element = $( event.currentTarget )
       url      = $element.attr( 'href' )
       service  = $element.data( 'share-service' )
       content  = $element.data( 'share-text' )
 
-      _triggerPopup( service, url, content )
+      @_triggerPopup( service, url, content )
 
   # -------------------------------------
   #   Trigger Popup
@@ -62,12 +68,12 @@
   #
   # -------------------------------------
 
-  _triggerPopup = ( service, url, content ) ->
+  _triggerPopup: ( service, url, content ) ->
     popupOptions =
-      "width=#{ _settings.popup.width },
-       height=#{ _settings.popup.height },
-       top=#{ _settings.popup.top },
-       left=#{ _settings.popup.left }"
+      "width=#{ @_settings.popup.width },
+       height=#{ @_settings.popup.height },
+       top=#{ @_settings.popup.top },
+       left=#{ @_settings.popup.left }"
 
     switch service
       when 'twitter'
@@ -80,15 +86,9 @@
 
     window.open( url, service, popupOptions )
 
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
-
-  init : init
-
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.Share.init()
+# new Spellbook.Classes.Share()
 #

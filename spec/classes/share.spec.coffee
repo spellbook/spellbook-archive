@@ -1,11 +1,11 @@
-describe 'Spellbook.Modules.Share', ->
+describe 'Spellbook.Classes.Share', ->
   beforeEach ->
     loadFixtures( 'share.html' )
 
     @element     = $( '.js-share' )
     @activeClass = 'is-active'
 
-    Spellbook.Modules.Share.init()
+    new Spellbook.Classes.Share()
 
   it 'should trigger a click on the service element', ->
     spyOnEvent( @element, 'click' )

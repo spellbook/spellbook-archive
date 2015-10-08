@@ -1,9 +1,9 @@
-describe('Spellbook.Modules.Share', function() {
+describe('Spellbook.Classes.Share', function() {
   beforeEach(function() {
     loadFixtures('share.html');
     this.element = $('.js-share');
     this.activeClass = 'is-active';
-    return Spellbook.Modules.Share.init();
+    return new Spellbook.Classes.Share();
   });
   return it('should trigger a click on the service element', function() {
     spyOnEvent(this.element, 'click');
