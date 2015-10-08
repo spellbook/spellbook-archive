@@ -6,11 +6,160 @@ this.Spellbook.Classes = {};
 
 this.Spellbook.Helpers = {};
 
-this.Spellbook.Modules = {};
-
 this.Spellbook.Services = {};
 
 this.Spellbook.Inbox = {};
+
+this.Spellbook.Classes.AutoDuplicateInput = (function() {
+  AutoDuplicateInput.prototype._settings = {};
+
+  AutoDuplicateInput.prototype._count = 0;
+
+  AutoDuplicateInput.prototype._field = null;
+
+  AutoDuplicateInput.prototype._validators = {
+    email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  };
+
+  function AutoDuplicateInput(options) {
+    this.init(options);
+  }
+
+  AutoDuplicateInput.prototype.init = function(options) {
+    this._settings = $.extend({
+      $element: $('.js-autoDuplicateInput'),
+      $container: $('.js-autoDuplicateInput-container'),
+      clonedDataAttribute: 'cloned',
+      validateDataAttribute: 'validate',
+      invalidClass: 'is-invalid',
+      validClass: 'is-valid',
+      onDuplicate: null,
+      onInvalid: null,
+      onValid: null
+    }, options);
+    return this._setEventHandlers();
+  };
+
+  AutoDuplicateInput.prototype._setEventHandlers = function() {
+    return this._settings.$element.on('keyup', (function(_this) {
+      return function(event) {
+        var base, base1, base2;
+        event.preventDefault();
+        _this._field = $(event.currentTarget);
+        if (_this._isValid()) {
+          _this._setInputState('valid');
+          if (typeof (base = _this._settings).onValid === "function") {
+            base.onValid(_this._settings);
+          }
+          if (_this._field.data('cloned') !== 'true') {
+            _this._duplicate();
+          }
+          return typeof (base1 = _this._settings).onDuplicate === "function" ? base1.onDuplicate(_this._settings, _this._count) : void 0;
+        } else {
+          _this._setInputState('invalid');
+          return typeof (base2 = _this._settings).onInvalid === "function" ? base2.onInvalid(_this._settings) : void 0;
+        }
+      };
+    })(this));
+  };
+
+  AutoDuplicateInput.prototype._getValidationType = function() {
+    return this._field.data(this._settings.validateDataAttribute);
+  };
+
+  AutoDuplicateInput.prototype._isValid = function() {
+    var validator;
+    validator = this._getValidationType(this._field);
+    return this._validators["" + validator].test(this._field.val());
+  };
+
+  AutoDuplicateInput.prototype._duplicate = function() {
+    ++this._count;
+    return this._field.data(this._settings.clonedDataAttribute, 'true').clone(true).appendTo(this._settings.$container).removeClass(this._settings.validClass).val('').data(this._settings.clonedDataAttribute, '');
+  };
+
+  AutoDuplicateInput.prototype._setInputState = function(type) {
+    switch (type) {
+      case 'invalid':
+        return this._field.removeClass(this._settings.validClass).addClass(this._settings.invalidClass);
+      case 'valid':
+        return this._field.removeClass(this._settings.invalidClass).addClass(this._settings.validClass);
+    }
+  };
+
+  AutoDuplicateInput.prototype.getCount = function() {
+    return this._count;
+  };
+
+  return AutoDuplicateInput;
+
+})();
+
+this.Spellbook.Classes.CharacterCounter = (function() {
+  CharacterCounter.prototype._settings = {};
+
+  CharacterCounter.prototype._count = 0;
+
+  function CharacterCounter(options) {
+    this.init(options);
+  }
+
+  CharacterCounter.prototype.init = function(options) {
+    this._settings = $.extend({
+      $element: $('.js-characterCounter'),
+      $label: $('.js-characterCounter-label'),
+      $number: $('.js-characterCounter-number'),
+      errorClass: 'is-error',
+      successClass: 'is-success',
+      minChars: 0,
+      maxChars: 140,
+      onMinPreceeded: null,
+      onMaxExceeded: null,
+      onConditionsMet: null
+    }, options);
+    return this._setEventHandlers();
+  };
+
+  CharacterCounter.prototype._setEventHandlers = function() {
+    return this._settings.$element.on('keyup', (function(_this) {
+      return function(event) {
+        var $element, base, base1, base2;
+        event.preventDefault();
+        $element = $(event.currentTarget);
+        _this._count = $element.val().length;
+        _this._settings.$number.text(_this._count);
+        if (_this._count > _this._settings.maxChars) {
+          _this._toggleState($element, 'error');
+          return typeof (base = _this._settings).onMaxExceeded === "function" ? base.onMaxExceeded(_this._settings) : void 0;
+        } else if (_this._count < _this._settings.minChars) {
+          _this._toggleState($element, 'error');
+          return typeof (base1 = _this._settings).onMinPreceeded === "function" ? base1.onMinPreceeded(_this._settings) : void 0;
+        } else {
+          _this._toggleState($element, 'success');
+          return typeof (base2 = _this._settings).onConditionsMet === "function" ? base2.onConditionsMet(_this._settings) : void 0;
+        }
+      };
+    })(this));
+  };
+
+  CharacterCounter.prototype._toggleState = function(element, state) {
+    switch (state) {
+      case 'error':
+        element.removeClass(this._settings.successClass);
+        this._settings.$label.removeClass(this._settings.successClass);
+        element.addClass(this._settings.errorClass);
+        return this._settings.$label.addClass(this._settings.errorClass);
+      case 'success':
+        element.removeClass(this._settings.errorClass);
+        this._settings.$label.removeClass(this._settings.errorClass);
+        element.addClass(this._settings.successClass);
+        return this._settings.$label.addClass(this._settings.successClass);
+    }
+  };
+
+  return CharacterCounter;
+
+})();
 
 this.Spellbook.Classes.Dematerialize = (function() {
   Dematerialize._settings = {};
@@ -217,6 +366,50 @@ this.Spellbook.Classes.DrawSvg = (function() {
 
 })();
 
+this.Spellbook.Classes.EqualHeights = (function() {
+  EqualHeights.prototype._settings = {};
+
+  EqualHeights.prototype._heights = [];
+
+  EqualHeights.prototype._timer = null;
+
+  function EqualHeights(options) {
+    this.init(options);
+  }
+
+  EqualHeights.prototype.init = function(options) {
+    this._settings = $.extend({
+      $element: $('.js-equalHeights')
+    }, options);
+    this._setHeight();
+    return this._setEventHandlers();
+  };
+
+  EqualHeights.prototype._setHeight = function() {
+    var height;
+    this._settings.$element.css('height', 'auto');
+    this._settings.$element.each((function(_this) {
+      return function(index, elementNode) {
+        return _this._heights.push($(elementNode).height());
+      };
+    })(this));
+    height = Math.max.apply(Math, this._heights);
+    return this._settings.$element.css('height', height);
+  };
+
+  EqualHeights.prototype._setEventHandlers = function() {
+    return $(window).on('resize', (function(_this) {
+      return function() {
+        clearTimeout(_this._timer);
+        return _this._timer = setTimeout(_this._setHeight, 250);
+      };
+    })(this));
+  };
+
+  return EqualHeights;
+
+})();
+
 this.Spellbook.Classes.FormValidator = (function() {
   FormValidator.prototype._settings = {};
 
@@ -377,6 +570,43 @@ this.Spellbook.Classes.FormValidator = (function() {
 
 })();
 
+this.Spellbook.Classes.HeadingLinks = (function() {
+  var _settings;
+
+  _settings = {};
+
+  function HeadingLinks(options) {
+    this.init(options);
+  }
+
+  HeadingLinks.prototype.init = function(options) {
+    this._settings = $.extend({
+      $element: $('h1, h2, h3, h4, h5'),
+      anchorClass: 'anchor'
+    }, options);
+    return this._addAnchors();
+  };
+
+  HeadingLinks.prototype._slugify = function(string) {
+    return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
+  };
+
+  HeadingLinks.prototype._addAnchors = function() {
+    return this._settings.$element.each((function(_this) {
+      return function(index, elementNode) {
+        var $element, slug;
+        $element = $(elementNode);
+        slug = _this._slugify($element.text());
+        $element.attr('id', slug);
+        return $element.prepend("<a class='" + _this._settings.anchorClass + "' href='#" + slug + "'>#</a>");
+      };
+    })(this));
+  };
+
+  return HeadingLinks;
+
+})();
+
 this.Spellbook.Classes.KeyboardEvents = (function() {
   KeyboardEvents.prototype._settings = {};
 
@@ -429,6 +659,303 @@ this.Spellbook.Classes.KeyboardEvents = (function() {
   };
 
   return KeyboardEvents;
+
+})();
+
+this.Spellbook.Classes.LiveSearch = (function() {
+  LiveSearch.prototype._settings = {};
+
+  LiveSearch.prototype._query = '';
+
+  function LiveSearch(options) {
+    this.init(options);
+  }
+
+  LiveSearch.prototype.init = function(options) {
+    var _settings;
+    _settings = $.extend({
+      $element: $('.js-search'),
+      $query: $('.js-search-query'),
+      $container: $('.js-search-container'),
+      itemNode: '.js-search-item',
+      hiddenClass: 'is-hidden',
+      emptyMessage: true,
+      emptyNode: '.js-search-empty',
+      onClear: null,
+      onEmpty: null,
+      onFound: null,
+      onKeyup: null
+    }, options);
+    return this._setEventHandlers();
+  };
+
+  LiveSearch.prototype._setEventHandlers = function() {
+    return this._settings.$element.on('keyup', (function(_this) {
+      return function(event) {
+        var base, base1;
+        _this._query = $(event.currentTarget).val();
+        if (typeof (base = _this._settings).onKeyup === "function") {
+          base.onKeyup(_this._settings);
+        }
+        if (_this._query === '') {
+          $(_this._settings.itemNode).removeClass(_this._settings.hiddenClass);
+          _this._clearEmptyMessage();
+          if (typeof (base1 = _this._settings).onClear === "function") {
+            base1.onClear(_this._settings);
+          }
+        }
+        _this._clearEmptyMessage();
+        return _this._parseDom();
+      };
+    })(this));
+  };
+
+  LiveSearch.prototype._parseDom = function() {
+    this._settings.$query.each((function(_this) {
+      return function(index, elementNode) {
+        var $element, base;
+        $element = $(elementNode);
+        if (_this._isQueryAbsent($element)) {
+          return $element.closest(_this._settings.itemNode).addClass(_this._settings.hiddenClass);
+        } else {
+          $element.closest(_this._settings.itemNode).removeClass(_this._settings.hiddenClass);
+          return typeof (base = _this._settings).onFound === "function" ? base.onFound(_this._settings) : void 0;
+        }
+      };
+    })(this));
+    return this._handleEmptyResults();
+  };
+
+  LiveSearch.prototype._clearEmptyMessages = function() {
+    if (this._settings.emptyMessage && $(this._settings.emptyNode).length > 0) {
+      return $(this._settings.emptyNode).remove();
+    }
+  };
+
+  LiveSearch.prototype._handleEmptyResults = function() {
+    var base, emptyClass;
+    if (this._isEmpty()) {
+      if (this._settings.emptyMessage) {
+        emptyClass = this._settings.emptyNode.replace('.', '');
+      }
+      $("<p class='" + emptyClass + "'>\n  There are no results matching '" + this._query + "'.\n</p>").insertAfter(this._settings.$container);
+      return typeof (base = this._settings).onEmpty === "function" ? base.onEmpty(this._settings) : void 0;
+    }
+  };
+
+  LiveSearch.prototype._isQueryAbsent = function(element) {
+    return element.text().search(new RegExp(this._query, 'i')) < 0;
+  };
+
+  LiveSearch.prototype._isEmpty = function() {
+    return $(this._settings.itemNode + "." + this._settings.hiddenClass).length === $(this._settings.itemNode).length;
+  };
+
+  return LiveSearch;
+
+})();
+
+this.Spellbook.Classes.Modal = (function() {
+  Modal.prototype._$modal = null;
+
+  Modal.prototype._$backdrop = null;
+
+  Modal.prototype._settings = {};
+
+  function Modal(options) {
+    this.init(options);
+  }
+
+  Modal.prototype.init = function(options) {
+    this._settings = $.extend({
+      $trigger: $('.js-modal-trigger'),
+      $close: $('.js-modal-close'),
+      dataAttribute: 'modal',
+      backdropClass: 'modal-backdrop',
+      activeClass: 'is-active',
+      inactiveClass: 'is-inactive',
+      activeBodyClass: 'is-modal-active'
+    }, options);
+    return this._setEventHandlers();
+  };
+
+  Modal.prototype.trigger = function($element, event, removeBackdrop, callback) {
+    if (removeBackdrop == null) {
+      removeBackdrop = false;
+    }
+    if (callback == null) {
+      callback = null;
+    }
+    this._$modal = $element;
+    switch (event) {
+      case 'open':
+        $element.addClass(this._settings.activeClass);
+        $('body').addClass(this._settings.activeBodyClass);
+        break;
+      case 'close':
+        $element.removeClass(this._settings.activeClass);
+        $('body').removeClass(this._settings.activeBodyClass);
+        this._cleanupEvents();
+    }
+    if (!removeBackdrop) {
+      this._toggleOverlay(event);
+    }
+    if (typeof callback === "function") {
+      callback();
+    }
+    return this._setActiveEventHandlers();
+  };
+
+  Modal.prototype._toggleOverlay = function(event) {
+    switch (event) {
+      case 'open':
+        $('<div class=' + this._settings.backdropClass + '></div>').appendTo($('body'));
+        this._$backdrop = $("." + this._settings.backdropClass);
+        return setTimeout((function(_this) {
+          return function() {
+            return _this._$backdrop.addClass(_this._settings.activeClass);
+          };
+        })(this), 25);
+      case 'close':
+        this._$backdrop.removeClass(this._settings.activeClass);
+        return setTimeout(function() {
+          return this._$backdrop.remove();
+        }, 500);
+    }
+  };
+
+  Modal.prototype._setEventHandlers = function() {
+    return this._settings.$trigger.on('click', (function(_this) {
+      return function(event) {
+        var selector;
+        event.preventDefault();
+        selector = $(event.currentTarget).data(_this._settings.dataAttribute);
+        _this._$modal = $(selector);
+        return _this.trigger(_this._$modal, 'open');
+      };
+    })(this));
+  };
+
+  Modal.prototype._setActiveEventHandlers = function() {
+    this._settings.$close.on('click', (function(_this) {
+      return function(event) {
+        event.preventDefault();
+        return _this.trigger(_this._$modal, 'close');
+      };
+    })(this));
+    this._$backdrop.on('click', (function(_this) {
+      return function(event) {
+        return _this.trigger(_this._$modal, 'close');
+      };
+    })(this));
+    return $(document).on('keydown', (function(_this) {
+      return function(event) {
+        switch (event.which) {
+          case 27:
+            return _this.trigger(_this._$modal, 'close');
+        }
+      };
+    })(this));
+  };
+
+  Modal.prototype._cleanupEvents = function() {
+    this._settings.$close.off('click');
+    return $(document).off('keydown');
+  };
+
+  return Modal;
+
+})();
+
+this.Spellbook.Classes.QuantityInput = (function() {
+  QuantityInput.prototype._settings = {};
+
+  QuantityInput.prototype._value = null;
+
+  function QuantityInput(options) {
+    this.init(options);
+  }
+
+  QuantityInput.prototype.init = function(options) {
+    this._settings = $.extend({
+      $element: $('.js-quantityInput'),
+      $field: $('.js-quantityInput-field'),
+      $increase: $('.js-quantityInput-increase'),
+      $decrease: $('.js-quantityInput-decrease'),
+      $target: $('.js-quantityInput-target'),
+      targetBaseValue: 29,
+      targetValuePrefix: '$',
+      minValue: 1,
+      maxValue: 100,
+      onIncrease: null,
+      onDecrease: null,
+      onTargetUpdate: null
+    }, options);
+    this._setValue();
+    return this._setEventHandlers();
+  };
+
+  QuantityInput.prototype._setValue = function() {
+    return this._value = parseInt(this._settings.$element.val());
+  };
+
+  QuantityInput.prototype._setEventHandlers = function() {
+    this._settings.$element.on('keyup', (function(_this) {
+      return function(event) {
+        _this._setValue();
+        if (!(isNaN(_this._value) || _this._value < _this._settings.minValue || _this._value > _this._settings.maxValue)) {
+          return _this._updateValue();
+        }
+      };
+    })(this));
+    this._settings.$increase.on('click', (function(_this) {
+      return function(event) {
+        var base;
+        event.preventDefault();
+        if (!(_this._value >= _this._settings.maxValue)) {
+          _this._updateValue('up');
+        }
+        return typeof (base = _this._settings).onIncrease === "function" ? base.onIncrease(_this._settings) : void 0;
+      };
+    })(this));
+    return this._settings.$decrease.on('click', (function(_this) {
+      return function(event) {
+        var base;
+        event.preventDefault();
+        if (!(_this._value <= _this._settings.minValue)) {
+          _this._updateValue('down');
+        }
+        return typeof (base = _this._settings).onDecrease === "function" ? base.onDecrease(_this._settings) : void 0;
+      };
+    })(this));
+  };
+
+  QuantityInput.prototype._updateValue = function(direction) {
+    var base;
+    if (direction == null) {
+      direction = '';
+    }
+    switch (direction) {
+      case 'up':
+        this._settings.$element.val(++this._value);
+        break;
+      case 'down':
+        this._settings.$element.val(--this._value);
+        break;
+      default:
+        this._settings.$element.val(this._value);
+    }
+    this._updateTarget();
+    return typeof (base = this._settings).onTargetUpdate === "function" ? base.onTargetUpdate(this._settings) : void 0;
+  };
+
+  QuantityInput.prototype._updateTarget = function() {
+    var updatedValue;
+    updatedValue = this._value * this._settings.targetBaseValue;
+    return this._settings.$target.text("" + this._settings.targetValuePrefix + updatedValue);
+  };
+
+  return QuantityInput;
 
 })();
 
@@ -510,6 +1037,215 @@ this.Spellbook.Classes.QueryParams = (function() {
 
 })();
 
+this.Spellbook.Classes.SaveProgress = (function() {
+  SaveProgress.prototype._settings = {};
+
+  function SaveProgress(options) {
+    this.init(options);
+  }
+
+  SaveProgress.prototype.init = function(options) {
+    this._settings = $.extend({
+      $element: $('.js-saveProgress'),
+      $container: $('.js-saveProgress-container'),
+      dataAttribute: 'saveprogress'
+    }, options);
+    this._restoreProgress();
+    return this._setEventHandlers();
+  };
+
+  SaveProgress.prototype._eraseProgress = function(container) {
+    return container.find(this._settings.$element).each((function(_this) {
+      return function(index, elementNode) {
+        var key;
+        key = $(elementNode).data(_this._settings.dataAttribute);
+        return localStorage.removeItem(key);
+      };
+    })(this));
+  };
+
+  SaveProgress.prototype._restoreProgress = function() {
+    return this._settings.$element.each((function(_this) {
+      return function(index, elementNode) {
+        var $element, key, value;
+        $element = $(elementNode);
+        key = $element.data(_this._settings.dataAttribute);
+        value = localStorage.getItem(key);
+        if (value !== null) {
+          return $element.val(value);
+        }
+      };
+    })(this));
+  };
+
+  SaveProgress.prototype._setEventHandlers = function() {
+    this._settings.$element.on('input', (function(_this) {
+      return function(event) {
+        var $element, key, value;
+        $element = $(event.currentTarget);
+        key = $element.data(_this._settings.dataAttribute);
+        value = $element.val();
+        return _this._storeProgress(key, value);
+      };
+    })(this));
+    return this._settings.$container.on('submit', (function(_this) {
+      return function(event) {
+        return _this._eraseProgress($(event.currentTarget));
+      };
+    })(this));
+  };
+
+  SaveProgress.prototype._storeProgress = function(key, value) {
+    return localStorage.setItem(key, value);
+  };
+
+  return SaveProgress;
+
+})();
+
+this.Spellbook.Classes.SelectText = (function() {
+  SelectText.prototype._settings = {};
+
+  function SelectText(options) {
+    this.init(options);
+  }
+
+  SelectText.prototype.init = function(options) {
+    this._settings = $.extend({
+      $element: $('.js-selectText'),
+      onClick: null
+    }, options);
+    return this._setEventHandlers();
+  };
+
+  SelectText.prototype._selectElement = function($element) {
+    var elementNode, range, selection;
+    elementNode = $element[0];
+    if (document.body.createTextRange) {
+      range = document.body.createTextRange();
+      range.moveToElementText(elementNode);
+      return range.select();
+    } else if (window.getSelection) {
+      selection = window.getSelection();
+      range = document.createRange();
+      range.selectNodeContents(elementNode);
+      selection.removeAllRanges();
+      return selection.addRange(range);
+    }
+  };
+
+  SelectText.prototype._setEventHandlers = function() {
+    return this._settings.$element.on('click', (function(_this) {
+      return function(event) {
+        var base;
+        _this._selectElement(_this._settings.$element);
+        $(event).trigger('focus').trigger('select');
+        return typeof (base = _this._settings).onClick === "function" ? base.onClick(_this._settings) : void 0;
+      };
+    })(this));
+  };
+
+  return SelectText;
+
+})();
+
+this.Spellbook.Classes.Share = (function() {
+  Share.prototype._settings = {};
+
+  function Share(options) {
+    this.init(options);
+  }
+
+  Share.prototype.init = function(options) {
+    this._settings = $.extend({
+      $element: $('.js-share'),
+      popup: {
+        height: 400,
+        width: 575,
+        left: 0,
+        top: 0
+      }
+    }, options);
+    return this._setEventHandlers();
+  };
+
+  Share.prototype._setEventHandlers = function() {
+    return this._settings.$element.on('click', (function(_this) {
+      return function(event) {
+        var $element, content, service, url;
+        event.preventDefault();
+        $element = $(event.currentTarget);
+        url = $element.attr('href');
+        service = $element.data('share-service');
+        content = $element.data('share-text');
+        return _this._triggerPopup(service, url, content);
+      };
+    })(this));
+  };
+
+  Share.prototype._triggerPopup = function(service, url, content) {
+    var popupOptions;
+    popupOptions = "width=" + this._settings.popup.width + ", height=" + this._settings.popup.height + ", top=" + this._settings.popup.top + ", left=" + this._settings.popup.left;
+    switch (service) {
+      case 'twitter':
+        url = "https://twitter.com/share?text=" + content + "&url=" + url;
+        break;
+      case 'facebook':
+        url = "https://www.facebook.com/sharer/sharer.php?u=" + url;
+        service = 'facebook-share-dialog';
+        break;
+      case 'google':
+        url = "https://plus.google.com/share?url=" + url;
+    }
+    return window.open(url, service, popupOptions);
+  };
+
+  return Share;
+
+})();
+
+this.Spellbook.Classes.ShowPassword = (function() {
+  ShowPassword.prototype._settings = {};
+
+  function ShowPassword(options) {
+    this.init(options);
+  }
+
+  ShowPassword.prototype.init = function(options) {
+    this._settings = $.extend({
+      $input: $('.js-showPassword-input'),
+      $toggle: $('.js-showPassword-toggle'),
+      showByDefault: false
+    }, options);
+    this._setEventHandlers();
+    if (this._settings.showByDefault) {
+      return this._showPassword();
+    }
+  };
+
+  ShowPassword.prototype._setEventHandlers = function() {
+    return this._settings.$toggle.on('change', (function(_this) {
+      return function(event) {
+        var show;
+        show = $(event.currentTarget).prop('checked');
+        if (show) {
+          return _this._showPassword();
+        } else {
+          return _this._settings.$input.attr('type', 'password');
+        }
+      };
+    })(this));
+  };
+
+  ShowPassword.prototype._showPassword = function() {
+    this._settings.$input.attr('type', 'text');
+    return this._settings.$toggle.prop('checked', true);
+  };
+
+  return ShowPassword;
+
+})();
+
 this.Spellbook.Classes.Singleton = (function() {
   function Singleton() {}
 
@@ -527,711 +1263,83 @@ this.Spellbook.Classes.Singleton = (function() {
 
 })();
 
-this.Spellbook.Modules.AutoDuplicateInput = (function() {
-  var _count, _duplicate, _field, _getValidationType, _isValid, _setEventHandlers, _setInputState, _settings, _validators, getCount, init;
-  _settings = {};
-  _count = 0;
-  _field = null;
-  _validators = {
-    email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  };
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('.js-autoDuplicateInput'),
-      $container: $('.js-autoDuplicateInput-container'),
-      clonedDataAttribute: 'cloned',
-      validateDataAttribute: 'validate',
-      invalidClass: 'is-invalid',
-      validClass: 'is-valid',
-      onDuplicate: null,
-      onInvalid: null,
-      onValid: null
-    }, options);
-    return _setEventHandlers();
-  };
-  _setEventHandlers = function() {
-    return _settings.$element.on('keyup', function(event) {
-      event.preventDefault();
-      _field = $(this);
-      if (_isValid()) {
-        _setInputState('valid');
-        if (typeof _settings.onValid === "function") {
-          _settings.onValid(_settings);
-        }
-        if (_field.data('cloned') !== 'true') {
-          _duplicate();
-        }
-        return typeof _settings.onDuplicate === "function" ? _settings.onDuplicate(_settings, _count) : void 0;
-      } else {
-        _setInputState('invalid');
-        return typeof _settings.onInvalid === "function" ? _settings.onInvalid(_settings) : void 0;
-      }
-    });
-  };
-  _getValidationType = function() {
-    return _field.data(_settings.validateDataAttribute);
-  };
-  _isValid = function() {
-    var validator;
-    validator = _getValidationType(_field);
-    return _validators["" + validator].test(_field.val());
-  };
-  _duplicate = function() {
-    ++_count;
-    return _field.data(_settings.clonedDataAttribute, 'true').clone(true).appendTo(_settings.$container).removeClass(_settings.validClass).val('').data(_settings.clonedDataAttribute, '');
-  };
-  _setInputState = function(type) {
-    switch (type) {
-      case 'invalid':
-        return _field.removeClass(_settings.validClass).addClass(_settings.invalidClass);
-      case 'valid':
-        return _field.removeClass(_settings.invalidClass).addClass(_settings.validClass);
-    }
-  };
-  getCount = function() {
-    return _count;
-  };
-  return {
-    init: init,
-    getCount: getCount
-  };
-})();
+this.Spellbook.Classes.StateUrls = (function() {
+  StateUrls.prototype._settings = {};
 
-this.Spellbook.Modules.CharacterCounter = (function() {
-  var _count, _setEventHandlers, _settings, _toggleState, init;
-  _settings = {};
-  _count = 0;
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('.js-characterCounter'),
-      $label: $('.js-characterCounter-label'),
-      $number: $('.js-characterCounter-number'),
-      errorClass: 'is-error',
-      successClass: 'is-success',
-      minChars: 0,
-      maxChars: 140,
-      onMinPreceeded: null,
-      onMaxExceeded: null,
-      onConditionsMet: null
-    }, options);
-    return _setEventHandlers();
-  };
-  _setEventHandlers = function() {
-    return _settings.$element.on('keyup', function(event) {
-      var $element;
-      event.preventDefault();
-      $element = $(this);
-      _count = $element.val().length;
-      _settings.$number.text(_count);
-      if (_count > _settings.maxChars) {
-        _toggleState($element, 'error');
-        return typeof _settings.onMaxExceeded === "function" ? _settings.onMaxExceeded(_settings) : void 0;
-      } else if (_count < _settings.minChars) {
-        _toggleState($element, 'error');
-        return typeof _settings.onMinPreceeded === "function" ? _settings.onMinPreceeded(_settings) : void 0;
-      } else {
-        _toggleState($element, 'success');
-        return typeof _settings.onConditionsMet === "function" ? _settings.onConditionsMet(_settings) : void 0;
-      }
-    });
-  };
-  _toggleState = function(element, state) {
-    switch (state) {
-      case 'error':
-        element.removeClass(_settings.successClass);
-        _settings.$label.removeClass(_settings.successClass);
-        element.addClass(_settings.errorClass);
-        return _settings.$label.addClass(_settings.errorClass);
-      case 'success':
-        element.removeClass(_settings.errorClass);
-        _settings.$label.removeClass(_settings.errorClass);
-        element.addClass(_settings.successClass);
-        return _settings.$label.addClass(_settings.successClass);
-    }
-  };
-  return {
-    init: init
-  };
-})();
+  function StateUrls(options) {
+    this.init(options);
+  }
 
-this.Spellbook.Modules.EqualHeights = (function() {
-  var _heights, _setEventHandlers, _setHeight, _settings, _timer, init;
-  _settings = {};
-  _heights = [];
-  _timer = null;
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('.js-equalHeights')
-    }, options);
-    _setHeight();
-    return _setEventHandlers();
-  };
-  _setHeight = function() {
-    var height;
-    _settings.$element.css('height', 'auto');
-    _settings.$element.each(function() {
-      return _heights.push($(this).height());
-    });
-    height = Math.max.apply(Math, _heights);
-    return _settings.$element.css('height', height);
-  };
-  _setEventHandlers = function() {
-    return $(window).on('resize', function() {
-      clearTimeout(_timer);
-      return _timer = setTimeout(_setHeight, 250);
-    });
-  };
-  return {
-    init: init
-  };
-})();
-
-this.Spellbook.Modules.HeadingLinks = (function() {
-  var _addAnchors, _settings, _slugify, init;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('h1, h2, h3, h4, h5'),
-      anchorClass: 'anchor'
-    }, options);
-    return _addAnchors();
-  };
-  _slugify = function(string) {
-    return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-  };
-  _addAnchors = function() {
-    return _settings.$element.each(function() {
-      var $element, slug;
-      $element = $(this);
-      slug = _slugify($element.text());
-      $element.attr('id', slug);
-      return $element.prepend("<a class='" + _settings.anchorClass + "' href='#" + slug + "'>#</a>");
-    });
-  };
-  return {
-    init: init
-  };
-})();
-
-this.Spellbook.Modules.KeyboardEvents = (function() {
-  var _getKeyCode, _match, _settings, emit, init;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
-      events: []
-    }, options);
-    return emit();
-  };
-  _match = function(event) {
-    return $(document).on('keyup', function(e) {
-      switch (_getKeyCode(e)) {
-        case event.key:
-          return event.run();
-      }
-    });
-  };
-  _getKeyCode = function(event) {
-    var charCode;
-    event = event || window.event;
-    charCode = event.keyCode || event.which;
-    return charCode;
-  };
-  emit = function(event) {
-    var i, len, ref, results;
-    if (event == null) {
-      event = null;
-    }
-    if (event == null) {
-      ref = _settings.events;
-      results = [];
-      for (i = 0, len = ref.length; i < len; i++) {
-        event = ref[i];
-        results.push(_match(event));
-      }
-      return results;
-    } else {
-      return _match(event);
-    }
-  };
-  return {
-    init: init,
-    emit: emit
-  };
-})();
-
-this.Spellbook.Modules.LiveSearch = (function() {
-  var _clearEmptyMessage, _handleEmptyResults, _isEmpty, _isQueryAbsent, _parseDom, _query, _setEventHandlers, _settings, init;
-  _settings = {};
-  _query = '';
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('.js-search'),
-      $query: $('.js-search-query'),
-      $container: $('.js-search-container'),
-      itemNode: '.js-search-item',
-      hiddenClass: 'is-hidden',
-      emptyMessage: true,
-      emptyNode: '.js-search-empty',
-      onClear: null,
-      onEmpty: null,
-      onFound: null,
-      onKeyup: null
-    }, options);
-    return _setEventHandlers();
-  };
-  _setEventHandlers = function() {
-    return _settings.$element.on('keyup', function(event) {
-      _query = $(this).val();
-      if (typeof _settings.onKeyup === "function") {
-        _settings.onKeyup(_settings);
-      }
-      if (_query === '') {
-        $(_settings.itemNode).removeClass(_settings.hiddenClass);
-        _clearEmptyMessage();
-        if (typeof _settings.onClear === "function") {
-          _settings.onClear(_settings);
-        }
-      }
-      _clearEmptyMessage();
-      return _parseDom();
-    });
-  };
-  _parseDom = function() {
-    _settings.$query.each(function(index) {
-      var $element;
-      $element = $(this);
-      if (_isQueryAbsent($element)) {
-        return $element.closest(_settings.itemNode).addClass(_settings.hiddenClass);
-      } else {
-        $element.closest(_settings.itemNode).removeClass(_settings.hiddenClass);
-        return typeof _settings.onFound === "function" ? _settings.onFound(_settings) : void 0;
-      }
-    });
-    return _handleEmptyResults();
-  };
-  _clearEmptyMessage = function() {
-    if (_settings.emptyMessage && $(_settings.emptyNode).length > 0) {
-      return $(_settings.emptyNode).remove();
-    }
-  };
-  _handleEmptyResults = function() {
-    var emptyClass;
-    if (_isEmpty()) {
-      if (_settings.emptyMessage) {
-        emptyClass = _settings.emptyNode.replace('.', '');
-      }
-      $("<p class='" + emptyClass + "'>\n  There are no results matching '" + _query + "'.\n</p>").insertAfter(_settings.$container);
-      return typeof _settings.onEmpty === "function" ? _settings.onEmpty(_settings) : void 0;
-    }
-  };
-  _isQueryAbsent = function(element) {
-    return element.text().search(new RegExp(_query, 'i')) < 0;
-  };
-  _isEmpty = function() {
-    return $(_settings.itemNode + "." + _settings.hiddenClass).length === $(_settings.itemNode).length;
-  };
-  return {
-    init: init
-  };
-})();
-
-this.Spellbook.Modules.Modal = (function() {
-  var $_backdrop, $_modal, _cleanupEvents, _setActiveEventHandlers, _setEventHandlers, _settings, _toggleOverlay, init, trigger;
-  $_modal = null;
-  $_backdrop = null;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
-      $trigger: $('.js-modal-trigger'),
-      $close: $('.js-modal-close'),
-      dataAttribute: 'modal',
-      backdropClass: 'modal-backdrop',
-      activeClass: 'is-active',
-      inactiveClass: 'is-inactive',
-      activeBodyClass: 'is-modal-active'
-    }, options);
-    _setEventHandlers();
-    return this;
-  };
-  trigger = function($element, event, removeBackdrop, callback) {
-    if (removeBackdrop == null) {
-      removeBackdrop = false;
-    }
-    if (callback == null) {
-      callback = null;
-    }
-    $_modal = $element;
-    switch (event) {
-      case 'open':
-        $element.addClass(_settings.activeClass);
-        $('body').addClass(_settings.activeBodyClass);
-        break;
-      case 'close':
-        $element.removeClass(_settings.activeClass);
-        $('body').removeClass(_settings.activeBodyClass);
-        _cleanupEvents();
-    }
-    if (!removeBackdrop) {
-      _toggleOverlay(event);
-    }
-    if (callback) {
-      callback();
-    }
-    return _setActiveEventHandlers();
-  };
-  _toggleOverlay = function(event) {
-    switch (event) {
-      case 'open':
-        $('<div class=' + _settings.backdropClass + '></div>').appendTo($('body'));
-        $_backdrop = $("." + _settings.backdropClass);
-        return setTimeout(function() {
-          return $_backdrop.addClass(_settings.activeClass);
-        }, 25);
-      case 'close':
-        $_backdrop.removeClass(_settings.activeClass);
-        return setTimeout(function() {
-          return $_backdrop.remove();
-        }, 500);
-    }
-  };
-  _setEventHandlers = function() {
-    return _settings.$trigger.on('click', function(event) {
-      var selector;
-      event.preventDefault();
-      selector = $(this).data(_settings.dataAttribute);
-      $_modal = $(selector);
-      return trigger($_modal, 'open');
-    });
-  };
-  _setActiveEventHandlers = function() {
-    _settings.$close.on('click', function(event) {
-      event.preventDefault();
-      return trigger($_modal, 'close');
-    });
-    $_backdrop.on('click', function(event) {
-      return trigger($_modal, 'close');
-    });
-    return $(document).on('keydown', function(event) {
-      switch (event.which) {
-        case 27:
-          return trigger($_modal, 'close');
-      }
-    });
-  };
-  _cleanupEvents = function() {
-    _settings.$close.off('click');
-    return $(document).off('keydown');
-  };
-  return {
-    init: init,
-    trigger: trigger
-  };
-})();
-
-this.Spellbook.Modules.QuantityInput = (function() {
-  var _setEventHandlers, _setValue, _settings, _updateTarget, _updateValue, _value, init;
-  _settings = {};
-  _value = null;
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('.js-quantityInput'),
-      $field: $('.js-quantityInput-field'),
-      $increase: $('.js-quantityInput-increase'),
-      $decrease: $('.js-quantityInput-decrease'),
-      $target: $('.js-quantityInput-target'),
-      targetBaseValue: 29,
-      targetValuePrefix: '$',
-      minValue: 1,
-      maxValue: 100,
-      onIncrease: null,
-      onDecrease: null,
-      onTargetUpdate: null
-    }, options);
-    _setValue();
-    return _setEventHandlers();
-  };
-  _setValue = function() {
-    return _value = parseInt(_settings.$element.val());
-  };
-  _setEventHandlers = function() {
-    _settings.$element.on('keyup', function(event) {
-      _setValue();
-      if (!(isNaN(_value) || _value < _settings.minValue || _value > _settings.maxValue)) {
-        return _updateValue();
-      }
-    });
-    _settings.$increase.on('click', function(event) {
-      event.preventDefault();
-      if (!(_value >= _settings.maxValue)) {
-        _updateValue('up');
-      }
-      return typeof _settings.onIncrease === "function" ? _settings.onIncrease(_settings) : void 0;
-    });
-    return _settings.$decrease.on('click', function(event) {
-      event.preventDefault();
-      if (!(_value <= _settings.minValue)) {
-        _updateValue('down');
-      }
-      return typeof _settings.onDecrease === "function" ? _settings.onDecrease(_settings) : void 0;
-    });
-  };
-  _updateValue = function(direction) {
-    if (direction == null) {
-      direction = '';
-    }
-    switch (direction) {
-      case 'up':
-        _settings.$element.val(++_value);
-        break;
-      case 'down':
-        _settings.$element.val(--_value);
-        break;
-      default:
-        _settings.$element.val(_value);
-    }
-    _updateTarget();
-    return typeof _settings.onTargetUpdate === "function" ? _settings.onTargetUpdate(_settings) : void 0;
-  };
-  _updateTarget = function() {
-    var updatedValue;
-    updatedValue = _value * _settings.targetBaseValue;
-    return _settings.$target.text("" + _settings.targetValuePrefix + updatedValue);
-  };
-  return {
-    init: init
-  };
-})();
-
-this.Spellbook.Modules.SaveProgress = (function() {
-  var _eraseProgress, _restoreProgress, _setEventHandlers, _settings, _storeProgress, init;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('.js-saveProgress'),
-      $container: $('.js-saveProgress-container'),
-      dataAttribute: 'saveprogress'
-    }, options);
-    _restoreProgress();
-    return _setEventHandlers();
-  };
-  _eraseProgress = function(container) {
-    return container.find(_settings.$element).each(function() {
-      var key;
-      key = $(this).data(_settings.dataAttribute);
-      return localStorage.removeItem(key);
-    });
-  };
-  _restoreProgress = function() {
-    return _settings.$element.each(function() {
-      var $element, key, value;
-      $element = $(this);
-      key = $element.data(_settings.dataAttribute);
-      value = localStorage.getItem(key);
-      if (value !== null) {
-        return $element.val(value);
-      }
-    });
-  };
-  _setEventHandlers = function() {
-    _settings.$element.on('input', function() {
-      var $element, key, value;
-      $element = $(this);
-      key = $element.data(_settings.dataAttribute);
-      value = $element.val();
-      return _storeProgress(key, value);
-    });
-    return _settings.$container.on('submit', function(event) {
-      return _eraseProgress($(this));
-    });
-  };
-  _storeProgress = function(key, value) {
-    return localStorage.setItem(key, value);
-  };
-  return {
-    init: init
-  };
-})();
-
-this.Spellbook.Modules.selectText = (function() {
-  var _selectElement, _setEventHandlers, _settings, init;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('.js-selectText'),
-      onClick: null
-    }, options);
-    return _setEventHandlers();
-  };
-  _selectElement = function($element) {
-    var node, range, selection;
-    node = $element[0];
-    if (document.body.createTextRange) {
-      range = document.body.createTextRange();
-      range.moveToElementText(node);
-      return range.select();
-    } else if (window.getSelection) {
-      selection = window.getSelection();
-      range = document.createRange();
-      range.selectNodeContents(node);
-      selection.removeAllRanges();
-      return selection.addRange(range);
-    }
-  };
-  _setEventHandlers = function() {
-    return _settings.$element.on('click', function() {
-      _selectElement(_settings.$element);
-      $(this).trigger('focus').trigger('select');
-      return typeof _settings.onClick === "function" ? _settings.onClick(_settings) : void 0;
-    });
-  };
-  return {
-    init: init
-  };
-})();
-
-this.Spellbook.Modules.Share = (function() {
-  var _setEventHandlers, _settings, _triggerPopup, init;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('.js-share'),
-      popup: {
-        height: 400,
-        width: 575,
-        left: 0,
-        top: 0
-      }
-    }, options);
-    return _setEventHandlers();
-  };
-  _setEventHandlers = function() {
-    return _settings.$element.on('click', function(event) {
-      var $element, content, service, url;
-      event.preventDefault();
-      $element = $(this);
-      url = $element.attr('href');
-      service = $element.data('share-service');
-      content = $element.data('share-text');
-      return _triggerPopup(service, url, content);
-    });
-  };
-  _triggerPopup = function(service, url, content) {
-    var popupOptions;
-    popupOptions = "width=" + _settings.popup.width + ", height=" + _settings.popup.height + ", top=" + _settings.popup.top + ", left=" + _settings.popup.left;
-    switch (service) {
-      case 'twitter':
-        url = "https://twitter.com/share?text=" + content + "&url=" + url;
-        break;
-      case 'facebook':
-        url = "https://www.facebook.com/sharer/sharer.php?u=" + url;
-        service = 'facebook-share-dialog';
-        break;
-      case 'google':
-        url = "https://plus.google.com/share?url=" + url;
-    }
-    return window.open(url, service, popupOptions);
-  };
-  return {
-    init: init
-  };
-})();
-
-this.Spellbook.Modules.ShowPassword = (function() {
-  var _setEventHandlers, _settings, _showPassword, init;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
-      $input: $('.js-showPassword-input'),
-      $toggle: $('.js-showPassword-toggle'),
-      showByDefault: false
-    }, options);
-    _setEventHandlers();
-    if (_settings.showByDefault) {
-      return _showPassword();
-    }
-  };
-  _setEventHandlers = function() {
-    return _settings.$toggle.on('change', function(event) {
-      var show;
-      show = $(this).prop('checked');
-      if (show) {
-        return _showPassword();
-      } else {
-        return _settings.$input.attr('type', 'password');
-      }
-    });
-  };
-  _showPassword = function() {
-    _settings.$input.attr('type', 'text');
-    return _settings.$toggle.prop('checked', true);
-  };
-  return {
-    init: init
-  };
-})();
-
-this.Spellbook.Modules.StateUrls = (function() {
-  var _getCurrentState, _sanitizeHash, _setEventHandlers, _setInitialState, _settings, _showSection, init;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
+  StateUrls.prototype.init = function(options) {
+    this._settings = $.extend({
       $element: $('.js-stateUrls'),
       $link: $('.js-stateUrls-link'),
       hiddenClass: 'is-hidden',
       activeClass: 'is-active',
       dataAttribute: 'state'
     }, options);
-    _setInitialState(_getCurrentState());
-    return _setEventHandlers();
+    this._setInitialState(this._getCurrentState());
+    return this._setEventHandlers();
   };
-  _sanitizeHash = function(string) {
+
+  StateUrls.prototype._sanitizeHash = function(string) {
     return string.replace(/(<([^>]+)>)/ig, '');
   };
-  _getCurrentState = function() {
+
+  StateUrls.prototype._getCurrentState = function() {
     var state;
     if (window.location.hash) {
-      state = _sanitizeHash(window.location.hash);
+      state = this._sanitizeHash(window.location.hash);
     } else {
-      state = _settings.$link.first().attr('href');
+      state = this._settings.$link.first().attr('href');
     }
     return state;
   };
-  _setInitialState = function(state) {
-    _settings.$element.not(state).addClass(_settings.hiddenClass);
-    return $("[data-" + _settings.dataAttribute + "=" + state + "]").removeClass(_settings.hiddenClass).addClass(_settings.activeClass);
+
+  StateUrls.prototype._setInitialState = function(state) {
+    this._settings.$element.not(state).addClass(this._settings.hiddenClass);
+    return $("[data-" + this._settings.dataAttribute + "=" + state + "]").removeClass(this._settings.hiddenClass).addClass(this._settings.activeClass);
   };
-  _setEventHandlers = function() {
-    return _settings.$link.on('click', function(event) {
-      var $element, state;
-      event.preventDefault();
-      $element = $(this);
-      state = $element.attr('href');
-      if (history.pushState) {
-        history.pushState(null, null, state);
-      } else {
-        window.location.hash = state;
-      }
-      if ($(state).length > 0) {
-        return _showSection($element, state);
-      }
-    });
+
+  StateUrls.prototype._setEventHandlers = function() {
+    return this._settings.$link.on('click', (function(_this) {
+      return function(event) {
+        var $element, state;
+        event.preventDefault();
+        $element = $(event.currentTarget);
+        state = $element.attr('href');
+        if (history.pushState) {
+          history.pushState(null, null, state);
+        } else {
+          window.location.hash = state;
+        }
+        if ($(state).length > 0) {
+          return _this._showSection($element, state);
+        }
+      };
+    })(this));
   };
-  _showSection = function($element, state) {
-    _settings.$link.removeClass(_settings.activeClass);
-    _settings.$element.addClass(_settings.hiddenClass);
-    $element.addClass(_settings.activeClass);
-    return $(state).removeClass(_settings.hiddenClass);
+
+  StateUrls.prototype._showSection = function($element, state) {
+    this._settings.$link.removeClass(this._settings.activeClass);
+    this._settings.$element.addClass(this._settings.hiddenClass);
+    $element.addClass(this._settings.activeClass);
+    return $(state).removeClass(this._settings.hiddenClass);
   };
-  return {
-    init: init
-  };
+
+  return StateUrls;
+
 })();
 
-this.Spellbook.Modules.Toggle = (function() {
-  var _handleClickEvent, _handleHoverEvent, _handleHoverStateEvent, _setEventHandlers, _settings, _toggleClass, init;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
+this.Spellbook.Classes.Toggle = (function() {
+  Toggle.prototype._settings = {};
+
+  function Toggle(options) {
+    this.init(options);
+  }
+
+  Toggle.prototype.init = function(options) {
+    this._settings = $.extend({
       $element: $('.js-toggle'),
       proximity: 'next',
       event: 'click',
@@ -1242,90 +1350,102 @@ this.Spellbook.Modules.Toggle = (function() {
       onMouseover: null,
       onMouseout: null
     }, options);
-    return _setEventHandlers();
+    return this._setEventHandlers();
   };
-  _setEventHandlers = function() {
-    switch (_settings.event) {
+
+  Toggle.prototype._setEventHandlers = function() {
+    switch (this._settings.event) {
       case 'click':
-        return _handleClickEvent();
+        return this._handleClickEvent();
       case 'hover':
-        return _handleHoverEvent();
+        return this._handleHoverEvent();
     }
   };
-  _handleClickEvent = function() {
-    return _settings.$element.on('click', function(event) {
-      var $element;
-      event.preventDefault();
-      $element = $(this);
-      if (typeof _settings.onClick === "function") {
-        _settings.onClick(_settings);
-      }
-      _settings.$element.toggleClass(_settings.activeClass);
-      switch (_settings.proximity) {
-        case 'next':
-          return $element.next().toggleClass(_settings.toggleClass);
-        case 'prev':
-          return $element.prev().toggleClass(_settings.toggleClass);
-        case 'nextParent':
-          return $element.parent().next().toggleClass(_settings.toggleClass);
-        case 'prevParent':
-          return $element.parent().prev().toggleClass(_settings.toggleClass);
-        default:
-          if (typeof _settings.proximity === 'object') {
-            return _settings.proximity.toggleClass(_settings.toggleClass);
-          } else {
-            return $element.find(_settings.proximity).toggleClass(_settings.toggleClass);
-          }
-      }
-    });
+
+  Toggle.prototype._handleClickEvent = function() {
+    return this._settings.$element.on('click', (function(_this) {
+      return function(event) {
+        var $element, base;
+        event.preventDefault();
+        $element = $(event.currentTarget);
+        if (typeof (base = _this._settings).onClick === "function") {
+          base.onClick(_this._settings);
+        }
+        _this._settings.$element.toggleClass(_this._settings.activeClass);
+        switch (_this._settings.proximity) {
+          case 'next':
+            return $element.next().toggleClass(_this._settings.toggleClass);
+          case 'prev':
+            return $element.prev().toggleClass(_this._settings.toggleClass);
+          case 'nextParent':
+            return $element.parent().next().toggleClass(_this._settings.toggleClass);
+          case 'prevParent':
+            return $element.parent().prev().toggleClass(_this._settings.toggleClass);
+          default:
+            if (typeof _this._settings.proximity === 'object') {
+              return _this._settings.proximity.toggleClass(_this._settings.toggleClass);
+            } else {
+              return $element.find(_this._settings.proximity).toggleClass(_this._settings.toggleClass);
+            }
+        }
+      };
+    })(this));
   };
-  _handleHoverEvent = function() {
-    if (_settings.initialState) {
-      _settings.initialState(_settings);
+
+  Toggle.prototype._handleHoverEvent = function() {
+    if (this._settings.initialState) {
+      this._settings.initialState(this._settings);
     }
-    return _settings.$element.on({
-      mouseenter: function() {
-        return _handleHoverStateEvent($(this), 'on');
-      },
-      mouseleave: function() {
-        return _handleHoverStateEvent($(this), 'off');
-      }
+    return this._settings.$element.on({
+      mouseenter: (function(_this) {
+        return function(event) {
+          return _this._handleHoverStateEvent($(event.currentTarget), 'on');
+        };
+      })(this),
+      mouseleave: (function(_this) {
+        return function(event) {
+          return _this._handleHoverStateEvent($(event.currentTarget), 'off');
+        };
+      })(this)
     });
   };
-  _handleHoverStateEvent = function($element, state) {
+
+  Toggle.prototype._handleHoverStateEvent = function($element, state) {
+    var base, base1;
     switch (state) {
       case 'on':
-        if (typeof _settings.onMouseover === "function") {
-          _settings.onMouseover(_settings);
+        if (typeof (base = this._settings).onMouseover === "function") {
+          base.onMouseover(this._settings);
         }
-        $element.addClass(_settings.activeClass);
+        $element.addClass(this._settings.activeClass);
         break;
       case 'off':
-        if (typeof _settings.onMouseout === "function") {
-          _settings.onMouseout(_settings);
+        if (typeof (base1 = this._settings).onMouseout === "function") {
+          base1.onMouseout(this._settings);
         }
-        $element.removeClass(_settings.activeClass);
+        $element.removeClass(this._settings.activeClass);
     }
-    switch (_settings.proximity) {
+    switch (this._settings.proximity) {
       case 'next':
-        return _toggleClass($element.next());
+        return this._toggleClass($element.next());
       case 'prev':
-        return _toggleClass($element.prev());
+        return this._toggleClass($element.prev());
       case 'nextParent':
-        return _toggleClass($element.parent().next());
+        return this._toggleClass($element.parent().next());
       case 'prevParent':
-        return _toggleClass($element.parent().prev());
+        return this._toggleClass($element.parent().prev());
       default:
-        if (typeof _settings.proximity === 'object') {
-          return _toggleClass(_settings.proximity);
+        if (typeof this._settings.proximity === 'object') {
+          return this._toggleClass(this._settings.proximity);
         } else {
-          return _toggleClass($element.find(_settings.proximity));
+          return this._toggleClass($element.find(this._settings.proximity));
         }
     }
   };
-  _toggleClass = function($element, classToToggle) {
+
+  Toggle.prototype._toggleClass = function($element, classToToggle) {
     if (classToToggle == null) {
-      classToToggle = _settings.toggleClass;
+      classToToggle = this._settings.toggleClass;
     }
     if ($element.hasClass(classToToggle)) {
       return $element.removeClass(classToToggle);
@@ -1333,9 +1453,9 @@ this.Spellbook.Modules.Toggle = (function() {
       return $element.addClass(classToToggle);
     }
   };
-  return {
-    init: init
-  };
+
+  return Toggle;
+
 })();
 
 this.Spellbook.Helpers.isBlank = function(string) {
@@ -1698,29 +1818,7 @@ this.Spellbook.Classes.ClassName = (function() {
 
 })();
 
-this.Spellbook.Namespace.functionName = function(options) {
-  return options.$element.on('click', function(event) {
-    event.preventDefault();
-    return $(this).toggleClass(options.className);
-  });
-};
-
 this.Spellbook.Helpers.helperName = function(item) {};
-
-this.Spellbook.Modules.ModuleName = (function() {
-  var _setEventHandlers, _settings, init;
-  _settings = {};
-  init = function(options) {
-    _settings = $.extend({
-      $element: $('.js-element')
-    }, options);
-    return _setEventHandlers();
-  };
-  _setEventHandlers = function() {};
-  return {
-    init: init
-  };
-})();
 
 this.Spellbook.Services.serviceName = function(options) {
   var settings;
