@@ -17,7 +17,7 @@ class @Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) -> @init( options )
+  constructor : ( options ) -> @init?( options )
 
 # -------------------------------------
 #   Usage
