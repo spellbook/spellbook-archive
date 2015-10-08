@@ -13,20 +13,26 @@
 #
 # *************************************
 
-@Spellbook.Modules.StateUrls = do ->
+class @Spellbook.Classes.StateUrls
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings = {}
+  _settings : {}
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init = ( options ) ->
-    _settings = $.extend
+  init: ( options ) ->
+    @_settings = $.extend
       $element      : $( '.js-stateUrls' )
       $link         : $( '.js-stateUrls-link' )
       hiddenClass   : 'is-hidden'
@@ -34,8 +40,8 @@
       dataAttribute : 'state'
     , options
 
-    _setInitialState( _getCurrentState() )
-    _setEventHandlers()
+    @_setInitialState( @_getCurrentState() )
+    @_setEventHandlers()
 
   # -------------------------------------
   #   Santize Hash
@@ -45,7 +51,7 @@
   #
   # -------------------------------------
 
-  _sanitizeHash = ( string ) ->
+  _sanitizeHash: ( string ) ->
     string.replace( /(<([^>]+)>)/ig, '' )
 
   # -------------------------------------
@@ -56,11 +62,11 @@
   #
   # -------------------------------------
 
-  _getCurrentState = ->
+  _getCurrentState: ->
     if window.location.hash
-      state = _sanitizeHash( window.location.hash )
+      state = @_sanitizeHash( window.location.hash )
     else
-      state = _settings.$link.first().attr( 'href' )
+      state = @_settings.$link.first().attr( 'href' )
 
     return state
 
@@ -72,24 +78,24 @@
   #
   # -------------------------------------
 
-  _setInitialState = ( state ) ->
-    _settings.$element
+  _setInitialState: ( state ) ->
+    @_settings.$element
       .not( state )
-      .addClass( _settings.hiddenClass )
+      .addClass( @_settings.hiddenClass )
 
-    $( "[data-#{ _settings.dataAttribute }=#{ state }]" )
-      .removeClass( _settings.hiddenClass )
-      .addClass( _settings.activeClass )
+    $( "[data-#{ @_settings.dataAttribute }=#{ state }]" )
+      .removeClass( @_settings.hiddenClass )
+      .addClass( @_settings.activeClass )
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers = ->
-    _settings.$link.on 'click', ( event ) ->
+  _setEventHandlers: ->
+    @_settings.$link.on 'click', ( event ) =>
       event.preventDefault()
 
-      $element = $(@)
+      $element = $( event.currentTarget )
       state    = $element.attr( 'href' )
 
       if history.pushState
@@ -97,7 +103,7 @@
       else
         window.location.hash = state
 
-      _showSection( $element, state ) if $( state ).length > 0
+      @_showSection( $element, state ) if $( state ).length > 0
 
   # -------------------------------------
   #   Show Section
@@ -108,21 +114,15 @@
   #
   # -------------------------------------
 
-  _showSection = ( $element, state ) ->
-    _settings.$link.removeClass( _settings.activeClass )
-    _settings.$element.addClass( _settings.hiddenClass )
-    $element.addClass( _settings.activeClass )
-    $( state ).removeClass( _settings.hiddenClass )
-
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
-
-  init : init
+  _showSection: ( $element, state ) ->
+    @_settings.$link.removeClass( @_settings.activeClass )
+    @_settings.$element.addClass( @_settings.hiddenClass )
+    $element.addClass( @_settings.activeClass )
+    $( state ).removeClass( @_settings.hiddenClass )
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.StateUrls.init()
+# new Spellbook.Classes.StateUrls()
 #

@@ -1,4 +1,4 @@
-describe 'Spellbook.Modules.StateUrls', ->
+describe 'Spellbook.Classes.StateUrls', ->
   beforeEach ->
     loadFixtures( 'state_urls.html' )
 
@@ -14,15 +14,15 @@ describe 'Spellbook.Modules.StateUrls', ->
 
   it 'should set the state to the window hash, if present', ->
     window.location.hash = '#section-03'
-    Spellbook.Modules.StateUrls.init()
+    new Spellbook.Classes.StateUrls()
     expect( $( '#section-03' ) ).toBeVisible()
 
   it 'should set the first section to active when no hash is present', ->
-    Spellbook.Modules.StateUrls.init()
+    new Spellbook.Classes.StateUrls()
     expect( $( '#section-01' ) ).toBeVisible()
 
   it 'should trigger a click on the link', ->
-    Spellbook.Modules.StateUrls.init()
+    new Spellbook.Classes.StateUrls()
 
     spyOnEvent( @link, 'click' )
     @link.click()
@@ -30,7 +30,7 @@ describe 'Spellbook.Modules.StateUrls', ->
     expect( 'click' ).toHaveBeenTriggeredOn( @link )
 
   it 'should show the appropriate section when the link is clicked on', ->
-    Spellbook.Modules.StateUrls.init()
+    new Spellbook.Classes.StateUrls()
 
     @link.last().click()
 
@@ -38,7 +38,7 @@ describe 'Spellbook.Modules.StateUrls', ->
     expect( $( goto ) ).toBeVisible()
 
   it 'should add an active class to the clicked link', ->
-    Spellbook.Modules.StateUrls.init()
+    new Spellbook.Classes.StateUrls()
 
     @link.first().click()
 
