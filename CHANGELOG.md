@@ -1,6 +1,21 @@
 Changelog
 =========
 
+2.0.1 - 2015-10-08
+-------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Spellbook.Classes.Modal setTimout scope
+
 2.0.0 - 2015-10-08
 -------------------
 
