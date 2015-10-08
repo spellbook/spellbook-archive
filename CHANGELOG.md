@@ -1,6 +1,21 @@
 Changelog
 =========
 
+2.0.0 - 2015-10-08
+-------------------
+
+### Added
+
+- Convert modules scripts into classes
+
+### Removed
+
+- Spellbook.Modules namespace
+
+### Fixed
+
+- Nothing
+
 1.9.3 - 2015-10-07
 -------------------
 
