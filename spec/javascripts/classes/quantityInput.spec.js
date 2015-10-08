@@ -1,4 +1,4 @@
-describe('Spellbook.Modules.QuantityInput', function() {
+describe('Spellbook.Classes.QuantityInput', function() {
   beforeEach(function() {
     loadFixtures('quantity-input.html');
     this.element = $('.js-quantityInput');
@@ -9,7 +9,7 @@ describe('Spellbook.Modules.QuantityInput', function() {
     this.targetBaseValue = 29;
     this.minValue = 1;
     this.maxValue = 100;
-    return Spellbook.Modules.QuantityInput.init();
+    return new Spellbook.Classes.QuantityInput;
   });
   it('should register a click event on the increase button', function() {
     spyOnEvent(this.increase, 'click');

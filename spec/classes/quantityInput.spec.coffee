@@ -1,4 +1,4 @@
-describe 'Spellbook.Modules.QuantityInput', ->
+describe 'Spellbook.Classes.QuantityInput', ->
   beforeEach ->
     loadFixtures( 'quantity-input.html' )
 
@@ -11,7 +11,7 @@ describe 'Spellbook.Modules.QuantityInput', ->
     @minValue        = 1
     @maxValue        = 100
 
-    Spellbook.Modules.QuantityInput.init()
+    new Spellbook.Classes.QuantityInput
 
   it 'should register a click event on the increase button', ->
     spyOnEvent( @increase, 'click' )

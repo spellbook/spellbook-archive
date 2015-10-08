@@ -20,21 +20,27 @@
 #
 # *************************************
 
-@Spellbook.Modules.QuantityInput = do ->
+class @Spellbook.Classes.QuantityInput
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings = {}
-  _value    = null
+  _settings : {}
+  _value    : null
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init = ( options ) ->
-    _settings = $.extend(
+  init: ( options ) ->
+    @_settings = $.extend
       $element          : $( '.js-quantityInput' )
       $field            : $( '.js-quantityInput-field' )
       $increase         : $( '.js-quantityInput-increase' )
@@ -47,50 +53,50 @@
       onIncrease        : null
       onDecrease        : null
       onTargetUpdate    : null
-    , options )
+    , options
 
-    _setValue()
-    _setEventHandlers()
+    @_setValue()
+    @_setEventHandlers()
 
   # -------------------------------------
   #   Set Value
   # -------------------------------------
 
-  _setValue = ->
-    _value = parseInt( _settings.$element.val() )
+  _setValue: ->
+    @_value = parseInt( @_settings.$element.val() )
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers = ->
+  _setEventHandlers: ->
 
     # ----- Input Keyup ----- #
 
-    _settings.$element.on 'keyup', ( event ) ->
-      _setValue()
-      unless isNaN( _value ) or _value < _settings.minValue or _value > _settings.maxValue
-        _updateValue()
+    @_settings.$element.on 'keyup', ( event ) =>
+      @_setValue()
+      unless isNaN( @_value ) or @_value < @_settings.minValue or @_value > @_settings.maxValue
+        @_updateValue()
 
     # ----- Increase ----- #
 
-    _settings.$increase.on 'click', ( event ) ->
+    @_settings.$increase.on 'click', ( event ) =>
       event.preventDefault()
 
-      _updateValue( 'up' ) unless _value >= _settings.maxValue
+      @_updateValue( 'up' ) unless @_value >= @_settings.maxValue
 
       # Increase Event
-      _settings.onIncrease?( _settings )
+      @_settings.onIncrease?( @_settings )
 
     # ----- Decrease ----- #
 
-    _settings.$decrease.on 'click', ( event ) ->
+    @_settings.$decrease.on 'click', ( event ) =>
       event.preventDefault()
 
-      _updateValue( 'down' ) unless _value <= _settings.minValue
+      @_updateValue( 'down' ) unless @_value <= @_settings.minValue
 
       # Decrease Event
-      _settings.onDecrease?( _settings )
+      @_settings.onDecrease?( @_settings )
 
   # -------------------------------------
   #   Update Value
@@ -100,35 +106,29 @@
   #
   # -------------------------------------
 
-  _updateValue = ( direction = '' ) ->
+  _updateValue: ( direction = '' ) ->
     switch direction
-      when 'up'   then _settings.$element.val( ++ _value )
-      when 'down' then _settings.$element.val( -- _value )
-      else _settings.$element.val( _value )
+      when 'up'   then @_settings.$element.val( ++ @_value )
+      when 'down' then @_settings.$element.val( -- @_value )
+      else @_settings.$element.val( @_value )
 
-    _updateTarget()
+    @_updateTarget()
 
       # Target Update Event
-    _settings.onTargetUpdate?( _settings )
+    @_settings.onTargetUpdate?( @_settings )
 
   # -------------------------------------
   #   Update Target
   # -------------------------------------
 
-  _updateTarget = ->
-    updatedValue = _value * _settings.targetBaseValue
+  _updateTarget: ->
+    updatedValue = @_value * @_settings.targetBaseValue
 
-    _settings.$target.text( "#{ _settings.targetValuePrefix }#{ updatedValue }" )
-
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
-
-  init : init
+    @_settings.$target.text( "#{ @_settings.targetValuePrefix }#{ updatedValue }" )
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.QuantityInput.init()
+# new Spellbook.Classes.QuantityInput()
 #
