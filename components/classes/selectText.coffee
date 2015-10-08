@@ -10,44 +10,50 @@
 #
 # *************************************
 
-@Spellbook.Modules.selectText = do ->
+class @Spellbook.Classes.SelectText
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings = {}
+  _settings : {}
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) -> @init( options )
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init = ( options ) ->
-    _settings = $.extend
+  init: ( options ) ->
+    @_settings = $.extend
       $element : $( '.js-selectText' )
       onClick  : null
     , options
 
-    _setEventHandlers()
+    @_setEventHandlers()
 
   # -------------------------------------
   #   Select Element
   # -------------------------------------
 
-  _selectElement = ( $element ) ->
-    node = $element[ 0 ]
+  _selectElement: ( $element ) ->
+    elementNode = $element[ 0 ]
 
     if ( document.body.createTextRange )
       range = document.body.createTextRange()
 
-      range.moveToElementText( node )
+      range.moveToElementText( elementNode )
       range.select()
 
     else if ( window.getSelection )
       selection = window.getSelection()
       range     = document.createRange()
 
-      range.selectNodeContents( node )
+      range.selectNodeContents( elementNode )
       selection.removeAllRanges()
       selection.addRange( range )
 
@@ -55,21 +61,17 @@
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers = ->
-    _settings.$element.on 'click', ->
-      _selectElement( _settings.$element )
-      $(@).trigger( 'focus' ).trigger( 'select' )
-      _settings.onClick?( _settings )
+  _setEventHandlers: ->
+    @_settings.$element.on 'click', ( event ) =>
+      @_selectElement( @_settings.$element )
 
-  # -------------------------------------
-  #   Public Methods
-  # -------------------------------------
+      $( event ).trigger( 'focus' ).trigger( 'select' )
 
-  init : init
+      @_settings.onClick?( @_settings )
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Modules.selectText.init()
+# new Spellbook.Classes.selectText()
 #
