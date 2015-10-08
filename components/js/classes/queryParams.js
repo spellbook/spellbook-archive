@@ -12,10 +12,10 @@ this.Spellbook.Classes.QueryParams = (function(superClass) {
 
   QueryParams.prototype.variables = [];
 
-  QueryParams.prototype.init = function(options) {
+  QueryParams.prototype.init = function() {
     this._settings = $.extend({
       url: null
-    }, options);
+    }, this.options);
     this._parseQueryString(this._settings.url);
     return this._sortParams();
   };

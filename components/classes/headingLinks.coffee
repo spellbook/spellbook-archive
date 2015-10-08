@@ -16,11 +16,11 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element    : $( 'h1, h2, h3, h4, h5' )
       anchorClass : 'anchor'
-    , options
+    , @options
 
     @_addAnchors()
 

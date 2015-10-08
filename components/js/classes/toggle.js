@@ -8,7 +8,7 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
     return Toggle.__super__.constructor.apply(this, arguments);
   }
 
-  Toggle.prototype.init = function(options) {
+  Toggle.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-toggle'),
       proximity: 'next',
@@ -19,7 +19,7 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
       onClick: null,
       onMouseover: null,
       onMouseout: null
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 

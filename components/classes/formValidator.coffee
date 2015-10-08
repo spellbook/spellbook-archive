@@ -32,7 +32,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element     : $( '.js-formValidator' )
       $input       : $( '.js-formValidator-input' )
@@ -44,7 +44,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
       showMessage  : true
       onError      : null
       onSuccess    : null
-    , options
+    , @options
 
     @_setEventHandlers()
 

@@ -2,8 +2,9 @@ this.Spellbook.Classes.Base = (function() {
   Base.prototype._settings = {};
 
   function Base(options) {
+    this.options = options;
     if (typeof this.init === "function") {
-      this.init(options);
+      this.init();
     }
   }
 

@@ -8,12 +8,12 @@ this.Spellbook.Classes.SaveProgress = (function(superClass) {
     return SaveProgress.__super__.constructor.apply(this, arguments);
   }
 
-  SaveProgress.prototype.init = function(options) {
+  SaveProgress.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-saveProgress'),
       $container: $('.js-saveProgress-container'),
       dataAttribute: 'saveprogress'
-    }, options);
+    }, this.options);
     this._restoreProgress();
     return this._setEventHandlers();
   };

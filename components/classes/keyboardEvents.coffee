@@ -15,10 +15,10 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       events : []
-    , options
+    , @options
 
     @emit()
 

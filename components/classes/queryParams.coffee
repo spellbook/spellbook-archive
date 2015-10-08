@@ -22,10 +22,10 @@ class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
   #   Initializer
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       url : null
-    , options
+    , @options
 
     @_parseQueryString( @_settings.url )
     @_sortParams()

@@ -10,13 +10,13 @@ this.Spellbook.Classes.Dematerialize = (function(superClass) {
 
   Dematerialize.prototype._item = '';
 
-  Dematerialize.prototype.init = function(options) {
+  Dematerialize.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-dematerialize'),
       $trigger: $('.js-dematerialize-trigger'),
       itemTitle: 'hidden_element',
       hiddenClass: 'is-hidden'
-    }, options);
+    }, this.options);
     this._setEventHandlers();
     return this._setInitialState();
   };

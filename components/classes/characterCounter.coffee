@@ -30,7 +30,7 @@ class @Spellbook.Classes.CharacterCounter extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element        : $( '.js-characterCounter' )
       $label          : $( '.js-characterCounter-label' )
@@ -42,7 +42,7 @@ class @Spellbook.Classes.CharacterCounter extends Spellbook.Classes.Base
       onMinPreceeded  : null
       onMaxExceeded   : null
       onConditionsMet : null
-    , options
+    , @options
 
     @_setEventHandlers()
 

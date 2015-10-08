@@ -22,11 +22,11 @@ this.Spellbook.Classes.DrawSvg = (function(superClass) {
 
   DrawSvg.prototype._progress = 0;
 
-  DrawSvg.prototype.init = function(options) {
+  DrawSvg.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-drawSvg'),
       prefix: 'path'
-    }, options);
+    }, this.options);
     return this._setStorage();
   };
 

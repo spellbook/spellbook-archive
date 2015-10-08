@@ -29,11 +29,11 @@ class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element : $( '.js-drawSvg' )
       prefix   : 'path'
-    , options
+    , @options
 
     @_setStorage()
 

@@ -24,13 +24,13 @@ class @Spellbook.Classes.Dematerialize extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element    : $( '.js-dematerialize' )
       $trigger    : $( '.js-dematerialize-trigger' )
       itemTitle   : 'hidden_element'
       hiddenClass : 'is-hidden'
-    , options
+    , @options
 
     @_setEventHandlers()
     @_setInitialState()

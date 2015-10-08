@@ -8,12 +8,12 @@ this.Spellbook.Classes.ShowPassword = (function(superClass) {
     return ShowPassword.__super__.constructor.apply(this, arguments);
   }
 
-  ShowPassword.prototype.init = function(options) {
+  ShowPassword.prototype.init = function() {
     this._settings = $.extend({
       $input: $('.js-showPassword-input'),
       $toggle: $('.js-showPassword-toggle'),
       showByDefault: false
-    }, options);
+    }, this.options);
     this._setEventHandlers();
     if (this._settings.showByDefault) {
       return this._showPassword();

@@ -8,11 +8,11 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
     return HeadingLinks.__super__.constructor.apply(this, arguments);
   }
 
-  HeadingLinks.prototype.init = function(options) {
+  HeadingLinks.prototype.init = function() {
     this._settings = $.extend({
       $element: $('h1, h2, h3, h4, h5'),
       anchorClass: 'anchor'
-    }, options);
+    }, this.options);
     return this._addAnchors();
   };
 

@@ -12,10 +12,10 @@ this.Spellbook.Classes.EqualHeights = (function(superClass) {
 
   EqualHeights.prototype._timer = null;
 
-  EqualHeights.prototype.init = function(options) {
+  EqualHeights.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-equalHeights')
-    }, options);
+    }, this.options);
     this._setHeight();
     return this._setEventHandlers();
   };

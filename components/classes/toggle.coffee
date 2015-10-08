@@ -23,7 +23,7 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element     : $( '.js-toggle' )
       proximity    : 'next' # prev, parent, nextParent, prevParent, $( '.element' ), '> span'
@@ -34,7 +34,7 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
       onClick      : null
       onMouseover  : null
       onMouseout   : null
-    , options
+    , @options
 
     @_setEventHandlers()
 

@@ -22,10 +22,10 @@ class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element : $( '.js-equalHeights' )
-    , options
+    , @options
 
     @_setHeight()
     @_setEventHandlers()

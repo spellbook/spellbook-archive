@@ -8,10 +8,10 @@ this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
     return KeyboardEvents.__super__.constructor.apply(this, arguments);
   }
 
-  KeyboardEvents.prototype.init = function(options) {
+  KeyboardEvents.prototype.init = function() {
     this._settings = $.extend({
       events: []
-    }, options);
+    }, this.options);
     return this.emit();
   };
 

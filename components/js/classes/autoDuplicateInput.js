@@ -16,7 +16,7 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
     email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   };
 
-  AutoDuplicateInput.prototype.init = function(options) {
+  AutoDuplicateInput.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-autoDuplicateInput'),
       $container: $('.js-autoDuplicateInput-container'),
@@ -27,7 +27,7 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
       onDuplicate: null,
       onInvalid: null,
       onValid: null
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 

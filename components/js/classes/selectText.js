@@ -8,11 +8,11 @@ this.Spellbook.Classes.SelectText = (function(superClass) {
     return SelectText.__super__.constructor.apply(this, arguments);
   }
 
-  SelectText.prototype.init = function(options) {
+  SelectText.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-selectText'),
       onClick: null
-    }, options);
+    }, this.options);
     return this._setEventHandlers();
   };
 

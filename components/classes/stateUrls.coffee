@@ -19,14 +19,14 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element      : $( '.js-stateUrls' )
       $link         : $( '.js-stateUrls-link' )
       hiddenClass   : 'is-hidden'
       activeClass   : 'is-active'
       dataAttribute : 'state'
-    , options
+    , @options
 
     @_setInitialState( @_getCurrentState() )
     @_setEventHandlers()

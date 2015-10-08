@@ -32,7 +32,7 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ( options ) ->
+  init: ->
     @_settings = $.extend
       $element          : $( '.js-quantityInput' )
       $field            : $( '.js-quantityInput-field' )
@@ -46,7 +46,7 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
       onIncrease        : null
       onDecrease        : null
       onTargetUpdate    : null
-    , options
+    , @options
 
     @_setValue()
     @_setEventHandlers()

@@ -8,12 +8,12 @@ this.Spellbook.Classes.Dispatcher = (function(superClass) {
     return Dispatcher.__super__.constructor.apply(this, arguments);
   }
 
-  Dispatcher.prototype.init = function(options) {
+  Dispatcher.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-dispatcher'),
       dataAttr: 'dispatcher-page',
       events: []
-    }, options);
+    }, this.options);
     return this.dispatch();
   };
 

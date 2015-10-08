@@ -8,14 +8,14 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
     return StateUrls.__super__.constructor.apply(this, arguments);
   }
 
-  StateUrls.prototype.init = function(options) {
+  StateUrls.prototype.init = function() {
     this._settings = $.extend({
       $element: $('.js-stateUrls'),
       $link: $('.js-stateUrls-link'),
       hiddenClass: 'is-hidden',
       activeClass: 'is-active',
       dataAttribute: 'state'
-    }, options);
+    }, this.options);
     this._setInitialState(this._getCurrentState());
     return this._setEventHandlers();
   };
