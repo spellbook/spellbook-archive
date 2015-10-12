@@ -1,6 +1,21 @@
 Changelog
 =========
 
+2.2.0 - 2015-10-12
+-------------------
+
+### Added
+
+- `Services.focusFirstInput`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 2.1.0 - 2015-10-08
 -------------------
 
