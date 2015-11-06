@@ -19,11 +19,10 @@ class @Spellbook.Classes.Dispatcher extends Spellbook.Classes.Base
   # -------------------------------------
 
   init: ->
-    @_settings = $.extend
+    @_setDefaults
       $element : $( '.js-dispatcher' )
       dataAttr : 'dispatcher-page'
       events   : []
-    , @options
 
     @dispatch()
 

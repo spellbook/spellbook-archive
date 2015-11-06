@@ -23,10 +23,10 @@ this.Spellbook.Classes.DrawSvg = (function(superClass) {
   DrawSvg.prototype._progress = 0;
 
   DrawSvg.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-drawSvg'),
       prefix: 'path'
-    }, this.options);
+    });
     return this._setStorage();
   };
 

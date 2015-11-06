@@ -24,7 +24,7 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
   # -------------------------------------
 
   init: ->
-    @_settings = $.extend
+    @_setDefaults
       $element     : $( '.js-toggle' )
       proximity    : 'next' # prev, parent, nextParent, prevParent, $( '.element' ), '> span'
       event        : 'click' # hover
@@ -34,7 +34,6 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
       onClick      : null
       onMouseover  : null
       onMouseout   : null
-    , @options
 
     @_setEventHandlers()
 

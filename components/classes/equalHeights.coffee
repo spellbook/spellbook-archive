@@ -23,9 +23,8 @@ class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
   # -------------------------------------
 
   init: ->
-    @_settings = $.extend
+    @_setDefaults
       $element : $( '.js-equalHeights' )
-    , @options
 
     @_setHeight()
     @_setEventHandlers()

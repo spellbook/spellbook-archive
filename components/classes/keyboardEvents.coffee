@@ -16,9 +16,8 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
   # -------------------------------------
 
   init: ->
-    @_settings = $.extend
+    @_setDefaults
       events : []
-    , @options
 
     @emit()
 

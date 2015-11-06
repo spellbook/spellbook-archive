@@ -17,10 +17,9 @@ class @Spellbook.Classes.SelectText extends Spellbook.Classes.Base
   # -------------------------------------
 
   init: ->
-    @_settings = $.extend
+    @_setDefaults
       $element : $( '.js-selectText' )
       onClick  : null
-    , @options
 
     @_setEventHandlers()
 

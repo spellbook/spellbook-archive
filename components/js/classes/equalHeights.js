@@ -13,9 +13,9 @@ this.Spellbook.Classes.EqualHeights = (function(superClass) {
   EqualHeights.prototype._timer = null;
 
   EqualHeights.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-equalHeights')
-    }, this.options);
+    });
     this._setHeight();
     return this._setEventHandlers();
   };

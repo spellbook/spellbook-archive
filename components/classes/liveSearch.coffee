@@ -32,7 +32,7 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
   # -------------------------------------
 
   init: ->
-    _settings = $.extend
+    @_setDefaults
       $element     : $( '.js-search' )
       $query       : $( '.js-search-query' )
       $container   : $( '.js-search-container' )
@@ -44,7 +44,6 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
       onEmpty      : null
       onFound      : null
       onKeyup      : null
-    , @options
 
     @_setEventHandlers()
 

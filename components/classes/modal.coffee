@@ -29,7 +29,7 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
   # -------------------------------------
 
   init: ->
-    @_settings = $.extend
+    @_setDefaults
       $trigger        : $( '.js-modal-trigger' )
       $close          : $( '.js-modal-close' )
       dataAttribute   : 'modal'
@@ -37,7 +37,6 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
       activeClass     : 'is-active'
       inactiveClass   : 'is-inactive'
       activeBodyClass : 'is-modal-active'
-    , @options
 
     @_setEventHandlers()
 

@@ -11,8 +11,7 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
   LiveSearch.prototype._query = '';
 
   LiveSearch.prototype.init = function() {
-    var _settings;
-    _settings = $.extend({
+    this._setDefaults({
       $element: $('.js-search'),
       $query: $('.js-search-query'),
       $container: $('.js-search-container'),
@@ -24,7 +23,7 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
       onEmpty: null,
       onFound: null,
       onKeyup: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 

@@ -11,7 +11,7 @@ this.Spellbook.Classes.CharacterCounter = (function(superClass) {
   CharacterCounter.prototype._count = 0;
 
   CharacterCounter.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-characterCounter'),
       $label: $('.js-characterCounter-label'),
       $number: $('.js-characterCounter-number'),
@@ -22,7 +22,7 @@ this.Spellbook.Classes.CharacterCounter = (function(superClass) {
       onMinPreceeded: null,
       onMaxExceeded: null,
       onConditionsMet: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 

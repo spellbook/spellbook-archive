@@ -13,7 +13,7 @@ this.Spellbook.Classes.Modal = (function(superClass) {
   Modal.prototype._$backdrop = null;
 
   Modal.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $trigger: $('.js-modal-trigger'),
       $close: $('.js-modal-close'),
       dataAttribute: 'modal',
@@ -21,7 +21,7 @@ this.Spellbook.Classes.Modal = (function(superClass) {
       activeClass: 'is-active',
       inactiveClass: 'is-inactive',
       activeBodyClass: 'is-modal-active'
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 

@@ -33,7 +33,7 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
   # -------------------------------------
 
   init: ->
-    @_settings = $.extend
+    @_setDefaults
       $element              : $( '.js-autoDuplicateInput' )
       $container            : $( '.js-autoDuplicateInput-container' )
       clonedDataAttribute   : 'cloned'
@@ -43,7 +43,6 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
       onDuplicate           : null
       onInvalid             : null
       onValid               : null
-    , @options
 
     @_setEventHandlers()
 

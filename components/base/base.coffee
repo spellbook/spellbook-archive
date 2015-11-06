@@ -19,6 +19,13 @@ class @Spellbook.Classes.Base
 
   constructor : ( @options ) -> @init?()
 
+  # -------------------------------------
+  #   Set Defaults
+  # -------------------------------------
+
+  _setDefaults : ( defaults ) ->
+    @_settings = $.extend( defaults, @options )
+
 # -------------------------------------
 #   Usage
 # -------------------------------------
