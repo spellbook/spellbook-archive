@@ -19,7 +19,7 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element      : $( '.js-stateUrls' )
       $link         : $( '.js-stateUrls-link' )
@@ -38,7 +38,7 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _sanitizeHash: ( string ) ->
+  _sanitizeHash : ( string ) ->
     string.replace( /(<([^>]+)>)/ig, '' )
 
   # -------------------------------------
@@ -49,7 +49,7 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _getCurrentState: ->
+  _getCurrentState : ->
     if window.location.hash
       state = @_sanitizeHash( window.location.hash )
     else
@@ -65,7 +65,7 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _setInitialState: ( state ) ->
+  _setInitialState : ( state ) ->
     @_settings.$element
       .not( state )
       .addClass( @_settings.hiddenClass )
@@ -78,7 +78,7 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     @_settings.$link.on 'click', ( event ) =>
       event.preventDefault()
 
@@ -101,7 +101,7 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _showSection: ( $element, state ) ->
+  _showSection : ( $element, state ) ->
     @_settings.$link.removeClass( @_settings.activeClass )
     @_settings.$element.addClass( @_settings.hiddenClass )
     $element.addClass( @_settings.activeClass )

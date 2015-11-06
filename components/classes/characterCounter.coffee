@@ -30,7 +30,7 @@ class @Spellbook.Classes.CharacterCounter extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element        : $( '.js-characterCounter' )
       $label          : $( '.js-characterCounter-label' )
@@ -49,7 +49,7 @@ class @Spellbook.Classes.CharacterCounter extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
 
     # ----- Element: Keyup ----- #
 
@@ -88,7 +88,7 @@ class @Spellbook.Classes.CharacterCounter extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _toggleState: ( element, state ) ->
+  _toggleState : ( element, state ) ->
     switch state
       when 'error'
         element.removeClass( @_settings.successClass )

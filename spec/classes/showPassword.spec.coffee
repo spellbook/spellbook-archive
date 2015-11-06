@@ -12,7 +12,7 @@ describe 'Spellbook.Classes.ShowPassword', ->
 
   it 'should show the password if showByDefault is true', ->
     new Spellbook.Classes.ShowPassword
-      showByDefault: true
+      showByDefault : true
 
     expect( @input ).toHaveAttr( 'type', 'text' )
 

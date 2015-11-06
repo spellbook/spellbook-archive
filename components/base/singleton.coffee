@@ -17,7 +17,7 @@ class @Spellbook.Classes.Singleton
   #   Get Instance
   # -------------------------------------
 
-  @getInstance: ->
+  @getInstance : ->
     @_instance ?= new @( arguments... )
 
 # -------------------------------------

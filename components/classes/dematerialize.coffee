@@ -24,7 +24,7 @@ class @Spellbook.Classes.Dematerialize extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element    : $( '.js-dematerialize' )
       $trigger    : $( '.js-dematerialize-trigger' )
@@ -38,7 +38,7 @@ class @Spellbook.Classes.Dematerialize extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     if @_settings.$trigger instanceof jQuery
       @_settings.$trigger.on 'click', ( event ) =>
         event.preventDefault()
@@ -50,7 +50,7 @@ class @Spellbook.Classes.Dematerialize extends Spellbook.Classes.Base
   #   Set Initial State
   # -------------------------------------
 
-  _setInitialState: ->
+  _setInitialState : ->
     @_item = localStorage.getItem( @_settings.itemTitle )
 
     unless @_item is 'true'
@@ -60,7 +60,7 @@ class @Spellbook.Classes.Dematerialize extends Spellbook.Classes.Base
   #   Toggle State
   # -------------------------------------
 
-  _toggleState: ->
+  _toggleState : ->
     unless @_settings.$element.hasClass( @_settings.hiddenClass )
       @_settings.$element.addClass( @_settings.hiddenClass )
       @_item = localStorage.setItem( @_settings.itemTitle, 'true' )
@@ -72,7 +72,7 @@ class @Spellbook.Classes.Dematerialize extends Spellbook.Classes.Base
   #   Toggle State Via Key
   # -------------------------------------
 
-  _toggleStateViaKey: ->
+  _toggleStateViaKey : ->
     $( document ).on 'keyup', ( event ) =>
       tag = event.target.tagName.toLowerCase()
 

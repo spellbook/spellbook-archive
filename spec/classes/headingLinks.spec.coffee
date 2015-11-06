@@ -6,7 +6,7 @@ describe 'Spellbook.Classes.HeadingLinks', ->
     @headings     = $( 'h1, h2, h3, h4' )
 
     new Spellbook.Classes.HeadingLinks
-      headings: @headings
+      headings : @headings
 
   it 'should slugify the heading string as an ID', ->
     expect( @firstHeading ).toHaveId( 'this-is-a-heading' )

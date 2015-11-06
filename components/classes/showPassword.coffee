@@ -17,7 +17,7 @@ class @Spellbook.Classes.ShowPassword extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $input        : $( '.js-showPassword-input' )
       $toggle       : $( '.js-showPassword-toggle' )
@@ -30,7 +30,7 @@ class @Spellbook.Classes.ShowPassword extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     @_settings.$toggle.on 'change', ( event ) =>
       show = $( event.currentTarget ).prop( 'checked' )
 
@@ -43,7 +43,7 @@ class @Spellbook.Classes.ShowPassword extends Spellbook.Classes.Base
   #   Show Password
   # -------------------------------------
 
-  _showPassword: ->
+  _showPassword : ->
     @_settings.$input.attr( 'type', 'text' )
     @_settings.$toggle.prop( 'checked', true )
 

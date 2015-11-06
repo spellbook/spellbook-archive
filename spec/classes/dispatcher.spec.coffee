@@ -6,20 +6,20 @@ describe 'Spellbook.Classes.Dispatcher', ->
     @dataAttr = 'dispatcher-page'
 
     new Spellbook.Classes.Dispatcher
-      events: [
+      events : [
         {
-          page: 'home',
-          run: ->
+          page : 'home',
+          run : ->
             $( '#home' ).addClass( 'is-active' )
         },
         {
-          page: 'about',
-          run: ->
+          page : 'about',
+          run : ->
             $( '#about' ).addClass( 'is-active' )
         },
         {
-          page: 'contact',
-          run: ->
+          page : 'contact',
+          run : ->
             $( '#contact' ).addClass( 'is-active' )
         }
       ]
@@ -29,10 +29,10 @@ describe 'Spellbook.Classes.Dispatcher', ->
 
   it 'should add an active class to all containers', ->
     new Spellbook.Classes.Dispatcher
-      events: [
+      events : [
         {
-          page: 'all',
-          run: ->
+          page : 'all',
+          run : ->
             $( '#home' ).addClass( 'is-active' )
             $( '#about' ).addClass( 'is-active' )
             $( '#contact' ).addClass( 'is-active' )

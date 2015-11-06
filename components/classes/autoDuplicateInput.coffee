@@ -32,7 +32,7 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element              : $( '.js-autoDuplicateInput' )
       $container            : $( '.js-autoDuplicateInput-container' )
@@ -50,7 +50,7 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     @_settings.$element.on 'keyup', ( event ) =>
       event.preventDefault()
 
@@ -70,14 +70,14 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
   #   Get Validation Type
   # -------------------------------------
 
-  _getValidationType: ->
+  _getValidationType : ->
     @_field.data( @_settings.validateDataAttribute )
 
   # -------------------------------------
   #   Is Valid
   # -------------------------------------
 
-  _isValid: ->
+  _isValid :  ->
     validator = @_getValidationType( @_field )
 
     @_validators[ "#{ validator }" ].test( @_field.val() )
@@ -86,7 +86,7 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
   #   Duplicate
   # -------------------------------------
 
-  _duplicate: ->
+  _duplicate : ->
     ++ @_count
 
     @_field
@@ -101,7 +101,7 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
   #   Set Input State
   # -------------------------------------
 
-  _setInputState: ( type ) ->
+  _setInputState : ( type ) ->
     switch type
       when 'invalid'
         @_field
@@ -116,7 +116,7 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
   #   Get Count
   # -------------------------------------
 
-  getCount: -> return @_count
+  getCount : -> return @_count
 
 # -------------------------------------
 #   Usage

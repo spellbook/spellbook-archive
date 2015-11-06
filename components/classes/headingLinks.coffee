@@ -16,7 +16,7 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element    : $( 'h1, h2, h3, h4, h5' )
       anchorClass : 'anchor'
@@ -31,7 +31,7 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _slugify: ( string ) ->
+  _slugify : ( string ) ->
     string
       .toLowerCase()
       .replace( /[^\w ]+/g, '' )
@@ -41,7 +41,7 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
   #   Add Anchors
   # -------------------------------------
 
-  _addAnchors: ->
+  _addAnchors : ->
     @_settings.$element.each ( index, elementNode ) =>
       $element = $( elementNode )
       slug     = @_slugify( $element.text() )

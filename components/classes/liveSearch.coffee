@@ -31,7 +31,7 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element     : $( '.js-search' )
       $query       : $( '.js-search-query' )
@@ -51,7 +51,7 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     @_settings.$element.on 'keyup', ( event ) =>
       @_query = $( event.currentTarget ).val()
 
@@ -72,7 +72,7 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
   #   Parse DOM
   # -------------------------------------
 
-  _parseDom: ->
+  _parseDom : ->
     @_settings.$query.each ( index, elementNode ) =>
       $element = $( elementNode )
 
@@ -94,7 +94,7 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
   #   Clear Empty Message
   # -------------------------------------
 
-  _clearEmptyMessages: ->
+  _clearEmptyMessages : ->
     if @_settings.emptyMessage and $( @_settings.emptyNode ).length > 0
       $( @_settings.emptyNode ).remove()
 
@@ -102,7 +102,7 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
   #   Handle Empty Results
   # -------------------------------------
 
-  _handleEmptyResults: ->
+  _handleEmptyResults : ->
     if @_isEmpty()
       if @_settings.emptyMessage
         emptyClass = @_settings.emptyNode.replace( '.', '' )
@@ -124,14 +124,14 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _isQueryAbsent: ( element ) ->
+  _isQueryAbsent : ( element ) ->
     element.text().search( new RegExp( @_query, 'i' ) ) < 0
 
   # -------------------------------------
   #   Is Empty
   # -------------------------------------
 
-  _isEmpty: ->
+  _isEmpty : ->
     $( "#{ @_settings.itemNode }.#{ @_settings.hiddenClass }" ).length is $( @_settings.itemNode ).length
 
 # -------------------------------------

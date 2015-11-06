@@ -19,7 +19,7 @@ class @Spellbook.Classes.Share extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element : $( '.js-share' )
       popup    :
@@ -34,7 +34,7 @@ class @Spellbook.Classes.Share extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     @_settings.$element.on 'click', ( event ) =>
       event.preventDefault()
 
@@ -55,7 +55,7 @@ class @Spellbook.Classes.Share extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _triggerPopup: ( service, url, content ) ->
+  _triggerPopup : ( service, url, content ) ->
     popupOptions =
       "width=#{ @_settings.popup.width },
        height=#{ @_settings.popup.height },

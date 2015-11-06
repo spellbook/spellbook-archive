@@ -28,7 +28,7 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $trigger        : $( '.js-modal-trigger' )
       $close          : $( '.js-modal-close' )
@@ -51,7 +51,7 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  trigger: ( $element, event, removeBackdrop = false, callback = null ) ->
+  trigger : ( $element, event, removeBackdrop = false, callback = null ) ->
     @_$modal = $element
 
     switch event
@@ -78,7 +78,7 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
   #   Toggle Overlay
   # -------------------------------------
 
-  _toggleOverlay: ( event ) ->
+  _toggleOverlay : ( event ) ->
     switch event
 
       when 'open'
@@ -104,7 +104,7 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     @_settings.$trigger.on 'click', ( event ) =>
       event.preventDefault()
 
@@ -117,7 +117,7 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
   #   Set Active Event Handlers
   # -------------------------------------
 
-  _setActiveEventHandlers: ->
+  _setActiveEventHandlers : ->
 
     # ----- Close ----- #
 
@@ -140,7 +140,7 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
   #   Clean Up Events
   # -------------------------------------
 
-  _cleanupEvents: ->
+  _cleanupEvents : ->
     @_settings.$close.off( 'click' )
     $( document ).off( 'keydown' )
 

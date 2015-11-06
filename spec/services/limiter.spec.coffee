@@ -15,25 +15,25 @@ describe 'Spellbook.Services.limiter', ->
 
   it 'should do nothing if there are less items than the limit', ->
     Spellbook.Services.limiter
-      limit: 6
+      limit : 6
 
     expect( @element ).not.toHaveClass( @hiddenClass )
 
   it 'should hide the toggle if there are less items than the limit', ->
     Spellbook.Services.limiter
-      limit: 6
+      limit : 6
 
     expect( @toggle ).toBeHidden()
 
   it 'should add a hidden class to hide elements greater than the limit', ->
     Spellbook.Services.limiter
-      limit: 4
+      limit : 4
 
     expect( '.js-limiter-element:nth-child( 5 )' ).toHaveClass( @hiddenClass )
 
   it 'should trigger a click on the toggle', ->
     Spellbook.Services.limiter
-      limit: 2
+      limit : 2
 
     spyOnEvent( @toggle, 'click' )
     @toggle.click()

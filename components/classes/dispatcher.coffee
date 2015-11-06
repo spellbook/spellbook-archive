@@ -18,7 +18,7 @@ class @Spellbook.Classes.Dispatcher extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element : $( '.js-dispatcher' )
       dataAttr : 'dispatcher-page'
@@ -34,7 +34,7 @@ class @Spellbook.Classes.Dispatcher extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  dispatch: ( event = null ) ->
+  dispatch : ( event = null ) ->
     page = @_getCurrentPage()
 
     return false unless page
@@ -57,7 +57,7 @@ class @Spellbook.Classes.Dispatcher extends Spellbook.Classes.Base
   #   Get Current Page
   # -------------------------------------
 
-  _getCurrentPage: ->
+  _getCurrentPage : ->
     @_settings.$element.data( @_settings.dataAttr )
 
 # -------------------------------------
@@ -65,7 +65,7 @@ class @Spellbook.Classes.Dispatcher extends Spellbook.Classes.Base
 # -------------------------------------
 #
 # new Spellbook.Classes.Dispatcher
-#   events: [
+#   events : [
 #     { ... }
 #   ]
 #

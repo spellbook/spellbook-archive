@@ -21,13 +21,13 @@ class @Spellbook.Classes.ClassName
   #   Constructor
   # -------------------------------------
 
-  constructor: ( @options ) -> @init()
+  constructor : ( @options ) -> @init()
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_settings = $.extend
       $element : $( '.js-element' )
     , @options
@@ -38,7 +38,7 @@ class @Spellbook.Classes.ClassName
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     # ...
 
 # -------------------------------------

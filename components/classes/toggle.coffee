@@ -23,7 +23,7 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element     : $( '.js-toggle' )
       proximity    : 'next' # prev, parent, nextParent, prevParent, $( '.element' ), '> span'
@@ -41,7 +41,7 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     switch @_settings.event
       when 'click' then @_handleClickEvent()
       when 'hover' then @_handleHoverEvent()
@@ -50,7 +50,7 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
   #   Handle Click Event
   # -------------------------------------
 
-  _handleClickEvent: ->
+  _handleClickEvent : ->
     @_settings.$element.on 'click', ( event ) =>
       event.preventDefault()
       $element = $( event.currentTarget )
@@ -91,12 +91,12 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
   #   Handle Hover Event
   # -------------------------------------
 
-  _handleHoverEvent: ->
+  _handleHoverEvent : ->
     @_settings.initialState( @_settings ) if @_settings.initialState
 
     @_settings.$element.on
-      mouseenter: ( event ) => @_handleHoverStateEvent( $( event.currentTarget ), 'on' )
-      mouseleave: ( event ) => @_handleHoverStateEvent( $( event.currentTarget ), 'off' )
+      mouseenter : ( event ) => @_handleHoverStateEvent( $( event.currentTarget ), 'on' )
+      mouseleave : ( event ) => @_handleHoverStateEvent( $( event.currentTarget ), 'off' )
 
   # -------------------------------------
   #   Handle Hover State Event
@@ -107,7 +107,7 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _handleHoverStateEvent: ( $element, state ) ->
+  _handleHoverStateEvent : ( $element, state ) ->
     switch state
       when 'on'
         @_settings.onMouseover?( @_settings )
@@ -140,7 +140,7 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _toggleClass: ( $element, classToToggle = @_settings.toggleClass ) ->
+  _toggleClass : ( $element, classToToggle = @_settings.toggleClass ) ->
     if $element.hasClass( classToToggle )
       $element.removeClass( classToToggle )
     else

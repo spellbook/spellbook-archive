@@ -5,7 +5,7 @@ describe 'Spellbook.Classes.QueryParams', ->
     expect( @qp ).not.toBe( false )
 
   beforeEach ->
-    @qp = new Spellbook.Classes.QueryParams( { url: 'http://www.example.com/?param1=true&param2=false' } )
+    @qp = new Spellbook.Classes.QueryParams( { url : 'http://www.example.com/?param1=true&param2=false' } )
 
   describe '#parseQueryString', ->
     it 'should parse the query string', ->
@@ -13,11 +13,11 @@ describe 'Spellbook.Classes.QueryParams', ->
 
   describe '#sortParams', ->
     it 'should sort the parameters', ->
-      expect( @qp.params ).toEqual( { 'param1': 'true', 'param2': 'false', throwFailures: 'false' } )
+      expect( @qp.params ).toEqual( { 'param1' : 'true', 'param2' : 'false', throwFailures : 'false' } )
 
   describe '.allParams', ->
     it 'should return a list of the parameters', ->
-      expect( @qp.allParams() ).toEqual( { 'param1': 'true', 'param2': 'false', throwFailures: 'false' } )
+      expect( @qp.allParams() ).toEqual( { 'param1' : 'true', 'param2' : 'false', throwFailures : 'false' } )
 
   describe '.matchParamKey', ->
     it 'should return a correct match on a parameter key', ->

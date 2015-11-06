@@ -15,7 +15,7 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       events : []
 
@@ -68,7 +68,7 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
 # -------------------------------------
 #
 # new Spellbook.Classes.KeyboardEvents
-#   events: [
+#   events : [
 #     { ... }
 #   ]
 #

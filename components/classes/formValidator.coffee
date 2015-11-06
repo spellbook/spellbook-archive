@@ -32,7 +32,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element     : $( '.js-formValidator' )
       $input       : $( '.js-formValidator-input' )
@@ -51,7 +51,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
 
     # ----- Submit ----- #
 
@@ -69,7 +69,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Validate All Fields
   # -------------------------------------
 
-  _validateAllFields: ->
+  _validateAllFields : ->
     @_settings.$input.each ( index, element ) =>
       @_input = $( element )
 
@@ -84,7 +84,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Validate
   # -------------------------------------
 
-  validate: ( input ) ->
+  validate : ( input ) ->
     parameter = @_parseValidators( input.data( @_settings.dataAttr ) )
     @_element = input
 
@@ -97,7 +97,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Match Validators
   # -------------------------------------
 
-  _matchValidators: ( match ) ->
+  _matchValidators : ( match ) ->
     switch match
       when 'required'
         if @_validateRequired()
@@ -109,7 +109,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Set Validation State
   # -------------------------------------
 
-  _setValidationState: ( state, message ) ->
+  _setValidationState : ( state, message ) ->
     switch state
       when 'error'
         @_setError( message )
@@ -124,7 +124,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Parse Validators
   # -------------------------------------
 
-  _parseValidators: ( parameter ) ->
+  _parseValidators : ( parameter ) ->
     parameters = []
     split      = parameter.split( @_settings.delimiter )
 
@@ -138,14 +138,14 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Is Validator
   # -------------------------------------
 
-  _isValidator: ( parameter ) ->
+  _isValidator : ( parameter ) ->
     @_validators.indexOf( parameter ) isnt -1
 
   # -------------------------------------
   #   Validate Required
   # -------------------------------------
 
-  _validateRequired: ->
+  _validateRequired : ->
     if @_input.val() is ''
       return true
     else
@@ -155,14 +155,14 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Set Error
   # -------------------------------------
 
-  _setError: ( message ) ->
-    @_errors.push( { element: @_input.attr( 'name' ), message: message } )
+  _setError : ( message ) ->
+    @_errors.push( { element : @_input.attr( 'name' ), message : message } )
 
   # -------------------------------------
   #   Remove Error
   # -------------------------------------
 
-  _removeError: ->
+  _removeError : ->
     index = @_errors.indexOf( @_input )
     @_errors.splice( index, 1 )
 
@@ -170,7 +170,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Set Input State
   # -------------------------------------
 
-  _setInputState: ( message ) ->
+  _setInputState : ( message ) ->
     @_removeInputState()
     @_input.addClass( @_settings.errorClass )
     if @_settings.showMessage
@@ -180,7 +180,7 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
   #   Remove Input State
   # -------------------------------------
 
-  _removeInputState: ->
+  _removeInputState : ->
     @_input.removeClass( @_settings.errorClass )
     if @_settings.showMessage
       @_input.next( ".#{ @_settings.messageClass }" ).remove()

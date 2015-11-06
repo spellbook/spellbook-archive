@@ -22,7 +22,7 @@ class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
   #   Initializer
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       url : null
 
@@ -37,7 +37,7 @@ class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _parseQueryString: ( url ) ->
+  _parseQueryString : ( url ) ->
     if url
       queryString = url.split( '?' )[ 1 ]
     else
@@ -49,7 +49,7 @@ class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
   #   Sort Parameters
   # -------------------------------------
 
-  _sortParams: ->
+  _sortParams : ->
     for param in @variables
       pair = param.split( '=' )
       @params[ pair[ 0 ] ] = pair[ 1 ] unless pair[ 1 ] is undefined
@@ -58,7 +58,7 @@ class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
   #   Get All Parameters
   # -------------------------------------
 
-  allParams: ->
+  allParams : ->
     @params
 
   # -------------------------------------
@@ -69,7 +69,7 @@ class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  matchParamKey: ( matcher ) ->
+  matchParamKey : ( matcher ) ->
     for key, value of @params
       return true if matcher is key
 
@@ -83,7 +83,7 @@ class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  matchParamValue: ( matcher ) ->
+  matchParamValue : ( matcher ) ->
     for key, value of @params
       return true if matcher is value
 

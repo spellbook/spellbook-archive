@@ -22,7 +22,7 @@ class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element : $( '.js-equalHeights' )
 
@@ -33,7 +33,7 @@ class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
   #   Set Height
   # -------------------------------------
 
-  _setHeight: ->
+  _setHeight : ->
     @_settings.$element.css( 'height', 'auto' )
 
     @_settings.$element.each ( index, elementNode ) =>
@@ -47,7 +47,7 @@ class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     $( window ).on 'resize', =>
       clearTimeout( @_timer )
       @_timer = setTimeout( @_setHeight, 250 )

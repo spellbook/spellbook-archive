@@ -29,7 +29,7 @@ class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element : $( '.js-drawSvg' )
       prefix   : 'path'
@@ -40,7 +40,7 @@ class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
   #   Set Storage
   # -------------------------------------
 
-  _setStorage: ->
+  _setStorage : ->
     numberOfPaths = @_settings.$element.find( 'path[id]' ).length
 
     for index in [ 0...numberOfPaths ]
@@ -55,7 +55,7 @@ class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
   #   Set Stroke
   # -------------------------------------
 
-  _setStroke: ->
+  _setStroke : ->
     for index in [ 0...@_paths.length ]
       @_paths[ index ].style.strokeDashoffset = Math.floor( @_lengths[ index ] * ( 1 - @_progress ) )
 
@@ -63,7 +63,7 @@ class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
   #   Draw
   # -------------------------------------
 
-  draw: =>
+  draw : =>
     @_progress = @_currentFrame / @_totalFrames
 
     if @_progress > 1

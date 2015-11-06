@@ -17,7 +17,7 @@ class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element      : $( '.js-saveProgress' )
       $container    : $( '.js-saveProgress-container' )
@@ -34,7 +34,7 @@ class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _eraseProgress: ( container ) ->
+  _eraseProgress : ( container ) ->
     container.find( @_settings.$element ).each ( index, elementNode ) =>
       key = $( elementNode ).data( @_settings.dataAttribute )
 
@@ -44,7 +44,7 @@ class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
   #   Restore Progress
   # -------------------------------------
 
-  _restoreProgress: ->
+  _restoreProgress : ->
     @_settings.$element.each ( index, elementNode ) =>
       $element = $( elementNode )
       key      = $element.data( @_settings.dataAttribute )
@@ -56,7 +56,7 @@ class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     @_settings.$element.on 'input', ( event ) =>
       $element = $( event.currentTarget )
       key      = $element.data( @_settings.dataAttribute )
@@ -71,7 +71,7 @@ class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
   #   Store Progress
   # -------------------------------------
 
-  _storeProgress: ( key, value ) ->
+  _storeProgress : ( key, value ) ->
     localStorage.setItem( key, value )
 
 # -------------------------------------

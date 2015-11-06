@@ -23,6 +23,6 @@
 # -------------------------------------
 #
 # Spellbook.Services.escapeOut
-#   run: ->
+#   run : ->
 #     # ...
 #

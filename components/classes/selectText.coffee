@@ -16,7 +16,7 @@ class @Spellbook.Classes.SelectText extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element : $( '.js-selectText' )
       onClick  : null
@@ -27,7 +27,7 @@ class @Spellbook.Classes.SelectText extends Spellbook.Classes.Base
   #   Select Element
   # -------------------------------------
 
-  _selectElement: ( $element ) ->
+  _selectElement : ( $element ) ->
     elementNode = $element[ 0 ]
 
     if ( document.body.createTextRange )
@@ -48,7 +48,7 @@ class @Spellbook.Classes.SelectText extends Spellbook.Classes.Base
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
     @_settings.$element.on 'click', ( event ) =>
       @_selectElement( @_settings.$element )
 

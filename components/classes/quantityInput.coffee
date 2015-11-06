@@ -32,7 +32,7 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
   #   Initialize
   # -------------------------------------
 
-  init: ->
+  init : ->
     @_setDefaults
       $element          : $( '.js-quantityInput' )
       $field            : $( '.js-quantityInput-field' )
@@ -54,14 +54,14 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
   #   Set Value
   # -------------------------------------
 
-  _setValue: ->
+  _setValue : ->
     @_value = parseInt( @_settings.$element.val() )
 
   # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
-  _setEventHandlers: ->
+  _setEventHandlers : ->
 
     # ----- Input Keyup ----- #
 
@@ -98,7 +98,7 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _updateValue: ( direction = '' ) ->
+  _updateValue : ( direction = '' ) ->
     switch direction
       when 'up'   then @_settings.$element.val( ++ @_value )
       when 'down' then @_settings.$element.val( -- @_value )
@@ -113,7 +113,7 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
   #   Update Target
   # -------------------------------------
 
-  _updateTarget: ->
+  _updateTarget : ->
     updatedValue = @_value * @_settings.targetBaseValue
 
     @_settings.$target.text( "#{ @_settings.targetValuePrefix }#{ updatedValue }" )
