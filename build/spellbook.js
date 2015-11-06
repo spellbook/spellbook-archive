@@ -20,6 +20,10 @@ this.Spellbook.Classes.Base = (function() {
     }
   }
 
+  Base.prototype._setDefaults = function(defaults) {
+    return this._settings = $.extend(defaults, this.options);
+  };
+
   return Base;
 
 })();
@@ -60,7 +64,7 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
   };
 
   AutoDuplicateInput.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-autoDuplicateInput'),
       $container: $('.js-autoDuplicateInput-container'),
       clonedDataAttribute: 'cloned',
@@ -70,7 +74,7 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
       onDuplicate: null,
       onInvalid: null,
       onValid: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 
@@ -142,7 +146,7 @@ this.Spellbook.Classes.CharacterCounter = (function(superClass) {
   CharacterCounter.prototype._count = 0;
 
   CharacterCounter.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-characterCounter'),
       $label: $('.js-characterCounter-label'),
       $number: $('.js-characterCounter-number'),
@@ -153,7 +157,7 @@ this.Spellbook.Classes.CharacterCounter = (function(superClass) {
       onMinPreceeded: null,
       onMaxExceeded: null,
       onConditionsMet: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 
@@ -211,12 +215,12 @@ this.Spellbook.Classes.Dematerialize = (function(superClass) {
   Dematerialize.prototype._item = '';
 
   Dematerialize.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-dematerialize'),
       $trigger: $('.js-dematerialize-trigger'),
       itemTitle: 'hidden_element',
       hiddenClass: 'is-hidden'
-    }, this.options);
+    });
     this._setEventHandlers();
     return this._setInitialState();
   };
@@ -281,11 +285,11 @@ this.Spellbook.Classes.Dispatcher = (function(superClass) {
   }
 
   Dispatcher.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-dispatcher'),
       dataAttr: 'dispatcher-page',
       events: []
-    }, this.options);
+    });
     return this.dispatch();
   };
 
@@ -364,10 +368,10 @@ this.Spellbook.Classes.DrawSvg = (function(superClass) {
   DrawSvg.prototype._progress = 0;
 
   DrawSvg.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-drawSvg'),
       prefix: 'path'
-    }, this.options);
+    });
     return this._setStorage();
   };
 
@@ -424,9 +428,9 @@ this.Spellbook.Classes.EqualHeights = (function(superClass) {
   EqualHeights.prototype._timer = null;
 
   EqualHeights.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-equalHeights')
-    }, this.options);
+    });
     this._setHeight();
     return this._setEventHandlers();
   };
@@ -473,7 +477,7 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
   FormValidator.prototype._validators = ['required'];
 
   FormValidator.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-formValidator'),
       $input: $('.js-formValidator-input'),
       $submit: $('.js-formValidator-submit'),
@@ -484,7 +488,7 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
       showMessage: true,
       onError: null,
       onSuccess: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 
@@ -629,10 +633,10 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
   }
 
   HeadingLinks.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('h1, h2, h3, h4, h5'),
       anchorClass: 'anchor'
-    }, this.options);
+    });
     return this._addAnchors();
   };
 
@@ -667,9 +671,9 @@ this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
   }
 
   KeyboardEvents.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       events: []
-    }, this.options);
+    });
     return this.emit();
   };
 
@@ -726,8 +730,7 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
   LiveSearch.prototype._query = '';
 
   LiveSearch.prototype.init = function() {
-    var _settings;
-    _settings = $.extend({
+    this._setDefaults({
       $element: $('.js-search'),
       $query: $('.js-search-query'),
       $container: $('.js-search-container'),
@@ -739,7 +742,7 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
       onEmpty: null,
       onFound: null,
       onKeyup: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 
@@ -824,7 +827,7 @@ this.Spellbook.Classes.Modal = (function(superClass) {
   Modal.prototype._$backdrop = null;
 
   Modal.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $trigger: $('.js-modal-trigger'),
       $close: $('.js-modal-close'),
       dataAttribute: 'modal',
@@ -832,7 +835,7 @@ this.Spellbook.Classes.Modal = (function(superClass) {
       activeClass: 'is-active',
       inactiveClass: 'is-inactive',
       activeBodyClass: 'is-modal-active'
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 
@@ -939,7 +942,7 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
   QuantityInput.prototype._value = null;
 
   QuantityInput.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-quantityInput'),
       $field: $('.js-quantityInput-field'),
       $increase: $('.js-quantityInput-increase'),
@@ -952,7 +955,7 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
       onIncrease: null,
       onDecrease: null,
       onTargetUpdate: null
-    }, this.options);
+    });
     this._setValue();
     return this._setEventHandlers();
   };
@@ -1036,9 +1039,9 @@ this.Spellbook.Classes.QueryParams = (function(superClass) {
   QueryParams.prototype.variables = [];
 
   QueryParams.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       url: null
-    }, this.options);
+    });
     this._parseQueryString(this._settings.url);
     return this._sortParams();
   };
@@ -1112,11 +1115,11 @@ this.Spellbook.Classes.SaveProgress = (function(superClass) {
   }
 
   SaveProgress.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-saveProgress'),
       $container: $('.js-saveProgress-container'),
       dataAttribute: 'saveprogress'
-    }, this.options);
+    });
     this._restoreProgress();
     return this._setEventHandlers();
   };
@@ -1181,10 +1184,10 @@ this.Spellbook.Classes.SelectText = (function(superClass) {
   }
 
   SelectText.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-selectText'),
       onClick: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 
@@ -1230,7 +1233,7 @@ this.Spellbook.Classes.Share = (function(superClass) {
   }
 
   Share.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-share'),
       popup: {
         height: 400,
@@ -1238,7 +1241,7 @@ this.Spellbook.Classes.Share = (function(superClass) {
         left: 0,
         top: 0
       }
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 
@@ -1288,11 +1291,11 @@ this.Spellbook.Classes.ShowPassword = (function(superClass) {
   }
 
   ShowPassword.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $input: $('.js-showPassword-input'),
       $toggle: $('.js-showPassword-toggle'),
       showByDefault: false
-    }, this.options);
+    });
     this._setEventHandlers();
     if (this._settings.showByDefault) {
       return this._showPassword();
@@ -1333,13 +1336,13 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
   }
 
   StateUrls.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-stateUrls'),
       $link: $('.js-stateUrls-link'),
       hiddenClass: 'is-hidden',
       activeClass: 'is-active',
       dataAttribute: 'state'
-    }, this.options);
+    });
     this._setInitialState(this._getCurrentState());
     return this._setEventHandlers();
   };
@@ -1404,7 +1407,7 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
   }
 
   Toggle.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-toggle'),
       proximity: 'next',
       event: 'click',
@@ -1414,7 +1417,7 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
       onClick: null,
       onMouseover: null,
       onMouseout: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 
@@ -1522,121 +1525,6 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
   return Toggle;
 
 })(Spellbook.Classes.Base);
-
-this.Spellbook.Helpers.isBlank = function(string) {
-  if (string.trim().length === 0) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-this.Spellbook.Helpers.keyCodes = {
-  'enter': 13,
-  'shift': 16,
-  'ctrl': 17,
-  'alt': 18,
-  'esc': 27,
-  'leftarrow': 37,
-  'uparrow': 38,
-  'rightarrow': 39,
-  'downarrow': 40,
-  'comma': 188,
-  'slash': 191,
-  'backslash': 220,
-  '0': 48,
-  '1': 49,
-  '2': 50,
-  '3': 51,
-  '4': 52,
-  '5': 53,
-  '6': 54,
-  '7': 55,
-  '8': 56,
-  '9': 57,
-  'a': 65,
-  'b': 66,
-  'c': 67,
-  'd': 68,
-  'e': 69,
-  'f': 70,
-  'g': 71,
-  'h': 72,
-  'i': 73,
-  'j': 74,
-  'k': 75,
-  'l': 76,
-  'm': 77,
-  'n': 78,
-  'o': 79,
-  'p': 80,
-  'q': 81,
-  'r': 82,
-  's': 83,
-  't': 84,
-  'u': 85,
-  'v': 86,
-  'w': 87,
-  'x': 88,
-  'y': 89,
-  'z': 90
-};
-
-this.Spellbook.Helpers.randomizer = function(collection) {
-  var randomNumber;
-  randomNumber = Math.floor(Math.random() * collection.length);
-  return collection[randomNumber];
-};
-
-this.Spellbook.Helpers.sanitize = function(string) {
-  return string.replace(/(<([^>]+)>)/ig, '');
-};
-
-this.Spellbook.Helpers.slugify = function(string) {
-  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-};
-
-this.Spellbook.Helpers.uid = function(length) {
-  var id;
-  if (length == null) {
-    length = 10;
-  }
-  id = '';
-  while (id.length < length) {
-    id += Math.random().toString(36).substr(2);
-  }
-  return id.substr(0, length);
-};
-
-this.Spellbook.Classes.ClassName = (function() {
-  ClassName.prototype._settings = {};
-
-  function ClassName(options) {
-    this.options = options;
-    this.init();
-  }
-
-  ClassName.prototype.init = function() {
-    this._settings = $.extend({
-      $element: $('.js-element')
-    }, this.options);
-    return this._setEventHandlers();
-  };
-
-  ClassName.prototype._setEventHandlers = function() {};
-
-  return ClassName;
-
-})();
-
-this.Spellbook.Helpers.helperName = function(item) {};
-
-this.Spellbook.Services.serviceName = function(options) {
-  var settings;
-  return settings = $.extend({
-    $element: $('.js-element')
-  }, options);
-};
 
 this.Spellbook.Services.autoSubmit = function(options) {
   var settings;
@@ -1898,4 +1786,119 @@ this.Spellbook.Services.shortcut = function(options) {
       };
     })(this));
   });
+};
+
+this.Spellbook.Helpers.isBlank = function(string) {
+  if (string.trim().length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+this.Spellbook.Helpers.keyCodes = {
+  'enter': 13,
+  'shift': 16,
+  'ctrl': 17,
+  'alt': 18,
+  'esc': 27,
+  'leftarrow': 37,
+  'uparrow': 38,
+  'rightarrow': 39,
+  'downarrow': 40,
+  'comma': 188,
+  'slash': 191,
+  'backslash': 220,
+  '0': 48,
+  '1': 49,
+  '2': 50,
+  '3': 51,
+  '4': 52,
+  '5': 53,
+  '6': 54,
+  '7': 55,
+  '8': 56,
+  '9': 57,
+  'a': 65,
+  'b': 66,
+  'c': 67,
+  'd': 68,
+  'e': 69,
+  'f': 70,
+  'g': 71,
+  'h': 72,
+  'i': 73,
+  'j': 74,
+  'k': 75,
+  'l': 76,
+  'm': 77,
+  'n': 78,
+  'o': 79,
+  'p': 80,
+  'q': 81,
+  'r': 82,
+  's': 83,
+  't': 84,
+  'u': 85,
+  'v': 86,
+  'w': 87,
+  'x': 88,
+  'y': 89,
+  'z': 90
+};
+
+this.Spellbook.Helpers.randomizer = function(collection) {
+  var randomNumber;
+  randomNumber = Math.floor(Math.random() * collection.length);
+  return collection[randomNumber];
+};
+
+this.Spellbook.Helpers.sanitize = function(string) {
+  return string.replace(/(<([^>]+)>)/ig, '');
+};
+
+this.Spellbook.Helpers.slugify = function(string) {
+  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
+};
+
+this.Spellbook.Helpers.uid = function(length) {
+  var id;
+  if (length == null) {
+    length = 10;
+  }
+  id = '';
+  while (id.length < length) {
+    id += Math.random().toString(36).substr(2);
+  }
+  return id.substr(0, length);
+};
+
+this.Spellbook.Classes.ClassName = (function() {
+  ClassName.prototype._settings = {};
+
+  function ClassName(options) {
+    this.options = options;
+    this.init();
+  }
+
+  ClassName.prototype.init = function() {
+    this._settings = $.extend({
+      $element: $('.js-element')
+    }, this.options);
+    return this._setEventHandlers();
+  };
+
+  ClassName.prototype._setEventHandlers = function() {};
+
+  return ClassName;
+
+})();
+
+this.Spellbook.Helpers.helperName = function(item) {};
+
+this.Spellbook.Services.serviceName = function(options) {
+  var settings;
+  return settings = $.extend({
+    $element: $('.js-element')
+  }, options);
 };
