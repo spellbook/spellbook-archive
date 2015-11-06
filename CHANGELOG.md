@@ -1,6 +1,21 @@
 Changelog
 =========
 
+2.3.0 - 2015-11-06
+-------------------
+
+### Added
+
+- `_setDefaults` method to `CS.Classes.Base`
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Colon trailing space syntax
+
 2.2.0 - 2015-10-12
 -------------------
 
