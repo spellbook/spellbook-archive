@@ -11,7 +11,7 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
   QuantityInput.prototype._value = null;
 
   QuantityInput.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-quantityInput'),
       $field: $('.js-quantityInput-field'),
       $increase: $('.js-quantityInput-increase'),
@@ -24,7 +24,7 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
       onIncrease: null,
       onDecrease: null,
       onTargetUpdate: null
-    }, this.options);
+    });
     this._setValue();
     return this._setEventHandlers();
   };

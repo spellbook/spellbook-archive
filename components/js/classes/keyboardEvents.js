@@ -9,9 +9,9 @@ this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
   }
 
   KeyboardEvents.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       events: []
-    }, this.options);
+    });
     return this.emit();
   };
 

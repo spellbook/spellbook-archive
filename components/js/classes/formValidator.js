@@ -15,7 +15,7 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
   FormValidator.prototype._validators = ['required'];
 
   FormValidator.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-formValidator'),
       $input: $('.js-formValidator-input'),
       $submit: $('.js-formValidator-submit'),
@@ -26,7 +26,7 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
       showMessage: true,
       onError: null,
       onSuccess: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 

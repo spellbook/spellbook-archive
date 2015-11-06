@@ -9,11 +9,11 @@ this.Spellbook.Classes.SaveProgress = (function(superClass) {
   }
 
   SaveProgress.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-saveProgress'),
       $container: $('.js-saveProgress-container'),
       dataAttribute: 'saveprogress'
-    }, this.options);
+    });
     this._restoreProgress();
     return this._setEventHandlers();
   };

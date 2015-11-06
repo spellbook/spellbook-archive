@@ -9,10 +9,10 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
   }
 
   HeadingLinks.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('h1, h2, h3, h4, h5'),
       anchorClass: 'anchor'
-    }, this.options);
+    });
     return this._addAnchors();
   };
 

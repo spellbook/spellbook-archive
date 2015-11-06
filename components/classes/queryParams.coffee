@@ -23,9 +23,8 @@ class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
   # -------------------------------------
 
   init: ->
-    @_settings = $.extend
+    @_setDefaults
       url : null
-    , @options
 
     @_parseQueryString( @_settings.url )
     @_sortParams()

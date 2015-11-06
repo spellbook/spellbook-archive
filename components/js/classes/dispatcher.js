@@ -9,11 +9,11 @@ this.Spellbook.Classes.Dispatcher = (function(superClass) {
   }
 
   Dispatcher.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-dispatcher'),
       dataAttr: 'dispatcher-page',
       events: []
-    }, this.options);
+    });
     return this.dispatch();
   };
 

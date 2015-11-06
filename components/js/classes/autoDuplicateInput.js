@@ -17,7 +17,7 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
   };
 
   AutoDuplicateInput.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-autoDuplicateInput'),
       $container: $('.js-autoDuplicateInput-container'),
       clonedDataAttribute: 'cloned',
@@ -27,7 +27,7 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
       onDuplicate: null,
       onInvalid: null,
       onValid: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 

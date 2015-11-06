@@ -9,10 +9,10 @@ this.Spellbook.Classes.SelectText = (function(superClass) {
   }
 
   SelectText.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-selectText'),
       onClick: null
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 

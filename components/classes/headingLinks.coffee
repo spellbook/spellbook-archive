@@ -17,10 +17,9 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
   # -------------------------------------
 
   init: ->
-    @_settings = $.extend
+    @_setDefaults
       $element    : $( 'h1, h2, h3, h4, h5' )
       anchorClass : 'anchor'
-    , @options
 
     @_addAnchors()
 

@@ -11,12 +11,12 @@ this.Spellbook.Classes.Dematerialize = (function(superClass) {
   Dematerialize.prototype._item = '';
 
   Dematerialize.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-dematerialize'),
       $trigger: $('.js-dematerialize-trigger'),
       itemTitle: 'hidden_element',
       hiddenClass: 'is-hidden'
-    }, this.options);
+    });
     this._setEventHandlers();
     return this._setInitialState();
   };

@@ -9,7 +9,7 @@ this.Spellbook.Classes.Share = (function(superClass) {
   }
 
   Share.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-share'),
       popup: {
         height: 400,
@@ -17,7 +17,7 @@ this.Spellbook.Classes.Share = (function(superClass) {
         left: 0,
         top: 0
       }
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 

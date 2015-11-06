@@ -13,9 +13,9 @@ this.Spellbook.Classes.QueryParams = (function(superClass) {
   QueryParams.prototype.variables = [];
 
   QueryParams.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       url: null
-    }, this.options);
+    });
     this._parseQueryString(this._settings.url);
     return this._sortParams();
   };
