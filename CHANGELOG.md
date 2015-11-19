@@ -1,6 +1,21 @@
 Changelog
 =========
 
+2.3.1 - 2015-11-19
+-------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- `Classes.LiveSearch` `_clearEmptyMessage` typo
+
 2.3.0 - 2015-11-06
 -------------------
 
