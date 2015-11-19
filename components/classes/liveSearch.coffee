@@ -94,7 +94,7 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
   #   Clear Empty Message
   # -------------------------------------
 
-  _clearEmptyMessages : ->
+  _clearEmptyMessage : ->
     if @_settings.emptyMessage and $( @_settings.emptyNode ).length > 0
       $( @_settings.emptyNode ).remove()
 

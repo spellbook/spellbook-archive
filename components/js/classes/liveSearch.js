@@ -64,7 +64,7 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
     return this._handleEmptyResults();
   };
 
-  LiveSearch.prototype._clearEmptyMessages = function() {
+  LiveSearch.prototype._clearEmptyMessage = function() {
     if (this._settings.emptyMessage && $(this._settings.emptyNode).length > 0) {
       return $(this._settings.emptyNode).remove();
     }
