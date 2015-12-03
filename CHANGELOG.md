@@ -1,6 +1,21 @@
 Changelog
 =========
 
+2.3.2 - 2015-12-03
+------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Change `show` variable to `isShown` in `Classes.ShowPassword`
+
 2.3.1 - 2015-11-19
 -------------------
 
