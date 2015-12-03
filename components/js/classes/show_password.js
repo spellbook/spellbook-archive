@@ -23,9 +23,9 @@ this.Spellbook.Classes.ShowPassword = (function(superClass) {
   ShowPassword.prototype._setEventHandlers = function() {
     return this._settings.$toggle.on('change', (function(_this) {
       return function(event) {
-        var show;
-        show = $(event.currentTarget).prop('checked');
-        if (show) {
+        var isShown;
+        isShown = $(event.currentTarget).prop('checked');
+        if (isShown) {
           return _this._showPassword();
         } else {
           return _this._settings.$input.attr('type', 'password');

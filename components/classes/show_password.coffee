@@ -32,9 +32,9 @@ class @Spellbook.Classes.ShowPassword extends Spellbook.Classes.Base
 
   _setEventHandlers : ->
     @_settings.$toggle.on 'change', ( event ) =>
-      show = $( event.currentTarget ).prop( 'checked' )
+      isShown = $( event.currentTarget ).prop( 'checked' )
 
-      if show
+      if isShown
         @_showPassword()
       else
         @_settings.$input.attr( 'type', 'password' )
