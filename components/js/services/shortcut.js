@@ -3,7 +3,7 @@ this.Spellbook.Services.shortcut = function(options) {
   settings = $.extend({
     $element: $('[data-shortcut]'),
     dataAttribute: 'shortcut',
-    keyCodes: Spellbook.Helpers.keyCodes
+    keyCodes: Spellbook.Globals.keyCodes
   }, options);
   return settings.$element.each(function() {
     var key;

@@ -1850,7 +1850,7 @@ this.Spellbook.Services.shortcut = function(options) {
   settings = $.extend({
     $element: $('[data-shortcut]'),
     dataAttribute: 'shortcut',
-    keyCodes: Spellbook.Helpers.keyCodes
+    keyCodes: Spellbook.Globals.keyCodes
   }, options);
   return settings.$element.each(function() {
     var key;
@@ -1873,18 +1873,20 @@ this.Spellbook.Services.shortcut = function(options) {
   });
 };
 
-this.Spellbook.Classes.ClassName = (function() {
-  ClassName.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function ClassName(options) {
-    this.options = options;
-    this.init();
+this.Spellbook.Classes.ClassName = (function(superClass) {
+  extend(ClassName, superClass);
+
+  function ClassName() {
+    return ClassName.__super__.constructor.apply(this, arguments);
   }
 
   ClassName.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-element')
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 
@@ -1892,7 +1894,7 @@ this.Spellbook.Classes.ClassName = (function() {
 
   return ClassName;
 
-})();
+})(this.Spellbook.Classes.Base);
 
 this.Spellbook.Helpers.helperName = function(item) {};
 
