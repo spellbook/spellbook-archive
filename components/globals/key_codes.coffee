@@ -5,7 +5,7 @@
 #
 # *************************************
 
-@Spellbook.Helpers.keyCodes =
+@Spellbook.Globals.keyCodes =
   'enter'      : 13
   'shift'      : 16
   'ctrl'       : 17
@@ -59,6 +59,6 @@
 #   Usage
 # -------------------------------------
 #
-# Spellbook.Helpers.keyCodes.comma
-# Spellbook.Helpers.keyCodes[ '1' ]
+# Spellbook.Globals.keyCodes.comma
+# Spellbook.Globals.keyCodes[ '1' ]
 #

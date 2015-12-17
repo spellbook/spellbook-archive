@@ -1,6 +1,21 @@
 Changelog
 =========
 
+2.4.0 - 2015-12-17
+-------------------
+
+### Added
+
+- `components/globals` directory
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Moved `Classes.keyCodes` to `Globals.keyCodes`
+
 2.3.2 - 2015-12-03
 ------------------
 
