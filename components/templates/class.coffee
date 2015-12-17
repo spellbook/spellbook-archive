@@ -9,28 +9,21 @@
 #
 # *************************************
 
-class @Spellbook.Classes.ClassName
+class @Spellbook.Classes.ClassName extends @Spellbook.Classes.Base
 
   # -------------------------------------
   #   Private Variables
   # -------------------------------------
 
-  _settings : {}
-
-  # -------------------------------------
-  #   Constructor
-  # -------------------------------------
-
-  constructor : ( @options ) -> @init()
+  # ...
 
   # -------------------------------------
   #   Initialize
   # -------------------------------------
 
   init : ->
-    @_settings = $.extend
+    @_setDefaults
       $element : $( '.js-element' )
-    , @options
 
     @_setEventHandlers()
 
