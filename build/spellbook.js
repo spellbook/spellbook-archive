@@ -10,40 +10,56 @@ this.Spellbook.Services = {};
 
 this.Spellbook.Inbox = {};
 
-this.Spellbook.Classes.Base = (function() {
-  Base.prototype._settings = {};
-
-  function Base(options) {
-    this.options = options;
-    if (typeof this.init === "function") {
-      this.init();
-    }
-  }
-
-  Base.prototype._setDefaults = function(defaults) {
-    return this._settings = $.extend(defaults, this.options);
-  };
-
-  return Base;
-
-})();
-
-this.Spellbook.Classes.Singleton = (function() {
-  function Singleton() {}
-
-  Singleton.prototype._instance = null;
-
-  Singleton.getInstance = function() {
-    return this._instance != null ? this._instance : this._instance = (function(func, args, ctor) {
-      ctor.prototype = func.prototype;
-      var child = new ctor, result = func.apply(child, args);
-      return Object(result) === result ? result : child;
-    })(this, arguments, function(){});
-  };
-
-  return Singleton;
-
-})();
+this.Spellbook.Globals.keyCodes = {
+  'enter': 13,
+  'shift': 16,
+  'ctrl': 17,
+  'alt': 18,
+  'esc': 27,
+  'leftarrow': 37,
+  'uparrow': 38,
+  'rightarrow': 39,
+  'downarrow': 40,
+  'comma': 188,
+  'slash': 191,
+  'backslash': 220,
+  '0': 48,
+  '1': 49,
+  '2': 50,
+  '3': 51,
+  '4': 52,
+  '5': 53,
+  '6': 54,
+  '7': 55,
+  '8': 56,
+  '9': 57,
+  'a': 65,
+  'b': 66,
+  'c': 67,
+  'd': 68,
+  'e': 69,
+  'f': 70,
+  'g': 71,
+  'h': 72,
+  'i': 73,
+  'j': 74,
+  'k': 75,
+  'l': 76,
+  'm': 77,
+  'n': 78,
+  'o': 79,
+  'p': 80,
+  'q': 81,
+  'r': 82,
+  's': 83,
+  't': 84,
+  'u': 85,
+  'v': 86,
+  'w': 87,
+  'x': 88,
+  'y': 89,
+  'z': 90
+};
 
 var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -1611,6 +1627,41 @@ this.Spellbook.Helpers.uid = function(length) {
   return id.substr(0, length);
 };
 
+this.Spellbook.Classes.Base = (function() {
+  Base.prototype._settings = {};
+
+  function Base(options) {
+    this.options = options;
+    if (typeof this.init === "function") {
+      this.init();
+    }
+  }
+
+  Base.prototype._setDefaults = function(defaults) {
+    return this._settings = $.extend(defaults, this.options);
+  };
+
+  return Base;
+
+})();
+
+this.Spellbook.Classes.Singleton = (function() {
+  function Singleton() {}
+
+  Singleton.prototype._instance = null;
+
+  Singleton.getInstance = function() {
+    return this._instance != null ? this._instance : this._instance = (function(func, args, ctor) {
+      ctor.prototype = func.prototype;
+      var child = new ctor, result = func.apply(child, args);
+      return Object(result) === result ? result : child;
+    })(this, arguments, function(){});
+  };
+
+  return Singleton;
+
+})();
+
 this.Spellbook.Services.autoSubmit = function(options) {
   var settings;
   settings = $.extend({
@@ -1850,7 +1901,7 @@ this.Spellbook.Services.shortcut = function(options) {
   settings = $.extend({
     $element: $('[data-shortcut]'),
     dataAttribute: 'shortcut',
-    keyCodes: Spellbook.Helpers.keyCodes
+    keyCodes: Spellbook.Globals.keyCodes
   }, options);
   return settings.$element.each(function() {
     var key;
@@ -1873,18 +1924,20 @@ this.Spellbook.Services.shortcut = function(options) {
   });
 };
 
-this.Spellbook.Classes.ClassName = (function() {
-  ClassName.prototype._settings = {};
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
 
-  function ClassName(options) {
-    this.options = options;
-    this.init();
+this.Spellbook.Classes.ClassName = (function(superClass) {
+  extend(ClassName, superClass);
+
+  function ClassName() {
+    return ClassName.__super__.constructor.apply(this, arguments);
   }
 
   ClassName.prototype.init = function() {
-    this._settings = $.extend({
+    this._setDefaults({
       $element: $('.js-element')
-    }, this.options);
+    });
     return this._setEventHandlers();
   };
 
@@ -1892,7 +1945,7 @@ this.Spellbook.Classes.ClassName = (function() {
 
   return ClassName;
 
-})();
+})(this.Spellbook.Classes.Base);
 
 this.Spellbook.Helpers.helperName = function(item) {};
 
