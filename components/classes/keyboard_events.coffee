@@ -43,7 +43,7 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
   # -------------------------------------
 
   _getKeyCode : ( event ) ->
-    event    = event  || window.event
+    event    = event || window.event
     charCode = event.keyCode || event.which
 
     charCode
