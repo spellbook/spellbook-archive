@@ -1,6 +1,21 @@
 Changelog
 =========
 
+2.4.1 - 2015-12-18
+-------------------
+
+### Added
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- `Classes.KeyboardEvents` no longer triggers in `input` or `textarea`
+
 2.4.0 - 2015-12-17
 -------------------
 
