@@ -22,6 +22,21 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
     @emit()
 
   # -------------------------------------
+  #   Emit
+  # -------------------------------------
+  #
+  # @param event { object }
+  #
+  # -------------------------------------
+
+  emit : ( event = null ) ->
+    unless event?
+      for event in @_settings.events
+        @_match( event )
+    else
+      @_match( event )
+
+  # -------------------------------------
   #   Match
   # -------------------------------------
   #
@@ -31,8 +46,11 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
 
   _match : ( event ) ->
     $( document ).on 'keyup', ( e ) =>
-      switch @_getKeyCode( e )
-        when event.key then event.run()
+      tag = e.target.tagName.toLowerCase()
+
+      unless tag is 'input' or tag is 'textarea'
+        switch @_getKeyCode( e )
+          when event.key then event.run()
 
   # -------------------------------------
   #   Get Key Code
@@ -47,21 +65,6 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
     charCode = event.keyCode || event.which
 
     charCode
-
-  # -------------------------------------
-  #   Emit
-  # -------------------------------------
-  #
-  # @param event { object }
-  #
-  # -------------------------------------
-
-  emit : ( event = null ) ->
-    unless event?
-      for event in @_settings.events
-        @_match( event )
-    else
-      @_match( event )
 
 # -------------------------------------
 #   Usage

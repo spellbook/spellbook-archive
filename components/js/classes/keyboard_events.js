@@ -15,24 +15,6 @@ this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
     return this.emit();
   };
 
-  KeyboardEvents.prototype._match = function(event) {
-    return $(document).on('keyup', (function(_this) {
-      return function(e) {
-        switch (_this._getKeyCode(e)) {
-          case event.key:
-            return event.run();
-        }
-      };
-    })(this));
-  };
-
-  KeyboardEvents.prototype._getKeyCode = function(event) {
-    var charCode;
-    event = event || window.event;
-    charCode = event.keyCode || event.which;
-    return charCode;
-  };
-
   KeyboardEvents.prototype.emit = function(event) {
     var i, len, ref, results;
     if (event == null) {
@@ -49,6 +31,28 @@ this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
     } else {
       return this._match(event);
     }
+  };
+
+  KeyboardEvents.prototype._match = function(event) {
+    return $(document).on('keyup', (function(_this) {
+      return function(e) {
+        var tag;
+        tag = e.target.tagName.toLowerCase();
+        if (!(tag === 'input' || tag === 'textarea')) {
+          switch (_this._getKeyCode(e)) {
+            case event.key:
+              return event.run();
+          }
+        }
+      };
+    })(this));
+  };
+
+  KeyboardEvents.prototype._getKeyCode = function(event) {
+    var charCode;
+    event = event || window.event;
+    charCode = event.keyCode || event.which;
+    return charCode;
   };
 
   return KeyboardEvents;
