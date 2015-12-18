@@ -1,6 +1,21 @@
 Changelog
 =========
 
+2.4.0 - 2015-12-17
+-------------------
+
+### Added
+
+- `compendium/globals/` directory
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Moved `Helpers.keyCodes` to `Globals.keyCodes`
+
 2.3.2 - 2015-12-03
 ------------------
 

@@ -11,6 +11,7 @@
 
 #= require namespace
 #= require globals
+#= require_tree ./globals
 
 # -------------------------------------
 #   Components
