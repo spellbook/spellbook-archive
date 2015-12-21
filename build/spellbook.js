@@ -45,6 +45,91 @@ this.Spellbook.Classes.Singleton = (function() {
 
 })();
 
+this.Spellbook.Helpers.isBlank = function(string) {
+  if (string.trim().length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+this.Spellbook.Helpers.keyCodes = {
+  'enter': 13,
+  'shift': 16,
+  'ctrl': 17,
+  'alt': 18,
+  'esc': 27,
+  'leftarrow': 37,
+  'uparrow': 38,
+  'rightarrow': 39,
+  'downarrow': 40,
+  'comma': 188,
+  'slash': 191,
+  'backslash': 220,
+  '0': 48,
+  '1': 49,
+  '2': 50,
+  '3': 51,
+  '4': 52,
+  '5': 53,
+  '6': 54,
+  '7': 55,
+  '8': 56,
+  '9': 57,
+  'a': 65,
+  'b': 66,
+  'c': 67,
+  'd': 68,
+  'e': 69,
+  'f': 70,
+  'g': 71,
+  'h': 72,
+  'i': 73,
+  'j': 74,
+  'k': 75,
+  'l': 76,
+  'm': 77,
+  'n': 78,
+  'o': 79,
+  'p': 80,
+  'q': 81,
+  'r': 82,
+  's': 83,
+  't': 84,
+  'u': 85,
+  'v': 86,
+  'w': 87,
+  'x': 88,
+  'y': 89,
+  'z': 90
+};
+
+this.Spellbook.Helpers.randomizer = function(collection) {
+  var randomNumber;
+  randomNumber = Math.floor(Math.random() * collection.length);
+  return collection[randomNumber];
+};
+
+this.Spellbook.Helpers.sanitize = function(string) {
+  return string.replace(/(<([^>]+)>)/ig, '');
+};
+
+this.Spellbook.Helpers.slugify = function(string) {
+  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
+};
+
+this.Spellbook.Helpers.uid = function(length) {
+  var id;
+  if (length == null) {
+    length = 10;
+  }
+  id = '';
+  while (id.length < length) {
+    id += Math.random().toString(36).substr(2);
+  }
+  return id.substr(0, length);
+};
+
 var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
 
@@ -492,36 +577,6 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     return this._setEventHandlers();
   };
 
-  FormValidator.prototype._setEventHandlers = function() {
-    this._settings.$element.on('submit', (function(_this) {
-      return function(event) {
-        if (!_this._validateAllFields()) {
-          return event.preventDefault();
-        }
-      };
-    })(this));
-    return this._settings.$input.on('keyup', (function(_this) {
-      return function(event) {
-        _this._input = $(event.currentTarget);
-        return _this.validate(_this._input);
-      };
-    })(this));
-  };
-
-  FormValidator.prototype._validateAllFields = function() {
-    this._settings.$input.each((function(_this) {
-      return function(index, element) {
-        _this._input = $(element);
-        return _this.validate(_this._input);
-      };
-    })(this));
-    if (this._errors.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   FormValidator.prototype.validate = function(input) {
     var i, key, len, parameter, results;
     parameter = this._parseValidators(input.data(this._settings.dataAttr));
@@ -538,6 +593,10 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     }
   };
 
+  FormValidator.prototype._isValidator = function(parameter) {
+    return this._validators.indexOf(parameter) !== -1;
+  };
+
   FormValidator.prototype._matchValidators = function(match) {
     switch (match) {
       case 'required':
@@ -546,20 +605,6 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
         } else {
           return this._setValidationState('success');
         }
-    }
-  };
-
-  FormValidator.prototype._setValidationState = function(state, message) {
-    var base, base1;
-    switch (state) {
-      case 'error':
-        this._setError(message);
-        this._setInputState(message);
-        return typeof (base = this._settings).onError === "function" ? base.onError(this._settings) : void 0;
-      case 'success':
-        this._removeError();
-        this._removeInputState();
-        return typeof (base1 = this._settings).onSuccess === "function" ? base1.onSuccess(this._settings) : void 0;
     }
   };
 
@@ -578,15 +623,16 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     }
   };
 
-  FormValidator.prototype._isValidator = function(parameter) {
-    return this._validators.indexOf(parameter) !== -1;
+  FormValidator.prototype._removeError = function() {
+    var index;
+    index = this._errors.indexOf(this._input);
+    return this._errors.splice(index, 1);
   };
 
-  FormValidator.prototype._validateRequired = function() {
-    if (this._input.val() === '') {
-      return true;
-    } else {
-      return false;
+  FormValidator.prototype._removeInputState = function() {
+    this._input.removeClass(this._settings.classError);
+    if (this._settings.isMessageShown) {
+      return this._input.next("." + this._settings.classMessage).remove();
     }
   };
 
@@ -597,10 +643,20 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     });
   };
 
-  FormValidator.prototype._removeError = function() {
-    var index;
-    index = this._errors.indexOf(this._input);
-    return this._errors.splice(index, 1);
+  FormValidator.prototype._setEventHandlers = function() {
+    this._settings.$element.on('submit', (function(_this) {
+      return function(event) {
+        if (!_this._validateAllFields()) {
+          return event.preventDefault();
+        }
+      };
+    })(this));
+    return this._settings.$input.on('keyup', (function(_this) {
+      return function(event) {
+        _this._input = $(event.currentTarget);
+        return _this.validate(_this._input);
+      };
+    })(this));
   };
 
   FormValidator.prototype._setInputState = function(message) {
@@ -611,10 +667,39 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     }
   };
 
-  FormValidator.prototype._removeInputState = function() {
-    this._input.removeClass(this._settings.classError);
-    if (this._settings.isMessageShown) {
-      return this._input.next("." + this._settings.classMessage).remove();
+  FormValidator.prototype._setValidationState = function(state, message) {
+    var base, base1;
+    switch (state) {
+      case 'error':
+        this._setError(message);
+        this._setInputState(message);
+        return typeof (base = this._settings).onError === "function" ? base.onError(this._settings) : void 0;
+      case 'success':
+        this._removeError();
+        this._removeInputState();
+        return typeof (base1 = this._settings).onSuccess === "function" ? base1.onSuccess(this._settings) : void 0;
+    }
+  };
+
+  FormValidator.prototype._validateAllFields = function() {
+    this._settings.$input.each((function(_this) {
+      return function(index, element) {
+        _this._input = $(element);
+        return _this.validate(_this._input);
+      };
+    })(this));
+    if (this._errors.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  FormValidator.prototype._validateRequired = function() {
+    if (this._input.val() === '') {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -1529,91 +1614,6 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
   return Toggle;
 
 })(Spellbook.Classes.Base);
-
-this.Spellbook.Helpers.isBlank = function(string) {
-  if (string.trim().length === 0) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-this.Spellbook.Helpers.keyCodes = {
-  'enter': 13,
-  'shift': 16,
-  'ctrl': 17,
-  'alt': 18,
-  'esc': 27,
-  'leftarrow': 37,
-  'uparrow': 38,
-  'rightarrow': 39,
-  'downarrow': 40,
-  'comma': 188,
-  'slash': 191,
-  'backslash': 220,
-  '0': 48,
-  '1': 49,
-  '2': 50,
-  '3': 51,
-  '4': 52,
-  '5': 53,
-  '6': 54,
-  '7': 55,
-  '8': 56,
-  '9': 57,
-  'a': 65,
-  'b': 66,
-  'c': 67,
-  'd': 68,
-  'e': 69,
-  'f': 70,
-  'g': 71,
-  'h': 72,
-  'i': 73,
-  'j': 74,
-  'k': 75,
-  'l': 76,
-  'm': 77,
-  'n': 78,
-  'o': 79,
-  'p': 80,
-  'q': 81,
-  'r': 82,
-  's': 83,
-  't': 84,
-  'u': 85,
-  'v': 86,
-  'w': 87,
-  'x': 88,
-  'y': 89,
-  'z': 90
-};
-
-this.Spellbook.Helpers.randomizer = function(collection) {
-  var randomNumber;
-  randomNumber = Math.floor(Math.random() * collection.length);
-  return collection[randomNumber];
-};
-
-this.Spellbook.Helpers.sanitize = function(string) {
-  return string.replace(/(<([^>]+)>)/ig, '');
-};
-
-this.Spellbook.Helpers.slugify = function(string) {
-  return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-};
-
-this.Spellbook.Helpers.uid = function(length) {
-  var id;
-  if (length == null) {
-    length = 10;
-  }
-  id = '';
-  while (id.length < length) {
-    id += Math.random().toString(36).substr(2);
-  }
-  return id.substr(0, length);
-};
 
 this.Spellbook.Services.autoSubmit = function(options) {
   var settings;

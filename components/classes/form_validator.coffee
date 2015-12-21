@@ -48,6 +48,76 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
     @_setEventHandlers()
 
   # -------------------------------------
+  #   Validate
+  # -------------------------------------
+
+  validate : ( input ) ->
+    parameter = @_parseValidators( input.data( @_settings.dataAttr ) )
+    @_element = input
+
+    if Array.isArray( parameter )
+      @_matchValidators( key ) for key in parameter
+    else
+      @_matchValidators( parameter )
+
+  # -------------------------------------
+  #   Is Validator
+  # -------------------------------------
+
+  _isValidator : ( parameter ) ->
+    @_validators.indexOf( parameter ) isnt -1
+
+  # -------------------------------------
+  #   Match Validators
+  # -------------------------------------
+
+  _matchValidators : ( match ) ->
+    switch match
+      when 'required'
+        if @_validateRequired()
+          @_setValidationState( 'error', 'The field is required.' )
+        else
+          @_setValidationState( 'success' )
+
+  # -------------------------------------
+  #   Parse Validators
+  # -------------------------------------
+
+  _parseValidators : ( parameter ) ->
+    parameters = []
+    split      = parameter.split( @_settings.delimiter )
+
+    if split.length > 1
+      parameters.push( param ) for param in split
+      return parameters
+    else
+      return parameter
+
+  # -------------------------------------
+  #   Remove Error
+  # -------------------------------------
+
+  _removeError : ->
+    index = @_errors.indexOf( @_input )
+    @_errors.splice( index, 1 )
+
+  # -------------------------------------
+  #   Remove Input State
+  # -------------------------------------
+
+  _removeInputState : ->
+    @_input.removeClass( @_settings.classError )
+    if @_settings.isMessageShown
+      @_input.next( ".#{ @_settings.classMessage }" ).remove()
+
+  # -------------------------------------
+  #   Set Error
+  # -------------------------------------
+
+  _setError : ( message ) ->
+    @_errors.push( { element : @_input.attr( 'name' ), message : message } )
+
+  # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
@@ -66,44 +136,14 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
       @validate( @_input )
 
   # -------------------------------------
-  #   Validate All Fields
+  #   Set Input State
   # -------------------------------------
 
-  _validateAllFields : ->
-    @_settings.$input.each ( index, element ) =>
-      @_input = $( element )
-
-      @validate( @_input )
-
-    if @_errors.length is 0
-      return true
-    else
-      return false
-
-  # -------------------------------------
-  #   Validate
-  # -------------------------------------
-
-  validate : ( input ) ->
-    parameter = @_parseValidators( input.data( @_settings.dataAttr ) )
-    @_element = input
-
-    if Array.isArray( parameter )
-      @_matchValidators( key ) for key in parameter
-    else
-      @_matchValidators( parameter )
-
-  # -------------------------------------
-  #   Match Validators
-  # -------------------------------------
-
-  _matchValidators : ( match ) ->
-    switch match
-      when 'required'
-        if @_validateRequired()
-          @_setValidationState( 'error', 'The field is required.' )
-        else
-          @_setValidationState( 'success' )
+  _setInputState : ( message ) ->
+    @_removeInputState()
+    @_input.addClass( @_settings.classError )
+    if @_settings.isMessageShown
+      @_input.after( "<p class='#{ @_settings.classMessage }'>#{ message }</p>" )
 
   # -------------------------------------
   #   Set Validation State
@@ -121,25 +161,19 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
         @_settings.onSuccess?( @_settings )
 
   # -------------------------------------
-  #   Parse Validators
+  #   Validate All Fields
   # -------------------------------------
 
-  _parseValidators : ( parameter ) ->
-    parameters = []
-    split      = parameter.split( @_settings.delimiter )
+  _validateAllFields : ->
+    @_settings.$input.each ( index, element ) =>
+      @_input = $( element )
 
-    if split.length > 1
-      parameters.push( param ) for param in split
-      return parameters
+      @validate( @_input )
+
+    if @_errors.length is 0
+      return true
     else
-      return parameter
-
-  # -------------------------------------
-  #   Is Validator
-  # -------------------------------------
-
-  _isValidator : ( parameter ) ->
-    @_validators.indexOf( parameter ) isnt -1
+      return false
 
   # -------------------------------------
   #   Validate Required
@@ -150,40 +184,6 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
       return true
     else
       return false
-
-  # -------------------------------------
-  #   Set Error
-  # -------------------------------------
-
-  _setError : ( message ) ->
-    @_errors.push( { element : @_input.attr( 'name' ), message : message } )
-
-  # -------------------------------------
-  #   Remove Error
-  # -------------------------------------
-
-  _removeError : ->
-    index = @_errors.indexOf( @_input )
-    @_errors.splice( index, 1 )
-
-  # -------------------------------------
-  #   Set Input State
-  # -------------------------------------
-
-  _setInputState : ( message ) ->
-    @_removeInputState()
-    @_input.addClass( @_settings.classError )
-    if @_settings.isMessageShown
-      @_input.after( "<p class='#{ @_settings.classMessage }'>#{ message }</p>" )
-
-  # -------------------------------------
-  #   Remove Input State
-  # -------------------------------------
-
-  _removeInputState : ->
-    @_input.removeClass( @_settings.classError )
-    if @_settings.isMessageShown
-      @_input.next( ".#{ @_settings.classMessage }" ).remove()
 
 # -------------------------------------
 #   Usage
