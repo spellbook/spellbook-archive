@@ -31,8 +31,8 @@ A Function is either classified as a **Helper** or a **Service**.
 
 A helper is a one-off utility function that performs a single action. Some examples:
 
-- `Spellbook.sanitize()`
-- `Spellbook.slugify()`
+- `Spellbook.Helpers.sanitize()`
+- `Spellbook.Helpers.slugify()`
 
 _You can find a template file in `components/templates/helper.coffee`._
 
@@ -40,8 +40,8 @@ _You can find a template file in `components/templates/helper.coffee`._
 
 A service is a function that can perform multiple actions, but a single service, and it is not a class. For example:
 
-- `Spellbook.autoSubmit()`
-- `Spellbook.scrollTo()`
+- `Spellbook.Services.autoSubmit()`
+- `Spellbook.Services.scrollTo()`
 
 _You can find a template file in `components/templates/service.coffee`._
 
@@ -68,31 +68,12 @@ jQuery
 
 There is a jQuery dependency in Spellbook, but you could easily swap out the underlying jQuery with vanilla JavaScript or another similar library.
 
-Defaults
---------
-
-If applicable, each Component sets default options to standardize calls. For example:
-
-```coffeescript
-@Spellbook.Namespace.componentName = ( options ) ->
-  _settings = $.extend
-    $element    : $( '.js-component' ),
-    activeClass : 'is-active'
-  , options
-```
-
-**Note**: Use `js-` selectors to standardize the class applied to elements. Now, in the call, you can either leave out the options (using the defaults), or pass in overrides to the default options.
-
 Development
 -----------
 
 Install Gulp:
 
 ```
-# Install grunt-cli globally
-npm install -g grunt-cli
-
-# Install dependencies
 npm install
 ```
 
