@@ -16,10 +16,6 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
     return this._addAnchors();
   };
 
-  HeadingLinks.prototype._slugify = function(string) {
-    return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-  };
-
   HeadingLinks.prototype._addAnchors = function() {
     return this._settings.$element.each((function(_this) {
       return function(index, elementNode) {
@@ -30,6 +26,10 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
         return $element.prepend("<a class='" + _this._settings.classAnchor + "' href='#" + slug + "'>#</a>");
       };
     })(this));
+  };
+
+  HeadingLinks.prototype._slugify = function(string) {
+    return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
   };
 
   return HeadingLinks;

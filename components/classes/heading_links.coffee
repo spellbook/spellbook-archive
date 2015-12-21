@@ -24,20 +24,6 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
     @_addAnchors()
 
   # -------------------------------------
-  #   Slugify
-  # -------------------------------------
-  #
-  # @param string { string }
-  #
-  # -------------------------------------
-
-  _slugify : ( string ) ->
-    string
-      .toLowerCase()
-      .replace( /[^\w ]+/g, '' )
-      .replace( /\s+/g, '-' )
-
-  # -------------------------------------
   #   Add Anchors
   # -------------------------------------
 
@@ -50,6 +36,20 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
       $element.prepend """
         <a class='#{ @_settings.classAnchor }' href='##{ slug }'>#</a>
       """
+
+  # -------------------------------------
+  #   Slugify
+  # -------------------------------------
+  #
+  # @param string { string }
+  #
+  # -------------------------------------
+
+  _slugify : ( string ) ->
+    string
+      .toLowerCase()
+      .replace( /[^\w ]+/g, '' )
+      .replace( /\s+/g, '-' )
 
 # -------------------------------------
 #   Usage

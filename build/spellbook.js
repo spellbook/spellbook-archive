@@ -640,10 +640,6 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
     return this._addAnchors();
   };
 
-  HeadingLinks.prototype._slugify = function(string) {
-    return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-  };
-
   HeadingLinks.prototype._addAnchors = function() {
     return this._settings.$element.each((function(_this) {
       return function(index, elementNode) {
@@ -654,6 +650,10 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
         return $element.prepend("<a class='" + _this._settings.classAnchor + "' href='#" + slug + "'>#</a>");
       };
     })(this));
+  };
+
+  HeadingLinks.prototype._slugify = function(string) {
+    return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
   };
 
   return HeadingLinks;
@@ -1615,38 +1615,6 @@ this.Spellbook.Helpers.uid = function(length) {
   return id.substr(0, length);
 };
 
-var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-  hasProp = {}.hasOwnProperty;
-
-this.Spellbook.Classes.ClassName = (function(superClass) {
-  extend(ClassName, superClass);
-
-  function ClassName() {
-    return ClassName.__super__.constructor.apply(this, arguments);
-  }
-
-  ClassName.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-element')
-    });
-    return this._setEventHandlers();
-  };
-
-  ClassName.prototype._setEventHandlers = function() {};
-
-  return ClassName;
-
-})(this.Spellbook.Classes.Base);
-
-this.Spellbook.Helpers.helperName = function(item) {};
-
-this.Spellbook.Services.serviceName = function(options) {
-  var settings;
-  return settings = $.extend({
-    $element: $('.js-element')
-  }, options);
-};
-
 this.Spellbook.Services.autoSubmit = function(options) {
   var settings;
   settings = $.extend({
@@ -1907,4 +1875,36 @@ this.Spellbook.Services.shortcut = function(options) {
       };
     })(this));
   });
+};
+
+var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+this.Spellbook.Classes.ClassName = (function(superClass) {
+  extend(ClassName, superClass);
+
+  function ClassName() {
+    return ClassName.__super__.constructor.apply(this, arguments);
+  }
+
+  ClassName.prototype.init = function() {
+    this._setDefaults({
+      $element: $('.js-element')
+    });
+    return this._setEventHandlers();
+  };
+
+  ClassName.prototype._setEventHandlers = function() {};
+
+  return ClassName;
+
+})(this.Spellbook.Classes.Base);
+
+this.Spellbook.Helpers.helperName = function(item) {};
+
+this.Spellbook.Services.serviceName = function(options) {
+  var settings;
+  return settings = $.extend({
+    $element: $('.js-element')
+  }, options);
 };
