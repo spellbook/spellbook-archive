@@ -74,7 +74,7 @@ Development
 Install Gulp:
 
 ```
-npm install
+npm install -g gulp
 ```
 
 ### Compiling CoffeeScript
