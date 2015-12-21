@@ -15,13 +15,13 @@ this.Spellbook.Classes.CharacterCounter = (function(superClass) {
       $element: $('.js-characterCounter'),
       $label: $('.js-characterCounter-label'),
       $number: $('.js-characterCounter-number'),
-      errorClass: 'is-error',
-      successClass: 'is-success',
-      minChars: 0,
-      maxChars: 140,
-      onMinPreceeded: null,
+      charsMax: 140,
+      charsMin: 0,
+      classError: 'is-error',
+      classSuccess: 'is-success',
+      onConditionsMet: null,
       onMaxExceeded: null,
-      onConditionsMet: null
+      onMinPreceeded: null
     });
     return this._setEventHandlers();
   };
@@ -34,10 +34,10 @@ this.Spellbook.Classes.CharacterCounter = (function(superClass) {
         $element = $(event.currentTarget);
         _this._count = $element.val().length;
         _this._settings.$number.text(_this._count);
-        if (_this._count > _this._settings.maxChars) {
+        if (_this._count > _this._settings.charsMax) {
           _this._toggleState($element, 'error');
           return typeof (base = _this._settings).onMaxExceeded === "function" ? base.onMaxExceeded(_this._settings) : void 0;
-        } else if (_this._count < _this._settings.minChars) {
+        } else if (_this._count < _this._settings.charsMin) {
           _this._toggleState($element, 'error');
           return typeof (base1 = _this._settings).onMinPreceeded === "function" ? base1.onMinPreceeded(_this._settings) : void 0;
         } else {
@@ -51,15 +51,15 @@ this.Spellbook.Classes.CharacterCounter = (function(superClass) {
   CharacterCounter.prototype._toggleState = function(element, state) {
     switch (state) {
       case 'error':
-        element.removeClass(this._settings.successClass);
-        this._settings.$label.removeClass(this._settings.successClass);
-        element.addClass(this._settings.errorClass);
-        return this._settings.$label.addClass(this._settings.errorClass);
+        element.removeClass(this._settings.classSuccess);
+        this._settings.$label.removeClass(this._settings.classSuccess);
+        element.addClass(this._settings.classError);
+        return this._settings.$label.addClass(this._settings.classError);
       case 'success':
-        element.removeClass(this._settings.errorClass);
-        this._settings.$label.removeClass(this._settings.errorClass);
-        element.addClass(this._settings.successClass);
-        return this._settings.$label.addClass(this._settings.successClass);
+        element.removeClass(this._settings.classError);
+        this._settings.$label.removeClass(this._settings.classError);
+        element.addClass(this._settings.classSuccess);
+        return this._settings.$label.addClass(this._settings.classSuccess);
     }
   };
 
