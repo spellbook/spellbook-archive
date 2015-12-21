@@ -7,10 +7,10 @@
 #
 # @param $element              { jQuery object }
 # @param $container            { jQuery object }
-# @param clonedDataAttribute   { string }
-# @param validateDataAttribute { string }
-# @param invalidClass          { string }
-# @param validClass            { string }
+# @param dataAttrCloned   { string }
+# @param dataAttrValidate { string }
+# @param classInvalid          { string }
+# @param classValid            { string }
 # @param onDuplicate           { function }
 # @param onInvalid             { function }
 # @param onValid               { function }
@@ -34,15 +34,15 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
 
   init : ->
     @_setDefaults
-      $element              : $( '.js-autoDuplicateInput' )
-      $container            : $( '.js-autoDuplicateInput-container' )
-      clonedDataAttribute   : 'cloned'
-      validateDataAttribute : 'validate'
-      invalidClass          : 'is-invalid'
-      validClass            : 'is-valid'
-      onDuplicate           : null
-      onInvalid             : null
-      onValid               : null
+      $container       : $( '.js-autoDuplicateInput-container' )
+      $element         : $( '.js-autoDuplicateInput' )
+      classInvalid     : 'is-invalid'
+      classValid       : 'is-valid'
+      dataAttrCloned   : 'cloned'
+      dataAttrValidate : 'validate'
+      onDuplicate      : null
+      onInvalid        : null
+      onValid          : null
 
     @_setEventHandlers()
 
@@ -71,7 +71,7 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
   # -------------------------------------
 
   _getValidationType : ->
-    @_field.data( @_settings.validateDataAttribute )
+    @_field.data( @_settings.dataAttrValidate )
 
   # -------------------------------------
   #   Is Valid
@@ -90,12 +90,12 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
     ++ @_count
 
     @_field
-      .data( @_settings.clonedDataAttribute, 'true' )
+      .data( @_settings.dataAttrCloned, 'true' )
       .clone( true )
       .appendTo( @_settings.$container )
-      .removeClass( @_settings.validClass )
+      .removeClass( @_settings.classValid )
       .val( '' )
-      .data( @_settings.clonedDataAttribute, '' )
+      .data( @_settings.dataAttrCloned, '' )
 
   # -------------------------------------
   #   Set Input State
@@ -105,12 +105,12 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
     switch type
       when 'invalid'
         @_field
-          .removeClass( @_settings.validClass )
-          .addClass( @_settings.invalidClass )
+          .removeClass( @_settings.classValid )
+          .addClass( @_settings.classInvalid )
       when 'valid'
         @_field
-          .removeClass( @_settings.invalidClass )
-          .addClass( @_settings.validClass )
+          .removeClass( @_settings.classInvalid )
+          .addClass( @_settings.classValid )
 
   # -------------------------------------
   #   Get Count

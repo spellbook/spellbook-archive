@@ -18,12 +18,12 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
 
   AutoDuplicateInput.prototype.init = function() {
     this._setDefaults({
-      $element: $('.js-autoDuplicateInput'),
       $container: $('.js-autoDuplicateInput-container'),
-      clonedDataAttribute: 'cloned',
-      validateDataAttribute: 'validate',
-      invalidClass: 'is-invalid',
-      validClass: 'is-valid',
+      $element: $('.js-autoDuplicateInput'),
+      classInvalid: 'is-invalid',
+      classValid: 'is-valid',
+      dataAttrCloned: 'cloned',
+      dataAttrValidate: 'validate',
       onDuplicate: null,
       onInvalid: null,
       onValid: null
@@ -55,7 +55,7 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
   };
 
   AutoDuplicateInput.prototype._getValidationType = function() {
-    return this._field.data(this._settings.validateDataAttribute);
+    return this._field.data(this._settings.dataAttrValidate);
   };
 
   AutoDuplicateInput.prototype._isValid = function() {
@@ -66,15 +66,15 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
 
   AutoDuplicateInput.prototype._duplicate = function() {
     ++this._count;
-    return this._field.data(this._settings.clonedDataAttribute, 'true').clone(true).appendTo(this._settings.$container).removeClass(this._settings.validClass).val('').data(this._settings.clonedDataAttribute, '');
+    return this._field.data(this._settings.dataAttrCloned, 'true').clone(true).appendTo(this._settings.$container).removeClass(this._settings.classValid).val('').data(this._settings.dataAttrCloned, '');
   };
 
   AutoDuplicateInput.prototype._setInputState = function(type) {
     switch (type) {
       case 'invalid':
-        return this._field.removeClass(this._settings.validClass).addClass(this._settings.invalidClass);
+        return this._field.removeClass(this._settings.classValid).addClass(this._settings.classInvalid);
       case 'valid':
-        return this._field.removeClass(this._settings.invalidClass).addClass(this._settings.validClass);
+        return this._field.removeClass(this._settings.classInvalid).addClass(this._settings.classValid);
     }
   };
 
