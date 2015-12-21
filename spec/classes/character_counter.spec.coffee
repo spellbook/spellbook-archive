@@ -5,8 +5,8 @@ describe 'Spellbook.Classes.CharacterCounter', ->
     @element      = $( '.js-characterCounter' )
     @label        = $( '.js-characterCounter-label' )
     @number       = $( '.js-characterCounter-number' )
-    @errorClass   = 'is-error'
-    @successClass = 'is-success'
+    @classError   = 'is-error'
+    @classSuccess = 'is-success'
 
     new Spellbook.Classes.CharacterCounter()
 
@@ -22,26 +22,26 @@ describe 'Spellbook.Classes.CharacterCounter', ->
     @element.val( "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." )
     @element.trigger( 'keyup' )
 
-    expect( @element ).toHaveClass( @errorClass )
-    expect( @label ).toHaveClass( @errorClass )
+    expect( @element ).toHaveClass( @classError )
+    expect( @label ).toHaveClass( @classError )
 
   it 'should add an error class when the min is not met', ->
     new Spellbook.Classes.CharacterCounter
-      minChars : 100
+      charsMin : 100
 
     @element.val( 'This is some text here.' )
     @element.trigger( 'keyup' )
 
-    expect( @element ).toHaveClass( @errorClass )
-    expect( @label ).toHaveClass( @errorClass )
+    expect( @element ).toHaveClass( @classError )
+    expect( @label ).toHaveClass( @classError )
 
   it 'should add a success class when conditions are met', ->
     new Spellbook.Classes.CharacterCounter
-      minChars : 10
-      maxChars : 20
+      charsMin : 10
+      charsMax : 20
 
     @element.val( 'Hello, friend!' )
     @element.trigger( 'keyup' )
 
-    expect( @element ).toHaveClass( @successClass )
-    expect( @label ).toHaveClass( @successClass )
+    expect( @element ).toHaveClass( @classSuccess )
+    expect( @label ).toHaveClass( @classSuccess )
