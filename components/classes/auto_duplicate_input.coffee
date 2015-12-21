@@ -47,6 +47,43 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
     @_setEventHandlers()
 
   # -------------------------------------
+  #   Get Count
+  # -------------------------------------
+
+  getCount : -> return @_count
+
+  # -------------------------------------
+  #   Duplicate
+  # -------------------------------------
+
+  _duplicate : ->
+    ++ @_count
+
+    @_field
+      .data( @_settings.dataAttrCloned, 'true' )
+      .clone( true )
+      .appendTo( @_settings.$container )
+      .removeClass( @_settings.classValid )
+      .val( '' )
+      .data( @_settings.dataAttrCloned, '' )
+
+  # -------------------------------------
+  #   Get Validation Type
+  # -------------------------------------
+
+  _getValidationType : ->
+    @_field.data( @_settings.dataAttrValidate )
+
+  # -------------------------------------
+  #   Is Valid
+  # -------------------------------------
+
+  _isValid :  ->
+    validator = @_getValidationType( @_field )
+
+    @_validators[ "#{ validator }" ].test( @_field.val() )
+
+  # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
@@ -67,37 +104,6 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
         @_settings.onInvalid?( @_settings )
 
   # -------------------------------------
-  #   Get Validation Type
-  # -------------------------------------
-
-  _getValidationType : ->
-    @_field.data( @_settings.dataAttrValidate )
-
-  # -------------------------------------
-  #   Is Valid
-  # -------------------------------------
-
-  _isValid :  ->
-    validator = @_getValidationType( @_field )
-
-    @_validators[ "#{ validator }" ].test( @_field.val() )
-
-  # -------------------------------------
-  #   Duplicate
-  # -------------------------------------
-
-  _duplicate : ->
-    ++ @_count
-
-    @_field
-      .data( @_settings.dataAttrCloned, 'true' )
-      .clone( true )
-      .appendTo( @_settings.$container )
-      .removeClass( @_settings.classValid )
-      .val( '' )
-      .data( @_settings.dataAttrCloned, '' )
-
-  # -------------------------------------
   #   Set Input State
   # -------------------------------------
 
@@ -111,12 +117,6 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
         @_field
           .removeClass( @_settings.classInvalid )
           .addClass( @_settings.classValid )
-
-  # -------------------------------------
-  #   Get Count
-  # -------------------------------------
-
-  getCount : -> return @_count
 
 # -------------------------------------
 #   Usage

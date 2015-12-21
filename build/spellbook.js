@@ -78,6 +78,25 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
     return this._setEventHandlers();
   };
 
+  AutoDuplicateInput.prototype.getCount = function() {
+    return this._count;
+  };
+
+  AutoDuplicateInput.prototype._duplicate = function() {
+    ++this._count;
+    return this._field.data(this._settings.dataAttrCloned, 'true').clone(true).appendTo(this._settings.$container).removeClass(this._settings.classValid).val('').data(this._settings.dataAttrCloned, '');
+  };
+
+  AutoDuplicateInput.prototype._getValidationType = function() {
+    return this._field.data(this._settings.dataAttrValidate);
+  };
+
+  AutoDuplicateInput.prototype._isValid = function() {
+    var validator;
+    validator = this._getValidationType(this._field);
+    return this._validators["" + validator].test(this._field.val());
+  };
+
   AutoDuplicateInput.prototype._setEventHandlers = function() {
     return this._settings.$element.on('keyup', (function(_this) {
       return function(event) {
@@ -101,21 +120,6 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
     })(this));
   };
 
-  AutoDuplicateInput.prototype._getValidationType = function() {
-    return this._field.data(this._settings.dataAttrValidate);
-  };
-
-  AutoDuplicateInput.prototype._isValid = function() {
-    var validator;
-    validator = this._getValidationType(this._field);
-    return this._validators["" + validator].test(this._field.val());
-  };
-
-  AutoDuplicateInput.prototype._duplicate = function() {
-    ++this._count;
-    return this._field.data(this._settings.dataAttrCloned, 'true').clone(true).appendTo(this._settings.$container).removeClass(this._settings.classValid).val('').data(this._settings.dataAttrCloned, '');
-  };
-
   AutoDuplicateInput.prototype._setInputState = function(type) {
     switch (type) {
       case 'invalid':
@@ -123,10 +127,6 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
       case 'valid':
         return this._field.removeClass(this._settings.classInvalid).addClass(this._settings.classValid);
     }
-  };
-
-  AutoDuplicateInput.prototype.getCount = function() {
-    return this._count;
   };
 
   return AutoDuplicateInput;
