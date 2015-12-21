@@ -37,6 +37,22 @@ class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
     @_setStorage()
 
   # -------------------------------------
+  #   Draw
+  # -------------------------------------
+
+  draw : =>
+    @_progress = @_currentFrame / @_totalFrames
+
+    if @_progress > 1
+      window.cancelAnimationFrame( @_handle )
+    else
+      @_currentFrame++
+
+      @_setStroke()
+
+      @_handle = window.requestAnimationFrame( @draw )
+
+  # -------------------------------------
   #   Set Storage
   # -------------------------------------
 
@@ -58,22 +74,6 @@ class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
   _setStroke : ->
     for index in [ 0...@_paths.length ]
       @_paths[ index ].style.strokeDashoffset = Math.floor( @_lengths[ index ] * ( 1 - @_progress ) )
-
-  # -------------------------------------
-  #   Draw
-  # -------------------------------------
-
-  draw : =>
-    @_progress = @_currentFrame / @_totalFrames
-
-    if @_progress > 1
-      window.cancelAnimationFrame( @_handle )
-    else
-      @_currentFrame++
-
-      @_setStroke()
-
-      @_handle = window.requestAnimationFrame( @draw )
 
 # -------------------------------------
 #   Usage

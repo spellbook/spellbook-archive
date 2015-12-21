@@ -30,6 +30,17 @@ this.Spellbook.Classes.DrawSvg = (function(superClass) {
     return this._setStorage();
   };
 
+  DrawSvg.prototype.draw = function() {
+    this._progress = this._currentFrame / this._totalFrames;
+    if (this._progress > 1) {
+      return window.cancelAnimationFrame(this._handle);
+    } else {
+      this._currentFrame++;
+      this._setStroke();
+      return this._handle = window.requestAnimationFrame(this.draw);
+    }
+  };
+
   DrawSvg.prototype._setStorage = function() {
     var i, index, length, numberOfPaths, ref, results;
     numberOfPaths = this._settings.$element.find('path[id]').length;
@@ -51,17 +62,6 @@ this.Spellbook.Classes.DrawSvg = (function(superClass) {
       results.push(this._paths[index].style.strokeDashoffset = Math.floor(this._lengths[index] * (1 - this._progress)));
     }
     return results;
-  };
-
-  DrawSvg.prototype.draw = function() {
-    this._progress = this._currentFrame / this._totalFrames;
-    if (this._progress > 1) {
-      return window.cancelAnimationFrame(this._handle);
-    } else {
-      this._currentFrame++;
-      this._setStroke();
-      return this._handle = window.requestAnimationFrame(this.draw);
-    }
   };
 
   return DrawSvg;
