@@ -6,7 +6,7 @@
 # *************************************
 #
 # @param $element    { jQuery object }
-# @param anchorClass { string }
+# @param classAnchor { string }
 #
 # *************************************
 
@@ -19,7 +19,7 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
   init : ->
     @_setDefaults
       $element    : $( 'h1, h2, h3, h4, h5' )
-      anchorClass : 'anchor'
+      classAnchor : 'anchor'
 
     @_addAnchors()
 
@@ -48,7 +48,7 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
 
       $element.attr( 'id', slug )
       $element.prepend """
-        <a class='#{ @_settings.anchorClass }' href='##{ slug }'>#</a>
+        <a class='#{ @_settings.classAnchor }' href='##{ slug }'>#</a>
       """
 
 # -------------------------------------

@@ -11,7 +11,7 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
   HeadingLinks.prototype.init = function() {
     this._setDefaults({
       $element: $('h1, h2, h3, h4, h5'),
-      anchorClass: 'anchor'
+      classAnchor: 'anchor'
     });
     return this._addAnchors();
   };
@@ -27,7 +27,7 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
         $element = $(elementNode);
         slug = _this._slugify($element.text());
         $element.attr('id', slug);
-        return $element.prepend("<a class='" + _this._settings.anchorClass + "' href='#" + slug + "'>#</a>");
+        return $element.prepend("<a class='" + _this._settings.classAnchor + "' href='#" + slug + "'>#</a>");
       };
     })(this));
   };
