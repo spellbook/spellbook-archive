@@ -33,6 +33,13 @@ this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
     }
   };
 
+  KeyboardEvents.prototype._getKeyCode = function(event) {
+    var charCode;
+    event = event || window.event;
+    charCode = event.keyCode || event.which;
+    return charCode;
+  };
+
   KeyboardEvents.prototype._match = function(event) {
     return $(document).on('keyup', (function(_this) {
       return function(e) {
@@ -46,13 +53,6 @@ this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
         }
       };
     })(this));
-  };
-
-  KeyboardEvents.prototype._getKeyCode = function(event) {
-    var charCode;
-    event = event || window.event;
-    charCode = event.keyCode || event.which;
-    return charCode;
   };
 
   return KeyboardEvents;

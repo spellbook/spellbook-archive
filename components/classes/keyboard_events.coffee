@@ -37,6 +37,20 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
       @_match( event )
 
   # -------------------------------------
+  #   Get Key Code
+  # -------------------------------------
+  #
+  # @param event { object }
+  #
+  # -------------------------------------
+
+  _getKeyCode : ( event ) ->
+    event    = event || window.event
+    charCode = event.keyCode || event.which
+
+    charCode
+
+  # -------------------------------------
   #   Match
   # -------------------------------------
   #
@@ -51,20 +65,6 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
       unless tag is 'input' or tag is 'textarea'
         switch @_getKeyCode( e )
           when event.key then event.run()
-
-  # -------------------------------------
-  #   Get Key Code
-  # -------------------------------------
-  #
-  # @param event { object }
-  #
-  # -------------------------------------
-
-  _getKeyCode : ( event ) ->
-    event    = event || window.event
-    charCode = event.keyCode || event.which
-
-    charCode
 
 # -------------------------------------
 #   Usage
