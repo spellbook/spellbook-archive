@@ -5,15 +5,15 @@
 #
 # *************************************
 #
-# @param $element              { jQuery object }
-# @param $container            { jQuery object }
+# @param $container       { jQuery object }
+# @param $element         { jQuery object }
+# @param classInvalid     { string }
+# @param classValid       { string }
 # @param dataAttrCloned   { string }
 # @param dataAttrValidate { string }
-# @param classInvalid          { string }
-# @param classValid            { string }
-# @param onDuplicate           { function }
-# @param onInvalid             { function }
-# @param onValid               { function }
+# @param onDuplicate      { function }
+# @param onInvalid        { function }
+# @param onValid          { function }
 #
 # *************************************
 
