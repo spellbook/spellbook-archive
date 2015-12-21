@@ -5,16 +5,16 @@
 #
 # *************************************
 #
-# @param $element     { jQuery object }
-# @param $input       { jQuery object }
-# @param $submit      { jQuery object }
-# @param messageClass { string }
-# @param errorClass   { string }
-# @param delimiter    { string }
-# @param dataAttr     { string }
-# @param showMessage  { string }
-# @param onError      { function }
-# @param onSuccess    { function }
+# @param $element       { jQuery object }
+# @param $input         { jQuery object }
+# @param $submit        { jQuery object }
+# @param classError     { string }
+# @param classMessage   { string }
+# @param dataAttr       { string }
+# @param delimiter      { string }
+# @param isMessageShown { string }
+# @param onError        { function }
+# @param onSuccess      { function }
 #
 # *************************************
 
@@ -34,16 +34,16 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
 
   init : ->
     @_setDefaults
-      $element     : $( '.js-formValidator' )
-      $input       : $( '.js-formValidator-input' )
-      $submit      : $( '.js-formValidator-submit' )
-      messageClass : 'js-formValidator-message'
-      errorClass   : 'is-invalid'
-      delimiter    : '|'
-      dataAttr     : 'validate'
-      showMessage  : true
-      onError      : null
-      onSuccess    : null
+      $element       : $( '.js-formValidator' )
+      $input         : $( '.js-formValidator-input' )
+      $submit        : $( '.js-formValidator-submit' )
+      classError     : 'is-invalid'
+      classMessage   : 'js-formValidator-message'
+      dataAttr       : 'validate'
+      delimiter      : '|'
+      isMessageShown : true
+      onError        : null
+      onSuccess      : null
 
     @_setEventHandlers()
 
@@ -172,18 +172,18 @@ class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
 
   _setInputState : ( message ) ->
     @_removeInputState()
-    @_input.addClass( @_settings.errorClass )
-    if @_settings.showMessage
-      @_input.after( "<p class='#{ @_settings.messageClass }'>#{ message }</p>" )
+    @_input.addClass( @_settings.classError )
+    if @_settings.isMessageShown
+      @_input.after( "<p class='#{ @_settings.classMessage }'>#{ message }</p>" )
 
   # -------------------------------------
   #   Remove Input State
   # -------------------------------------
 
   _removeInputState : ->
-    @_input.removeClass( @_settings.errorClass )
-    if @_settings.showMessage
-      @_input.next( ".#{ @_settings.messageClass }" ).remove()
+    @_input.removeClass( @_settings.classError )
+    if @_settings.isMessageShown
+      @_input.next( ".#{ @_settings.classMessage }" ).remove()
 
 # -------------------------------------
 #   Usage

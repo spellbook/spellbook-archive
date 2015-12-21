@@ -19,11 +19,11 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
       $element: $('.js-formValidator'),
       $input: $('.js-formValidator-input'),
       $submit: $('.js-formValidator-submit'),
-      messageClass: 'js-formValidator-message',
-      errorClass: 'is-invalid',
-      delimiter: '|',
+      classError: 'is-invalid',
+      classMessage: 'js-formValidator-message',
       dataAttr: 'validate',
-      showMessage: true,
+      delimiter: '|',
+      isMessageShown: true,
       onError: null,
       onSuccess: null
     });
@@ -143,16 +143,16 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
 
   FormValidator.prototype._setInputState = function(message) {
     this._removeInputState();
-    this._input.addClass(this._settings.errorClass);
-    if (this._settings.showMessage) {
-      return this._input.after("<p class='" + this._settings.messageClass + "'>" + message + "</p>");
+    this._input.addClass(this._settings.classError);
+    if (this._settings.isMessageShown) {
+      return this._input.after("<p class='" + this._settings.classMessage + "'>" + message + "</p>");
     }
   };
 
   FormValidator.prototype._removeInputState = function() {
-    this._input.removeClass(this._settings.errorClass);
-    if (this._settings.showMessage) {
-      return this._input.next("." + this._settings.messageClass).remove();
+    this._input.removeClass(this._settings.classError);
+    if (this._settings.isMessageShown) {
+      return this._input.next("." + this._settings.classMessage).remove();
     }
   };
 
