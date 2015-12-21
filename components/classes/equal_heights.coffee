@@ -30,6 +30,15 @@ class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
     @_setEventHandlers()
 
   # -------------------------------------
+  #   Set Event Handlers
+  # -------------------------------------
+
+  _setEventHandlers : ->
+    $( window ).on 'resize', =>
+      clearTimeout( @_timer )
+      @_timer = setTimeout( @_setHeight, 250 )
+
+  # -------------------------------------
   #   Set Height
   # -------------------------------------
 
@@ -42,15 +51,6 @@ class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
     height = Math.max.apply( Math, @_heights )
 
     @_settings.$element.css( 'height', height )
-
-  # -------------------------------------
-  #   Set Event Handlers
-  # -------------------------------------
-
-  _setEventHandlers : ->
-    $( window ).on 'resize', =>
-      clearTimeout( @_timer )
-      @_timer = setTimeout( @_setHeight, 250 )
 
 # -------------------------------------
 #   Usage

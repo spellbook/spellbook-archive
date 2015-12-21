@@ -20,6 +20,15 @@ this.Spellbook.Classes.EqualHeights = (function(superClass) {
     return this._setEventHandlers();
   };
 
+  EqualHeights.prototype._setEventHandlers = function() {
+    return $(window).on('resize', (function(_this) {
+      return function() {
+        clearTimeout(_this._timer);
+        return _this._timer = setTimeout(_this._setHeight, 250);
+      };
+    })(this));
+  };
+
   EqualHeights.prototype._setHeight = function() {
     var height;
     this._settings.$element.css('height', 'auto');
@@ -30,15 +39,6 @@ this.Spellbook.Classes.EqualHeights = (function(superClass) {
     })(this));
     height = Math.max.apply(Math, this._heights);
     return this._settings.$element.css('height', height);
-  };
-
-  EqualHeights.prototype._setEventHandlers = function() {
-    return $(window).on('resize', (function(_this) {
-      return function() {
-        clearTimeout(_this._timer);
-        return _this._timer = setTimeout(_this._setHeight, 250);
-      };
-    })(this));
   };
 
   return EqualHeights;
