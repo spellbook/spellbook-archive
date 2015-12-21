@@ -218,8 +218,8 @@ this.Spellbook.Classes.Dematerialize = (function(superClass) {
     this._setDefaults({
       $element: $('.js-dematerialize'),
       $trigger: $('.js-dematerialize-trigger'),
-      itemTitle: 'hidden_element',
-      hiddenClass: 'is-hidden'
+      classHidden: 'is-hidden',
+      titleItem: 'hidden_element'
     });
     this._setEventHandlers();
     return this._setInitialState();
@@ -239,19 +239,19 @@ this.Spellbook.Classes.Dematerialize = (function(superClass) {
   };
 
   Dematerialize.prototype._setInitialState = function() {
-    this._item = localStorage.getItem(this._settings.itemTitle);
+    this._item = localStorage.getItem(this._settings.titleItem);
     if (this._item !== 'true') {
-      return this._settings.$element.removeClass(this._settings.hiddenClass);
+      return this._settings.$element.removeClass(this._settings.classHidden);
     }
   };
 
   Dematerialize.prototype._toggleState = function() {
-    if (!this._settings.$element.hasClass(this._settings.hiddenClass)) {
-      this._settings.$element.addClass(this._settings.hiddenClass);
-      return this._item = localStorage.setItem(this._settings.itemTitle, 'true');
+    if (!this._settings.$element.hasClass(this._settings.classHidden)) {
+      this._settings.$element.addClass(this._settings.classHidden);
+      return this._item = localStorage.setItem(this._settings.titleItem, 'true');
     } else {
-      this._settings.$element.removeClass(this._settings.hiddenClass);
-      return this._item = localStorage.removeItem(this._settings.itemTitle);
+      this._settings.$element.removeClass(this._settings.classHidden);
+      return this._item = localStorage.removeItem(this._settings.titleItem);
     }
   };
 
@@ -355,17 +355,17 @@ this.Spellbook.Classes.DrawSvg = (function(superClass) {
     return DrawSvg.__super__.constructor.apply(this, arguments);
   }
 
-  DrawSvg.prototype._paths = [];
-
-  DrawSvg.prototype._lengths = [];
-
   DrawSvg.prototype._currentFrame = 0;
-
-  DrawSvg.prototype._totalFrames = 60;
 
   DrawSvg.prototype._handle = 0;
 
+  DrawSvg.prototype._lengths = [];
+
+  DrawSvg.prototype._paths = [];
+
   DrawSvg.prototype._progress = 0;
+
+  DrawSvg.prototype._totalFrames = 60;
 
   DrawSvg.prototype.init = function() {
     this._setDefaults({

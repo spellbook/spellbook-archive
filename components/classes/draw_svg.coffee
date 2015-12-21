@@ -18,12 +18,12 @@ class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
   #   Instance Variables
   # -------------------------------------
 
-  _paths        : []
-  _lengths      : []
   _currentFrame : 0
-  _totalFrames  : 60
   _handle       : 0
+  _lengths      : []
+  _paths        : []
   _progress     : 0
+  _totalFrames  : 60
 
   # -------------------------------------
   #   Initialize

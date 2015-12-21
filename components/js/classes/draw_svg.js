@@ -10,17 +10,17 @@ this.Spellbook.Classes.DrawSvg = (function(superClass) {
     return DrawSvg.__super__.constructor.apply(this, arguments);
   }
 
-  DrawSvg.prototype._paths = [];
-
-  DrawSvg.prototype._lengths = [];
-
   DrawSvg.prototype._currentFrame = 0;
-
-  DrawSvg.prototype._totalFrames = 60;
 
   DrawSvg.prototype._handle = 0;
 
+  DrawSvg.prototype._lengths = [];
+
+  DrawSvg.prototype._paths = [];
+
   DrawSvg.prototype._progress = 0;
+
+  DrawSvg.prototype._totalFrames = 60;
 
   DrawSvg.prototype.init = function() {
     this._setDefaults({
