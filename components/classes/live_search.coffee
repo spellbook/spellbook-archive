@@ -5,17 +5,17 @@
 #
 # *************************************
 #
-# @param $element     { jQuery object }
-# @param $query       { jQuery object }
-# @param $container   { jQuery object }
-# @param itemNode     { string (selector) }
-# @param hiddenClass  { string }
-# @param emptyMessage { boolean }
-# @param emptyNode    { string (selector) }
-# @param onClear      { function }
-# @param onEmpty      { function }
-# @param onFound      { function }
-# @param onKeyup      { function }
+# @param $container          { jQuery object }
+# @param $element            { jQuery object }
+# @param $query              { jQuery object }
+# @param classHidden         { string }
+# @param isEmptyMessageShown { boolean }
+# @param onClear             { function }
+# @param onEmpty             { function }
+# @param onFound             { function }
+# @param onKeyup             { function }
+# @param selectorEmpty       { string (selector) }
+# @param selectorItem        { string (selector) }
 #
 # *************************************
 
@@ -33,17 +33,17 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
 
   init : ->
     @_setDefaults
-      $element     : $( '.js-search' )
-      $query       : $( '.js-search-query' )
-      $container   : $( '.js-search-container' )
-      itemNode     : '.js-search-item'
-      hiddenClass  : 'is-hidden'
-      emptyMessage : true
-      emptyNode    : '.js-search-empty'
-      onClear      : null
-      onEmpty      : null
-      onFound      : null
-      onKeyup      : null
+      $container          : $( '.js-search-container' )
+      $element            : $( '.js-search' )
+      $query              : $( '.js-search-query' )
+      classHidden         : 'is-hidden'
+      isEmptyMessageShown : true
+      onClear             : null
+      onEmpty             : null
+      onFound             : null
+      onKeyup             : null
+      selectorEmpty       : '.js-search-empty'
+      selectorItem        : '.js-search-item'
 
     @_setEventHandlers()
 
@@ -59,7 +59,7 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
       @_settings.onKeyup?( @_settings )
 
       if @_query is ''
-        $( @_settings.itemNode ).removeClass( @_settings.hiddenClass )
+        $( @_settings.selectorItem ).removeClass( @_settings.classHidden )
         @_clearEmptyMessage()
 
         # Clear Event
@@ -78,12 +78,12 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
 
       if @_isQueryAbsent( $element )
         $element
-          .closest( @_settings.itemNode )
-          .addClass( @_settings.hiddenClass )
+          .closest( @_settings.selectorItem )
+          .addClass( @_settings.classHidden )
       else
         $element
-          .closest( @_settings.itemNode )
-          .removeClass( @_settings.hiddenClass )
+          .closest( @_settings.selectorItem )
+          .removeClass( @_settings.classHidden )
 
         # Found Event
         @_settings.onFound?( @_settings )
@@ -95,8 +95,8 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
   # -------------------------------------
 
   _clearEmptyMessage : ->
-    if @_settings.emptyMessage and $( @_settings.emptyNode ).length > 0
-      $( @_settings.emptyNode ).remove()
+    if @_settings.isEmptyMessageShown and $( @_settings.selectorEmpty ).length > 0
+      $( @_settings.selectorEmpty ).remove()
 
   # -------------------------------------
   #   Handle Empty Results
@@ -104,8 +104,8 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
 
   _handleEmptyResults : ->
     if @_isEmpty()
-      if @_settings.emptyMessage
-        emptyClass = @_settings.emptyNode.replace( '.', '' )
+      if @_settings.isEmptyMessageShown
+        emptyClass = @_settings.selectorEmpty.replace( '.', '' )
 
       $( """
         <p class='#{ emptyClass }'>
@@ -132,7 +132,7 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
   # -------------------------------------
 
   _isEmpty : ->
-    $( "#{ @_settings.itemNode }.#{ @_settings.hiddenClass }" ).length is $( @_settings.itemNode ).length
+    $( "#{ @_settings.selectorItem }.#{ @_settings.classHidden }" ).length is $( @_settings.selectorItem ).length
 
 # -------------------------------------
 #   Usage

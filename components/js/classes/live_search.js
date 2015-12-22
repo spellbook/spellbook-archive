@@ -12,17 +12,17 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
 
   LiveSearch.prototype.init = function() {
     this._setDefaults({
+      $container: $('.js-search-container'),
       $element: $('.js-search'),
       $query: $('.js-search-query'),
-      $container: $('.js-search-container'),
-      itemNode: '.js-search-item',
-      hiddenClass: 'is-hidden',
-      emptyMessage: true,
-      emptyNode: '.js-search-empty',
+      classHidden: 'is-hidden',
+      isEmptyMessageShown: true,
       onClear: null,
       onEmpty: null,
       onFound: null,
-      onKeyup: null
+      onKeyup: null,
+      selectorEmpty: '.js-search-empty',
+      selectorItem: '.js-search-item'
     });
     return this._setEventHandlers();
   };
@@ -36,7 +36,7 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
           base.onKeyup(_this._settings);
         }
         if (_this._query === '') {
-          $(_this._settings.itemNode).removeClass(_this._settings.hiddenClass);
+          $(_this._settings.selectorItem).removeClass(_this._settings.classHidden);
           _this._clearEmptyMessage();
           if (typeof (base1 = _this._settings).onClear === "function") {
             base1.onClear(_this._settings);
@@ -54,9 +54,9 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
         var $element, base;
         $element = $(elementNode);
         if (_this._isQueryAbsent($element)) {
-          return $element.closest(_this._settings.itemNode).addClass(_this._settings.hiddenClass);
+          return $element.closest(_this._settings.selectorItem).addClass(_this._settings.classHidden);
         } else {
-          $element.closest(_this._settings.itemNode).removeClass(_this._settings.hiddenClass);
+          $element.closest(_this._settings.selectorItem).removeClass(_this._settings.classHidden);
           return typeof (base = _this._settings).onFound === "function" ? base.onFound(_this._settings) : void 0;
         }
       };
@@ -65,16 +65,16 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
   };
 
   LiveSearch.prototype._clearEmptyMessage = function() {
-    if (this._settings.emptyMessage && $(this._settings.emptyNode).length > 0) {
-      return $(this._settings.emptyNode).remove();
+    if (this._settings.isEmptyMessageShown && $(this._settings.selectorEmpty).length > 0) {
+      return $(this._settings.selectorEmpty).remove();
     }
   };
 
   LiveSearch.prototype._handleEmptyResults = function() {
     var base, emptyClass;
     if (this._isEmpty()) {
-      if (this._settings.emptyMessage) {
-        emptyClass = this._settings.emptyNode.replace('.', '');
+      if (this._settings.isEmptyMessageShown) {
+        emptyClass = this._settings.selectorEmpty.replace('.', '');
       }
       $("<p class='" + emptyClass + "'>\n  There are no results matching '" + this._query + "'.\n</p>").insertAfter(this._settings.$container);
       return typeof (base = this._settings).onEmpty === "function" ? base.onEmpty(this._settings) : void 0;
@@ -86,7 +86,7 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
   };
 
   LiveSearch.prototype._isEmpty = function() {
-    return $(this._settings.itemNode + "." + this._settings.hiddenClass).length === $(this._settings.itemNode).length;
+    return $(this._settings.selectorItem + "." + this._settings.classHidden).length === $(this._settings.selectorItem).length;
   };
 
   return LiveSearch;
