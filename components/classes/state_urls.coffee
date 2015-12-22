@@ -31,17 +31,6 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
     @_setEventHandlers()
 
   # -------------------------------------
-  #   Santize Hash
-  # -------------------------------------
-  #
-  # @param string { string }
-  #
-  # -------------------------------------
-
-  _sanitizeHash : ( string ) ->
-    string.replace( /(<([^>]+)>)/ig, '' )
-
-  # -------------------------------------
   #   Get Current State
   # -------------------------------------
   #
@@ -58,21 +47,15 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
     return state
 
   # -------------------------------------
-  #   Set Current State
+  #   Santize Hash
   # -------------------------------------
   #
-  # @param state { string }
+  # @param string { string }
   #
   # -------------------------------------
 
-  _setInitialState : ( state ) ->
-    @_settings.$element
-      .not( state )
-      .addClass( @_settings.classHidden )
-
-    $( "[data-#{ @_settings.dataAttr }=#{ state }]" )
-      .removeClass( @_settings.classHidden )
-      .addClass( @_settings.classActive )
+  _sanitizeHash : ( string ) ->
+    string.replace( /(<([^>]+)>)/ig, '' )
 
   # -------------------------------------
   #   Set Event Handlers
@@ -91,6 +74,23 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
         window.location.hash = state
 
       @_showSection( $element, state ) if $( state ).length > 0
+
+  # -------------------------------------
+  #   Set Current State
+  # -------------------------------------
+  #
+  # @param state { string }
+  #
+  # -------------------------------------
+
+  _setInitialState : ( state ) ->
+    @_settings.$element
+      .not( state )
+      .addClass( @_settings.classHidden )
+
+    $( "[data-#{ @_settings.dataAttr }=#{ state }]" )
+      .removeClass( @_settings.classHidden )
+      .addClass( @_settings.classActive )
 
   # -------------------------------------
   #   Show Section

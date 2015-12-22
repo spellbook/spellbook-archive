@@ -1351,10 +1351,6 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
     return this._setEventHandlers();
   };
 
-  StateUrls.prototype._sanitizeHash = function(string) {
-    return string.replace(/(<([^>]+)>)/ig, '');
-  };
-
   StateUrls.prototype._getCurrentState = function() {
     var state;
     if (window.location.hash) {
@@ -1365,9 +1361,8 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
     return state;
   };
 
-  StateUrls.prototype._setInitialState = function(state) {
-    this._settings.$element.not(state).addClass(this._settings.classHidden);
-    return $("[data-" + this._settings.dataAttr + "=" + state + "]").removeClass(this._settings.classHidden).addClass(this._settings.classActive);
+  StateUrls.prototype._sanitizeHash = function(string) {
+    return string.replace(/(<([^>]+)>)/ig, '');
   };
 
   StateUrls.prototype._setEventHandlers = function() {
@@ -1387,6 +1382,11 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
         }
       };
     })(this));
+  };
+
+  StateUrls.prototype._setInitialState = function(state) {
+    this._settings.$element.not(state).addClass(this._settings.classHidden);
+    return $("[data-" + this._settings.dataAttr + "=" + state + "]").removeClass(this._settings.classHidden).addClass(this._settings.classActive);
   };
 
   StateUrls.prototype._showSection = function($element, state) {
