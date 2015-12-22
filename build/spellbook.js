@@ -1413,14 +1413,14 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
   Toggle.prototype.init = function() {
     this._setDefaults({
       $element: $('.js-toggle'),
-      proximity: 'next',
+      classActive: 'is-active',
+      classToggle: 'is-hidden',
       event: 'click',
-      toggleClass: 'is-hidden',
-      activeClass: 'is-active',
-      initialState: null,
       onClick: null,
+      onInitialState: null,
+      onMouseout: null,
       onMouseover: null,
-      onMouseout: null
+      proximity: 'next'
     });
     return this._setEventHandlers();
   };
@@ -1443,21 +1443,21 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
         if (typeof (base = _this._settings).onClick === "function") {
           base.onClick(_this._settings);
         }
-        _this._settings.$element.toggleClass(_this._settings.activeClass);
+        _this._settings.$element.toggleClass(_this._settings.classActive);
         switch (_this._settings.proximity) {
           case 'next':
-            return $element.next().toggleClass(_this._settings.toggleClass);
+            return $element.next().toggleClass(_this._settings.classToggle);
           case 'prev':
-            return $element.prev().toggleClass(_this._settings.toggleClass);
+            return $element.prev().toggleClass(_this._settings.classToggle);
           case 'nextParent':
-            return $element.parent().next().toggleClass(_this._settings.toggleClass);
+            return $element.parent().next().toggleClass(_this._settings.classToggle);
           case 'prevParent':
-            return $element.parent().prev().toggleClass(_this._settings.toggleClass);
+            return $element.parent().prev().toggleClass(_this._settings.classToggle);
           default:
             if (typeof _this._settings.proximity === 'object') {
-              return _this._settings.proximity.toggleClass(_this._settings.toggleClass);
+              return _this._settings.proximity.toggleClass(_this._settings.classToggle);
             } else {
-              return $element.find(_this._settings.proximity).toggleClass(_this._settings.toggleClass);
+              return $element.find(_this._settings.proximity).toggleClass(_this._settings.classToggle);
             }
         }
       };
@@ -1465,8 +1465,8 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
   };
 
   Toggle.prototype._handleHoverEvent = function() {
-    if (this._settings.initialState) {
-      this._settings.initialState(this._settings);
+    if (this._settings.onInitialState) {
+      this._settings.onInitialState(this._settings);
     }
     return this._settings.$element.on({
       mouseenter: (function(_this) {
@@ -1489,13 +1489,13 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
         if (typeof (base = this._settings).onMouseover === "function") {
           base.onMouseover(this._settings);
         }
-        $element.addClass(this._settings.activeClass);
+        $element.addClass(this._settings.classActive);
         break;
       case 'off':
         if (typeof (base1 = this._settings).onMouseout === "function") {
           base1.onMouseout(this._settings);
         }
-        $element.removeClass(this._settings.activeClass);
+        $element.removeClass(this._settings.classActive);
     }
     switch (this._settings.proximity) {
       case 'next':
@@ -1517,7 +1517,7 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
 
   Toggle.prototype._toggleClass = function($element, classToToggle) {
     if (classToToggle == null) {
-      classToToggle = this._settings.toggleClass;
+      classToToggle = this._settings.classToggle;
     }
     if ($element.hasClass(classToToggle)) {
       return $element.removeClass(classToToggle);

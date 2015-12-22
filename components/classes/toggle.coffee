@@ -5,15 +5,15 @@
 #
 # *************************************
 #
-# @param $element     { jQuery object }
-# @param proximity    { string }
-# @param event        { string }
-# @param toggleClass  { string }
-# @param activeClass  { string }
-# @param initialState { function }
-# @param onClick      { function }
-# @param onMouseover  { function }
-# @param onMouseout   { function }
+# @param $element       { jQuery object }
+# @param classActive    { string }
+# @param classToggle    { string }
+# @param event          { string }
+# @param onClick        { function }
+# @param onInitialState { function }
+# @param onMouseout     { function }
+# @param onMouseover    { function }
+# @param proximity      { string }
 #
 # *************************************
 
@@ -25,15 +25,15 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
 
   init : ->
     @_setDefaults
-      $element     : $( '.js-toggle' )
-      proximity    : 'next' # prev, parent, nextParent, prevParent, $( '.element' ), '> span'
-      event        : 'click' # hover
-      toggleClass  : 'is-hidden'
-      activeClass  : 'is-active'
-      initialState : null
-      onClick      : null
-      onMouseover  : null
-      onMouseout   : null
+      $element       : $( '.js-toggle' )
+      classActive    : 'is-active'
+      classToggle    : 'is-hidden'
+      event          : 'click' # hover
+      onClick        : null
+      onInitialState : null
+      onMouseout     : null
+      onMouseover    : null
+      proximity      : 'next' # prev, parent, nextParent, prevParent, $( '.element' ), '> span'
 
     @_setEventHandlers()
 
@@ -57,42 +57,42 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
 
       @_settings.onClick?( @_settings )
 
-      @_settings.$element.toggleClass( @_settings.activeClass )
+      @_settings.$element.toggleClass( @_settings.classActive )
 
       switch @_settings.proximity
         when 'next'
           $element
             .next()
-            .toggleClass( @_settings.toggleClass )
+            .toggleClass( @_settings.classToggle )
         when 'prev'
           $element
             .prev()
-            .toggleClass( @_settings.toggleClass )
+            .toggleClass( @_settings.classToggle )
         when 'nextParent'
           $element
             .parent()
             .next()
-            .toggleClass( @_settings.toggleClass )
+            .toggleClass( @_settings.classToggle )
         when 'prevParent'
           $element
             .parent()
             .prev()
-            .toggleClass( @_settings.toggleClass )
+            .toggleClass( @_settings.classToggle )
         else
           if typeof @_settings.proximity is 'object'
             @_settings.proximity
-              .toggleClass( @_settings.toggleClass )
+              .toggleClass( @_settings.classToggle )
           else
             $element
               .find( @_settings.proximity )
-              .toggleClass( @_settings.toggleClass )
+              .toggleClass( @_settings.classToggle )
 
   # -------------------------------------
   #   Handle Hover Event
   # -------------------------------------
 
   _handleHoverEvent : ->
-    @_settings.initialState( @_settings ) if @_settings.initialState
+    @_settings.onInitialState( @_settings ) if @_settings.onInitialState
 
     @_settings.$element.on
       mouseenter : ( event ) => @_handleHoverStateEvent( $( event.currentTarget ), 'on' )
@@ -111,10 +111,10 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
     switch state
       when 'on'
         @_settings.onMouseover?( @_settings )
-        $element.addClass( @_settings.activeClass )
+        $element.addClass( @_settings.classActive )
       when 'off'
         @_settings.onMouseout?( @_settings )
-        $element.removeClass( @_settings.activeClass )
+        $element.removeClass( @_settings.classActive )
 
     switch @_settings.proximity
       when 'next'
@@ -140,7 +140,7 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
   #
   # -------------------------------------
 
-  _toggleClass : ( $element, classToToggle = @_settings.toggleClass ) ->
+  _toggleClass : ( $element, classToToggle = @_settings.classToggle ) ->
     if $element.hasClass( classToToggle )
       $element.removeClass( classToToggle )
     else
