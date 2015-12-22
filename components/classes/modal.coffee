@@ -5,13 +5,13 @@
 #
 # *************************************
 #
-# @param $trigger        { jQuery object }
 # @param $close          { jQuery object }
-# @param dataAttribute   { string }
-# @param backdropClass   { string }
-# @param activeClass     { string }
-# @param inactiveClass   { string }
-# @param activeBodyClass { string }
+# @param $trigger        { jQuery object }
+# @param classActive     { string }
+# @param classBackdrop   { string }
+# @param classBodyActive { string }
+# @param classInactive   { string }
+# @param dataAttr        { string }
 #
 # *************************************
 
@@ -30,13 +30,13 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
 
   init : ->
     @_setDefaults
-      $trigger        : $( '.js-modal-trigger' )
       $close          : $( '.js-modal-close' )
-      dataAttribute   : 'modal'
-      backdropClass   : 'modal-backdrop'
-      activeClass     : 'is-active'
-      inactiveClass   : 'is-inactive'
-      activeBodyClass : 'is-modal-active'
+      $trigger        : $( '.js-modal-trigger' )
+      classActive     : 'is-active'
+      classBackdrop   : 'modal-backdrop'
+      classBodyActive : 'is-modal-active'
+      classInactive   : 'is-inactive'
+      dataAttr        : 'modal'
 
     @_setEventHandlers()
 
@@ -58,13 +58,13 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
 
       when 'open'
 
-        $element.addClass( @_settings.activeClass )
-        $( 'body' ).addClass( @_settings.activeBodyClass )
+        $element.addClass( @_settings.classActive )
+        $( 'body' ).addClass( @_settings.classBodyActive )
 
       when 'close'
 
-        $element.removeClass( @_settings.activeClass )
-        $( 'body' ).removeClass( @_settings.activeBodyClass )
+        $element.removeClass( @_settings.classActive )
+        $( 'body' ).removeClass( @_settings.classBodyActive )
 
         @_cleanupEvents()
 
@@ -83,18 +83,18 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
 
       when 'open'
 
-        $( '<div class=' + @_settings.backdropClass + '></div>' )
+        $( '<div class=' + @_settings.classBackdrop + '></div>' )
           .appendTo( $( 'body' ) )
 
-        @_$backdrop = $( ".#{ @_settings.backdropClass }" )
+        @_$backdrop = $( ".#{ @_settings.classBackdrop }" )
 
         setTimeout =>
-          @_$backdrop.addClass( @_settings.activeClass )
+          @_$backdrop.addClass( @_settings.classActive )
         , 25
 
       when 'close'
 
-        @_$backdrop.removeClass( @_settings.activeClass )
+        @_$backdrop.removeClass( @_settings.classActive )
 
         setTimeout =>
           @_$backdrop.remove()
@@ -108,7 +108,7 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
     @_settings.$trigger.on 'click', ( event ) =>
       event.preventDefault()
 
-      selector = $( event.currentTarget ).data( @_settings.dataAttribute )
+      selector = $( event.currentTarget ).data( @_settings.dataAttr )
       @_$modal = $( selector )
 
       @trigger( @_$modal, 'open' )

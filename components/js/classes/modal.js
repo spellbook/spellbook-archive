@@ -14,13 +14,13 @@ this.Spellbook.Classes.Modal = (function(superClass) {
 
   Modal.prototype.init = function() {
     this._setDefaults({
-      $trigger: $('.js-modal-trigger'),
       $close: $('.js-modal-close'),
-      dataAttribute: 'modal',
-      backdropClass: 'modal-backdrop',
-      activeClass: 'is-active',
-      inactiveClass: 'is-inactive',
-      activeBodyClass: 'is-modal-active'
+      $trigger: $('.js-modal-trigger'),
+      classActive: 'is-active',
+      classBackdrop: 'modal-backdrop',
+      classBodyActive: 'is-modal-active',
+      classInactive: 'is-inactive',
+      dataAttr: 'modal'
     });
     return this._setEventHandlers();
   };
@@ -35,12 +35,12 @@ this.Spellbook.Classes.Modal = (function(superClass) {
     this._$modal = $element;
     switch (event) {
       case 'open':
-        $element.addClass(this._settings.activeClass);
-        $('body').addClass(this._settings.activeBodyClass);
+        $element.addClass(this._settings.classActive);
+        $('body').addClass(this._settings.classBodyActive);
         break;
       case 'close':
-        $element.removeClass(this._settings.activeClass);
-        $('body').removeClass(this._settings.activeBodyClass);
+        $element.removeClass(this._settings.classActive);
+        $('body').removeClass(this._settings.classBodyActive);
         this._cleanupEvents();
     }
     if (!removeBackdrop) {
@@ -55,15 +55,15 @@ this.Spellbook.Classes.Modal = (function(superClass) {
   Modal.prototype._toggleOverlay = function(event) {
     switch (event) {
       case 'open':
-        $('<div class=' + this._settings.backdropClass + '></div>').appendTo($('body'));
-        this._$backdrop = $("." + this._settings.backdropClass);
+        $('<div class=' + this._settings.classBackdrop + '></div>').appendTo($('body'));
+        this._$backdrop = $("." + this._settings.classBackdrop);
         return setTimeout((function(_this) {
           return function() {
-            return _this._$backdrop.addClass(_this._settings.activeClass);
+            return _this._$backdrop.addClass(_this._settings.classActive);
           };
         })(this), 25);
       case 'close':
-        this._$backdrop.removeClass(this._settings.activeClass);
+        this._$backdrop.removeClass(this._settings.classActive);
         return setTimeout((function(_this) {
           return function() {
             return _this._$backdrop.remove();
@@ -77,7 +77,7 @@ this.Spellbook.Classes.Modal = (function(superClass) {
       return function(event) {
         var selector;
         event.preventDefault();
-        selector = $(event.currentTarget).data(_this._settings.dataAttribute);
+        selector = $(event.currentTarget).data(_this._settings.dataAttr);
         _this._$modal = $(selector);
         return _this.trigger(_this._$modal, 'open');
       };
