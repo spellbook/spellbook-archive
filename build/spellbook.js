@@ -1425,15 +1425,6 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
     return this._setEventHandlers();
   };
 
-  Toggle.prototype._setEventHandlers = function() {
-    switch (this._settings.event) {
-      case 'click':
-        return this._handleClickEvent();
-      case 'hover':
-        return this._handleHoverEvent();
-    }
-  };
-
   Toggle.prototype._handleClickEvent = function() {
     return this._settings.$element.on('click', (function(_this) {
       return function(event) {
@@ -1512,6 +1503,15 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
         } else {
           return this._toggleClass($element.find(this._settings.proximity));
         }
+    }
+  };
+
+  Toggle.prototype._setEventHandlers = function() {
+    switch (this._settings.event) {
+      case 'click':
+        return this._handleClickEvent();
+      case 'hover':
+        return this._handleHoverEvent();
     }
   };
 

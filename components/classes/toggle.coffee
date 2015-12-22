@@ -38,15 +38,6 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
     @_setEventHandlers()
 
   # -------------------------------------
-  #   Set Event Handlers
-  # -------------------------------------
-
-  _setEventHandlers : ->
-    switch @_settings.event
-      when 'click' then @_handleClickEvent()
-      when 'hover' then @_handleHoverEvent()
-
-  # -------------------------------------
   #   Handle Click Event
   # -------------------------------------
 
@@ -132,6 +123,15 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
           @_toggleClass( $element.find( @_settings.proximity) )
 
   # -------------------------------------
+  #   Set Event Handlers
+  # -------------------------------------
+
+  _setEventHandlers : ->
+    switch @_settings.event
+      when 'click' then @_handleClickEvent()
+      when 'hover' then @_handleHoverEvent()
+
+  # -------------------------------------
   #   Toggle Class
   # -------------------------------------
   #
@@ -150,5 +150,5 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
 #   Usage
 # -------------------------------------
 #
-# new Spellbook.Classes.Toggle
+# new Spellbook.Classes.Toggle()
 #
