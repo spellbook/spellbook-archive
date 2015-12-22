@@ -2,26 +2,24 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 describe('Spellbook.Classes.Base', function() {
-  return describe('without arguments', function() {
-    beforeEach(function() {
-      var ExtendsBase;
-      ExtendsBase = (function(superClass) {
-        extend(ExtendsBase, superClass);
+  beforeEach(function() {
+    var ExtendsBase;
+    ExtendsBase = (function(superClass) {
+      extend(ExtendsBase, superClass);
 
-        function ExtendsBase() {
-          return ExtendsBase.__super__.constructor.apply(this, arguments);
-        }
+      function ExtendsBase() {
+        return ExtendsBase.__super__.constructor.apply(this, arguments);
+      }
 
-        return ExtendsBase;
+      return ExtendsBase;
 
-      })(Spellbook.Classes.Base);
-      return this.extendsBase = new ExtendsBase;
-    });
-    it('should cause extended classes to be an instance of itself', function() {
-      return expect(this.extendsBase instanceof Spellbook.Classes.Base).toBeTruthy();
-    });
-    return it('should contain a _settings object in extended classes', function() {
-      return expect(this.extendsBase._settings).toBeDefined();
-    });
+    })(Spellbook.Classes.Base);
+    return this.extendsBase = new ExtendsBase;
+  });
+  it('should cause extended classes to be an instance of itself', function() {
+    return expect(this.extendsBase instanceof Spellbook.Classes.Base).toBeTruthy();
+  });
+  return it('should contain a _settings object in extended classes', function() {
+    return expect(this.extendsBase._settings).toBeDefined();
   });
 });
