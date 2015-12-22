@@ -60,5 +60,5 @@ class @Spellbook.Classes.SelectText extends Spellbook.Classes.Base
 #   Usage
 # -------------------------------------
 #
-# new Spellbook.Classes.selectText()
+# new Spellbook.Classes.SelectText()
 #
