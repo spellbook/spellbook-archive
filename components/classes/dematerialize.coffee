@@ -28,8 +28,8 @@ class @Spellbook.Classes.Dematerialize extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_item = ''
 

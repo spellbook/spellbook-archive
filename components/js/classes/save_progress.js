@@ -10,8 +10,8 @@ this.Spellbook.Classes.SaveProgress = (function(superClass) {
     dataAttr: 'saveprogress'
   };
 
-  function SaveProgress(options) {
-    SaveProgress.__super__.constructor.call(this, options);
+  function SaveProgress() {
+    SaveProgress.__super__.constructor.apply(this, arguments);
     this._restoreProgress();
     this._setEventHandlers();
   }

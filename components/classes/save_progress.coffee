@@ -26,8 +26,8 @@ class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_restoreProgress()
     @_setEventHandlers()

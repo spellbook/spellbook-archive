@@ -10,8 +10,8 @@ this.Spellbook.Classes.ShowPassword = (function(superClass) {
     isShownByDefault: false
   };
 
-  function ShowPassword(options) {
-    ShowPassword.__super__.constructor.call(this, options);
+  function ShowPassword() {
+    ShowPassword.__super__.constructor.apply(this, arguments);
     this._setEventHandlers();
     if (this._settings.isShownByDefault) {
       this._showPassword();

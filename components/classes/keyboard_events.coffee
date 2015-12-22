@@ -22,8 +22,8 @@ class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @emit()
 

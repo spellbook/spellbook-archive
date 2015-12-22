@@ -26,8 +26,8 @@ class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_currentFrame = 0
     @_handle       = 0

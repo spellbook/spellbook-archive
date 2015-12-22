@@ -8,8 +8,8 @@ this.Spellbook.Classes.QueryParams = (function(superClass) {
     url: null
   };
 
-  function QueryParams(options) {
-    QueryParams.__super__.constructor.call(this, options);
+  function QueryParams() {
+    QueryParams.__super__.constructor.apply(this, arguments);
     this.params = {};
     this.variables = [];
     this._parseQueryString(this._settings.url);

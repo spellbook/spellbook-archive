@@ -40,8 +40,8 @@ class @Spellbook.Classes.CharacterCounter extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_count = 0
 

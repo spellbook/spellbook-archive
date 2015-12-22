@@ -9,8 +9,8 @@ this.Spellbook.Classes.SelectText = (function(superClass) {
     onClick: null
   };
 
-  function SelectText(options) {
-    SelectText.__super__.constructor.call(this, options);
+  function SelectText() {
+    SelectText.__super__.constructor.apply(this, arguments);
     this._setEventHandlers();
   }
 

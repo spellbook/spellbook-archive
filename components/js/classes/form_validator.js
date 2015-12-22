@@ -17,8 +17,8 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     onSuccess: null
   };
 
-  function FormValidator(options) {
-    FormValidator.__super__.constructor.call(this, options);
+  function FormValidator() {
+    FormValidator.__super__.constructor.apply(this, arguments);
     this._input = null;
     this._errors = [];
     this._validators = ['required'];

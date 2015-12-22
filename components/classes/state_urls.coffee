@@ -30,8 +30,8 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_setInitialState( @_getCurrentState() )
     @_setEventHandlers()

@@ -24,8 +24,8 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_addAnchors()
 

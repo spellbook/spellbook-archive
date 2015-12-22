@@ -10,8 +10,8 @@ this.Spellbook.Classes.Dispatcher = (function(superClass) {
     events: []
   };
 
-  function Dispatcher(options) {
-    Dispatcher.__super__.constructor.call(this, options);
+  function Dispatcher() {
+    Dispatcher.__super__.constructor.apply(this, arguments);
     this.dispatch();
   }
 

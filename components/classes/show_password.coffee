@@ -26,8 +26,8 @@ class @Spellbook.Classes.ShowPassword extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_setEventHandlers()
     @_showPassword() if @_settings.isShownByDefault

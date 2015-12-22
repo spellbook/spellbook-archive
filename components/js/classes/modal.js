@@ -14,8 +14,8 @@ this.Spellbook.Classes.Modal = (function(superClass) {
     dataAttr: 'modal'
   };
 
-  function Modal(options) {
-    Modal.__super__.constructor.call(this, options);
+  function Modal() {
+    Modal.__super__.constructor.apply(this, arguments);
     this._$modal = null;
     this._$backdrop = null;
     this._setEventHandlers();

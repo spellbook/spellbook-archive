@@ -18,8 +18,8 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
     selectorItem: '.js-search-item'
   };
 
-  function LiveSearch(options) {
-    LiveSearch.__super__.constructor.call(this, options);
+  function LiveSearch() {
+    LiveSearch.__super__.constructor.apply(this, arguments);
     this._query = '';
     this._setEventHandlers();
   }

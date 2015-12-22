@@ -19,8 +19,8 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
     valuePrefix: '$'
   };
 
-  function QuantityInput(options) {
-    QuantityInput.__super__.constructor.call(this, options);
+  function QuantityInput() {
+    QuantityInput.__super__.constructor.apply(this, arguments);
     this._value = null;
     this._setValue();
     this._setEventHandlers();

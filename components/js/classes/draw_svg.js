@@ -10,9 +10,9 @@ this.Spellbook.Classes.DrawSvg = (function(superClass) {
     prefix: 'path'
   };
 
-  function DrawSvg(options) {
+  function DrawSvg() {
     this.draw = bind(this.draw, this);
-    DrawSvg.__super__.constructor.call(this, options);
+    DrawSvg.__super__.constructor.apply(this, arguments);
     this._currentFrame = 0;
     this._handle = 0;
     this._lengths = [];

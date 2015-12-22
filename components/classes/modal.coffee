@@ -34,8 +34,8 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_$modal    = null
     @_$backdrop = null

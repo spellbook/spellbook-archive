@@ -8,8 +8,8 @@ this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
     events: []
   };
 
-  function KeyboardEvents(options) {
-    KeyboardEvents.__super__.constructor.call(this, options);
+  function KeyboardEvents() {
+    KeyboardEvents.__super__.constructor.apply(this, arguments);
     this.emit();
   }
 

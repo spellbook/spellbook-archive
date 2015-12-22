@@ -8,8 +8,8 @@ this.Spellbook.Classes.EqualHeights = (function(superClass) {
     $element: $('.js-equalHeights')
   };
 
-  function EqualHeights(options) {
-    EqualHeights.__super__.constructor.call(this, options);
+  function EqualHeights() {
+    EqualHeights.__super__.constructor.apply(this, arguments);
     this._heights = [];
     this._timer = null;
     this._setHeight();

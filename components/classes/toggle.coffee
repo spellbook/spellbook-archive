@@ -38,8 +38,8 @@ class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_setEventHandlers()
 

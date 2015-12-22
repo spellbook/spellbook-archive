@@ -27,8 +27,8 @@ class @Spellbook.Classes.Dispatcher extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @dispatch()
 

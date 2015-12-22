@@ -38,8 +38,8 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_count      = 0
     @_field      = null

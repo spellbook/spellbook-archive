@@ -12,8 +12,8 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
     dataAttr: 'state'
   };
 
-  function StateUrls(options) {
-    StateUrls.__super__.constructor.call(this, options);
+  function StateUrls() {
+    StateUrls.__super__.constructor.apply(this, arguments);
     this._setInitialState(this._getCurrentState());
     this._setEventHandlers();
   }

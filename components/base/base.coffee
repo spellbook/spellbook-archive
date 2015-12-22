@@ -11,8 +11,8 @@ class @Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    @_settings = $.extend( {}, @constructor._defaults, options )
+  constructor : ( @options ) ->
+    @_settings = $.extend( {}, @constructor._defaults, @options )
 
 # -------------------------------------
 #   Usage

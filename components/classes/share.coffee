@@ -31,8 +31,8 @@ class @Spellbook.Classes.Share extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_setEventHandlers()
 

@@ -44,8 +44,8 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
   #   Constructor
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @_value = null
 

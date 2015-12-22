@@ -17,8 +17,8 @@ this.Spellbook.Classes.CharacterCounter = (function(superClass) {
     onMinPreceeded: null
   };
 
-  function CharacterCounter(options) {
-    CharacterCounter.__super__.constructor.call(this, options);
+  function CharacterCounter() {
+    CharacterCounter.__super__.constructor.apply(this, arguments);
     this._count = 0;
     this._setEventHandlers();
   }

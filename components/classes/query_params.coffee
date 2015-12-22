@@ -22,8 +22,8 @@ class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
   #   Constructorr
   # -------------------------------------
 
-  constructor : ( options ) ->
-    super( options )
+  constructor : ->
+    super
 
     @params    = {}
     @variables = []

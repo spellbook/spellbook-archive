@@ -9,8 +9,8 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
     classAnchor: 'anchor'
   };
 
-  function HeadingLinks(options) {
-    HeadingLinks.__super__.constructor.call(this, options);
+  function HeadingLinks() {
+    HeadingLinks.__super__.constructor.apply(this, arguments);
     this._addAnchors();
   }
 

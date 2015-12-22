@@ -16,8 +16,8 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
     onValid: null
   };
 
-  function AutoDuplicateInput(options) {
-    AutoDuplicateInput.__super__.constructor.call(this, options);
+  function AutoDuplicateInput() {
+    AutoDuplicateInput.__super__.constructor.apply(this, arguments);
     this._count = 0;
     this._field = null;
     this._validators = {

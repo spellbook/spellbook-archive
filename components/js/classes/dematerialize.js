@@ -11,8 +11,8 @@ this.Spellbook.Classes.Dematerialize = (function(superClass) {
     titleItem: 'hidden_element'
   };
 
-  function Dematerialize(options) {
-    Dematerialize.__super__.constructor.call(this, options);
+  function Dematerialize() {
+    Dematerialize.__super__.constructor.apply(this, arguments);
     this._item = '';
     this._setEventHandlers();
     this._setInitialState();

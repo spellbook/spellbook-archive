@@ -16,8 +16,8 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
     proximity: 'next'
   };
 
-  function Toggle(options) {
-    Toggle.__super__.constructor.call(this, options);
+  function Toggle() {
+    Toggle.__super__.constructor.apply(this, arguments);
     this._setEventHandlers();
   }
 

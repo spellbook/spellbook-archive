@@ -14,8 +14,8 @@ this.Spellbook.Classes.Share = (function(superClass) {
     }
   };
 
-  function Share(options) {
-    Share.__super__.constructor.call(this, options);
+  function Share() {
+    Share.__super__.constructor.apply(this, arguments);
     this._setEventHandlers();
   }
 
