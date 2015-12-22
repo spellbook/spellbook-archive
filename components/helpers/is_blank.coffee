@@ -16,5 +16,5 @@
 #   Usage
 # -------------------------------------
 #
-# CS.isBlank( ' ' )
+# Spellbook.Helpers.isBlank( ' ' )
 #
