@@ -964,10 +964,6 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
     return this._setEventHandlers();
   };
 
-  QuantityInput.prototype._setValue = function() {
-    return this._value = parseInt(this._settings.$element.val());
-  };
-
   QuantityInput.prototype._setEventHandlers = function() {
     this._settings.$element.on('keyup', (function(_this) {
       return function(event) {
@@ -999,6 +995,16 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
     })(this));
   };
 
+  QuantityInput.prototype._setValue = function() {
+    return this._value = parseInt(this._settings.$element.val());
+  };
+
+  QuantityInput.prototype._updateTarget = function() {
+    var updatedValue;
+    updatedValue = this._value * this._settings.valueBase;
+    return this._settings.$target.text("" + this._settings.valuePrefix + updatedValue);
+  };
+
   QuantityInput.prototype._updateValue = function(direction) {
     var base;
     if (direction == null) {
@@ -1016,12 +1022,6 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
     }
     this._updateTarget();
     return typeof (base = this._settings).onTargetUpdate === "function" ? base.onTargetUpdate(this._settings) : void 0;
-  };
-
-  QuantityInput.prototype._updateTarget = function() {
-    var updatedValue;
-    updatedValue = this._value * this._settings.valueBase;
-    return this._settings.$target.text("" + this._settings.valuePrefix + updatedValue);
   };
 
   return QuantityInput;

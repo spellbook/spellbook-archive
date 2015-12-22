@@ -51,13 +51,6 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
     @_setEventHandlers()
 
   # -------------------------------------
-  #   Set Value
-  # -------------------------------------
-
-  _setValue : ->
-    @_value = parseInt( @_settings.$element.val() )
-
-  # -------------------------------------
   #   Set Event Handlers
   # -------------------------------------
 
@@ -91,6 +84,22 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
       @_settings.onDecrease?( @_settings )
 
   # -------------------------------------
+  #   Set Value
+  # -------------------------------------
+
+  _setValue : ->
+    @_value = parseInt( @_settings.$element.val() )
+
+  # -------------------------------------
+  #   Update Target
+  # -------------------------------------
+
+  _updateTarget : ->
+    updatedValue = @_value * @_settings.valueBase
+
+    @_settings.$target.text( "#{ @_settings.valuePrefix }#{ updatedValue }" )
+
+  # -------------------------------------
   #   Update Value
   # -------------------------------------
   #
@@ -108,15 +117,6 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
 
       # Target Update Event
     @_settings.onTargetUpdate?( @_settings )
-
-  # -------------------------------------
-  #   Update Target
-  # -------------------------------------
-
-  _updateTarget : ->
-    updatedValue = @_value * @_settings.valueBase
-
-    @_settings.$target.text( "#{ @_settings.valuePrefix }#{ updatedValue }" )
 
 # -------------------------------------
 #   Usage
