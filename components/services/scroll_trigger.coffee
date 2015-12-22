@@ -5,18 +5,19 @@
 #
 # *************************************
 #
-# @param $element       { jQuery object }
-# @param scrollPadding  { integer }
-# @param activeClass    { string }
+# @param $element      { jQuery object }
+# @param classActive   { string }
+# @param onTrigger     { function }
+# @param scrollPadding { integer }
 #
 # *************************************
 
 @Spellbook.Services.scrollTrigger = ( options ) ->
   settings = $.extend
     $element      : $( '.js-scrollTrigger' )
-    scrollPadding : 400
-    activeClass   : 'is-active'
+    classActive   : 'is-active'
     onTrigger     : null
+    scrollPadding : 400
   , options
 
   scrolled = $( window ).scrollTop()
@@ -24,8 +25,8 @@
   if settings.$element.offset().top >= 0
     active = scrolled - settings.$element.offset().top - settings.scrollPadding
 
-  if not settings.$element.hasClass( settings.activeClass ) and active
-    settings.$element.addClass( settings.activeClass )
+  if not settings.$element.hasClass( settings.classActive ) and active
+    settings.$element.addClass( settings.classActive )
 
     settings.onTrigger?( settings )
 
