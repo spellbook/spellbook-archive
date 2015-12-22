@@ -11,18 +11,10 @@ this.Spellbook.Services = {};
 this.Spellbook.Inbox = {};
 
 this.Spellbook.Classes.Base = (function() {
-  Base.prototype._settings = {};
-
   function Base(options) {
     this.options = options;
-    if (typeof this.init === "function") {
-      this.init();
-    }
+    this._settings = $.extend({}, this.constructor._defaults, this.options);
   }
-
-  Base.prototype._setDefaults = function(defaults) {
-    return this._settings = $.extend(defaults, this.options);
-  };
 
   return Base;
 
@@ -51,32 +43,27 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
   extend(AutoDuplicateInput, superClass);
 
+  AutoDuplicateInput._defaults = {
+    $container: $('.js-autoDuplicateInput-container'),
+    $element: $('.js-autoDuplicateInput'),
+    classInvalid: 'is-invalid',
+    classValid: 'is-valid',
+    dataAttrCloned: 'cloned',
+    dataAttrValidate: 'validate',
+    onDuplicate: null,
+    onInvalid: null,
+    onValid: null
+  };
+
   function AutoDuplicateInput() {
-    return AutoDuplicateInput.__super__.constructor.apply(this, arguments);
+    AutoDuplicateInput.__super__.constructor.apply(this, arguments);
+    this._count = 0;
+    this._field = null;
+    this._validators = {
+      email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    };
+    this._setEventHandlers();
   }
-
-  AutoDuplicateInput.prototype._count = 0;
-
-  AutoDuplicateInput.prototype._field = null;
-
-  AutoDuplicateInput.prototype._validators = {
-    email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  };
-
-  AutoDuplicateInput.prototype.init = function() {
-    this._setDefaults({
-      $container: $('.js-autoDuplicateInput-container'),
-      $element: $('.js-autoDuplicateInput'),
-      classInvalid: 'is-invalid',
-      classValid: 'is-valid',
-      dataAttrCloned: 'cloned',
-      dataAttrValidate: 'validate',
-      onDuplicate: null,
-      onInvalid: null,
-      onValid: null
-    });
-    return this._setEventHandlers();
-  };
 
   AutoDuplicateInput.prototype.getCount = function() {
     return this._count;
@@ -139,27 +126,24 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.CharacterCounter = (function(superClass) {
   extend(CharacterCounter, superClass);
 
-  function CharacterCounter() {
-    return CharacterCounter.__super__.constructor.apply(this, arguments);
-  }
-
-  CharacterCounter.prototype._count = 0;
-
-  CharacterCounter.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-characterCounter'),
-      $label: $('.js-characterCounter-label'),
-      $number: $('.js-characterCounter-number'),
-      charsMax: 140,
-      charsMin: 0,
-      classError: 'is-error',
-      classSuccess: 'is-success',
-      onConditionsMet: null,
-      onMaxExceeded: null,
-      onMinPreceeded: null
-    });
-    return this._setEventHandlers();
+  CharacterCounter._defaults = {
+    $element: $('.js-characterCounter'),
+    $label: $('.js-characterCounter-label'),
+    $number: $('.js-characterCounter-number'),
+    charsMax: 140,
+    charsMin: 0,
+    classError: 'is-error',
+    classSuccess: 'is-success',
+    onConditionsMet: null,
+    onMaxExceeded: null,
+    onMinPreceeded: null
   };
+
+  function CharacterCounter() {
+    CharacterCounter.__super__.constructor.apply(this, arguments);
+    this._count = 0;
+    this._setEventHandlers();
+  }
 
   CharacterCounter.prototype._setEventHandlers = function() {
     return this._settings.$element.on('keyup', (function(_this) {
@@ -208,22 +192,19 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Dematerialize = (function(superClass) {
   extend(Dematerialize, superClass);
 
-  function Dematerialize() {
-    return Dematerialize.__super__.constructor.apply(this, arguments);
-  }
-
-  Dematerialize.prototype._item = '';
-
-  Dematerialize.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-dematerialize'),
-      $trigger: $('.js-dematerialize-trigger'),
-      classHidden: 'is-hidden',
-      titleItem: 'hidden_element'
-    });
-    this._setEventHandlers();
-    return this._setInitialState();
+  Dematerialize._defaults = {
+    $element: $('.js-dematerialize'),
+    $trigger: $('.js-dematerialize-trigger'),
+    classHidden: 'is-hidden',
+    titleItem: 'hidden_element'
   };
+
+  function Dematerialize() {
+    Dematerialize.__super__.constructor.apply(this, arguments);
+    this._item = '';
+    this._setEventHandlers();
+    this._setInitialState();
+  }
 
   Dematerialize.prototype._setEventHandlers = function() {
     if (this._settings.$trigger instanceof jQuery) {
@@ -280,18 +261,16 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Dispatcher = (function(superClass) {
   extend(Dispatcher, superClass);
 
-  function Dispatcher() {
-    return Dispatcher.__super__.constructor.apply(this, arguments);
-  }
-
-  Dispatcher.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-dispatcher'),
-      dataAttr: 'dispatcher-page',
-      events: []
-    });
-    return this.dispatch();
+  Dispatcher._defaults = {
+    $element: $('.js-dispatcher'),
+    dataAttr: 'dispatcher-page',
+    events: []
   };
+
+  function Dispatcher() {
+    Dispatcher.__super__.constructor.apply(this, arguments);
+    this.dispatch();
+  }
 
   Dispatcher.prototype.dispatch = function(event) {
     var i, len, page, ref, results;
@@ -350,30 +329,22 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
 this.Spellbook.Classes.DrawSvg = (function(superClass) {
   extend(DrawSvg, superClass);
 
+  DrawSvg._defaults = {
+    $element: $('.js-drawSvg'),
+    prefix: 'path'
+  };
+
   function DrawSvg() {
     this.draw = bind(this.draw, this);
-    return DrawSvg.__super__.constructor.apply(this, arguments);
+    DrawSvg.__super__.constructor.apply(this, arguments);
+    this._currentFrame = 0;
+    this._handle = 0;
+    this._lengths = [];
+    this._paths = [];
+    this._progress = 0;
+    this._totalFrames = 60;
+    this._setStorage();
   }
-
-  DrawSvg.prototype._currentFrame = 0;
-
-  DrawSvg.prototype._handle = 0;
-
-  DrawSvg.prototype._lengths = [];
-
-  DrawSvg.prototype._paths = [];
-
-  DrawSvg.prototype._progress = 0;
-
-  DrawSvg.prototype._totalFrames = 60;
-
-  DrawSvg.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-drawSvg'),
-      prefix: 'path'
-    });
-    return this._setStorage();
-  };
 
   DrawSvg.prototype.draw = function() {
     this._progress = this._currentFrame / this._totalFrames;
@@ -419,21 +390,17 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.EqualHeights = (function(superClass) {
   extend(EqualHeights, superClass);
 
-  function EqualHeights() {
-    return EqualHeights.__super__.constructor.apply(this, arguments);
-  }
-
-  EqualHeights.prototype._heights = [];
-
-  EqualHeights.prototype._timer = null;
-
-  EqualHeights.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-equalHeights')
-    });
-    this._setHeight();
-    return this._setEventHandlers();
+  EqualHeights._defaults = {
+    $element: $('.js-equalHeights')
   };
+
+  function EqualHeights() {
+    EqualHeights.__super__.constructor.apply(this, arguments);
+    this._heights = [];
+    this._timer = null;
+    this._setHeight();
+    this._setEventHandlers();
+  }
 
   EqualHeights.prototype._setEventHandlers = function() {
     return $(window).on('resize', (function(_this) {
@@ -466,31 +433,26 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.FormValidator = (function(superClass) {
   extend(FormValidator, superClass);
 
-  function FormValidator() {
-    return FormValidator.__super__.constructor.apply(this, arguments);
-  }
-
-  FormValidator.prototype._input = null;
-
-  FormValidator.prototype._errors = [];
-
-  FormValidator.prototype._validators = ['required'];
-
-  FormValidator.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-formValidator'),
-      $input: $('.js-formValidator-input'),
-      $submit: $('.js-formValidator-submit'),
-      classError: 'is-invalid',
-      classMessage: 'js-formValidator-message',
-      dataAttr: 'validate',
-      delimiter: '|',
-      isMessageShown: true,
-      onError: null,
-      onSuccess: null
-    });
-    return this._setEventHandlers();
+  FormValidator._defaults = {
+    $element: $('.js-formValidator'),
+    $input: $('.js-formValidator-input'),
+    $submit: $('.js-formValidator-submit'),
+    classError: 'is-invalid',
+    classMessage: 'js-formValidator-message',
+    dataAttr: 'validate',
+    delimiter: '|',
+    isMessageShown: true,
+    onError: null,
+    onSuccess: null
   };
+
+  function FormValidator() {
+    FormValidator.__super__.constructor.apply(this, arguments);
+    this._input = null;
+    this._errors = [];
+    this._validators = ['required'];
+    this._setEventHandlers();
+  }
 
   FormValidator.prototype.validate = function(input) {
     var i, key, len, parameter, results;
@@ -628,17 +590,15 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.HeadingLinks = (function(superClass) {
   extend(HeadingLinks, superClass);
 
-  function HeadingLinks() {
-    return HeadingLinks.__super__.constructor.apply(this, arguments);
-  }
-
-  HeadingLinks.prototype.init = function() {
-    this._setDefaults({
-      $element: $('h1, h2, h3, h4, h5'),
-      classAnchor: 'anchor'
-    });
-    return this._addAnchors();
+  HeadingLinks._defaults = {
+    $element: $('h1, h2, h3, h4, h5'),
+    classAnchor: 'anchor'
   };
+
+  function HeadingLinks() {
+    HeadingLinks.__super__.constructor.apply(this, arguments);
+    this._addAnchors();
+  }
 
   HeadingLinks.prototype._addAnchors = function() {
     return this._settings.$element.each((function(_this) {
@@ -666,16 +626,14 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
   extend(KeyboardEvents, superClass);
 
-  function KeyboardEvents() {
-    return KeyboardEvents.__super__.constructor.apply(this, arguments);
-  }
-
-  KeyboardEvents.prototype.init = function() {
-    this._setDefaults({
-      events: []
-    });
-    return this.emit();
+  KeyboardEvents._defaults = {
+    events: []
   };
+
+  function KeyboardEvents() {
+    KeyboardEvents.__super__.constructor.apply(this, arguments);
+    this.emit();
+  }
 
   KeyboardEvents.prototype.emit = function(event) {
     var i, len, ref, results;
@@ -727,28 +685,25 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.LiveSearch = (function(superClass) {
   extend(LiveSearch, superClass);
 
-  function LiveSearch() {
-    return LiveSearch.__super__.constructor.apply(this, arguments);
-  }
-
-  LiveSearch.prototype._query = '';
-
-  LiveSearch.prototype.init = function() {
-    this._setDefaults({
-      $container: $('.js-search-container'),
-      $element: $('.js-search'),
-      $query: $('.js-search-query'),
-      classHidden: 'is-hidden',
-      isEmptyMessageShown: true,
-      onClear: null,
-      onEmpty: null,
-      onFound: null,
-      onKeyup: null,
-      selectorEmpty: '.js-search-empty',
-      selectorItem: '.js-search-item'
-    });
-    return this._setEventHandlers();
+  LiveSearch._defaults = {
+    $container: $('.js-search-container'),
+    $element: $('.js-search'),
+    $query: $('.js-search-query'),
+    classHidden: 'is-hidden',
+    isEmptyMessageShown: true,
+    onClear: null,
+    onEmpty: null,
+    onFound: null,
+    onKeyup: null,
+    selectorEmpty: '.js-search-empty',
+    selectorItem: '.js-search-item'
   };
+
+  function LiveSearch() {
+    LiveSearch.__super__.constructor.apply(this, arguments);
+    this._query = '';
+    this._setEventHandlers();
+  }
 
   LiveSearch.prototype._clearEmptyMessage = function() {
     if (this._settings.isEmptyMessageShown && $(this._settings.selectorEmpty).length > 0) {
@@ -822,26 +777,22 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Modal = (function(superClass) {
   extend(Modal, superClass);
 
-  function Modal() {
-    return Modal.__super__.constructor.apply(this, arguments);
-  }
-
-  Modal.prototype._$modal = null;
-
-  Modal.prototype._$backdrop = null;
-
-  Modal.prototype.init = function() {
-    this._setDefaults({
-      $close: $('.js-modal-close'),
-      $trigger: $('.js-modal-trigger'),
-      classActive: 'is-active',
-      classBackdrop: 'modal-backdrop',
-      classBodyActive: 'is-modal-active',
-      classInactive: 'is-inactive',
-      dataAttr: 'modal'
-    });
-    return this._setEventHandlers();
+  Modal._defaults = {
+    $close: $('.js-modal-close'),
+    $trigger: $('.js-modal-trigger'),
+    classActive: 'is-active',
+    classBackdrop: 'modal-backdrop',
+    classBodyActive: 'is-modal-active',
+    classInactive: 'is-inactive',
+    dataAttr: 'modal'
   };
+
+  function Modal() {
+    Modal.__super__.constructor.apply(this, arguments);
+    this._$modal = null;
+    this._$backdrop = null;
+    this._setEventHandlers();
+  }
 
   Modal.prototype.trigger = function($element, event, removeBackdrop, callback) {
     if (removeBackdrop == null) {
@@ -939,30 +890,27 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.QuantityInput = (function(superClass) {
   extend(QuantityInput, superClass);
 
-  function QuantityInput() {
-    return QuantityInput.__super__.constructor.apply(this, arguments);
-  }
-
-  QuantityInput.prototype._value = null;
-
-  QuantityInput.prototype.init = function() {
-    this._setDefaults({
-      $decrease: $('.js-quantityInput-decrease'),
-      $element: $('.js-quantityInput'),
-      $field: $('.js-quantityInput-field'),
-      $increase: $('.js-quantityInput-increase'),
-      $target: $('.js-quantityInput-target'),
-      onDecrease: null,
-      onIncrease: null,
-      onTargetUpdate: null,
-      valueBase: 29,
-      valueMax: 100,
-      valueMin: 1,
-      valuePrefix: '$'
-    });
-    this._setValue();
-    return this._setEventHandlers();
+  QuantityInput._defaults = {
+    $decrease: $('.js-quantityInput-decrease'),
+    $element: $('.js-quantityInput'),
+    $field: $('.js-quantityInput-field'),
+    $increase: $('.js-quantityInput-increase'),
+    $target: $('.js-quantityInput-target'),
+    onDecrease: null,
+    onIncrease: null,
+    onTargetUpdate: null,
+    valueBase: 29,
+    valueMax: 100,
+    valueMin: 1,
+    valuePrefix: '$'
   };
+
+  function QuantityInput() {
+    QuantityInput.__super__.constructor.apply(this, arguments);
+    this._value = null;
+    this._setValue();
+    this._setEventHandlers();
+  }
 
   QuantityInput.prototype._setEventHandlers = function() {
     this._settings.$element.on('keyup', (function(_this) {
@@ -1034,21 +982,17 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.QueryParams = (function(superClass) {
   extend(QueryParams, superClass);
 
-  function QueryParams() {
-    return QueryParams.__super__.constructor.apply(this, arguments);
-  }
-
-  QueryParams.prototype.params = {};
-
-  QueryParams.prototype.variables = [];
-
-  QueryParams.prototype.init = function() {
-    this._setDefaults({
-      url: null
-    });
-    this._parseQueryString(this._settings.url);
-    return this._sortParams();
+  QueryParams._defaults = {
+    url: null
   };
+
+  function QueryParams() {
+    QueryParams.__super__.constructor.apply(this, arguments);
+    this.params = {};
+    this.variables = [];
+    this._parseQueryString(this._settings.url);
+    this._sortParams();
+  }
 
   QueryParams.prototype.allParams = function() {
     return this.params;
@@ -1114,19 +1058,17 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.SaveProgress = (function(superClass) {
   extend(SaveProgress, superClass);
 
-  function SaveProgress() {
-    return SaveProgress.__super__.constructor.apply(this, arguments);
-  }
-
-  SaveProgress.prototype.init = function() {
-    this._setDefaults({
-      $container: $('.js-saveProgress-container'),
-      $element: $('.js-saveProgress'),
-      dataAttr: 'saveprogress'
-    });
-    this._restoreProgress();
-    return this._setEventHandlers();
+  SaveProgress._defaults = {
+    $container: $('.js-saveProgress-container'),
+    $element: $('.js-saveProgress'),
+    dataAttr: 'saveprogress'
   };
+
+  function SaveProgress() {
+    SaveProgress.__super__.constructor.apply(this, arguments);
+    this._restoreProgress();
+    this._setEventHandlers();
+  }
 
   SaveProgress.prototype._eraseProgress = function(container) {
     return container.find(this._settings.$element).each((function(_this) {
@@ -1183,17 +1125,15 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.SelectText = (function(superClass) {
   extend(SelectText, superClass);
 
-  function SelectText() {
-    return SelectText.__super__.constructor.apply(this, arguments);
-  }
-
-  SelectText.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-selectText'),
-      onClick: null
-    });
-    return this._setEventHandlers();
+  SelectText._defaults = {
+    $element: $('.js-selectText'),
+    onClick: null
   };
+
+  function SelectText() {
+    SelectText.__super__.constructor.apply(this, arguments);
+    this._setEventHandlers();
+  }
 
   SelectText.prototype._selectElement = function($element) {
     var elementNode, range, selection;
@@ -1232,22 +1172,20 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Share = (function(superClass) {
   extend(Share, superClass);
 
-  function Share() {
-    return Share.__super__.constructor.apply(this, arguments);
-  }
-
-  Share.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-share'),
-      popup: {
-        height: 400,
-        left: 0,
-        top: 0,
-        width: 575
-      }
-    });
-    return this._setEventHandlers();
+  Share._defaults = {
+    $element: $('.js-share'),
+    popup: {
+      height: 400,
+      left: 0,
+      top: 0,
+      width: 575
+    }
   };
+
+  function Share() {
+    Share.__super__.constructor.apply(this, arguments);
+    this._setEventHandlers();
+  }
 
   Share.prototype._setEventHandlers = function() {
     return this._settings.$element.on('click', (function(_this) {
@@ -1290,21 +1228,19 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.ShowPassword = (function(superClass) {
   extend(ShowPassword, superClass);
 
-  function ShowPassword() {
-    return ShowPassword.__super__.constructor.apply(this, arguments);
-  }
+  ShowPassword._defaults = {
+    $input: $('.js-showPassword-input'),
+    $toggle: $('.js-showPassword-toggle'),
+    isShownByDefault: false
+  };
 
-  ShowPassword.prototype.init = function() {
-    this._setDefaults({
-      $input: $('.js-showPassword-input'),
-      $toggle: $('.js-showPassword-toggle'),
-      isShownByDefault: false
-    });
+  function ShowPassword() {
+    ShowPassword.__super__.constructor.apply(this, arguments);
     this._setEventHandlers();
     if (this._settings.isShownByDefault) {
-      return this._showPassword();
+      this._showPassword();
     }
-  };
+  }
 
   ShowPassword.prototype._setEventHandlers = function() {
     return this._settings.$toggle.on('change', (function(_this) {
@@ -1335,21 +1271,19 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.StateUrls = (function(superClass) {
   extend(StateUrls, superClass);
 
-  function StateUrls() {
-    return StateUrls.__super__.constructor.apply(this, arguments);
-  }
-
-  StateUrls.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-stateUrls'),
-      $link: $('.js-stateUrls-link'),
-      classActive: 'is-active',
-      classHidden: 'is-hidden',
-      dataAttr: 'state'
-    });
-    this._setInitialState(this._getCurrentState());
-    return this._setEventHandlers();
+  StateUrls._defaults = {
+    $element: $('.js-stateUrls'),
+    $link: $('.js-stateUrls-link'),
+    classActive: 'is-active',
+    classHidden: 'is-hidden',
+    dataAttr: 'state'
   };
+
+  function StateUrls() {
+    StateUrls.__super__.constructor.apply(this, arguments);
+    this._setInitialState(this._getCurrentState());
+    this._setEventHandlers();
+  }
 
   StateUrls.prototype._getCurrentState = function() {
     var state;
@@ -1406,24 +1340,22 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Toggle = (function(superClass) {
   extend(Toggle, superClass);
 
-  function Toggle() {
-    return Toggle.__super__.constructor.apply(this, arguments);
-  }
-
-  Toggle.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-toggle'),
-      classActive: 'is-active',
-      classToggle: 'is-hidden',
-      event: 'click',
-      onClick: null,
-      onInitialState: null,
-      onMouseout: null,
-      onMouseover: null,
-      proximity: 'next'
-    });
-    return this._setEventHandlers();
+  Toggle._defaults = {
+    $element: $('.js-toggle'),
+    classActive: 'is-active',
+    classToggle: 'is-hidden',
+    event: 'click',
+    onClick: null,
+    onInitialState: null,
+    onMouseout: null,
+    onMouseover: null,
+    proximity: 'next'
   };
+
+  function Toggle() {
+    Toggle.__super__.constructor.apply(this, arguments);
+    this._setEventHandlers();
+  }
 
   Toggle.prototype._handleClickEvent = function() {
     return this._settings.$element.on('click', (function(_this) {
@@ -1883,16 +1815,14 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.ClassName = (function(superClass) {
   extend(ClassName, superClass);
 
-  function ClassName() {
-    return ClassName.__super__.constructor.apply(this, arguments);
-  }
-
-  ClassName.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-element')
-    });
-    return this._setEventHandlers();
+  ClassName._defaults = {
+    $element: $('.js-element')
   };
+
+  function ClassName(options) {
+    ClassName.__super__.constructor.call(this, options);
+    this._setEventHandlers();
+  }
 
   ClassName.prototype._setEventHandlers = function() {};
 
