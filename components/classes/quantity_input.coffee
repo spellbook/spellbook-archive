@@ -5,18 +5,18 @@
 #
 # *************************************
 #
-# @param $element          { jQuery object }
-# @param $field            { jQuery object }
-# @param $increase         { jQuery object }
-# @param $decrease         { jQuery object }
-# @param $target           { jQuery object }
-# @param targetBaseValue   { integer }
-# @param targetValuePrefix { string }
-# @param minValue          { integer }
-# @param maxValue          { integer }
-# @param onIncrease        { function }
-# @param onDecrease        { function }
-# @param onTargetUpdate    { function }
+# @param $decrease      { jQuery object }
+# @param $element       { jQuery object }
+# @param $field         { jQuery object }
+# @param $increase      { jQuery object }
+# @param $target        { jQuery object }
+# @param onDecrease     { function }
+# @param onIncrease     { function }
+# @param onTargetUpdate { function }
+# @param valueBase      { integer }
+# @param valueMax       { integer }
+# @param valueMin       { integer }
+# @param valuePrefix    { string }
 #
 # *************************************
 
@@ -34,18 +34,18 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
 
   init : ->
     @_setDefaults
-      $element          : $( '.js-quantityInput' )
-      $field            : $( '.js-quantityInput-field' )
-      $increase         : $( '.js-quantityInput-increase' )
-      $decrease         : $( '.js-quantityInput-decrease' )
-      $target           : $( '.js-quantityInput-target' )
-      targetBaseValue   : 29
-      targetValuePrefix : '$'
-      minValue          : 1
-      maxValue          : 100
-      onIncrease        : null
-      onDecrease        : null
-      onTargetUpdate    : null
+      $decrease      : $( '.js-quantityInput-decrease' )
+      $element       : $( '.js-quantityInput' )
+      $field         : $( '.js-quantityInput-field' )
+      $increase      : $( '.js-quantityInput-increase' )
+      $target        : $( '.js-quantityInput-target' )
+      onDecrease     : null
+      onIncrease     : null
+      onTargetUpdate : null
+      valueBase      : 29
+      valueMax       : 100
+      valueMin       : 1
+      valuePrefix    : '$'
 
     @_setValue()
     @_setEventHandlers()
@@ -67,7 +67,7 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
 
     @_settings.$element.on 'keyup', ( event ) =>
       @_setValue()
-      unless isNaN( @_value ) or @_value < @_settings.minValue or @_value > @_settings.maxValue
+      unless isNaN( @_value ) or @_value < @_settings.valueMin or @_value > @_settings.valueMax
         @_updateValue()
 
     # ----- Increase ----- #
@@ -75,7 +75,7 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
     @_settings.$increase.on 'click', ( event ) =>
       event.preventDefault()
 
-      @_updateValue( 'up' ) unless @_value >= @_settings.maxValue
+      @_updateValue( 'up' ) unless @_value >= @_settings.valueMax
 
       # Increase Event
       @_settings.onIncrease?( @_settings )
@@ -85,7 +85,7 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
     @_settings.$decrease.on 'click', ( event ) =>
       event.preventDefault()
 
-      @_updateValue( 'down' ) unless @_value <= @_settings.minValue
+      @_updateValue( 'down' ) unless @_value <= @_settings.valueMin
 
       # Decrease Event
       @_settings.onDecrease?( @_settings )
@@ -114,9 +114,9 @@ class @Spellbook.Classes.QuantityInput extends Spellbook.Classes.Base
   # -------------------------------------
 
   _updateTarget : ->
-    updatedValue = @_value * @_settings.targetBaseValue
+    updatedValue = @_value * @_settings.valueBase
 
-    @_settings.$target.text( "#{ @_settings.targetValuePrefix }#{ updatedValue }" )
+    @_settings.$target.text( "#{ @_settings.valuePrefix }#{ updatedValue }" )
 
 # -------------------------------------
 #   Usage

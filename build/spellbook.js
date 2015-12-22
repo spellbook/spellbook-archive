@@ -947,18 +947,18 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
 
   QuantityInput.prototype.init = function() {
     this._setDefaults({
+      $decrease: $('.js-quantityInput-decrease'),
       $element: $('.js-quantityInput'),
       $field: $('.js-quantityInput-field'),
       $increase: $('.js-quantityInput-increase'),
-      $decrease: $('.js-quantityInput-decrease'),
       $target: $('.js-quantityInput-target'),
-      targetBaseValue: 29,
-      targetValuePrefix: '$',
-      minValue: 1,
-      maxValue: 100,
-      onIncrease: null,
       onDecrease: null,
-      onTargetUpdate: null
+      onIncrease: null,
+      onTargetUpdate: null,
+      valueBase: 29,
+      valueMax: 100,
+      valueMin: 1,
+      valuePrefix: '$'
     });
     this._setValue();
     return this._setEventHandlers();
@@ -972,7 +972,7 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
     this._settings.$element.on('keyup', (function(_this) {
       return function(event) {
         _this._setValue();
-        if (!(isNaN(_this._value) || _this._value < _this._settings.minValue || _this._value > _this._settings.maxValue)) {
+        if (!(isNaN(_this._value) || _this._value < _this._settings.valueMin || _this._value > _this._settings.valueMax)) {
           return _this._updateValue();
         }
       };
@@ -981,7 +981,7 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
       return function(event) {
         var base;
         event.preventDefault();
-        if (!(_this._value >= _this._settings.maxValue)) {
+        if (!(_this._value >= _this._settings.valueMax)) {
           _this._updateValue('up');
         }
         return typeof (base = _this._settings).onIncrease === "function" ? base.onIncrease(_this._settings) : void 0;
@@ -991,7 +991,7 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
       return function(event) {
         var base;
         event.preventDefault();
-        if (!(_this._value <= _this._settings.minValue)) {
+        if (!(_this._value <= _this._settings.valueMin)) {
           _this._updateValue('down');
         }
         return typeof (base = _this._settings).onDecrease === "function" ? base.onDecrease(_this._settings) : void 0;
@@ -1020,8 +1020,8 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
 
   QuantityInput.prototype._updateTarget = function() {
     var updatedValue;
-    updatedValue = this._value * this._settings.targetBaseValue;
-    return this._settings.$target.text("" + this._settings.targetValuePrefix + updatedValue);
+    updatedValue = this._value * this._settings.valueBase;
+    return this._settings.$target.text("" + this._settings.valuePrefix + updatedValue);
   };
 
   return QuantityInput;
