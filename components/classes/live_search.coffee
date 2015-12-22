@@ -48,49 +48,6 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
     @_setEventHandlers()
 
   # -------------------------------------
-  #   Set Event Handlers
-  # -------------------------------------
-
-  _setEventHandlers : ->
-    @_settings.$element.on 'keyup', ( event ) =>
-      @_query = $( event.currentTarget ).val()
-
-      # Keyup Event
-      @_settings.onKeyup?( @_settings )
-
-      if @_query is ''
-        $( @_settings.selectorItem ).removeClass( @_settings.classHidden )
-        @_clearEmptyMessage()
-
-        # Clear Event
-        @_settings.onClear?( @_settings )
-
-      @_clearEmptyMessage()
-      @_parseDom()
-
-  # -------------------------------------
-  #   Parse DOM
-  # -------------------------------------
-
-  _parseDom : ->
-    @_settings.$query.each ( index, elementNode ) =>
-      $element = $( elementNode )
-
-      if @_isQueryAbsent( $element )
-        $element
-          .closest( @_settings.selectorItem )
-          .addClass( @_settings.classHidden )
-      else
-        $element
-          .closest( @_settings.selectorItem )
-          .removeClass( @_settings.classHidden )
-
-        # Found Event
-        @_settings.onFound?( @_settings )
-
-    @_handleEmptyResults()
-
-  # -------------------------------------
   #   Clear Empty Message
   # -------------------------------------
 
@@ -117,6 +74,13 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
       @_settings.onEmpty?( @_settings )
 
   # -------------------------------------
+  #   Is Empty
+  # -------------------------------------
+
+  _isEmpty : ->
+    $( "#{ @_settings.selectorItem }.#{ @_settings.classHidden }" ).length is $( @_settings.selectorItem ).length
+
+  # -------------------------------------
   #   Is Query Absent
   # -------------------------------------
   #
@@ -128,11 +92,47 @@ class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
     element.text().search( new RegExp( @_query, 'i' ) ) < 0
 
   # -------------------------------------
-  #   Is Empty
+  #   Parse DOM
   # -------------------------------------
 
-  _isEmpty : ->
-    $( "#{ @_settings.selectorItem }.#{ @_settings.classHidden }" ).length is $( @_settings.selectorItem ).length
+  _parseDom : ->
+    @_settings.$query.each ( index, elementNode ) =>
+      $element = $( elementNode )
+
+      if @_isQueryAbsent( $element )
+        $element
+          .closest( @_settings.selectorItem )
+          .addClass( @_settings.classHidden )
+      else
+        $element
+          .closest( @_settings.selectorItem )
+          .removeClass( @_settings.classHidden )
+
+        # Found Event
+        @_settings.onFound?( @_settings )
+
+    @_handleEmptyResults()
+
+  # -------------------------------------
+  #   Set Event Handlers
+  # -------------------------------------
+
+  _setEventHandlers : ->
+    @_settings.$element.on 'keyup', ( event ) =>
+      @_query = $( event.currentTarget ).val()
+
+      # Keyup Event
+      @_settings.onKeyup?( @_settings )
+
+      if @_query is ''
+        $( @_settings.selectorItem ).removeClass( @_settings.classHidden )
+        @_clearEmptyMessage()
+
+        # Clear Event
+        @_settings.onClear?( @_settings )
+
+      @_clearEmptyMessage()
+      @_parseDom()
 
 # -------------------------------------
 #   Usage
