@@ -8,7 +8,7 @@ General
 - Use `camelCase`
 - Don't use parenthesis with conditional statements (`if`, `switch`, else.)
 
-### Parmeters
+### Parameters
 
 No empty parameter list.
 
