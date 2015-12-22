@@ -52,36 +52,9 @@ this.Spellbook.Classes.Modal = (function(superClass) {
     return this._setActiveEventHandlers();
   };
 
-  Modal.prototype._toggleOverlay = function(event) {
-    switch (event) {
-      case 'open':
-        $('<div class=' + this._settings.classBackdrop + '></div>').appendTo($('body'));
-        this._$backdrop = $("." + this._settings.classBackdrop);
-        return setTimeout((function(_this) {
-          return function() {
-            return _this._$backdrop.addClass(_this._settings.classActive);
-          };
-        })(this), 25);
-      case 'close':
-        this._$backdrop.removeClass(this._settings.classActive);
-        return setTimeout((function(_this) {
-          return function() {
-            return _this._$backdrop.remove();
-          };
-        })(this), 500);
-    }
-  };
-
-  Modal.prototype._setEventHandlers = function() {
-    return this._settings.$trigger.on('click', (function(_this) {
-      return function(event) {
-        var selector;
-        event.preventDefault();
-        selector = $(event.currentTarget).data(_this._settings.dataAttr);
-        _this._$modal = $(selector);
-        return _this.trigger(_this._$modal, 'open');
-      };
-    })(this));
+  Modal.prototype._cleanupEvents = function() {
+    this._settings.$close.off('click');
+    return $(document).off('keydown');
   };
 
   Modal.prototype._setActiveEventHandlers = function() {
@@ -106,9 +79,36 @@ this.Spellbook.Classes.Modal = (function(superClass) {
     })(this));
   };
 
-  Modal.prototype._cleanupEvents = function() {
-    this._settings.$close.off('click');
-    return $(document).off('keydown');
+  Modal.prototype._setEventHandlers = function() {
+    return this._settings.$trigger.on('click', (function(_this) {
+      return function(event) {
+        var selector;
+        event.preventDefault();
+        selector = $(event.currentTarget).data(_this._settings.dataAttr);
+        _this._$modal = $(selector);
+        return _this.trigger(_this._$modal, 'open');
+      };
+    })(this));
+  };
+
+  Modal.prototype._toggleOverlay = function(event) {
+    switch (event) {
+      case 'open':
+        $('<div class=' + this._settings.classBackdrop + '></div>').appendTo($('body'));
+        this._$backdrop = $("." + this._settings.classBackdrop);
+        return setTimeout((function(_this) {
+          return function() {
+            return _this._$backdrop.addClass(_this._settings.classActive);
+          };
+        })(this), 25);
+      case 'close':
+        this._$backdrop.removeClass(this._settings.classActive);
+        return setTimeout((function(_this) {
+          return function() {
+            return _this._$backdrop.remove();
+          };
+        })(this), 500);
+    }
   };
 
   return Modal;

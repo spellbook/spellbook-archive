@@ -75,43 +75,12 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
     @_setActiveEventHandlers()
 
   # -------------------------------------
-  #   Toggle Overlay
+  #   Clean Up Events
   # -------------------------------------
 
-  _toggleOverlay : ( event ) ->
-    switch event
-
-      when 'open'
-
-        $( '<div class=' + @_settings.classBackdrop + '></div>' )
-          .appendTo( $( 'body' ) )
-
-        @_$backdrop = $( ".#{ @_settings.classBackdrop }" )
-
-        setTimeout =>
-          @_$backdrop.addClass( @_settings.classActive )
-        , 25
-
-      when 'close'
-
-        @_$backdrop.removeClass( @_settings.classActive )
-
-        setTimeout =>
-          @_$backdrop.remove()
-        , 500
-
-  # -------------------------------------
-  #   Set Event Handlers
-  # -------------------------------------
-
-  _setEventHandlers : ->
-    @_settings.$trigger.on 'click', ( event ) =>
-      event.preventDefault()
-
-      selector = $( event.currentTarget ).data( @_settings.dataAttr )
-      @_$modal = $( selector )
-
-      @trigger( @_$modal, 'open' )
+  _cleanupEvents : ->
+    @_settings.$close.off( 'click' )
+    $( document ).off( 'keydown' )
 
   # -------------------------------------
   #   Set Active Event Handlers
@@ -137,12 +106,43 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
         when 27 then @trigger( @_$modal, 'close' )
 
   # -------------------------------------
-  #   Clean Up Events
+  #   Set Event Handlers
   # -------------------------------------
 
-  _cleanupEvents : ->
-    @_settings.$close.off( 'click' )
-    $( document ).off( 'keydown' )
+  _setEventHandlers : ->
+    @_settings.$trigger.on 'click', ( event ) =>
+      event.preventDefault()
+
+      selector = $( event.currentTarget ).data( @_settings.dataAttr )
+      @_$modal = $( selector )
+
+      @trigger( @_$modal, 'open' )
+
+  # -------------------------------------
+  #   Toggle Overlay
+  # -------------------------------------
+
+  _toggleOverlay : ( event ) ->
+    switch event
+
+      when 'open'
+
+        $( '<div class=' + @_settings.classBackdrop + '></div>' )
+          .appendTo( $( 'body' ) )
+
+        @_$backdrop = $( ".#{ @_settings.classBackdrop }" )
+
+        setTimeout =>
+          @_$backdrop.addClass( @_settings.classActive )
+        , 25
+
+      when 'close'
+
+        @_$backdrop.removeClass( @_settings.classActive )
+
+        setTimeout =>
+          @_$backdrop.remove()
+        , 500
 
 # -------------------------------------
 #   Usage
