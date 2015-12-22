@@ -10,21 +10,21 @@
 #
 # *************************************
 #
-# @param $element      { jQuery object }
-# @param dataAttribute { string }
-# @param keyCodes      { object }
+# @param $element { jQuery object }
+# @param dataAttr { string }
+# @param keyCodes { object }
 #
 # *************************************
 
 @Spellbook.Services.shortcut = ( options ) ->
   settings = $.extend
-    $element      : $( '[data-shortcut]' )
-    dataAttribute : 'shortcut'
-    keyCodes      : Spellbook.Globals.keyCodes
+    $element : $( '[data-shortcut]' )
+    dataAttr : 'shortcut'
+    keyCodes : Spellbook.Globals.keyCodes
   , options
 
   settings.$element.each ->
-    key = settings.keyCodes[ $(@).data( settings.dataAttribute ) ]
+    key = settings.keyCodes[ $(@).data( settings.dataAttr ) ]
 
     $( document ).on 'keyup', ( event ) =>
       $element = $(@)

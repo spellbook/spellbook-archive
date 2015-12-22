@@ -2,12 +2,12 @@ this.Spellbook.Services.shortcut = function(options) {
   var settings;
   settings = $.extend({
     $element: $('[data-shortcut]'),
-    dataAttribute: 'shortcut',
+    dataAttr: 'shortcut',
     keyCodes: Spellbook.Globals.keyCodes
   }, options);
   return settings.$element.each(function() {
     var key;
-    key = settings.keyCodes[$(this).data(settings.dataAttribute)];
+    key = settings.keyCodes[$(this).data(settings.dataAttr)];
     return $(document).on('keyup', (function(_this) {
       return function(event) {
         var $element, tag;
