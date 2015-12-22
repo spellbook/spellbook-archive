@@ -12,10 +12,10 @@ this.Spellbook.Classes.ShowPassword = (function(superClass) {
     this._setDefaults({
       $input: $('.js-showPassword-input'),
       $toggle: $('.js-showPassword-toggle'),
-      showByDefault: false
+      isShownByDefault: false
     });
     this._setEventHandlers();
-    if (this._settings.showByDefault) {
+    if (this._settings.isShownByDefault) {
       return this._showPassword();
     }
   };
