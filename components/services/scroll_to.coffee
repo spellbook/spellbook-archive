@@ -18,6 +18,7 @@
 
   settings.$element.on 'click', ( event ) ->
     event.preventDefault()
+
     to = settings.$element.attr( 'href' )
 
     $( 'body, html' ).animate({
