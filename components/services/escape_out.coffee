@@ -1,28 +1,28 @@
 # *************************************
 #
 #   Escape Out
-#   -> Run a function when escape key is hit
+#   -> callback a function when escape key is hit
 #
 # *************************************
 #
-# @param run { function }
+# @param callback { function }
 #
 # *************************************
 
 @Spellbook.Services.escapeOut = ( options ) ->
   settings = $.extend
-    run : null
+    callback : null
   , options
 
   $( document ).on 'keyup', ( event ) ->
     switch event.which
-      when 27 then settings.run()
+      when 27 then settings.callback()
 
 # -------------------------------------
 #   Usage
 # -------------------------------------
 #
 # Spellbook.Services.escapeOut
-#   run : ->
+#   callback : ->
 #     # ...
 #
