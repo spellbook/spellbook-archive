@@ -1343,9 +1343,9 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
     this._setDefaults({
       $element: $('.js-stateUrls'),
       $link: $('.js-stateUrls-link'),
-      hiddenClass: 'is-hidden',
-      activeClass: 'is-active',
-      dataAttribute: 'state'
+      classActive: 'is-active',
+      classHidden: 'is-hidden',
+      dataAttr: 'state'
     });
     this._setInitialState(this._getCurrentState());
     return this._setEventHandlers();
@@ -1366,8 +1366,8 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
   };
 
   StateUrls.prototype._setInitialState = function(state) {
-    this._settings.$element.not(state).addClass(this._settings.hiddenClass);
-    return $("[data-" + this._settings.dataAttribute + "=" + state + "]").removeClass(this._settings.hiddenClass).addClass(this._settings.activeClass);
+    this._settings.$element.not(state).addClass(this._settings.classHidden);
+    return $("[data-" + this._settings.dataAttr + "=" + state + "]").removeClass(this._settings.classHidden).addClass(this._settings.classActive);
   };
 
   StateUrls.prototype._setEventHandlers = function() {
@@ -1390,10 +1390,10 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
   };
 
   StateUrls.prototype._showSection = function($element, state) {
-    this._settings.$link.removeClass(this._settings.activeClass);
-    this._settings.$element.addClass(this._settings.hiddenClass);
-    $element.addClass(this._settings.activeClass);
-    return $(state).removeClass(this._settings.hiddenClass);
+    this._settings.$link.removeClass(this._settings.classActive);
+    this._settings.$element.addClass(this._settings.classHidden);
+    $element.addClass(this._settings.classActive);
+    return $(state).removeClass(this._settings.classHidden);
   };
 
   return StateUrls;

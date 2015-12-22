@@ -5,11 +5,11 @@
 #
 # *************************************
 #
-# @param $element      { jQuery object }
-# @param $link         { jQuery object }
-# @param hiddenClass   { string }
-# @param activeClass   { string }
-# @param dataAttribute { string }
+# @param $element    { jQuery object }
+# @param $link       { jQuery object }
+# @param classActive { string }
+# @param classHidden { string }
+# @param dataAttr    { string }
 #
 # *************************************
 
@@ -21,11 +21,11 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
 
   init : ->
     @_setDefaults
-      $element      : $( '.js-stateUrls' )
-      $link         : $( '.js-stateUrls-link' )
-      hiddenClass   : 'is-hidden'
-      activeClass   : 'is-active'
-      dataAttribute : 'state'
+      $element    : $( '.js-stateUrls' )
+      $link       : $( '.js-stateUrls-link' )
+      classActive : 'is-active'
+      classHidden : 'is-hidden'
+      dataAttr    : 'state'
 
     @_setInitialState( @_getCurrentState() )
     @_setEventHandlers()
@@ -68,11 +68,11 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
   _setInitialState : ( state ) ->
     @_settings.$element
       .not( state )
-      .addClass( @_settings.hiddenClass )
+      .addClass( @_settings.classHidden )
 
-    $( "[data-#{ @_settings.dataAttribute }=#{ state }]" )
-      .removeClass( @_settings.hiddenClass )
-      .addClass( @_settings.activeClass )
+    $( "[data-#{ @_settings.dataAttr }=#{ state }]" )
+      .removeClass( @_settings.classHidden )
+      .addClass( @_settings.classActive )
 
   # -------------------------------------
   #   Set Event Handlers
@@ -102,10 +102,10 @@ class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
   # -------------------------------------
 
   _showSection : ( $element, state ) ->
-    @_settings.$link.removeClass( @_settings.activeClass )
-    @_settings.$element.addClass( @_settings.hiddenClass )
-    $element.addClass( @_settings.activeClass )
-    $( state ).removeClass( @_settings.hiddenClass )
+    @_settings.$link.removeClass( @_settings.classActive )
+    @_settings.$element.addClass( @_settings.classHidden )
+    $element.addClass( @_settings.classActive )
+    $( state ).removeClass( @_settings.classHidden )
 
 # -------------------------------------
 #   Usage
