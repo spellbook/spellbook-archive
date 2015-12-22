@@ -4,7 +4,7 @@ describe('Spellbook.Services.clickOut', function() {
     this.element = $('<div class="js-clickout"></div>');
     return Spellbook.Services.clickOut({
       element: this.element,
-      run: function() {
+      callback: function() {
         return 'turtle';
       }
     });

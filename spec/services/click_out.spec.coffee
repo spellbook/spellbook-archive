@@ -4,8 +4,8 @@ describe 'Spellbook.Services.clickOut', ->
     @element  = $( '<div class="js-clickout"></div>' )
 
     Spellbook.Services.clickOut
-      element : @element
-      run     : -> 'turtle'
+      element  : @element
+      callback : -> 'turtle'
 
   it 'should trigger a click event on the element', ->
     spyOnEvent( @element, 'click' )

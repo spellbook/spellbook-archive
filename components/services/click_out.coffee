@@ -1,22 +1,22 @@
 # *************************************
 #
 #   Click Out
-#   -> Run action when document is clicked
+#   -> callback action when document is clicked
 #
 # *************************************
 #
 # @param $element { jQuery object }
-# @param run      { function }
+# @param callback { function }
 #
 # *************************************
 
 @Spellbook.Services.clickOut = ( options ) ->
   settings = $.extend
     $element : $( '.js-clickout' )
-    run      : null
+    callback : null
   , options
 
-  $( document ).on 'click', -> settings.run()
+  $( document ).on 'click', -> settings.callback()
 
   settings.$element.on 'click', ( event ) ->
     event.stopPropagation()
@@ -26,6 +26,6 @@
 # -------------------------------------
 #
 # Spellbook.Services.clickOut
-#   run : ->
+#   callback : ->
 #     # ...
 #
