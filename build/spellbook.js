@@ -1050,32 +1050,6 @@ this.Spellbook.Classes.QueryParams = (function(superClass) {
     return this._sortParams();
   };
 
-  QueryParams.prototype._parseQueryString = function(url) {
-    var queryString;
-    if (url) {
-      queryString = url.split('?')[1];
-    } else {
-      queryString = window.location.search.substring(1);
-    }
-    return this.variables = queryString.split('&');
-  };
-
-  QueryParams.prototype._sortParams = function() {
-    var i, len, pair, param, ref, results;
-    ref = this.variables;
-    results = [];
-    for (i = 0, len = ref.length; i < len; i++) {
-      param = ref[i];
-      pair = param.split('=');
-      if (pair[1] !== void 0) {
-        results.push(this.params[pair[0]] = pair[1]);
-      } else {
-        results.push(void 0);
-      }
-    }
-    return results;
-  };
-
   QueryParams.prototype.allParams = function() {
     return this.params;
   };
@@ -1102,6 +1076,32 @@ this.Spellbook.Classes.QueryParams = (function(superClass) {
       }
     }
     return false;
+  };
+
+  QueryParams.prototype._parseQueryString = function(url) {
+    var queryString;
+    if (url) {
+      queryString = url.split('?')[1];
+    } else {
+      queryString = window.location.search.substring(1);
+    }
+    return this.variables = queryString.split('&');
+  };
+
+  QueryParams.prototype._sortParams = function() {
+    var i, len, pair, param, ref, results;
+    ref = this.variables;
+    results = [];
+    for (i = 0, len = ref.length; i < len; i++) {
+      param = ref[i];
+      pair = param.split('=');
+      if (pair[1] !== void 0) {
+        results.push(this.params[pair[0]] = pair[1]);
+      } else {
+        results.push(void 0);
+      }
+    }
+    return results;
   };
 
   return QueryParams;
