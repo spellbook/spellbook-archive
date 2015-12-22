@@ -13,9 +13,9 @@ this.Spellbook.Classes.Share = (function(superClass) {
       $element: $('.js-share'),
       popup: {
         height: 400,
-        width: 575,
         left: 0,
-        top: 0
+        top: 0,
+        width: 575
       }
     });
     return this._setEventHandlers();

@@ -24,9 +24,9 @@ class @Spellbook.Classes.Share extends Spellbook.Classes.Base
       $element : $( '.js-share' )
       popup    :
         height : 400
-        width  : 575
         left   : 0
         top    : 0
+        width  : 575
 
     @_setEventHandlers()
 
