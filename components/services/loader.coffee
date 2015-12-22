@@ -6,32 +6,32 @@
 # *************************************
 #
 # @param $element     { jQuery object }
-# @param $toggle      { jQuery object }
-# @param $spinner     { jQuery object }
 # @param $overlay     { jQuery object }
-# @param spinnerClass { string }
-# @param overlayClass { string }
-# @param loadingClass { string }
+# @param $spinner     { jQuery object }
+# @param $toggle      { jQuery object }
+# @param classLoading { string }
+# @param classOverlay { string }
+# @param classSpinner { string }
 #
 # *************************************
 
 @Spellbook.Services.loader = ( options ) ->
   settings = $.extend
     $element     : $( '.js-loader-element' )
-    $toggle      : $( '.js-loader-toggle' )
-    $spinner     : $( '<span></span>' )
     $overlay     : $( '<div></div>' )
-    spinnerClass : 'loader'
-    overlayClass : 'loader-overlay'
-    loadingClass : 'is-loading'
+    $spinner     : $( '<span></span>' )
+    $toggle      : $( '.js-loader-toggle' )
+    classLoading : 'is-loading'
+    classOverlay : 'loader-overlay'
+    classSpinner : 'loader'
   , options
 
   settings.$toggle.on 'click', ( event ) ->
-    settings.$element.toggleClass( settings.loadingClass )
+    settings.$element.toggleClass( settings.classLoading )
     settings.$element.append( settings.$spinner )
-    settings.$spinner.addClass( settings.spinnerClass )
+    settings.$spinner.addClass( settings.classSpinner )
     settings.$element.append( settings.$overlay )
-    settings.$overlay.addClass( settings.overlayClass )
+    settings.$overlay.addClass( settings.classOverlay )
 
 # -------------------------------------
 #   Usage

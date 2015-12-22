@@ -2,18 +2,18 @@ this.Spellbook.Services.loader = function(options) {
   var settings;
   settings = $.extend({
     $element: $('.js-loader-element'),
-    $toggle: $('.js-loader-toggle'),
-    $spinner: $('<span></span>'),
     $overlay: $('<div></div>'),
-    spinnerClass: 'loader',
-    overlayClass: 'loader-overlay',
-    loadingClass: 'is-loading'
+    $spinner: $('<span></span>'),
+    $toggle: $('.js-loader-toggle'),
+    classLoading: 'is-loading',
+    classOverlay: 'loader-overlay',
+    classSpinner: 'loader'
   }, options);
   return settings.$toggle.on('click', function(event) {
-    settings.$element.toggleClass(settings.loadingClass);
+    settings.$element.toggleClass(settings.classLoading);
     settings.$element.append(settings.$spinner);
-    settings.$spinner.addClass(settings.spinnerClass);
+    settings.$spinner.addClass(settings.classSpinner);
     settings.$element.append(settings.$overlay);
-    return settings.$overlay.addClass(settings.overlayClass);
+    return settings.$overlay.addClass(settings.classOverlay);
   });
 };
