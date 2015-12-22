@@ -4,21 +4,17 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.QueryParams = (function(superClass) {
   extend(QueryParams, superClass);
 
-  function QueryParams() {
-    return QueryParams.__super__.constructor.apply(this, arguments);
-  }
-
-  QueryParams.prototype.params = {};
-
-  QueryParams.prototype.variables = [];
-
-  QueryParams.prototype.init = function() {
-    this._setDefaults({
-      url: null
-    });
-    this._parseQueryString(this._settings.url);
-    return this._sortParams();
+  QueryParams._defaults = {
+    url: null
   };
+
+  function QueryParams(options) {
+    QueryParams.__super__.constructor.call(this, options);
+    this.params = {};
+    this.variables = [];
+    this._parseQueryString(this._settings.url);
+    this._sortParams();
+  }
 
   QueryParams.prototype.allParams = function() {
     return this.params;

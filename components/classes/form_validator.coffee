@@ -21,29 +21,31 @@
 class @Spellbook.Classes.FormValidator extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
+  #   Defaults
   # -------------------------------------
 
-  _input      : null
-  _errors     : []
-  _validators : [ 'required' ]
+  @_defaults       :
+    $element       : $( '.js-formValidator' )
+    $input         : $( '.js-formValidator-input' )
+    $submit        : $( '.js-formValidator-submit' )
+    classError     : 'is-invalid'
+    classMessage   : 'js-formValidator-message'
+    dataAttr       : 'validate'
+    delimiter      : '|'
+    isMessageShown : true
+    onError        : null
+    onSuccess      : null
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element       : $( '.js-formValidator' )
-      $input         : $( '.js-formValidator-input' )
-      $submit        : $( '.js-formValidator-submit' )
-      classError     : 'is-invalid'
-      classMessage   : 'js-formValidator-message'
-      dataAttr       : 'validate'
-      delimiter      : '|'
-      isMessageShown : true
-      onError        : null
-      onSuccess      : null
+  constructor : ( options ) ->
+    super( options )
+
+    @_input      = null
+    @_errors     = []
+    @_validators = [ 'required' ]
 
     @_setEventHandlers()
 

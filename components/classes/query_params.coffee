@@ -12,19 +12,21 @@
 class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Instance Variables
+  #   Defaults
   # -------------------------------------
 
-  params    : {}
-  variables : []
+  @_defaults :
+    url      : null
 
   # -------------------------------------
-  #   Initializer
+  #   Constructorr
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      url : null
+  constructor : ( options ) ->
+    super( options )
+
+    @params    = {}
+    @variables = []
 
     @_parseQueryString( @_settings.url )
     @_sortParams()

@@ -22,28 +22,30 @@
 class @Spellbook.Classes.LiveSearch extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
+  #   Defaults
   # -------------------------------------
 
-  _query : ''
+  @_defaults            :
+    $container          : $( '.js-search-container' )
+    $element            : $( '.js-search' )
+    $query              : $( '.js-search-query' )
+    classHidden         : 'is-hidden'
+    isEmptyMessageShown : true
+    onClear             : null
+    onEmpty             : null
+    onFound             : null
+    onKeyup             : null
+    selectorEmpty       : '.js-search-empty'
+    selectorItem        : '.js-search-item'
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $container          : $( '.js-search-container' )
-      $element            : $( '.js-search' )
-      $query              : $( '.js-search-query' )
-      classHidden         : 'is-hidden'
-      isEmptyMessageShown : true
-      onClear             : null
-      onEmpty             : null
-      onFound             : null
-      onKeyup             : null
-      selectorEmpty       : '.js-search-empty'
-      selectorItem        : '.js-search-item'
+  constructor : ( options ) ->
+    super( options )
+
+    @_query = ''
 
     @_setEventHandlers()
 

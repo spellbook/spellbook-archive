@@ -12,19 +12,21 @@
 class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
+  #   Defaults
   # -------------------------------------
 
-  _heights  : []
-  _timer    : null
+  @_defaults :
+    $element : $( '.js-equalHeights' )
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element : $( '.js-equalHeights' )
+  constructor : ( options ) ->
+    super( options )
+
+    @_heights  = []
+    @_timer    = null
 
     @_setHeight()
     @_setEventHandlers()

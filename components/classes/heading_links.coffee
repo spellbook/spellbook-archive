@@ -13,13 +13,19 @@
 class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element    : $( 'h1, h2, h3, h4, h5' )
-      classAnchor : 'anchor'
+  @_defaults    :
+    $element    : $( 'h1, h2, h3, h4, h5' )
+    classAnchor : 'anchor'
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) ->
+    super( options )
 
     @_addAnchors()
 

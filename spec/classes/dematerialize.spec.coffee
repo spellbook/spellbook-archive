@@ -8,7 +8,6 @@ describe 'Spellbook.Classes.Dematerialize', ->
     @hiddenClass = 'is-hidden'
 
     element = new Spellbook.Classes.Dematerialize()
-    element.init()
 
   it 'should register a click on the trigger', ->
     spyOnEvent( @trigger, 'click' )

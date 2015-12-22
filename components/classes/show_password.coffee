@@ -14,14 +14,20 @@
 class @Spellbook.Classes.ShowPassword extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $input           : $( '.js-showPassword-input' )
-      $toggle          : $( '.js-showPassword-toggle' )
-      isShownByDefault : false
+  @_defaults         :
+    $input           : $( '.js-showPassword-input' )
+    $toggle          : $( '.js-showPassword-toggle' )
+    isShownByDefault : false
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) ->
+    super( options )
 
     @_setEventHandlers()
     @_showPassword() if @_settings.isShownByDefault

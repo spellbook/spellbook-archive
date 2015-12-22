@@ -4,31 +4,26 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.FormValidator = (function(superClass) {
   extend(FormValidator, superClass);
 
-  function FormValidator() {
-    return FormValidator.__super__.constructor.apply(this, arguments);
-  }
-
-  FormValidator.prototype._input = null;
-
-  FormValidator.prototype._errors = [];
-
-  FormValidator.prototype._validators = ['required'];
-
-  FormValidator.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-formValidator'),
-      $input: $('.js-formValidator-input'),
-      $submit: $('.js-formValidator-submit'),
-      classError: 'is-invalid',
-      classMessage: 'js-formValidator-message',
-      dataAttr: 'validate',
-      delimiter: '|',
-      isMessageShown: true,
-      onError: null,
-      onSuccess: null
-    });
-    return this._setEventHandlers();
+  FormValidator._defaults = {
+    $element: $('.js-formValidator'),
+    $input: $('.js-formValidator-input'),
+    $submit: $('.js-formValidator-submit'),
+    classError: 'is-invalid',
+    classMessage: 'js-formValidator-message',
+    dataAttr: 'validate',
+    delimiter: '|',
+    isMessageShown: true,
+    onError: null,
+    onSuccess: null
   };
+
+  function FormValidator(options) {
+    FormValidator.__super__.constructor.call(this, options);
+    this._input = null;
+    this._errors = [];
+    this._validators = ['required'];
+    this._setEventHandlers();
+  }
 
   FormValidator.prototype.validate = function(input) {
     var i, key, len, parameter, results;

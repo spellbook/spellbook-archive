@@ -18,25 +18,27 @@
 class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
+  #   Defaults
   # -------------------------------------
 
-  _$modal    : null
-  _$backdrop : null
+  @_defaults        :
+    $close          : $( '.js-modal-close' )
+    $trigger        : $( '.js-modal-trigger' )
+    classActive     : 'is-active'
+    classBackdrop   : 'modal-backdrop'
+    classBodyActive : 'is-modal-active'
+    classInactive   : 'is-inactive'
+    dataAttr        : 'modal'
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $close          : $( '.js-modal-close' )
-      $trigger        : $( '.js-modal-trigger' )
-      classActive     : 'is-active'
-      classBackdrop   : 'modal-backdrop'
-      classBodyActive : 'is-modal-active'
-      classInactive   : 'is-inactive'
-      dataAttr        : 'modal'
+  constructor : ( options ) ->
+    super( options )
+
+    @_$modal    = null
+    @_$backdrop = null
 
     @_setEventHandlers()
 

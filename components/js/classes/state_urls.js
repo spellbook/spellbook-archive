@@ -4,21 +4,19 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.StateUrls = (function(superClass) {
   extend(StateUrls, superClass);
 
-  function StateUrls() {
-    return StateUrls.__super__.constructor.apply(this, arguments);
-  }
-
-  StateUrls.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-stateUrls'),
-      $link: $('.js-stateUrls-link'),
-      classActive: 'is-active',
-      classHidden: 'is-hidden',
-      dataAttr: 'state'
-    });
-    this._setInitialState(this._getCurrentState());
-    return this._setEventHandlers();
+  StateUrls._defaults = {
+    $element: $('.js-stateUrls'),
+    $link: $('.js-stateUrls-link'),
+    classActive: 'is-active',
+    classHidden: 'is-hidden',
+    dataAttr: 'state'
   };
+
+  function StateUrls(options) {
+    StateUrls.__super__.constructor.call(this, options);
+    this._setInitialState(this._getCurrentState());
+    this._setEventHandlers();
+  }
 
   StateUrls.prototype._getCurrentState = function() {
     var state;

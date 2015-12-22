@@ -4,27 +4,24 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.CharacterCounter = (function(superClass) {
   extend(CharacterCounter, superClass);
 
-  function CharacterCounter() {
-    return CharacterCounter.__super__.constructor.apply(this, arguments);
-  }
-
-  CharacterCounter.prototype._count = 0;
-
-  CharacterCounter.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-characterCounter'),
-      $label: $('.js-characterCounter-label'),
-      $number: $('.js-characterCounter-number'),
-      charsMax: 140,
-      charsMin: 0,
-      classError: 'is-error',
-      classSuccess: 'is-success',
-      onConditionsMet: null,
-      onMaxExceeded: null,
-      onMinPreceeded: null
-    });
-    return this._setEventHandlers();
+  CharacterCounter._defaults = {
+    $element: $('.js-characterCounter'),
+    $label: $('.js-characterCounter-label'),
+    $number: $('.js-characterCounter-number'),
+    charsMax: 140,
+    charsMin: 0,
+    classError: 'is-error',
+    classSuccess: 'is-success',
+    onConditionsMet: null,
+    onMaxExceeded: null,
+    onMinPreceeded: null
   };
+
+  function CharacterCounter(options) {
+    CharacterCounter.__super__.constructor.call(this, options);
+    this._count = 0;
+    this._setEventHandlers();
+  }
 
   CharacterCounter.prototype._setEventHandlers = function() {
     return this._settings.$element.on('keyup', (function(_this) {

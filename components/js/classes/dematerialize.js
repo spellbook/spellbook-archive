@@ -4,22 +4,19 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Dematerialize = (function(superClass) {
   extend(Dematerialize, superClass);
 
-  function Dematerialize() {
-    return Dematerialize.__super__.constructor.apply(this, arguments);
-  }
-
-  Dematerialize.prototype._item = '';
-
-  Dematerialize.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-dematerialize'),
-      $trigger: $('.js-dematerialize-trigger'),
-      classHidden: 'is-hidden',
-      titleItem: 'hidden_element'
-    });
-    this._setEventHandlers();
-    return this._setInitialState();
+  Dematerialize._defaults = {
+    $element: $('.js-dematerialize'),
+    $trigger: $('.js-dematerialize-trigger'),
+    classHidden: 'is-hidden',
+    titleItem: 'hidden_element'
   };
+
+  function Dematerialize(options) {
+    Dematerialize.__super__.constructor.call(this, options);
+    this._item = '';
+    this._setEventHandlers();
+    this._setInitialState();
+  }
 
   Dematerialize.prototype._setEventHandlers = function() {
     if (this._settings.$trigger instanceof jQuery) {

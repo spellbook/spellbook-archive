@@ -8,23 +8,11 @@
 class @Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
-  # -------------------------------------
-
-  _settings : {}
-
-  # -------------------------------------
   #   Constructor
   # -------------------------------------
 
-  constructor : ( @options ) -> @init?()
-
-  # -------------------------------------
-  #   Set Defaults
-  # -------------------------------------
-
-  _setDefaults : ( defaults ) ->
-    @_settings = $.extend( defaults, @options )
+  constructor : ( options ) ->
+    @_settings = $.extend( {}, @constructor._defaults, options )
 
 # -------------------------------------
 #   Usage

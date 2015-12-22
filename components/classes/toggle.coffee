@@ -20,20 +20,26 @@
 class @Spellbook.Classes.Toggle extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element       : $( '.js-toggle' )
-      classActive    : 'is-active'
-      classToggle    : 'is-hidden'
-      event          : 'click' # hover
-      onClick        : null
-      onInitialState : null
-      onMouseout     : null
-      onMouseover    : null
-      proximity      : 'next' # prev, parent, nextParent, prevParent, $( '.element' ), '> span'
+  @_defaults       :
+    $element       : $( '.js-toggle' )
+    classActive    : 'is-active'
+    classToggle    : 'is-hidden'
+    event          : 'click' # hover
+    onClick        : null
+    onInitialState : null
+    onMouseout     : null
+    onMouseover    : null
+    proximity      : 'next' # prev, parent, nextParent, prevParent, $( '.element' ), '> span'
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) ->
+    super( options )
 
     @_setEventHandlers()
 

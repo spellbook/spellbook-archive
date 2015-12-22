@@ -21,27 +21,29 @@
 class @Spellbook.Classes.CharacterCounter extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
+  #   Defaults
   # -------------------------------------
 
-  _count : 0
+  @_defaults        :
+    $element        : $( '.js-characterCounter' )
+    $label          : $( '.js-characterCounter-label' )
+    $number         : $( '.js-characterCounter-number' )
+    charsMax        : 140
+    charsMin        : 0
+    classError      : 'is-error'
+    classSuccess    : 'is-success'
+    onConditionsMet : null
+    onMaxExceeded   : null
+    onMinPreceeded  : null
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element        : $( '.js-characterCounter' )
-      $label          : $( '.js-characterCounter-label' )
-      $number         : $( '.js-characterCounter-number' )
-      charsMax        : 140
-      charsMin        : 0
-      classError      : 'is-error'
-      classSuccess    : 'is-success'
-      onConditionsMet : null
-      onMaxExceeded   : null
-      onMinPreceeded  : null
+  constructor : ( options ) ->
+    super( options )
+
+    @_count = 0
 
     @_setEventHandlers()
 

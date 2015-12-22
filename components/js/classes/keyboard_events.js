@@ -4,16 +4,14 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
   extend(KeyboardEvents, superClass);
 
-  function KeyboardEvents() {
-    return KeyboardEvents.__super__.constructor.apply(this, arguments);
-  }
-
-  KeyboardEvents.prototype.init = function() {
-    this._setDefaults({
-      events: []
-    });
-    return this.emit();
+  KeyboardEvents._defaults = {
+    events: []
   };
+
+  function KeyboardEvents(options) {
+    KeyboardEvents.__super__.constructor.call(this, options);
+    this.emit();
+  }
 
   KeyboardEvents.prototype.emit = function(event) {
     var i, len, ref, results;

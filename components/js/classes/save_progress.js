@@ -4,19 +4,17 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.SaveProgress = (function(superClass) {
   extend(SaveProgress, superClass);
 
-  function SaveProgress() {
-    return SaveProgress.__super__.constructor.apply(this, arguments);
-  }
-
-  SaveProgress.prototype.init = function() {
-    this._setDefaults({
-      $container: $('.js-saveProgress-container'),
-      $element: $('.js-saveProgress'),
-      dataAttr: 'saveprogress'
-    });
-    this._restoreProgress();
-    return this._setEventHandlers();
+  SaveProgress._defaults = {
+    $container: $('.js-saveProgress-container'),
+    $element: $('.js-saveProgress'),
+    dataAttr: 'saveprogress'
   };
+
+  function SaveProgress(options) {
+    SaveProgress.__super__.constructor.call(this, options);
+    this._restoreProgress();
+    this._setEventHandlers();
+  }
 
   SaveProgress.prototype._eraseProgress = function(container) {
     return container.find(this._settings.$element).each((function(_this) {

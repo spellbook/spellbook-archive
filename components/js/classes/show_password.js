@@ -4,21 +4,19 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.ShowPassword = (function(superClass) {
   extend(ShowPassword, superClass);
 
-  function ShowPassword() {
-    return ShowPassword.__super__.constructor.apply(this, arguments);
-  }
+  ShowPassword._defaults = {
+    $input: $('.js-showPassword-input'),
+    $toggle: $('.js-showPassword-toggle'),
+    isShownByDefault: false
+  };
 
-  ShowPassword.prototype.init = function() {
-    this._setDefaults({
-      $input: $('.js-showPassword-input'),
-      $toggle: $('.js-showPassword-toggle'),
-      isShownByDefault: false
-    });
+  function ShowPassword(options) {
+    ShowPassword.__super__.constructor.call(this, options);
     this._setEventHandlers();
     if (this._settings.isShownByDefault) {
-      return this._showPassword();
+      this._showPassword();
     }
-  };
+  }
 
   ShowPassword.prototype._setEventHandlers = function() {
     return this._settings.$toggle.on('change', (function(_this) {

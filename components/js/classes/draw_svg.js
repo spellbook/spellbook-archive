@@ -5,30 +5,22 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
 this.Spellbook.Classes.DrawSvg = (function(superClass) {
   extend(DrawSvg, superClass);
 
-  function DrawSvg() {
-    this.draw = bind(this.draw, this);
-    return DrawSvg.__super__.constructor.apply(this, arguments);
-  }
-
-  DrawSvg.prototype._currentFrame = 0;
-
-  DrawSvg.prototype._handle = 0;
-
-  DrawSvg.prototype._lengths = [];
-
-  DrawSvg.prototype._paths = [];
-
-  DrawSvg.prototype._progress = 0;
-
-  DrawSvg.prototype._totalFrames = 60;
-
-  DrawSvg.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-drawSvg'),
-      prefix: 'path'
-    });
-    return this._setStorage();
+  DrawSvg._defaults = {
+    $element: $('.js-drawSvg'),
+    prefix: 'path'
   };
+
+  function DrawSvg(options) {
+    this.draw = bind(this.draw, this);
+    DrawSvg.__super__.constructor.call(this, options);
+    this._currentFrame = 0;
+    this._handle = 0;
+    this._lengths = [];
+    this._paths = [];
+    this._progress = 0;
+    this._totalFrames = 60;
+    this._setStorage();
+  }
 
   DrawSvg.prototype.draw = function() {
     this._progress = this._currentFrame / this._totalFrames;

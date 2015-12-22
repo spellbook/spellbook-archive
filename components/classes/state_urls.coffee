@@ -16,16 +16,22 @@
 class @Spellbook.Classes.StateUrls extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element    : $( '.js-stateUrls' )
-      $link       : $( '.js-stateUrls-link' )
-      classActive : 'is-active'
-      classHidden : 'is-hidden'
-      dataAttr    : 'state'
+  @_defaults    :
+    $element    : $( '.js-stateUrls' )
+    $link       : $( '.js-stateUrls-link' )
+    classActive : 'is-active'
+    classHidden : 'is-hidden'
+    dataAttr    : 'state'
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) ->
+    super( options )
 
     @_setInitialState( @_getCurrentState() )
     @_setEventHandlers()

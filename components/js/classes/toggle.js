@@ -4,24 +4,22 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Toggle = (function(superClass) {
   extend(Toggle, superClass);
 
-  function Toggle() {
-    return Toggle.__super__.constructor.apply(this, arguments);
-  }
-
-  Toggle.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-toggle'),
-      classActive: 'is-active',
-      classToggle: 'is-hidden',
-      event: 'click',
-      onClick: null,
-      onInitialState: null,
-      onMouseout: null,
-      onMouseover: null,
-      proximity: 'next'
-    });
-    return this._setEventHandlers();
+  Toggle._defaults = {
+    $element: $('.js-toggle'),
+    classActive: 'is-active',
+    classToggle: 'is-hidden',
+    event: 'click',
+    onClick: null,
+    onInitialState: null,
+    onMouseout: null,
+    onMouseover: null,
+    proximity: 'next'
   };
+
+  function Toggle(options) {
+    Toggle.__super__.constructor.call(this, options);
+    this._setEventHandlers();
+  }
 
   Toggle.prototype._handleClickEvent = function() {
     return this._settings.$element.on('click', (function(_this) {

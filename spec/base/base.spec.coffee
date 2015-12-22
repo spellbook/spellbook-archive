@@ -11,14 +11,3 @@ describe 'Spellbook.Classes.Base', ->
 
     it 'should contain a _settings object in extended classes', ->
       expect( @extendsBase._settings ).toBeDefined()
-
-  describe 'with arguments', ->
-    it 'should run init() in extended classes', ->
-      class ExtendsBase extends Spellbook.Classes.Base
-        init : ->
-
-      spyOn( ExtendsBase.prototype, 'init' )
-
-      @extendsBase = new ExtendsBase
-
-      expect( ExtendsBase.prototype.init ).toHaveBeenCalled()

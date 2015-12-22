@@ -14,14 +14,20 @@
 class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $container : $( '.js-saveProgress-container' )
-      $element   : $( '.js-saveProgress' )
-      dataAttr   : 'saveprogress'
+  @_defaults   :
+    $container : $( '.js-saveProgress-container' )
+    $element   : $( '.js-saveProgress' )
+    dataAttr   : 'saveprogress'
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) ->
+    super( options )
 
     @_restoreProgress()
     @_setEventHandlers()

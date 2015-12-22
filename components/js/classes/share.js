@@ -4,22 +4,20 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Share = (function(superClass) {
   extend(Share, superClass);
 
-  function Share() {
-    return Share.__super__.constructor.apply(this, arguments);
-  }
-
-  Share.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-share'),
-      popup: {
-        height: 400,
-        left: 0,
-        top: 0,
-        width: 575
-      }
-    });
-    return this._setEventHandlers();
+  Share._defaults = {
+    $element: $('.js-share'),
+    popup: {
+      height: 400,
+      left: 0,
+      top: 0,
+      width: 575
+    }
   };
+
+  function Share(options) {
+    Share.__super__.constructor.call(this, options);
+    this._setEventHandlers();
+  }
 
   Share.prototype._setEventHandlers = function() {
     return this._settings.$element.on('click', (function(_this) {

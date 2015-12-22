@@ -4,32 +4,27 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
   extend(AutoDuplicateInput, superClass);
 
-  function AutoDuplicateInput() {
-    return AutoDuplicateInput.__super__.constructor.apply(this, arguments);
+  AutoDuplicateInput._defaults = {
+    $container: $('.js-autoDuplicateInput-container'),
+    $element: $('.js-autoDuplicateInput'),
+    classInvalid: 'is-invalid',
+    classValid: 'is-valid',
+    dataAttrCloned: 'cloned',
+    dataAttrValidate: 'validate',
+    onDuplicate: null,
+    onInvalid: null,
+    onValid: null
+  };
+
+  function AutoDuplicateInput(options) {
+    AutoDuplicateInput.__super__.constructor.call(this, options);
+    this._count = 0;
+    this._field = null;
+    this._validators = {
+      email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    };
+    this._setEventHandlers();
   }
-
-  AutoDuplicateInput.prototype._count = 0;
-
-  AutoDuplicateInput.prototype._field = null;
-
-  AutoDuplicateInput.prototype._validators = {
-    email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  };
-
-  AutoDuplicateInput.prototype.init = function() {
-    this._setDefaults({
-      $container: $('.js-autoDuplicateInput-container'),
-      $element: $('.js-autoDuplicateInput'),
-      classInvalid: 'is-invalid',
-      classValid: 'is-valid',
-      dataAttrCloned: 'cloned',
-      dataAttrValidate: 'validate',
-      onDuplicate: null,
-      onInvalid: null,
-      onValid: null
-    });
-    return this._setEventHandlers();
-  };
 
   AutoDuplicateInput.prototype.getCount = function() {
     return this._count;

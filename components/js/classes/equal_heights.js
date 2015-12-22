@@ -4,21 +4,17 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.EqualHeights = (function(superClass) {
   extend(EqualHeights, superClass);
 
-  function EqualHeights() {
-    return EqualHeights.__super__.constructor.apply(this, arguments);
-  }
-
-  EqualHeights.prototype._heights = [];
-
-  EqualHeights.prototype._timer = null;
-
-  EqualHeights.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-equalHeights')
-    });
-    this._setHeight();
-    return this._setEventHandlers();
+  EqualHeights._defaults = {
+    $element: $('.js-equalHeights')
   };
+
+  function EqualHeights(options) {
+    EqualHeights.__super__.constructor.call(this, options);
+    this._heights = [];
+    this._timer = null;
+    this._setHeight();
+    this._setEventHandlers();
+  }
 
   EqualHeights.prototype._setEventHandlers = function() {
     return $(window).on('resize', (function(_this) {

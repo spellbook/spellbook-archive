@@ -1,16 +1,7 @@
 this.Spellbook.Classes.Base = (function() {
-  Base.prototype._settings = {};
-
   function Base(options) {
-    this.options = options;
-    if (typeof this.init === "function") {
-      this.init();
-    }
+    this._settings = $.extend({}, this.constructor._defaults, options);
   }
-
-  Base.prototype._setDefaults = function(defaults) {
-    return this._settings = $.extend(defaults, this.options);
-  };
 
   return Base;
 

@@ -15,24 +15,26 @@
 class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Instance Variables
+  #   Defaults
   # -------------------------------------
 
-  _currentFrame : 0
-  _handle       : 0
-  _lengths      : []
-  _paths        : []
-  _progress     : 0
-  _totalFrames  : 60
+  @_defaults :
+    $element : $( '.js-drawSvg' )
+    prefix   : 'path'
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element : $( '.js-drawSvg' )
-      prefix   : 'path'
+  constructor : ( options ) ->
+    super( options )
+
+    @_currentFrame = 0
+    @_handle       = 0
+    @_lengths      = []
+    @_paths        = []
+    @_progress     = 0
+    @_totalFrames  = 60
 
     @_setStorage()
 

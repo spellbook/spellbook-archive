@@ -2,7 +2,7 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 describe('Spellbook.Classes.Base', function() {
-  describe('without arguments', function() {
+  return describe('without arguments', function() {
     beforeEach(function() {
       var ExtendsBase;
       ExtendsBase = (function(superClass) {
@@ -22,26 +22,6 @@ describe('Spellbook.Classes.Base', function() {
     });
     return it('should contain a _settings object in extended classes', function() {
       return expect(this.extendsBase._settings).toBeDefined();
-    });
-  });
-  return describe('with arguments', function() {
-    return it('should run init() in extended classes', function() {
-      var ExtendsBase;
-      ExtendsBase = (function(superClass) {
-        extend(ExtendsBase, superClass);
-
-        function ExtendsBase() {
-          return ExtendsBase.__super__.constructor.apply(this, arguments);
-        }
-
-        ExtendsBase.prototype.init = function() {};
-
-        return ExtendsBase;
-
-      })(Spellbook.Classes.Base);
-      spyOn(ExtendsBase.prototype, 'init');
-      this.extendsBase = new ExtendsBase;
-      return expect(ExtendsBase.prototype.init).toHaveBeenCalled();
     });
   });
 });

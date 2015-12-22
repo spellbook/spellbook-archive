@@ -4,17 +4,15 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.HeadingLinks = (function(superClass) {
   extend(HeadingLinks, superClass);
 
-  function HeadingLinks() {
-    return HeadingLinks.__super__.constructor.apply(this, arguments);
-  }
-
-  HeadingLinks.prototype.init = function() {
-    this._setDefaults({
-      $element: $('h1, h2, h3, h4, h5'),
-      classAnchor: 'anchor'
-    });
-    return this._addAnchors();
+  HeadingLinks._defaults = {
+    $element: $('h1, h2, h3, h4, h5'),
+    classAnchor: 'anchor'
   };
+
+  function HeadingLinks(options) {
+    HeadingLinks.__super__.constructor.call(this, options);
+    this._addAnchors();
+  }
 
   HeadingLinks.prototype._addAnchors = function() {
     return this._settings.$element.each((function(_this) {

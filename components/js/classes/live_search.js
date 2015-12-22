@@ -4,28 +4,25 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.LiveSearch = (function(superClass) {
   extend(LiveSearch, superClass);
 
-  function LiveSearch() {
-    return LiveSearch.__super__.constructor.apply(this, arguments);
-  }
-
-  LiveSearch.prototype._query = '';
-
-  LiveSearch.prototype.init = function() {
-    this._setDefaults({
-      $container: $('.js-search-container'),
-      $element: $('.js-search'),
-      $query: $('.js-search-query'),
-      classHidden: 'is-hidden',
-      isEmptyMessageShown: true,
-      onClear: null,
-      onEmpty: null,
-      onFound: null,
-      onKeyup: null,
-      selectorEmpty: '.js-search-empty',
-      selectorItem: '.js-search-item'
-    });
-    return this._setEventHandlers();
+  LiveSearch._defaults = {
+    $container: $('.js-search-container'),
+    $element: $('.js-search'),
+    $query: $('.js-search-query'),
+    classHidden: 'is-hidden',
+    isEmptyMessageShown: true,
+    onClear: null,
+    onEmpty: null,
+    onFound: null,
+    onKeyup: null,
+    selectorEmpty: '.js-search-empty',
+    selectorItem: '.js-search-item'
   };
+
+  function LiveSearch(options) {
+    LiveSearch.__super__.constructor.call(this, options);
+    this._query = '';
+    this._setEventHandlers();
+  }
 
   LiveSearch.prototype._clearEmptyMessage = function() {
     if (this._settings.isEmptyMessageShown && $(this._settings.selectorEmpty).length > 0) {

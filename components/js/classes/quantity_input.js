@@ -4,30 +4,27 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.QuantityInput = (function(superClass) {
   extend(QuantityInput, superClass);
 
-  function QuantityInput() {
-    return QuantityInput.__super__.constructor.apply(this, arguments);
-  }
-
-  QuantityInput.prototype._value = null;
-
-  QuantityInput.prototype.init = function() {
-    this._setDefaults({
-      $decrease: $('.js-quantityInput-decrease'),
-      $element: $('.js-quantityInput'),
-      $field: $('.js-quantityInput-field'),
-      $increase: $('.js-quantityInput-increase'),
-      $target: $('.js-quantityInput-target'),
-      onDecrease: null,
-      onIncrease: null,
-      onTargetUpdate: null,
-      valueBase: 29,
-      valueMax: 100,
-      valueMin: 1,
-      valuePrefix: '$'
-    });
-    this._setValue();
-    return this._setEventHandlers();
+  QuantityInput._defaults = {
+    $decrease: $('.js-quantityInput-decrease'),
+    $element: $('.js-quantityInput'),
+    $field: $('.js-quantityInput-field'),
+    $increase: $('.js-quantityInput-increase'),
+    $target: $('.js-quantityInput-target'),
+    onDecrease: null,
+    onIncrease: null,
+    onTargetUpdate: null,
+    valueBase: 29,
+    valueMax: 100,
+    valueMin: 1,
+    valuePrefix: '$'
   };
+
+  function QuantityInput(options) {
+    QuantityInput.__super__.constructor.call(this, options);
+    this._value = null;
+    this._setValue();
+    this._setEventHandlers();
+  }
 
   QuantityInput.prototype._setEventHandlers = function() {
     this._settings.$element.on('keyup', (function(_this) {

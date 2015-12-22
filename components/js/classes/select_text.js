@@ -4,17 +4,15 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.SelectText = (function(superClass) {
   extend(SelectText, superClass);
 
-  function SelectText() {
-    return SelectText.__super__.constructor.apply(this, arguments);
-  }
-
-  SelectText.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-selectText'),
-      onClick: null
-    });
-    return this._setEventHandlers();
+  SelectText._defaults = {
+    $element: $('.js-selectText'),
+    onClick: null
   };
+
+  function SelectText(options) {
+    SelectText.__super__.constructor.call(this, options);
+    this._setEventHandlers();
+  }
 
   SelectText.prototype._selectElement = function($element) {
     var elementNode, range, selection;

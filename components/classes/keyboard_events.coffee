@@ -12,12 +12,18 @@
 class @Spellbook.Classes.KeyboardEvents extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      events : []
+  @_defaults :
+    events   : []
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ( options ) ->
+    super( options )
 
     @emit()
 

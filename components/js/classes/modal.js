@@ -4,26 +4,22 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Modal = (function(superClass) {
   extend(Modal, superClass);
 
-  function Modal() {
-    return Modal.__super__.constructor.apply(this, arguments);
-  }
-
-  Modal.prototype._$modal = null;
-
-  Modal.prototype._$backdrop = null;
-
-  Modal.prototype.init = function() {
-    this._setDefaults({
-      $close: $('.js-modal-close'),
-      $trigger: $('.js-modal-trigger'),
-      classActive: 'is-active',
-      classBackdrop: 'modal-backdrop',
-      classBodyActive: 'is-modal-active',
-      classInactive: 'is-inactive',
-      dataAttr: 'modal'
-    });
-    return this._setEventHandlers();
+  Modal._defaults = {
+    $close: $('.js-modal-close'),
+    $trigger: $('.js-modal-trigger'),
+    classActive: 'is-active',
+    classBackdrop: 'modal-backdrop',
+    classBodyActive: 'is-modal-active',
+    classInactive: 'is-inactive',
+    dataAttr: 'modal'
   };
+
+  function Modal(options) {
+    Modal.__super__.constructor.call(this, options);
+    this._$modal = null;
+    this._$backdrop = null;
+    this._setEventHandlers();
+  }
 
   Modal.prototype.trigger = function($element, event, removeBackdrop, callback) {
     if (removeBackdrop == null) {
