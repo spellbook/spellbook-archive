@@ -12,6 +12,7 @@ var gulp       = require( 'gulp' );
 var coffee     = require( 'gulp-coffee' );
 var coffeelint = require( 'gulp-coffeelint' );
 var concat     = require( 'gulp-concat' );
+var connect    = require( 'gulp-connect' );
 var es         = require( 'event-stream' );
 var gutil      = require( 'gulp-util' );
 var rename     = require( 'gulp-rename' );
@@ -25,6 +26,10 @@ var run        = require( 'run-sequence' );
 
 var options = {
 
+  default : {
+    tasks : [ 'build', 'connect', 'watch' ]
+  },
+
   build : {
     files                : [ 'compendium/js/*.js', 'components/js/**/*.js' ],
     destinationFile      : 'spellbook.js',
@@ -37,8 +42,23 @@ var options = {
     destinationFile : 'test.js'
   },
 
-  watch : function() {
-    return this.coffee.files;
+  connect : {
+    port : 9000,
+    base : 'http://localhost',
+    root : './'
+  },
+
+  watch : {
+    files : function() {
+      return [
+        options.coffee.files
+      ]
+    },
+    run : function() {
+      return [
+        [ 'coffee' ]
+      ]
+    }
   }
 
 };
@@ -47,15 +67,7 @@ var options = {
 //   Task: Default
 // -------------------------------------
 
-gulp.task( 'default', function() {
-
-  watch( options.watch(), function( files ) {
-
-    gulp.start( 'coffee' );
-
-  } );
-
-} );
+gulp.task( 'default', options.default.tasks );
 
 // -------------------------------------
 //   Task: Build
@@ -89,6 +101,21 @@ gulp.task( 'coffee', function() {
   return es.concat(compendium, components, tests);
 
 } );
+
+// -------------------------------------
+//   Task: Connect
+// -------------------------------------
+
+gulp.task( 'connect', function() {
+
+  connect.server( {
+    root       : [ options.connect.root ],
+    port       : options.connect.port,
+    base       : options.connect.base,
+    livereload : true
+  } );
+
+});
 
 // -------------------------------------
 //   Task: Concat
@@ -127,3 +154,17 @@ gulp.task( 'uglify', function () {
       .pipe( gulp.dest( options.build.destinationDirectory ) );
 
 } );
+
+// -------------------------------------
+//   Task: Watch
+// -------------------------------------
+
+gulp.task( 'watch', function() {
+
+  var watchFiles = options.watch.files();
+
+  watchFiles.forEach( function( files, index ) {
+    gulp.watch( files, options.watch.run()[ index ]  );
+  } );
+
+});
