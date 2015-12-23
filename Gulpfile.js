@@ -32,8 +32,9 @@ var options = {
   },
 
   coffee : {
-    files       : [ 'compendium/spellbook.coffee', 'components/**/*.coffee', 'spec/**/*.coffee' ],
-    destination : [ 'compendium/js/', 'components/js/', 'spec/javascripts/' ]
+    files           : [ 'compendium/spellbook.coffee', 'components/**/*.coffee', 'test/source/*.coffee' ],
+    destination     : [ 'compendium/js/', 'components/js/', 'test' ],
+    destinationFile : 'test.js'
   },
 
   watch : function() {
@@ -82,6 +83,7 @@ gulp.task( 'coffee', function() {
 
   var tests = gulp.src( options.coffee.files[2] )
     .pipe( coffee( { bare: true } ).on( 'error', gutil.log ) )
+    .pipe( concat( options.coffee.destinationFile ) )
     .pipe( gulp.dest( options.coffee.destination[2] ) );
 
   return es.concat(compendium, components, tests);
