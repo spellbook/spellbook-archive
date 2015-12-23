@@ -23,6 +23,46 @@ describe('Spellbook.Services.clickOut', function() {
   });
 });
 
+describe('Spellbook.Services.contextMenu', function() {
+  before(function() {
+    return this.fixture = new Fixture('<div class="js-contextMenu"> <p>This is my menu!</p> </div>');
+  });
+  beforeEach(function() {
+    this.document = $(document);
+    this.element = $('.js-contextMenu');
+    this.classActive = 'is-active';
+    return Spellbook.Services.contextMenu();
+  });
+  it('should trigger a contextmenu event on the document', function() {
+    var spy;
+    spy = sinon.spy(this.document, 'click');
+    this.document.click();
+    return expect(spy).to.be.called;
+  });
+  it('should add an active class on the contextmenu event', function() {
+    this.document.trigger('contextmenu');
+    return expect(this.element).to.have["class"](this.classActive);
+  });
+  it('should trigger a click event on the document', function() {
+    var spy;
+    spy = sinon.spy(this.document, 'click');
+    this.document.click();
+    return expect(spy).to.be.called;
+  });
+  it('should remove the active class when the document is clicked', function() {
+    this.document.trigger('contextmenu');
+    this.document.trigger('click');
+    return expect(this.element).to.not.have["class"](this.classActive);
+  });
+  it('should apply inline CSS properties to the menu', function() {
+    this.document.trigger('contextmenu');
+    return expect(this.element).to.have.prop('style');
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Helpers.isBlank', function() {
   it('should accept whitespace characters', function() {
     var string;
