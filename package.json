@@ -23,7 +23,9 @@
     "js-fixtures": "^1.5.3",
     "merge-stream": "^0.1.7",
     "mocha": "^2.3.4",
-    "run-sequence": "^1.0.2"
+    "run-sequence": "^1.0.2",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0"
   },
   "scripts": {
     "test": "gulp"
