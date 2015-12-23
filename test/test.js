@@ -1,3 +1,28 @@
+describe('Spellbook.Services.clickOut', function() {
+  beforeEach(function() {
+    this.document = $(document);
+    this.element = $('<div class="js-clickout"></div>');
+    return Spellbook.Services.clickOut({
+      element: this.element,
+      callback: function() {
+        return 'turtle';
+      }
+    });
+  });
+  it('should trigger a click event on the element', function() {
+    var spy;
+    spy = sinon.spy(this.element, 'click');
+    this.element.click();
+    return expect(spy).to.be.called;
+  });
+  return it('should trigger a click event on the document', function() {
+    var spy;
+    spy = sinon.spy(this.document, 'click');
+    this.document.click();
+    return expect(spy).to.be.called;
+  });
+});
+
 describe('Spellbook.Helpers.isBlank', function() {
   it('should accept whitespace characters', function() {
     var string;
