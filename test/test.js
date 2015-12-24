@@ -79,6 +79,41 @@ describe('Spellbook.Services.fixOrphanWords', function() {
   });
 });
 
+describe('Spellbook.Services.focusFirstInput', function() {
+  before(function() {
+    return this.fixture = new Fixture('<form action="" class="js-focusFirstInput"> <input type="hidden" /> <input type="text" /> <input type="text" /> <input type="text" /> </form> <form action="" class="js-focusFirstInput-2"> <input type="hidden" /> <textarea>Focus me!</textarea> <textarea>Focus me!</textarea> <textarea>Focus me!</textarea> </form> <form action="" class="js-focusFirstInput-3"> <input type="hidden" /> <p contenteditable>Focus me!</p> <p contenteditable>Focus me!</p> <p contenteditable>Focus me!</p> </form>');
+  });
+  beforeEach(function() {
+    this.hiddenInput = $('input[type="hidden"]');
+    this.textInput = $('input[type="text"]');
+    this.textarea = $('textarea');
+    return this.contenteditable = $('[contenteditable]');
+  });
+  it('should not focus the hidden input element', function() {
+    Spellbook.Services.focusFirstInput();
+    return expect($(':focus')).to.not.match(this.hiddenInput[0]);
+  });
+  xit('should focus the first text input element', function() {
+    Spellbook.Services.focusFirstInput();
+    return expect($(':focus')).to.match(this.textInput[0]);
+  });
+  xit('should focus the first textarea element', function() {
+    Spellbook.Services.focusFirstInput({
+      $element: $('.js-focusFirstInput-2')
+    });
+    return expect($(':focus')).to.match(this.textarea[0]);
+  });
+  xit('should focus the first contenteditable element', function() {
+    Spellbook.Services.focusFirstInput({
+      $element: $('.js-focusFirstInput-3')
+    });
+    return expect($(':focus')).to.match(this.contenteditable[0]);
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Helpers.isBlank', function() {
   it('should accept whitespace characters', function() {
     var string;
