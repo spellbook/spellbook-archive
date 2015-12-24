@@ -263,6 +263,22 @@ describe('Spellbook.Classes.Dispatcher', function() {
   });
 });
 
+describe('Spellbook.Classes.EqualHeights', function() {
+  before(function() {
+    return this.fixture = new Fixture('<div class="js-equalHeights"> <h1>This is a heading.</h1> </div> <div class="js-equalHeights"> <p>This is some paragraph text that is going to make this element taller than the other one.</p> <p>This is some paragraph text that is going to make this element taller than the other one.</p> <p>This is some paragraph text that is going to make this element taller than the other one.</p> <p>This is some paragraph text that is going to make this element taller than the other one.</p> <p>This is some paragraph text that is going to make this element taller than the other one.</p> <p>This is some paragraph text that is going to make this element taller than the other one.</p> <p>This is some paragraph text that is going to make this element taller than the other one.</p> </div>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-equalHeights');
+    return new Spellbook.Classes.EqualHeights;
+  });
+  it('should set equal heights on the elements', function() {
+    return expect(this.element).to.have.prop('style');
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Services.filter', function() {
   before(function() {
     return this.fixture = new Fixture('<ul> <li><a href="#all" class="link-all js-filter-link">All</a></li> <li><a href="#set-01" class="link-first js-filter-link">Set 01</a></li> <li><a href="#set-02" class="link-second js-filter-link">Set 02</a></li> <li><a href="#set-03" class="link-third js-filter-link">Set 03</a></li> </ul> <div class="js-filter"> <div class="all js-filter-item" data-item="all"> <p>This is an item.</p> </div> <div class="all js-filter-item" data-item="all"> <p>This is an item.</p> </div> <div class="set-01 js-filter-item" data-item="set-01"> <p>This is an item.</p> </div> <div class="set-01 js-filter-item" data-item="set-01"> <p>This is an item.</p> </div> <div class="set-02 js-filter-item" data-item="set-02"> <p>This is an item.</p> </div> <div class="set-02 js-filter-item" data-item="set-02"> <p>This is an item.</p> </div> </div>');
