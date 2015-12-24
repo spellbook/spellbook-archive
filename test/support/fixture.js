@@ -3,7 +3,7 @@
   'use strict';
 
   var _ = self.Fixture = function( fixture ) {
-    this.fixture = $( fixture );
+    this.fixture = $( '<div>' + fixture + '</div>' );
     this.create();
   };
 
