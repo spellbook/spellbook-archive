@@ -63,6 +63,22 @@ describe('Spellbook.Services.contextMenu', function() {
   });
 });
 
+describe('Spellbook.Services.fixOrphanWords', function() {
+  before(function() {
+    return this.fixture = new Fixture('<p class="js-orphan">This is a paragraph of words.</p>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-orphan');
+    return Spellbook.Services.fixOrphanWords();
+  });
+  it('should add a non-breaking space', function() {
+    return expect(this.element.html()).to.contain('&nbsp;');
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Helpers.isBlank', function() {
   it('should accept whitespace characters', function() {
     var string;
