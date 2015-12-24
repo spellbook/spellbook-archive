@@ -435,6 +435,66 @@ describe('Spellbook.Services.formPreview', function() {
   });
 });
 
+describe('Spellbook.Classes.FormValidator', function() {
+  before(function() {
+    return this.fixture = new Fixture('<form class="js-formValidator" action=""> <input type="text" id="field1" class="js-formValidator-input" data-validate="required" /> <input type="text" id="field2" class="js-formValidator-input" data-validate="required" /> <input type="text" id="field3" class="js-formValidator-input" data-validate="required" /> <input type="submit" id="submit" class="js-formValidator-submit" /> </form>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-formValidator');
+    this.field1 = $('#field1');
+    this.field2 = $('#field2');
+    this.field3 = $('#field3');
+    this.submit = $('#submit');
+    this.message = $('.js-formValidator-message');
+    this.errorClass = 'is-invalid';
+    return new Spellbook.Classes.FormValidator;
+  });
+  xit('should trigger a click event when the submit button is clicked', function() {
+    var spy;
+    spy = sinon.spy(this.submit, 'click');
+    this.submit.click();
+    return expect(spy).to.be.called;
+  });
+  it('should trigger a keyup event on the inputs', function() {
+    var spy1, spy2, spy3;
+    spy1 = sinon.spy(this.field1, 'keyup');
+    spy2 = sinon.spy(this.field2, 'keyup');
+    spy3 = sinon.spy(this.field3, 'keyup');
+    this.field1.keyup();
+    this.field2.keyup();
+    this.field3.keyup();
+    expect(spy1).to.be.called;
+    expect(spy2).to.be.called;
+    return expect(spy3).to.be.called;
+  });
+  xit('should set the inputs as invalid when left empty', function() {
+    var spy;
+    spy = sinon.spy(this.element, 'submit');
+    this.element.submit();
+    expect(this.field1).to.have["class"](this.errorClass);
+    expect(this.field2).to.have["class"](this.errorClass);
+    return expect(this.field3).to.have["class"](this.errorClass);
+  });
+  xit('should remove the error class on the input that is typed into', function() {
+    this.field1.val('hello').keyup();
+    this.field2.keyup();
+    this.field3.keyup();
+    expect(this.field1).not.to.have["class"](this.errorClass);
+    expect(this.field2).to.have["class"](this.errorClass);
+    return expect(this.field3).to.have["class"](this.errorClass);
+  });
+  xit('should show a message when there is an error', function() {
+    var spy;
+    spy = sinon.spy(this.submit, 'click');
+    this.submit.click();
+    expect($('p').length).to.equal(3);
+    return expect($('p').first().text()).to.equal('The field is required.');
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Helpers.isBlank', function() {
   it('should accept whitespace characters', function() {
     var string;
