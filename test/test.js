@@ -370,6 +370,24 @@ describe('Spellbook.Helpers.sanitize', function() {
   });
 });
 
+describe('Spellbook.Services.scrollTo', function() {
+  before(function() {
+    return this.fixture = new Fixture('<a class="js-scrollTo" href="#turtle" style="margin-bottom: 2000px;">Element</a> <div id="turtle"> <p>This is an element that is being scrolled to.</p> </div>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-scrollTo');
+    this.document = $('body, html');
+    this.to = $(this.element.attr('href'));
+    return Spellbook.Services.scrollTo();
+  });
+  return it('should trigger a click event on the element', function() {
+    var spy;
+    spy = sinon.spy(this.element, 'click');
+    this.element.click();
+    return expect(spy).to.be.called;
+  });
+});
+
 describe('Spellbook.Helpers.slugify', function() {
   beforeEach(function() {
     this.string = 'This is my title!';
