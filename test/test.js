@@ -172,6 +172,53 @@ describe('Spellbook.Services.focusFirstInput', function() {
   });
 });
 
+describe('Spellbook.Services.formPreview', function() {
+  before(function() {
+    return this.fixture = new Fixture('<form action=""> <input class="js-formPreview-input" type="text" data-preview="1" /> <input class="js-formPreview-input" type="text" data-preview="2" /> <input class="js-formPreview-input" type="text" data-preview="3" /> </form> <div id="formPreview"> <h1 id="formPreview-1"></h1> <h3 id="formPreview-2"></h3> <p id="formPreview-3"></p> </div>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-formPreview-input');
+    this.idName = 'formPreview';
+    return Spellbook.Services.formPreview();
+  });
+  it('should trigger a keyup event when the input is typed in', function() {
+    var spy;
+    spy = sinon.spy(this.element, 'keyup');
+    this.element.keyup();
+    return expect(spy).to.be.called;
+  });
+  it('should show the first input value in the associated HTML element', function() {
+    var element, string, tag;
+    element = $('.js-formPreview-input[data-preview="1"]');
+    tag = $('#formPreview-1');
+    string = 'Hello, friend!';
+    element.val(string);
+    element.keyup();
+    return expect(tag.text()).to.equal(string);
+  });
+  it('should show the second input value in the associated HTML element', function() {
+    var element, string, tag;
+    element = $('.js-formPreview-input[data-preview="2"]');
+    tag = $('#formPreview-2');
+    string = 'Hello, friend!';
+    element.val(string);
+    element.keyup();
+    return expect(tag.text()).to.equal(string);
+  });
+  it('should show the third input value in the associated HTML element', function() {
+    var element, string, tag;
+    element = $('.js-formPreview-input[data-preview="3"]');
+    tag = $('#formPreview-3');
+    string = 'Hello, friend!';
+    element.val(string);
+    element.keyup();
+    return expect(tag.text()).to.equal(string);
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Helpers.isBlank', function() {
   it('should accept whitespace characters', function() {
     var string;
