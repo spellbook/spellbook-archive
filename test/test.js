@@ -274,6 +274,48 @@ describe('Spellbook.Services.limiter', function() {
   });
 });
 
+describe('Spellbook.Services.loader', function() {
+  before(function() {
+    return this.fixture = new Fixture('<a href="#" class="js-loader-toggle">Toggle</a> <div id="element" class="js-loader-element"> <p>This is an element.</p> </div>');
+  });
+  beforeEach(function() {
+    this.classLoading = 'is-loading';
+    this.classOverlay = 'loader-overlay';
+    this.classSpinner = 'loader';
+    this.element = $('.js-loader-element');
+    this.overlay = 'div';
+    this.spinner = 'span';
+    this.toggle = $('.js-loader-toggle');
+    return Spellbook.Services.loader();
+  });
+  it('should register a click on the toggle', function() {
+    var spy;
+    spy = sinon.spy(this.toggle, 'click');
+    this.toggle.click();
+    return expect(spy).to.be.called;
+  });
+  it('should append the spinner element', function() {
+    this.toggle.click();
+    return expect(this.element.html()).to.contain(this.spinner);
+  });
+  it('should append the overlay element', function() {
+    this.toggle.click();
+    return expect(this.element.html()).to.contain(this.overlay);
+  });
+  it('should add the spinner class to the spinner element', function() {
+    this.toggle.click();
+    return expect(this.element.find(this.spinner)).to.have["class"](this.classSpinner);
+  });
+  it('should add the overlay class to the overlay element', function() {
+    this.toggle.click();
+    return expect(this.element.find(this.overlay)).to.have["class"](this.classOverlay);
+  });
+  return it('should add the loading class to the element', function() {
+    this.toggle.click();
+    return expect(this.element).to.have["class"](this.classLoading);
+  });
+});
+
 describe('Spellbook.Helpers.randomizer', function() {
   return it('should return a random value from a collection', function() {
     var collection;
