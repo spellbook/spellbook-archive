@@ -43,6 +43,55 @@ describe('Spellbook.Classes.AutoDuplicateInput', function() {
   });
 });
 
+describe('Spellbook.Classes.CharacterCounter', function() {
+  before(function() {
+    return this.fixture = new Fixture('<form action=""> <textarea class="js-characterCounter"></textarea> <p class="js-characterCounter-label"> <span class="js-characterCounter-number">0</span> Characters </p> </form>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-characterCounter');
+    this.label = $('.js-characterCounter-label');
+    this.number = $('.js-characterCounter-number');
+    this.classError = 'is-error';
+    this.classSuccess = 'is-success';
+    return new Spellbook.Classes.CharacterCounter();
+  });
+  it('should initialize with a zero character count', function() {
+    return expect(this.label).to.contain('0');
+  });
+  it('should change character count based on the typed string', function() {
+    this.element.val('This is some text here.');
+    return expect(this.number).to.contain(this.element.text().length);
+  });
+  xit('should add an error class when the max is exceeded', function() {
+    this.element.val("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+    this.element.keyup();
+    expect(this.element).to.have["class"](this.classError);
+    return expect(this.label).to.have["class"](this.classError);
+  });
+  xit('should add an error class when the min is not met', function() {
+    new Spellbook.Classes.CharacterCounter({
+      minChars: 100
+    });
+    this.element.val('This is some text here.');
+    this.element.keyup();
+    expect(this.element).to.have["class"](this.classError);
+    return expect(this.label).to.have["class"](this.classError);
+  });
+  xit('should add a success class when conditions are met', function() {
+    new Spellbook.Classes.CharacterCounter({
+      minChars: 10,
+      maxChars: 20
+    });
+    this.element.val('Hello, friend!');
+    this.element.keyup();
+    expect(this.element).to.have["class"](this.classSuccess);
+    return expect(this.label).to.have["class"](this.classSuccess);
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Services.clickOut', function() {
   beforeEach(function() {
     this.document = $(document);
