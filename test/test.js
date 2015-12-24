@@ -927,6 +927,42 @@ describe('Spellbook.Classes.Share', function() {
   });
 });
 
+describe('Spellbook.Classes.ShowPassword', function() {
+  before(function() {
+    return this.fixture = new Fixture('<form action=""> <input id="" type="password" name="" class="js-showPassword-input" /> <input id="" type="checkbox" name="" class="js-showPassword-toggle" /> </form>');
+  });
+  beforeEach(function() {
+    this.input = $('.js-showPassword-input');
+    return this.toggle = $('.js-showPassword-toggle');
+  });
+  it('should show the standard password input by default', function() {
+    new Spellbook.Classes.ShowPassword;
+    return expect(this.input).to.have.attr('type', 'password');
+  });
+  xit('should show the password if isShownByDefault is true', function() {
+    new Spellbook.Classes.ShowPassword({
+      isShownByDefault: true
+    });
+    expect(this.input).to.have.attr('type', 'text');
+    return expect(this.input).to.have.prop('checked', true);
+  });
+  xit('should show the password when the checkbox is clicked', function() {
+    new Spellbook.Classes.ShowPassword;
+    this.toggle.click();
+    expect(this.input).to.have.attr('type', 'text');
+    return expect(this.input).to.have.prop('checked', true);
+  });
+  it('should hide the password when the checkbox is clicked again', function() {
+    new Spellbook.Classes.ShowPassword;
+    this.toggle.prop('checked', true);
+    this.toggle.click();
+    return expect(this.input).to.have.attr('type', 'password');
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Classes.Singleton', function() {
   beforeEach(function() {
     this.a = Spellbook.Classes.Singleton.getInstance();
