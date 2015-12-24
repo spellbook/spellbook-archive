@@ -232,6 +232,48 @@ describe('Spellbook.Helpers.isBlank', function() {
   });
 });
 
+describe('Spellbook.Services.limiter', function() {
+  before(function() {
+    return this.fixture = new Fixture('<div class="limiter"> <div class="js-limiter-element"> <p>Element.</p> </div> <div class="js-limiter-element"> <p>Element.</p> </div> <div class="js-limiter-element"> <p>Element.</p> </div> <div class="js-limiter-element"> <p>Element.</p> </div> <div class="js-limiter-element"> <p>Element.</p> </div> <a href="#" class="js-limiter-toggle">Toggle</a> </div>');
+  });
+  beforeEach(function() {
+    this.container = $('.fixture--limiter');
+    this.element = $('.js-limiter-element');
+    this.toggle = $('.js-limiter-toggle');
+    return this.hiddenClass = 'is-hidden';
+  });
+  it('should do nothing if there are less items than the limit', function() {
+    Spellbook.Services.limiter({
+      limit: 6
+    });
+    return expect(this.element).not.to.have["class"](this.hiddenClass);
+  });
+  it('should hide the toggle if there are less items than the limit', function() {
+    Spellbook.Services.limiter({
+      limit: 6
+    });
+    return expect(this.toggle).not.to.exist;
+  });
+  it('should add a hidden class to hide elements greater than the limit', function() {
+    Spellbook.Services.limiter({
+      limit: 4
+    });
+    return expect($('.js-limiter-element:nth-child( 5 )')).to.have["class"](this.hiddenClass);
+  });
+  it('should trigger a click on the toggle', function() {
+    var spy;
+    Spellbook.Services.limiter({
+      limit: 2
+    });
+    spy = sinon.spy(this.toggle, 'click');
+    this.toggle.click();
+    return expect(spy).to.be.called;
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Helpers.randomizer', function() {
   return it('should return a random value from a collection', function() {
     var collection;
