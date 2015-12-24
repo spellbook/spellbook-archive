@@ -1,3 +1,48 @@
+describe('Spellbook.Classes.AutoDuplicateInput', function() {
+  before(function() {
+    return this.fixture = new Fixture('<form action=""> <field class="set js-autoDuplicateInput-container"> <input class="js-autoDuplicateInput" data-validate="email" placeholder="email@example.com" required type="email" /> </field> </form>');
+  });
+  beforeEach(function() {
+    this.classInvalid = 'is-invalid';
+    this.classValid = 'is-valid';
+    this.clonedDataAttribute = 'cloned';
+    this.container = $('.js-autoDuplicateInput-container');
+    this.selector = '.js-autoDuplicateInput';
+    this.element = $(this.selector);
+    this.validateDataAttribute = 'validate';
+    return this.adi = new Spellbook.Classes.AutoDuplicateInput;
+  });
+  it('should register a keyup event on the input', function() {
+    var spy;
+    spy = sinon.spy(this.element, 'keyup');
+    this.element.keyup();
+    return expect(spy).to.be.called;
+  });
+  xit('should mark the input as invalid and give the appropriate class', function() {
+    this.element.val('thisisapartialemail');
+    this.element.keyup();
+    return expect(this.element).to.have["class"](this.classInvalid);
+  });
+  xit('should mark the input as valid and give the appropriate class', function() {
+    this.element.val('email@example.com');
+    this.element.keyup();
+    return expect(this.element).to.have["class"](this.classValid);
+  });
+  xit('should duplicate the input when a valid string is provided', function() {
+    this.element.val('email@example.com');
+    this.element.keyup();
+    return expect($(this.selector).length).to.equal(2);
+  });
+  xit('should keep a count of valid fields', function() {
+    this.element.val('email@example.com');
+    this.element.keyup();
+    return expect(this.adi.getCount()).to.equal(1);
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Services.clickOut', function() {
   beforeEach(function() {
     this.document = $(document);
