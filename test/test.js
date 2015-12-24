@@ -780,6 +780,59 @@ describe('Spellbook.Classes.QuantityInput', function() {
   });
 });
 
+describe('Spellbook.Classes.QueryParams', function() {
+  it('should instantiate a new object', function() {
+    this.qp = new Spellbook.Classes.QueryParams();
+    return expect(this.qp).to.be.instance;
+  });
+  beforeEach(function() {
+    return this.qp = new Spellbook.Classes.QueryParams({
+      url: 'http://www.example.com/?param1=true&param2=false'
+    });
+  });
+  describe('#parseQueryString', function() {
+    return it('should parse the query string', function() {
+      return expect(this.qp.variables).to.eql(['param1=true', 'param2=false']);
+    });
+  });
+  describe('#sortParams', function() {
+    return it('should sort the parameters', function() {
+      return expect(this.qp.params).to.eql({
+        'param1': 'true',
+        'param2': 'false'
+      });
+    });
+  });
+  describe('.allParams', function() {
+    return it('should return a list of the parameters', function() {
+      return expect(this.qp.allParams()).to.eql({
+        'param1': 'true',
+        'param2': 'false'
+      });
+    });
+  });
+  describe('.matchParamKey', function() {
+    return it('should return a correct match on a parameter key', function() {
+      return expect(this.qp.matchParamKey('param1')).to.be["true"];
+    });
+  });
+  describe('.matchParamValue', function() {
+    return it('should return a correct match on a parameter value', function() {
+      return expect(this.qp.matchParamValue('true')).to.be["true"];
+    });
+  });
+  describe('.matchParamKey', function() {
+    return it('should not return a correct match on a parameter key', function() {
+      return expect(this.qp.matchParamKey('param3')).to.be["false"];
+    });
+  });
+  return describe('.matchParamValue', function() {
+    return it('should not return a correct match on a parameter value', function() {
+      return expect(this.qp.matchParamValue('turtle')).to.be["false"];
+    });
+  });
+});
+
 describe('Spellbook.Helpers.randomizer', function() {
   return it('should return a random value from a collection', function() {
     var collection;
