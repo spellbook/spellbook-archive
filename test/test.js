@@ -907,6 +907,26 @@ describe('Spellbook.Services.scrollTo', function() {
   });
 });
 
+describe('Spellbook.Classes.Share', function() {
+  before(function() {
+    return this.fixture = new Fixture('<a class="js-share" data-share-service="twitter" data-share-text="Share this thing!" href="http://www.example.com">Twitter</a> <a class="js-share" data-share-service="facebook" data-share-text="Share this thing!" href="http://www.example.com">Facebook</a> <a class="js-share" data-share-service="google" data-share-text="Share this thing!" href="http://www.example.com">Google</a>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-share');
+    this.activeClass = 'is-active';
+    return new Spellbook.Classes.Share;
+  });
+  it('should trigger a click on the service element', function() {
+    var spy;
+    spy = sinon.spy(this.element, 'click');
+    this.element.click();
+    return expect(spy).to.be.called;
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Classes.Singleton', function() {
   beforeEach(function() {
     this.a = Spellbook.Classes.Singleton.getInstance();
