@@ -157,6 +157,33 @@ describe('Spellbook.Services.contextMenu', function() {
   });
 });
 
+describe('Spellbook.Classes.Dematerialize', function() {
+  before(function() {
+    return this.fixture = new Fixture('<div class="js-dematerialize is-hidden"> <a href="#" class="js-dematerialize-trigger">Trigger</a> <p>This is a thing.</p> </div>');
+  });
+  beforeEach(function() {
+    var element;
+    this.element = $('.js-dematerialize');
+    this.trigger = $('.js-dematerialize-trigger');
+    this.itemTitle = 'hidden_element';
+    this.hiddenClass = 'is-hidden';
+    return element = new Spellbook.Classes.Dematerialize();
+  });
+  it('should register a click on the trigger', function() {
+    var spy;
+    spy = sinon.spy(this.trigger, 'click');
+    this.trigger.click();
+    return expect(spy).to.be.called;
+  });
+  xit('should hide the element when the trigger is clicked', function() {
+    this.trigger.click();
+    return expect(this.element).not.to.have["class"](this.hiddenClass);
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Services.filter', function() {
   before(function() {
     return this.fixture = new Fixture('<ul> <li><a href="#all" class="link-all js-filter-link">All</a></li> <li><a href="#set-01" class="link-first js-filter-link">Set 01</a></li> <li><a href="#set-02" class="link-second js-filter-link">Set 02</a></li> <li><a href="#set-03" class="link-third js-filter-link">Set 03</a></li> </ul> <div class="js-filter"> <div class="all js-filter-item" data-item="all"> <p>This is an item.</p> </div> <div class="all js-filter-item" data-item="all"> <p>This is an item.</p> </div> <div class="set-01 js-filter-item" data-item="set-01"> <p>This is an item.</p> </div> <div class="set-01 js-filter-item" data-item="set-01"> <p>This is an item.</p> </div> <div class="set-02 js-filter-item" data-item="set-02"> <p>This is an item.</p> </div> <div class="set-02 js-filter-item" data-item="set-02"> <p>This is an item.</p> </div> </div>');
