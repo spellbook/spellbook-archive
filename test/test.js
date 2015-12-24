@@ -495,6 +495,33 @@ describe('Spellbook.Classes.FormValidator', function() {
   });
 });
 
+describe('Spellbook.Classes.HeadingLinks', function() {
+  before(function() {
+    return this.fixture = new Fixture('<div class="js-headingLinks"> <h1>This is a heading</h1> <h2>This is another heading</h2> <h3>And another</h3> <h4>And yet another</h4> </div>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-headingLinks');
+    this.firstHeading = this.element.find('h1');
+    this.headings = this.element.find('h1, h2, h3, h4');
+    return new Spellbook.Classes.HeadingLinks({
+      headings: this.headings
+    });
+  });
+  xit('should slugify the heading string as an ID', function() {
+    this.headings.find('a');
+    return expect(this.firstHeading.attr('id')).to.equal('this-is-a-heading');
+  });
+  it('should have an anchor link prepended to the heading', function() {
+    return expect(this.headings).to.contain('a');
+  });
+  xit('should apply the correct class to the heading link', function() {
+    return expect(this.headings.find('a')).to.have["class"]('anchor');
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Helpers.isBlank', function() {
   it('should accept whitespace characters', function() {
     var string;
