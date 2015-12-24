@@ -184,6 +184,59 @@ describe('Spellbook.Classes.Dematerialize', function() {
   });
 });
 
+describe('Spellbook.Classes.Dispatcher', function() {
+  before(function() {
+    return this.fixture = new Fixture('<div class="js-dispatcher" data-dispatcher-page="home"> <div id="home"> <h1>Home</h1> </div> <div id="about"> <h1>About</h1> </div> <div id="contact"> <h1>Contact</h1> </div> </div>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-dispatcher');
+    this.dataAttr = 'dispatcher-page';
+    return new Spellbook.Classes.Dispatcher({
+      events: [
+        {
+          page: 'home',
+          run: function() {
+            return $('#home').addClass('is-active');
+          }
+        }, {
+          page: 'about',
+          run: function() {
+            return $('#about').addClass('is-active');
+          }
+        }, {
+          page: 'contact',
+          run: function() {
+            return $('#contact').addClass('is-active');
+          }
+        }
+      ]
+    });
+  });
+  xit('should add an active class to the home container when on the home page', function() {
+    return expect($('#home')).to.have["class"]('is-active');
+  });
+  xit('should add an active class to all containers', function() {
+    new Spellbook.Classes.Dispatcher({
+      events: [
+        {
+          page: 'all',
+          run: function() {
+            $('#home').addClass('is-active');
+            $('#about').addClass('is-active');
+            return $('#contact').addClass('is-active');
+          }
+        }
+      ]
+    });
+    expect($('#home')).to.have["class"]('is-active');
+    expect($('#about')).to.have["class"]('is-active');
+    return expect($('#contact')).to.have["class"]('is-active');
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Services.filter', function() {
   before(function() {
     return this.fixture = new Fixture('<ul> <li><a href="#all" class="link-all js-filter-link">All</a></li> <li><a href="#set-01" class="link-first js-filter-link">Set 01</a></li> <li><a href="#set-02" class="link-second js-filter-link">Set 02</a></li> <li><a href="#set-03" class="link-third js-filter-link">Set 03</a></li> </ul> <div class="js-filter"> <div class="all js-filter-item" data-item="all"> <p>This is an item.</p> </div> <div class="all js-filter-item" data-item="all"> <p>This is an item.</p> </div> <div class="set-01 js-filter-item" data-item="set-01"> <p>This is an item.</p> </div> <div class="set-01 js-filter-item" data-item="set-01"> <p>This is an item.</p> </div> <div class="set-02 js-filter-item" data-item="set-02"> <p>This is an item.</p> </div> <div class="set-02 js-filter-item" data-item="set-02"> <p>This is an item.</p> </div> </div>');
