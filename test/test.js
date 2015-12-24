@@ -316,6 +316,39 @@ describe('Spellbook.Services.loader', function() {
   });
 });
 
+describe('Spellbook.Services.prefixClasses', function() {
+  before(function() {
+    return this.fixture = new Fixture('<div class="js-prefixClasses"> <p class="first">First</p> <p class="second">Second</p> </div>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-prefixClasses');
+    this.firstChild = this.element.find('.first');
+    return this.secondChild = this.element.find('.second');
+  });
+  it("should prepend a string to the matched elements' classes", function() {
+    Spellbook.Services.prefixClasses();
+    expect(this.firstChild).to.have["class"]('prefix-first');
+    return expect(this.secondChild).to.have["class"]('prefix-second');
+  });
+  xit("should not prepend a string to the unmatched elements' classes", function() {
+    Spellbook.Services.prefixClasses({
+      query: '.second'
+    });
+    expect(this.firstChild).to.have["class"]('first');
+    return expect(this.secondChild).to.have["class"]('prefix-second');
+  });
+  xit("should prepend a custom string to the matched elements' classes", function() {
+    Spellbook.Services.prefixClasses({
+      prefix: 'custom'
+    });
+    expect(this.firstChild).to.have["class"]('custom-first');
+    return expect(this.secondChild).to.have["class"]('custom-second');
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Helpers.randomizer', function() {
   return it('should return a random value from a collection', function() {
     var collection;
