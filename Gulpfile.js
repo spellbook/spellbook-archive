@@ -56,7 +56,7 @@ var options = {
     },
     run : function() {
       return [
-        [ 'coffee' ]
+        [ 'build' ]
       ]
     }
   }
