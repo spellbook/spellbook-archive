@@ -854,6 +854,41 @@ describe('Spellbook.Helpers.sanitize', function() {
   });
 });
 
+describe('Spellbook.Classes.SaveProgress', function() {
+  before(function() {
+    return this.fixture = new Fixture('<div class="js-saveProgress-container"> <input type="text" name="" class="js-saveProgress" data-saveprogress="key" > </div>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-saveProgress');
+    this.container = $('.js-saveProgress-container');
+    this.key = this.element.data('saveprogress');
+    return this.value = 'string';
+  });
+  it('should save input element values to localStorage on input event', function() {
+    new Spellbook.Classes.SaveProgress;
+    this.element.val(this.value);
+    this.element.trigger('input');
+    return expect(localStorage.getItem(this.key)).to.equal(this.element.val());
+  });
+  xit('should fill input elements with localStorage values when initialized', function() {
+    this.element.val('');
+    new Spellbook.Classes.SaveProgress;
+    return expect(this.element.val()).to.equal(this.value);
+  });
+  xit('should remove container-specific localStorage items on form submission', function() {
+    new Spellbook.Classes.SaveProgress;
+    localStorage.setItem(this.key, this.value);
+    localStorage.setItem('keep', 'me');
+    sinon.spy(this.container, 'submit');
+    this.container.submit();
+    expect(localStorage.getItem(this.key)).to.equal(null);
+    return expect(localStorage.getItem('keep')).to.equal('me');
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Services.scrollTo', function() {
   before(function() {
     return this.fixture = new Fixture('<a class="js-scrollTo" href="#turtle" style="margin-bottom: 2000px;">Element</a> <div id="turtle"> <p>This is an element that is being scrolled to.</p> </div>');
