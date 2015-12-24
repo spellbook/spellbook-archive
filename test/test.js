@@ -983,6 +983,164 @@ describe('Spellbook.Helpers.slugify', function() {
   });
 });
 
+describe('Spellbook.Classes.Toggle', function() {
+  before(function() {
+    return this.fixture = new Fixture('<a href="#" class="js-toggle">Toggle</a> <a href="#receiver-01" class="js-toggle-sender-01">Toggle</a> <div id="receiver-01"> <p>This is an element.</p> </div> <div id="receiver-02"> <p>This is an element.</p> </div> <a href="#receiver-02" class="js-toggle-sender-02">Toggle</a> <div> <a href="#receiver-03" class="js-toggle-sender-03">Toggle</a> <p>This is an element.</p> </div> <div id="receiver-03"> <p>This is an element.</p> </div> <div id="receiver-04"> <p>This is an element.</p> </div> <div> <a href="#receiver-04" class="js-toggle-sender-04">Toggle</a> <p>This is an element.</p> </div>');
+  });
+  beforeEach(function() {
+    this.element = $('.js-toggle');
+    this.classToggle = 'is-hidden';
+    return this.classActive = 'is-active';
+  });
+  describe('click', function() {
+    it('should register a click on the sender', function() {
+      var spy;
+      spy = sinon.spy(this.element, 'click');
+      this.element.click();
+      return expect(spy).to.be.called;
+    });
+    xit('should add an active class to the sender when clicked', function() {
+      new Spellbook.Classes.Toggle;
+      this.element.click();
+      return expect(this.element).to.have["class"](this.classActive);
+    });
+    it('should toggle the visibility of the next element when clicked', function() {
+      this.element1 = $('.js-toggle-sender-01');
+      this.receiver1 = $('#receiver-01');
+      new Spellbook.Classes.Toggle({
+        $element: this.element1
+      });
+      this.element1.click();
+      return expect(this.receiver1).to.have["class"](this.classToggle);
+    });
+    it('should toggle the visibility of the previous element when clicked', function() {
+      this.element2 = $('.js-toggle-sender-02');
+      this.receiver2 = $('#receiver-02');
+      new Spellbook.Classes.Toggle({
+        $element: this.element2,
+        proximity: 'prev'
+      });
+      this.element2.click();
+      return expect(this.receiver2).to.have["class"](this.classToggle);
+    });
+    it('should toggle the visibility of the next parent element when clicked', function() {
+      this.element3 = $('.js-toggle-sender-03');
+      this.receiver3 = $('#receiver-03');
+      new Spellbook.Classes.Toggle({
+        $element: this.element3,
+        proximity: 'nextParent'
+      });
+      this.element3.click();
+      return expect(this.receiver3).to.have["class"](this.classToggle);
+    });
+    it('should toggle the visibility of the previous parent element when clicked', function() {
+      this.element4 = $('.js-toggle-sender-04');
+      this.receiver4 = $('#receiver-04');
+      new Spellbook.Classes.Toggle({
+        $element: this.element4,
+        proximity: 'prevParent'
+      });
+      this.element4.click();
+      return expect(this.receiver4).to.have["class"](this.classToggle);
+    });
+    return xit('should toggle the visibility of the referenced element when clicked', function() {
+      this.element = $('.js-toggle-sender-04');
+      this.receiver = $('#receiver-04');
+      new Spellbook.Classes.Toggle({
+        $element: this.element,
+        proximity: this.receiver
+      });
+      this.element.click();
+      return expect(this.receiver).to.have["class"](this.classToggle);
+    });
+  });
+  describe('hover', function() {
+    it('should register a mouseover on the sender', function() {
+      var spy;
+      spy = sinon.spy(this.element, 'mouseover');
+      this.element.mouseover();
+      return expect(spy).to.be.called;
+    });
+    it('should register a mouseout on the sender', function() {
+      var spy;
+      spy = sinon.spy(this.element, 'mouseout');
+      this.element.mouseout();
+      return expect(spy).to.be.called;
+    });
+    xit('should add an active class to the sender when hovered on', function() {
+      new Spellbook.Classes.Toggle({
+        event: 'hover'
+      });
+      this.element.mouseout();
+      return expect(this.element).to.have["class"](this.classActive);
+    });
+    it('should remove the active class to the sender when hovered off', function() {
+      new Spellbook.Classes.Toggle({
+        event: 'hover'
+      });
+      this.element.trigger('mouseout');
+      return expect(this.element).not.to.have["class"](this.classActive);
+    });
+    xit('should toggle the visibility of the next element when hovered on', function() {
+      this.element1 = $('.js-toggle-sender-01');
+      this.receiver1 = $('#receiver-01');
+      new Spellbook.Classes.Toggle({
+        $element: this.element1,
+        event: 'hover'
+      });
+      this.element1.mouseout();
+      return expect(this.receiver1).to.have["class"](this.classToggle);
+    });
+    xit('should toggle the visibility of the previous element when hovered on', function() {
+      this.element2 = $('.js-toggle-sender-02');
+      this.receiver2 = $('#receiver-02');
+      new Spellbook.Classes.Toggle({
+        $element: this.element2,
+        event: 'hover',
+        proximity: 'prev'
+      });
+      this.element2.mouseout();
+      return expect(this.receiver2).to.have["class"](this.classToggle);
+    });
+    xit('should toggle the visibility of the next parent element when hovered on', function() {
+      this.element3 = $('.js-toggle-sender-03');
+      this.receiver3 = $('#receiver-03');
+      new Spellbook.Classes.Toggle({
+        $element: this.element3,
+        event: 'hover',
+        proximity: 'nextParent'
+      });
+      this.element3.mouseout();
+      return expect(this.receiver3).to.have["class"](this.classToggle);
+    });
+    xit('should toggle the visibility of the previous parent element when hovered on', function() {
+      this.element4 = $('.js-toggle-sender-04');
+      this.receiver4 = $('#receiver-04');
+      new Spellbook.Classes.Toggle({
+        $element: this.element4,
+        event: 'hover',
+        proximity: 'prevParent'
+      });
+      this.element4.mouseout();
+      return expect(this.receiver4).to.have["class"](this.classToggle);
+    });
+    return xit('should toggle the visibility of the referenced element when hovered on', function() {
+      this.element = $('.js-toggle-sender-04');
+      this.receiver = $('#receiver-04');
+      new Spellbook.Classes.Toggle({
+        $element: this.element,
+        event: 'hover',
+        proximity: this.receiver
+      });
+      this.element.mouseout();
+      return expect(this.receiver).to.have["class"](this.classToggle);
+    });
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Helpers.uid', function() {
   it('should generate a ten-digit unique ID', function() {
     var id;
