@@ -619,6 +619,45 @@ describe('Spellbook.Services.loader', function() {
   });
 });
 
+describe('Spellbook.Classes.Modal', function() {
+  before(function() {
+    return this.fixture = new Fixture('<a class="js-modal-trigger" data-modal="#modal" href="#">Open Modal</a> <div id="modal"> <a class="js-modal-close" data-modal="#modal" href="#"></a> <h1>I am a modal.</h1> <p>This is a modal! Srsly.</p> </div>');
+  });
+  beforeEach(function() {
+    this.trigger = $('.js-modal-trigger');
+    this.close = $('.js-modal-close');
+    this.modal = $('#modal');
+    this.backdrop = $('.modal-backdrop');
+    this.classActive = 'is-active';
+    return new Spellbook.Classes.Modal;
+  });
+  it('should trigger a click event when the link is clicked', function() {
+    var spy;
+    spy = sinon.spy(this.trigger, 'click');
+    this.trigger.click();
+    return expect(spy).to.be.called;
+  });
+  xit('should open the modal when the trigger is clicked', function() {
+    this.trigger.click();
+    return expect(this.modal).to.have["class"](this.classActive);
+  });
+  xit('should inject a backdrop element into the page', function() {
+    this.trigger.click();
+    return expect(this.backdrop).to.exist;
+  });
+  it('should close the modal when the close button is clicked', function() {
+    this.close.click();
+    return expect(this.modal).not.to.have["class"](this.classActive);
+  });
+  it('should close the modal when the backdrop is clicked', function() {
+    this.backdrop.click();
+    return expect(this.modal).not.to.have["class"](this.classActive);
+  });
+  return afterEach(function() {
+    return this.fixture.cleanup();
+  });
+});
+
 describe('Spellbook.Services.prefixClasses', function() {
   before(function() {
     return this.fixture = new Fixture('<div class="js-prefixClasses"> <p class="first">First</p> <p class="second">Second</p> </div>');
