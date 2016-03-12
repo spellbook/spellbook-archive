@@ -7,9 +7,9 @@ GEM
       rack (>= 1.2.1)
       rake
     jasmine-core (2.4.1)
-    phantomjs (1.9.8.0)
+    phantomjs (2.1.1.0)
     rack (1.6.4)
-    rake (10.4.2)
+    rake (11.1.0)
 
 PLATFORMS
   ruby
@@ -18,4 +18,4 @@ DEPENDENCIES
   jasmine
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
