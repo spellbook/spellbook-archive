@@ -1,6 +1,8 @@
 Spellbook
 =========
 
+🚨 **This repository is no longer maintained.** 🚨
+
 A compilation of CoffeeScript structure, components, and classes.
 
 Compendium
