@@ -5,29 +5,32 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
 this.Spellbook.Classes.DrawSvg = (function(superClass) {
   extend(DrawSvg, superClass);
 
+  DrawSvg._defaults = {
+    $element: $('.js-drawSvg'),
+    prefix: 'path'
+  };
+
   function DrawSvg() {
     this.draw = bind(this.draw, this);
-    return DrawSvg.__super__.constructor.apply(this, arguments);
+    DrawSvg.__super__.constructor.apply(this, arguments);
+    this._currentFrame = 0;
+    this._handle = 0;
+    this._lengths = [];
+    this._paths = [];
+    this._progress = 0;
+    this._totalFrames = 60;
+    this._setStorage();
   }
 
-  DrawSvg.prototype._paths = [];
-
-  DrawSvg.prototype._lengths = [];
-
-  DrawSvg.prototype._currentFrame = 0;
-
-  DrawSvg.prototype._totalFrames = 60;
-
-  DrawSvg.prototype._handle = 0;
-
-  DrawSvg.prototype._progress = 0;
-
-  DrawSvg.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-drawSvg'),
-      prefix: 'path'
-    });
-    return this._setStorage();
+  DrawSvg.prototype.draw = function() {
+    this._progress = this._currentFrame / this._totalFrames;
+    if (this._progress > 1) {
+      return window.cancelAnimationFrame(this._handle);
+    } else {
+      this._currentFrame++;
+      this._setStroke();
+      return this._handle = window.requestAnimationFrame(this.draw);
+    }
   };
 
   DrawSvg.prototype._setStorage = function() {
@@ -51,17 +54,6 @@ this.Spellbook.Classes.DrawSvg = (function(superClass) {
       results.push(this._paths[index].style.strokeDashoffset = Math.floor(this._lengths[index] * (1 - this._progress)));
     }
     return results;
-  };
-
-  DrawSvg.prototype.draw = function() {
-    this._progress = this._currentFrame / this._totalFrames;
-    if (this._progress > 1) {
-      return window.cancelAnimationFrame(this._handle);
-    } else {
-      this._currentFrame++;
-      this._setStroke();
-      return this._handle = window.requestAnimationFrame(this.draw);
-    }
   };
 
   return DrawSvg;

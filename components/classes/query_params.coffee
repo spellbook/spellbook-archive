@@ -12,47 +12,24 @@
 class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Instance Variables
+  #   Defaults
   # -------------------------------------
 
-  params    : {}
-  variables : []
+  @_defaults :
+    url      : null
 
   # -------------------------------------
-  #   Initializer
+  #   Constructorr
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      url : null
+  constructor : ->
+    super
+
+    @params    = {}
+    @variables = []
 
     @_parseQueryString( @_settings.url )
     @_sortParams()
-
-  # -------------------------------------
-  #   Parse Query String
-  # -------------------------------------
-  #
-  # @param url { string }
-  #
-  # -------------------------------------
-
-  _parseQueryString : ( url ) ->
-    if url
-      queryString = url.split( '?' )[ 1 ]
-    else
-      queryString = window.location.search.substring( 1 )
-
-    @variables = queryString.split( '&' )
-
-  # -------------------------------------
-  #   Sort Parameters
-  # -------------------------------------
-
-  _sortParams : ->
-    for param in @variables
-      pair = param.split( '=' )
-      @params[ pair[ 0 ] ] = pair[ 1 ] unless pair[ 1 ] is undefined
 
   # -------------------------------------
   #   Get All Parameters
@@ -88,6 +65,31 @@ class @Spellbook.Classes.QueryParams extends Spellbook.Classes.Base
       return true if matcher is value
 
     return false
+
+  # -------------------------------------
+  #   Parse Query String
+  # -------------------------------------
+  #
+  # @param url { string }
+  #
+  # -------------------------------------
+
+  _parseQueryString : ( url ) ->
+    if url
+      queryString = url.split( '?' )[ 1 ]
+    else
+      queryString = window.location.search.substring( 1 )
+
+    @variables = queryString.split( '&' )
+
+  # -------------------------------------
+  #   Sort Parameters
+  # -------------------------------------
+
+  _sortParams : ->
+    for param in @variables
+      pair = param.split( '=' )
+      @params[ pair[ 0 ] ] = pair[ 1 ] unless pair[ 1 ] is undefined
 
 # -------------------------------------
 #   Usage

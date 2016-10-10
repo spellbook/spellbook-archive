@@ -4,31 +4,45 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
   extend(AutoDuplicateInput, superClass);
 
-  function AutoDuplicateInput() {
-    return AutoDuplicateInput.__super__.constructor.apply(this, arguments);
-  }
-
-  AutoDuplicateInput.prototype._count = 0;
-
-  AutoDuplicateInput.prototype._field = null;
-
-  AutoDuplicateInput.prototype._validators = {
-    email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  AutoDuplicateInput._defaults = {
+    $container: $('.js-autoDuplicateInput-container'),
+    $element: $('.js-autoDuplicateInput'),
+    classInvalid: 'is-invalid',
+    classValid: 'is-valid',
+    dataAttrCloned: 'cloned',
+    dataAttrValidate: 'validate',
+    onDuplicate: null,
+    onInvalid: null,
+    onValid: null
   };
 
-  AutoDuplicateInput.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-autoDuplicateInput'),
-      $container: $('.js-autoDuplicateInput-container'),
-      clonedDataAttribute: 'cloned',
-      validateDataAttribute: 'validate',
-      invalidClass: 'is-invalid',
-      validClass: 'is-valid',
-      onDuplicate: null,
-      onInvalid: null,
-      onValid: null
-    });
-    return this._setEventHandlers();
+  function AutoDuplicateInput() {
+    AutoDuplicateInput.__super__.constructor.apply(this, arguments);
+    this._count = 0;
+    this._field = null;
+    this._validators = {
+      email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    };
+    this._setEventHandlers();
+  }
+
+  AutoDuplicateInput.prototype.getCount = function() {
+    return this._count;
+  };
+
+  AutoDuplicateInput.prototype._duplicate = function() {
+    ++this._count;
+    return this._field.data(this._settings.dataAttrCloned, 'true').clone(true).appendTo(this._settings.$container).removeClass(this._settings.classValid).val('').data(this._settings.dataAttrCloned, '');
+  };
+
+  AutoDuplicateInput.prototype._getValidationType = function() {
+    return this._field.data(this._settings.dataAttrValidate);
+  };
+
+  AutoDuplicateInput.prototype._isValid = function() {
+    var validator;
+    validator = this._getValidationType(this._field);
+    return this._validators["" + validator].test(this._field.val());
   };
 
   AutoDuplicateInput.prototype._setEventHandlers = function() {
@@ -54,32 +68,13 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
     })(this));
   };
 
-  AutoDuplicateInput.prototype._getValidationType = function() {
-    return this._field.data(this._settings.validateDataAttribute);
-  };
-
-  AutoDuplicateInput.prototype._isValid = function() {
-    var validator;
-    validator = this._getValidationType(this._field);
-    return this._validators["" + validator].test(this._field.val());
-  };
-
-  AutoDuplicateInput.prototype._duplicate = function() {
-    ++this._count;
-    return this._field.data(this._settings.clonedDataAttribute, 'true').clone(true).appendTo(this._settings.$container).removeClass(this._settings.validClass).val('').data(this._settings.clonedDataAttribute, '');
-  };
-
   AutoDuplicateInput.prototype._setInputState = function(type) {
     switch (type) {
       case 'invalid':
-        return this._field.removeClass(this._settings.validClass).addClass(this._settings.invalidClass);
+        return this._field.removeClass(this._settings.classValid).addClass(this._settings.classInvalid);
       case 'valid':
-        return this._field.removeClass(this._settings.invalidClass).addClass(this._settings.validClass);
+        return this._field.removeClass(this._settings.classInvalid).addClass(this._settings.classValid);
     }
-  };
-
-  AutoDuplicateInput.prototype.getCount = function() {
-    return this._count;
   };
 
   return AutoDuplicateInput;

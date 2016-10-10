@@ -15,14 +15,20 @@
 class @Spellbook.Classes.Dispatcher extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element : $( '.js-dispatcher' )
-      dataAttr : 'dispatcher-page'
-      events   : []
+  @_defaults :
+    $element : $( '.js-dispatcher' )
+    dataAttr : 'dispatcher-page'
+    events   : []
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ->
+    super
 
     @dispatch()
 

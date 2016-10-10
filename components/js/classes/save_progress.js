@@ -4,25 +4,23 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.SaveProgress = (function(superClass) {
   extend(SaveProgress, superClass);
 
-  function SaveProgress() {
-    return SaveProgress.__super__.constructor.apply(this, arguments);
-  }
-
-  SaveProgress.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-saveProgress'),
-      $container: $('.js-saveProgress-container'),
-      dataAttribute: 'saveprogress'
-    });
-    this._restoreProgress();
-    return this._setEventHandlers();
+  SaveProgress._defaults = {
+    $container: $('.js-saveProgress-container'),
+    $element: $('.js-saveProgress'),
+    dataAttr: 'saveprogress'
   };
+
+  function SaveProgress() {
+    SaveProgress.__super__.constructor.apply(this, arguments);
+    this._restoreProgress();
+    this._setEventHandlers();
+  }
 
   SaveProgress.prototype._eraseProgress = function(container) {
     return container.find(this._settings.$element).each((function(_this) {
       return function(index, elementNode) {
         var key;
-        key = $(elementNode).data(_this._settings.dataAttribute);
+        key = $(elementNode).data(_this._settings.dataAttr);
         return localStorage.removeItem(key);
       };
     })(this));
@@ -33,7 +31,7 @@ this.Spellbook.Classes.SaveProgress = (function(superClass) {
       return function(index, elementNode) {
         var $element, key, value;
         $element = $(elementNode);
-        key = $element.data(_this._settings.dataAttribute);
+        key = $element.data(_this._settings.dataAttr);
         value = localStorage.getItem(key);
         if (value !== null) {
           return $element.val(value);
@@ -47,7 +45,7 @@ this.Spellbook.Classes.SaveProgress = (function(superClass) {
       return function(event) {
         var $element, key, value;
         $element = $(event.currentTarget);
-        key = $element.data(_this._settings.dataAttribute);
+        key = $element.data(_this._settings.dataAttr);
         value = $element.val();
         return _this._storeProgress(key, value);
       };

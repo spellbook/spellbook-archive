@@ -11,6 +11,7 @@
 
 @Spellbook.Helpers.randomizer = ( collection ) ->
   randomNumber = Math.floor( Math.random() * collection.length )
+
   return collection[ randomNumber ]
 
 # -------------------------------------

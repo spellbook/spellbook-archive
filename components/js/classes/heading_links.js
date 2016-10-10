@@ -4,21 +4,15 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.HeadingLinks = (function(superClass) {
   extend(HeadingLinks, superClass);
 
+  HeadingLinks._defaults = {
+    $element: $('h1, h2, h3, h4, h5'),
+    classAnchor: 'anchor'
+  };
+
   function HeadingLinks() {
-    return HeadingLinks.__super__.constructor.apply(this, arguments);
+    HeadingLinks.__super__.constructor.apply(this, arguments);
+    this._addAnchors();
   }
-
-  HeadingLinks.prototype.init = function() {
-    this._setDefaults({
-      $element: $('h1, h2, h3, h4, h5'),
-      anchorClass: 'anchor'
-    });
-    return this._addAnchors();
-  };
-
-  HeadingLinks.prototype._slugify = function(string) {
-    return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-  };
 
   HeadingLinks.prototype._addAnchors = function() {
     return this._settings.$element.each((function(_this) {
@@ -27,9 +21,13 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
         $element = $(elementNode);
         slug = _this._slugify($element.text());
         $element.attr('id', slug);
-        return $element.prepend("<a class='" + _this._settings.anchorClass + "' href='#" + slug + "'>#</a>");
+        return $element.prepend("<a class='" + _this._settings.classAnchor + "' href='#" + slug + "'>#</a>");
       };
     })(this));
+  };
+
+  HeadingLinks.prototype._slugify = function(string) {
+    return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
   };
 
   return HeadingLinks;

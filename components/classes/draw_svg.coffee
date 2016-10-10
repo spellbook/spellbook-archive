@@ -15,26 +15,44 @@
 class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Instance Variables
+  #   Defaults
   # -------------------------------------
 
-  _paths        : []
-  _lengths      : []
-  _currentFrame : 0
-  _totalFrames  : 60
-  _handle       : 0
-  _progress     : 0
+  @_defaults :
+    $element : $( '.js-drawSvg' )
+    prefix   : 'path'
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element : $( '.js-drawSvg' )
-      prefix   : 'path'
+  constructor : ->
+    super
+
+    @_currentFrame = 0
+    @_handle       = 0
+    @_lengths      = []
+    @_paths        = []
+    @_progress     = 0
+    @_totalFrames  = 60
 
     @_setStorage()
+
+  # -------------------------------------
+  #   Draw
+  # -------------------------------------
+
+  draw : =>
+    @_progress = @_currentFrame / @_totalFrames
+
+    if @_progress > 1
+      window.cancelAnimationFrame( @_handle )
+    else
+      @_currentFrame++
+
+      @_setStroke()
+
+      @_handle = window.requestAnimationFrame( @draw )
 
   # -------------------------------------
   #   Set Storage
@@ -58,22 +76,6 @@ class @Spellbook.Classes.DrawSvg extends Spellbook.Classes.Base
   _setStroke : ->
     for index in [ 0...@_paths.length ]
       @_paths[ index ].style.strokeDashoffset = Math.floor( @_lengths[ index ] * ( 1 - @_progress ) )
-
-  # -------------------------------------
-  #   Draw
-  # -------------------------------------
-
-  draw : =>
-    @_progress = @_currentFrame / @_totalFrames
-
-    if @_progress > 1
-      window.cancelAnimationFrame( @_handle )
-    else
-      @_currentFrame++
-
-      @_setStroke()
-
-      @_handle = window.requestAnimationFrame( @draw )
 
 # -------------------------------------
 #   Usage

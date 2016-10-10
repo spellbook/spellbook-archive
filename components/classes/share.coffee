@@ -16,17 +16,23 @@
 class @Spellbook.Classes.Share extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element : $( '.js-share' )
-      popup    :
-        height : 400
-        width  : 575
-        left   : 0
-        top    : 0
+  @_defaults :
+    $element : $( '.js-share' )
+    popup    :
+      height : 400
+      left   : 0
+      top    : 0
+      width  : 575
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ->
+    super
 
     @_setEventHandlers()
 

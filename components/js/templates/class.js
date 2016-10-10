@@ -4,16 +4,14 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.ClassName = (function(superClass) {
   extend(ClassName, superClass);
 
-  function ClassName() {
-    return ClassName.__super__.constructor.apply(this, arguments);
-  }
-
-  ClassName.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-element')
-    });
-    return this._setEventHandlers();
+  ClassName._defaults = {
+    $element: $('.js-element')
   };
+
+  function ClassName(options) {
+    ClassName.__super__.constructor.call(this, options);
+    this._setEventHandlers();
+  }
 
   ClassName.prototype._setEventHandlers = function() {};
 

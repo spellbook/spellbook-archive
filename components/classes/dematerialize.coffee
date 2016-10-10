@@ -7,29 +7,31 @@
 #
 # @param $element    { jQuery object }
 # @param $trigger    { jQuery object | integer }
-# @param itemTitle   { string }
-# @param hiddenClass { string }
+# @param classHidden { string }
+# @param titleItem   { string }
 #
 # *************************************
 
 class @Spellbook.Classes.Dematerialize extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
+  #   Defaults
   # -------------------------------------
 
-  _item : ''
+  @_defaults    :
+    $element    : $( '.js-dematerialize' )
+    $trigger    : $( '.js-dematerialize-trigger' )
+    classHidden : 'is-hidden'
+    titleItem   : 'hidden_element'
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element    : $( '.js-dematerialize' )
-      $trigger    : $( '.js-dematerialize-trigger' )
-      itemTitle   : 'hidden_element'
-      hiddenClass : 'is-hidden'
+  constructor : ->
+    super
+
+    @_item = ''
 
     @_setEventHandlers()
     @_setInitialState()
@@ -51,22 +53,22 @@ class @Spellbook.Classes.Dematerialize extends Spellbook.Classes.Base
   # -------------------------------------
 
   _setInitialState : ->
-    @_item = localStorage.getItem( @_settings.itemTitle )
+    @_item = localStorage.getItem( @_settings.titleItem )
 
     unless @_item is 'true'
-      @_settings.$element.removeClass( @_settings.hiddenClass )
+      @_settings.$element.removeClass( @_settings.classHidden )
 
   # -------------------------------------
   #   Toggle State
   # -------------------------------------
 
   _toggleState : ->
-    unless @_settings.$element.hasClass( @_settings.hiddenClass )
-      @_settings.$element.addClass( @_settings.hiddenClass )
-      @_item = localStorage.setItem( @_settings.itemTitle, 'true' )
+    unless @_settings.$element.hasClass( @_settings.classHidden )
+      @_settings.$element.addClass( @_settings.classHidden )
+      @_item = localStorage.setItem( @_settings.titleItem, 'true' )
     else
-      @_settings.$element.removeClass( @_settings.hiddenClass )
-      @_item = localStorage.removeItem( @_settings.itemTitle )
+      @_settings.$element.removeClass( @_settings.classHidden )
+      @_item = localStorage.removeItem( @_settings.titleItem )
 
   # -------------------------------------
   #   Toggle State Via Key

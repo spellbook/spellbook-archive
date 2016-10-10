@@ -4,61 +4,26 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.FormValidator = (function(superClass) {
   extend(FormValidator, superClass);
 
+  FormValidator._defaults = {
+    $element: $('.js-formValidator'),
+    $input: $('.js-formValidator-input'),
+    $submit: $('.js-formValidator-submit'),
+    classError: 'is-invalid',
+    classMessage: 'js-formValidator-message',
+    dataAttr: 'validate',
+    delimiter: '|',
+    isMessageShown: true,
+    onError: null,
+    onSuccess: null
+  };
+
   function FormValidator() {
-    return FormValidator.__super__.constructor.apply(this, arguments);
+    FormValidator.__super__.constructor.apply(this, arguments);
+    this._input = null;
+    this._errors = [];
+    this._validators = ['required'];
+    this._setEventHandlers();
   }
-
-  FormValidator.prototype._input = null;
-
-  FormValidator.prototype._errors = [];
-
-  FormValidator.prototype._validators = ['required'];
-
-  FormValidator.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-formValidator'),
-      $input: $('.js-formValidator-input'),
-      $submit: $('.js-formValidator-submit'),
-      messageClass: 'js-formValidator-message',
-      errorClass: 'is-invalid',
-      delimiter: '|',
-      dataAttr: 'validate',
-      showMessage: true,
-      onError: null,
-      onSuccess: null
-    });
-    return this._setEventHandlers();
-  };
-
-  FormValidator.prototype._setEventHandlers = function() {
-    this._settings.$element.on('submit', (function(_this) {
-      return function(event) {
-        if (!_this._validateAllFields()) {
-          return event.preventDefault();
-        }
-      };
-    })(this));
-    return this._settings.$input.on('keyup', (function(_this) {
-      return function(event) {
-        _this._input = $(event.currentTarget);
-        return _this.validate(_this._input);
-      };
-    })(this));
-  };
-
-  FormValidator.prototype._validateAllFields = function() {
-    this._settings.$input.each((function(_this) {
-      return function(index, element) {
-        _this._input = $(element);
-        return _this.validate(_this._input);
-      };
-    })(this));
-    if (this._errors.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   FormValidator.prototype.validate = function(input) {
     var i, key, len, parameter, results;
@@ -76,6 +41,10 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     }
   };
 
+  FormValidator.prototype._isValidator = function(parameter) {
+    return this._validators.indexOf(parameter) !== -1;
+  };
+
   FormValidator.prototype._matchValidators = function(match) {
     switch (match) {
       case 'required':
@@ -84,20 +53,6 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
         } else {
           return this._setValidationState('success');
         }
-    }
-  };
-
-  FormValidator.prototype._setValidationState = function(state, message) {
-    var base, base1;
-    switch (state) {
-      case 'error':
-        this._setError(message);
-        this._setInputState(message);
-        return typeof (base = this._settings).onError === "function" ? base.onError(this._settings) : void 0;
-      case 'success':
-        this._removeError();
-        this._removeInputState();
-        return typeof (base1 = this._settings).onSuccess === "function" ? base1.onSuccess(this._settings) : void 0;
     }
   };
 
@@ -116,15 +71,16 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     }
   };
 
-  FormValidator.prototype._isValidator = function(parameter) {
-    return this._validators.indexOf(parameter) !== -1;
+  FormValidator.prototype._removeError = function() {
+    var index;
+    index = this._errors.indexOf(this._input);
+    return this._errors.splice(index, 1);
   };
 
-  FormValidator.prototype._validateRequired = function() {
-    if (this._input.val() === '') {
-      return true;
-    } else {
-      return false;
+  FormValidator.prototype._removeInputState = function() {
+    this._input.removeClass(this._settings.classError);
+    if (this._settings.isMessageShown) {
+      return this._input.next("." + this._settings.classMessage).remove();
     }
   };
 
@@ -135,24 +91,63 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     });
   };
 
-  FormValidator.prototype._removeError = function() {
-    var index;
-    index = this._errors.indexOf(this._input);
-    return this._errors.splice(index, 1);
+  FormValidator.prototype._setEventHandlers = function() {
+    this._settings.$element.on('submit', (function(_this) {
+      return function(event) {
+        if (!_this._validateAllFields()) {
+          return event.preventDefault();
+        }
+      };
+    })(this));
+    return this._settings.$input.on('keyup', (function(_this) {
+      return function(event) {
+        _this._input = $(event.currentTarget);
+        return _this.validate(_this._input);
+      };
+    })(this));
   };
 
   FormValidator.prototype._setInputState = function(message) {
     this._removeInputState();
-    this._input.addClass(this._settings.errorClass);
-    if (this._settings.showMessage) {
-      return this._input.after("<p class='" + this._settings.messageClass + "'>" + message + "</p>");
+    this._input.addClass(this._settings.classError);
+    if (this._settings.isMessageShown) {
+      return this._input.after("<p class='" + this._settings.classMessage + "'>" + message + "</p>");
     }
   };
 
-  FormValidator.prototype._removeInputState = function() {
-    this._input.removeClass(this._settings.errorClass);
-    if (this._settings.showMessage) {
-      return this._input.next("." + this._settings.messageClass).remove();
+  FormValidator.prototype._setValidationState = function(state, message) {
+    var base, base1;
+    switch (state) {
+      case 'error':
+        this._setError(message);
+        this._setInputState(message);
+        return typeof (base = this._settings).onError === "function" ? base.onError(this._settings) : void 0;
+      case 'success':
+        this._removeError();
+        this._removeInputState();
+        return typeof (base1 = this._settings).onSuccess === "function" ? base1.onSuccess(this._settings) : void 0;
+    }
+  };
+
+  FormValidator.prototype._validateAllFields = function() {
+    this._settings.$input.each((function(_this) {
+      return function(index, element) {
+        _this._input = $(element);
+        return _this.validate(_this._input);
+      };
+    })(this));
+    if (this._errors.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  FormValidator.prototype._validateRequired = function() {
+    if (this._input.val() === '') {
+      return true;
+    } else {
+      return false;
     }
   };
 

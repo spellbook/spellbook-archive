@@ -12,22 +12,33 @@
 class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
+  #   Defaults
   # -------------------------------------
 
-  _heights  : []
-  _timer    : null
+  @_defaults :
+    $element : $( '.js-equalHeights' )
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element : $( '.js-equalHeights' )
+  constructor : ->
+    super
+
+    @_heights  = []
+    @_timer    = null
 
     @_setHeight()
     @_setEventHandlers()
+
+  # -------------------------------------
+  #   Set Event Handlers
+  # -------------------------------------
+
+  _setEventHandlers : ->
+    $( window ).on 'resize', =>
+      clearTimeout( @_timer )
+      @_timer = setTimeout( @_setHeight, 250 )
 
   # -------------------------------------
   #   Set Height
@@ -42,15 +53,6 @@ class @Spellbook.Classes.EqualHeights extends Spellbook.Classes.Base
     height = Math.max.apply( Math, @_heights )
 
     @_settings.$element.css( 'height', height )
-
-  # -------------------------------------
-  #   Set Event Handlers
-  # -------------------------------------
-
-  _setEventHandlers : ->
-    $( window ).on 'resize', =>
-      clearTimeout( @_timer )
-      @_timer = setTimeout( @_setHeight, 250 )
 
 # -------------------------------------
 #   Usage

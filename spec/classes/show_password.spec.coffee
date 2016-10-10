@@ -10,9 +10,9 @@ describe 'Spellbook.Classes.ShowPassword', ->
   it 'should show the standard password input by default', ->
     expect( @input ).toHaveAttr( 'type', 'password' )
 
-  it 'should show the password if showByDefault is true', ->
+  it 'should show the password if isShownByDefault is true', ->
     new Spellbook.Classes.ShowPassword
-      showByDefault : true
+      isShownByDefault : true
 
     expect( @input ).toHaveAttr( 'type', 'text' )
 

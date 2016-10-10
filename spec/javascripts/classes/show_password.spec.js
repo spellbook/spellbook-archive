@@ -8,9 +8,9 @@ describe('Spellbook.Classes.ShowPassword', function() {
   it('should show the standard password input by default', function() {
     return expect(this.input).toHaveAttr('type', 'password');
   });
-  it('should show the password if showByDefault is true', function() {
+  it('should show the password if isShownByDefault is true', function() {
     new Spellbook.Classes.ShowPassword({
-      showByDefault: true
+      isShownByDefault: true
     });
     return expect(this.input).toHaveAttr('type', 'text');
   });

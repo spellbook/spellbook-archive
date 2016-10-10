@@ -4,22 +4,19 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Dematerialize = (function(superClass) {
   extend(Dematerialize, superClass);
 
-  function Dematerialize() {
-    return Dematerialize.__super__.constructor.apply(this, arguments);
-  }
-
-  Dematerialize.prototype._item = '';
-
-  Dematerialize.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-dematerialize'),
-      $trigger: $('.js-dematerialize-trigger'),
-      itemTitle: 'hidden_element',
-      hiddenClass: 'is-hidden'
-    });
-    this._setEventHandlers();
-    return this._setInitialState();
+  Dematerialize._defaults = {
+    $element: $('.js-dematerialize'),
+    $trigger: $('.js-dematerialize-trigger'),
+    classHidden: 'is-hidden',
+    titleItem: 'hidden_element'
   };
+
+  function Dematerialize() {
+    Dematerialize.__super__.constructor.apply(this, arguments);
+    this._item = '';
+    this._setEventHandlers();
+    this._setInitialState();
+  }
 
   Dematerialize.prototype._setEventHandlers = function() {
     if (this._settings.$trigger instanceof jQuery) {
@@ -35,19 +32,19 @@ this.Spellbook.Classes.Dematerialize = (function(superClass) {
   };
 
   Dematerialize.prototype._setInitialState = function() {
-    this._item = localStorage.getItem(this._settings.itemTitle);
+    this._item = localStorage.getItem(this._settings.titleItem);
     if (this._item !== 'true') {
-      return this._settings.$element.removeClass(this._settings.hiddenClass);
+      return this._settings.$element.removeClass(this._settings.classHidden);
     }
   };
 
   Dematerialize.prototype._toggleState = function() {
-    if (!this._settings.$element.hasClass(this._settings.hiddenClass)) {
-      this._settings.$element.addClass(this._settings.hiddenClass);
-      return this._item = localStorage.setItem(this._settings.itemTitle, 'true');
+    if (!this._settings.$element.hasClass(this._settings.classHidden)) {
+      this._settings.$element.addClass(this._settings.classHidden);
+      return this._item = localStorage.setItem(this._settings.titleItem, 'true');
     } else {
-      this._settings.$element.removeClass(this._settings.hiddenClass);
-      return this._item = localStorage.removeItem(this._settings.itemTitle);
+      this._settings.$element.removeClass(this._settings.classHidden);
+      return this._item = localStorage.removeItem(this._settings.titleItem);
     }
   };
 

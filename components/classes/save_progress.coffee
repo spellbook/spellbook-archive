@@ -5,23 +5,29 @@
 #
 # *************************************
 #
-# @param $element      { jQuery object }
-# @param $container    { jQuery object }
-# @param dataAttribute { string }
+# @param $container { jQuery object }
+# @param $element   { jQuery object }
+# @param dataAttr   { string }
 #
 # *************************************
 
 class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element      : $( '.js-saveProgress' )
-      $container    : $( '.js-saveProgress-container' )
-      dataAttribute : 'saveprogress'
+  @_defaults   :
+    $container : $( '.js-saveProgress-container' )
+    $element   : $( '.js-saveProgress' )
+    dataAttr   : 'saveprogress'
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ->
+    super
 
     @_restoreProgress()
     @_setEventHandlers()
@@ -36,7 +42,7 @@ class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
 
   _eraseProgress : ( container ) ->
     container.find( @_settings.$element ).each ( index, elementNode ) =>
-      key = $( elementNode ).data( @_settings.dataAttribute )
+      key = $( elementNode ).data( @_settings.dataAttr )
 
       localStorage.removeItem( key )
 
@@ -47,7 +53,7 @@ class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
   _restoreProgress : ->
     @_settings.$element.each ( index, elementNode ) =>
       $element = $( elementNode )
-      key      = $element.data( @_settings.dataAttribute )
+      key      = $element.data( @_settings.dataAttr )
       value    = localStorage.getItem( key )
 
       $element.val( value ) unless value is null
@@ -59,7 +65,7 @@ class @Spellbook.Classes.SaveProgress extends Spellbook.Classes.Base
   _setEventHandlers : ->
     @_settings.$element.on 'input', ( event ) =>
       $element = $( event.currentTarget )
-      key      = $element.data( @_settings.dataAttribute )
+      key      = $element.data( @_settings.dataAttr )
       value    = $element.val()
 
       @_storeProgress( key, value )

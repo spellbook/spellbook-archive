@@ -4,18 +4,16 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Dispatcher = (function(superClass) {
   extend(Dispatcher, superClass);
 
-  function Dispatcher() {
-    return Dispatcher.__super__.constructor.apply(this, arguments);
-  }
-
-  Dispatcher.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-dispatcher'),
-      dataAttr: 'dispatcher-page',
-      events: []
-    });
-    return this.dispatch();
+  Dispatcher._defaults = {
+    $element: $('.js-dispatcher'),
+    dataAttr: 'dispatcher-page',
+    events: []
   };
+
+  function Dispatcher() {
+    Dispatcher.__super__.constructor.apply(this, arguments);
+    this.dispatch();
+  }
 
   Dispatcher.prototype.dispatch = function(event) {
     var i, len, page, ref, results;

@@ -5,26 +5,32 @@
 #
 # *************************************
 #
-# @param $input        { jQuery object }
-# @param $toggle       { jQuery object }
-# @param showByDefault { boolean }
+# @param $input           { jQuery object }
+# @param $toggle          { jQuery object }
+# @param isShownByDefault { boolean }
 #
 # *************************************
 
 class @Spellbook.Classes.ShowPassword extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $input        : $( '.js-showPassword-input' )
-      $toggle       : $( '.js-showPassword-toggle' )
-      showByDefault : false
+  @_defaults         :
+    $input           : $( '.js-showPassword-input' )
+    $toggle          : $( '.js-showPassword-toggle' )
+    isShownByDefault : false
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ->
+    super
 
     @_setEventHandlers()
-    @_showPassword() if @_settings.showByDefault
+    @_showPassword() if @_settings.isShownByDefault
 
   # -------------------------------------
   #   Set Event Handlers

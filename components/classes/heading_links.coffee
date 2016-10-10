@@ -6,22 +6,42 @@
 # *************************************
 #
 # @param $element    { jQuery object }
-# @param anchorClass { string }
+# @param classAnchor { string }
 #
 # *************************************
 
 class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element    : $( 'h1, h2, h3, h4, h5' )
-      anchorClass : 'anchor'
+  @_defaults    :
+    $element    : $( 'h1, h2, h3, h4, h5' )
+    classAnchor : 'anchor'
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ->
+    super
 
     @_addAnchors()
+
+  # -------------------------------------
+  #   Add Anchors
+  # -------------------------------------
+
+  _addAnchors : ->
+    @_settings.$element.each ( index, elementNode ) =>
+      $element = $( elementNode )
+      slug     = @_slugify( $element.text() )
+
+      $element.attr( 'id', slug )
+      $element.prepend """
+        <a class='#{ @_settings.classAnchor }' href='##{ slug }'>#</a>
+      """
 
   # -------------------------------------
   #   Slugify
@@ -36,20 +56,6 @@ class @Spellbook.Classes.HeadingLinks extends Spellbook.Classes.Base
       .toLowerCase()
       .replace( /[^\w ]+/g, '' )
       .replace( /\s+/g, '-' )
-
-  # -------------------------------------
-  #   Add Anchors
-  # -------------------------------------
-
-  _addAnchors : ->
-    @_settings.$element.each ( index, elementNode ) =>
-      $element = $( elementNode )
-      slug     = @_slugify( $element.text() )
-
-      $element.attr( 'id', slug )
-      $element.prepend """
-        <a class='#{ @_settings.anchorClass }' href='##{ slug }'>#</a>
-      """
 
 # -------------------------------------
 #   Usage

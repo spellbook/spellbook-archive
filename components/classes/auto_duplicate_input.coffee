@@ -5,46 +5,85 @@
 #
 # *************************************
 #
-# @param $element              { jQuery object }
-# @param $container            { jQuery object }
-# @param clonedDataAttribute   { string }
-# @param validateDataAttribute { string }
-# @param invalidClass          { string }
-# @param validClass            { string }
-# @param onDuplicate           { function }
-# @param onInvalid             { function }
-# @param onValid               { function }
+# @param $container       { jQuery object }
+# @param $element         { jQuery object }
+# @param classInvalid     { string }
+# @param classValid       { string }
+# @param dataAttrCloned   { string }
+# @param dataAttrValidate { string }
+# @param onDuplicate      { function }
+# @param onInvalid        { function }
+# @param onValid          { function }
 #
 # *************************************
 
 class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
+  #   Defaults
   # -------------------------------------
 
-  _count      : 0
-  _field      : null
-  _validators :
-    email : /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  @_defaults         :
+    $container       : $( '.js-autoDuplicateInput-container' )
+    $element         : $( '.js-autoDuplicateInput' )
+    classInvalid     : 'is-invalid'
+    classValid       : 'is-valid'
+    dataAttrCloned   : 'cloned'
+    dataAttrValidate : 'validate'
+    onDuplicate      : null
+    onInvalid        : null
+    onValid          : null
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element              : $( '.js-autoDuplicateInput' )
-      $container            : $( '.js-autoDuplicateInput-container' )
-      clonedDataAttribute   : 'cloned'
-      validateDataAttribute : 'validate'
-      invalidClass          : 'is-invalid'
-      validClass            : 'is-valid'
-      onDuplicate           : null
-      onInvalid             : null
-      onValid               : null
+  constructor : ->
+    super
+
+    @_count      = 0
+    @_field      = null
+    @_validators =
+      email : /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     @_setEventHandlers()
+
+  # -------------------------------------
+  #   Get Count
+  # -------------------------------------
+
+  getCount : -> return @_count
+
+  # -------------------------------------
+  #   Duplicate
+  # -------------------------------------
+
+  _duplicate : ->
+    ++ @_count
+
+    @_field
+      .data( @_settings.dataAttrCloned, 'true' )
+      .clone( true )
+      .appendTo( @_settings.$container )
+      .removeClass( @_settings.classValid )
+      .val( '' )
+      .data( @_settings.dataAttrCloned, '' )
+
+  # -------------------------------------
+  #   Get Validation Type
+  # -------------------------------------
+
+  _getValidationType : ->
+    @_field.data( @_settings.dataAttrValidate )
+
+  # -------------------------------------
+  #   Is Valid
+  # -------------------------------------
+
+  _isValid :  ->
+    validator = @_getValidationType( @_field )
+
+    @_validators[ "#{ validator }" ].test( @_field.val() )
 
   # -------------------------------------
   #   Set Event Handlers
@@ -67,37 +106,6 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
         @_settings.onInvalid?( @_settings )
 
   # -------------------------------------
-  #   Get Validation Type
-  # -------------------------------------
-
-  _getValidationType : ->
-    @_field.data( @_settings.validateDataAttribute )
-
-  # -------------------------------------
-  #   Is Valid
-  # -------------------------------------
-
-  _isValid :  ->
-    validator = @_getValidationType( @_field )
-
-    @_validators[ "#{ validator }" ].test( @_field.val() )
-
-  # -------------------------------------
-  #   Duplicate
-  # -------------------------------------
-
-  _duplicate : ->
-    ++ @_count
-
-    @_field
-      .data( @_settings.clonedDataAttribute, 'true' )
-      .clone( true )
-      .appendTo( @_settings.$container )
-      .removeClass( @_settings.validClass )
-      .val( '' )
-      .data( @_settings.clonedDataAttribute, '' )
-
-  # -------------------------------------
   #   Set Input State
   # -------------------------------------
 
@@ -105,18 +113,12 @@ class @Spellbook.Classes.AutoDuplicateInput extends Spellbook.Classes.Base
     switch type
       when 'invalid'
         @_field
-          .removeClass( @_settings.validClass )
-          .addClass( @_settings.invalidClass )
+          .removeClass( @_settings.classValid )
+          .addClass( @_settings.classInvalid )
       when 'valid'
         @_field
-          .removeClass( @_settings.invalidClass )
-          .addClass( @_settings.validClass )
-
-  # -------------------------------------
-  #   Get Count
-  # -------------------------------------
-
-  getCount : -> return @_count
+          .removeClass( @_settings.classInvalid )
+          .addClass( @_settings.classValid )
 
 # -------------------------------------
 #   Usage

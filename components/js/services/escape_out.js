@@ -1,12 +1,12 @@
 this.Spellbook.Services.escapeOut = function(options) {
   var settings;
   settings = $.extend({
-    run: null
+    callback: null
   }, options);
   return $(document).on('keyup', function(event) {
     switch (event.which) {
       case 27:
-        return settings.run();
+        return settings.callback();
     }
   });
 };

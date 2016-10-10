@@ -11,18 +11,10 @@ this.Spellbook.Services = {};
 this.Spellbook.Inbox = {};
 
 this.Spellbook.Classes.Base = (function() {
-  Base.prototype._settings = {};
-
   function Base(options) {
     this.options = options;
-    if (typeof this.init === "function") {
-      this.init();
-    }
+    this._settings = $.extend({}, this.constructor._defaults, this.options);
   }
-
-  Base.prototype._setDefaults = function(defaults) {
-    return this._settings = $.extend(defaults, this.options);
-  };
 
   return Base;
 
@@ -51,31 +43,45 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
   extend(AutoDuplicateInput, superClass);
 
-  function AutoDuplicateInput() {
-    return AutoDuplicateInput.__super__.constructor.apply(this, arguments);
-  }
-
-  AutoDuplicateInput.prototype._count = 0;
-
-  AutoDuplicateInput.prototype._field = null;
-
-  AutoDuplicateInput.prototype._validators = {
-    email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  AutoDuplicateInput._defaults = {
+    $container: $('.js-autoDuplicateInput-container'),
+    $element: $('.js-autoDuplicateInput'),
+    classInvalid: 'is-invalid',
+    classValid: 'is-valid',
+    dataAttrCloned: 'cloned',
+    dataAttrValidate: 'validate',
+    onDuplicate: null,
+    onInvalid: null,
+    onValid: null
   };
 
-  AutoDuplicateInput.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-autoDuplicateInput'),
-      $container: $('.js-autoDuplicateInput-container'),
-      clonedDataAttribute: 'cloned',
-      validateDataAttribute: 'validate',
-      invalidClass: 'is-invalid',
-      validClass: 'is-valid',
-      onDuplicate: null,
-      onInvalid: null,
-      onValid: null
-    });
-    return this._setEventHandlers();
+  function AutoDuplicateInput() {
+    AutoDuplicateInput.__super__.constructor.apply(this, arguments);
+    this._count = 0;
+    this._field = null;
+    this._validators = {
+      email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    };
+    this._setEventHandlers();
+  }
+
+  AutoDuplicateInput.prototype.getCount = function() {
+    return this._count;
+  };
+
+  AutoDuplicateInput.prototype._duplicate = function() {
+    ++this._count;
+    return this._field.data(this._settings.dataAttrCloned, 'true').clone(true).appendTo(this._settings.$container).removeClass(this._settings.classValid).val('').data(this._settings.dataAttrCloned, '');
+  };
+
+  AutoDuplicateInput.prototype._getValidationType = function() {
+    return this._field.data(this._settings.dataAttrValidate);
+  };
+
+  AutoDuplicateInput.prototype._isValid = function() {
+    var validator;
+    validator = this._getValidationType(this._field);
+    return this._validators["" + validator].test(this._field.val());
   };
 
   AutoDuplicateInput.prototype._setEventHandlers = function() {
@@ -101,32 +107,13 @@ this.Spellbook.Classes.AutoDuplicateInput = (function(superClass) {
     })(this));
   };
 
-  AutoDuplicateInput.prototype._getValidationType = function() {
-    return this._field.data(this._settings.validateDataAttribute);
-  };
-
-  AutoDuplicateInput.prototype._isValid = function() {
-    var validator;
-    validator = this._getValidationType(this._field);
-    return this._validators["" + validator].test(this._field.val());
-  };
-
-  AutoDuplicateInput.prototype._duplicate = function() {
-    ++this._count;
-    return this._field.data(this._settings.clonedDataAttribute, 'true').clone(true).appendTo(this._settings.$container).removeClass(this._settings.validClass).val('').data(this._settings.clonedDataAttribute, '');
-  };
-
   AutoDuplicateInput.prototype._setInputState = function(type) {
     switch (type) {
       case 'invalid':
-        return this._field.removeClass(this._settings.validClass).addClass(this._settings.invalidClass);
+        return this._field.removeClass(this._settings.classValid).addClass(this._settings.classInvalid);
       case 'valid':
-        return this._field.removeClass(this._settings.invalidClass).addClass(this._settings.validClass);
+        return this._field.removeClass(this._settings.classInvalid).addClass(this._settings.classValid);
     }
-  };
-
-  AutoDuplicateInput.prototype.getCount = function() {
-    return this._count;
   };
 
   return AutoDuplicateInput;
@@ -139,27 +126,24 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.CharacterCounter = (function(superClass) {
   extend(CharacterCounter, superClass);
 
-  function CharacterCounter() {
-    return CharacterCounter.__super__.constructor.apply(this, arguments);
-  }
-
-  CharacterCounter.prototype._count = 0;
-
-  CharacterCounter.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-characterCounter'),
-      $label: $('.js-characterCounter-label'),
-      $number: $('.js-characterCounter-number'),
-      errorClass: 'is-error',
-      successClass: 'is-success',
-      minChars: 0,
-      maxChars: 140,
-      onMinPreceeded: null,
-      onMaxExceeded: null,
-      onConditionsMet: null
-    });
-    return this._setEventHandlers();
+  CharacterCounter._defaults = {
+    $element: $('.js-characterCounter'),
+    $label: $('.js-characterCounter-label'),
+    $number: $('.js-characterCounter-number'),
+    charsMax: 140,
+    charsMin: 0,
+    classError: 'is-error',
+    classSuccess: 'is-success',
+    onConditionsMet: null,
+    onMaxExceeded: null,
+    onMinPreceeded: null
   };
+
+  function CharacterCounter() {
+    CharacterCounter.__super__.constructor.apply(this, arguments);
+    this._count = 0;
+    this._setEventHandlers();
+  }
 
   CharacterCounter.prototype._setEventHandlers = function() {
     return this._settings.$element.on('keyup', (function(_this) {
@@ -169,10 +153,10 @@ this.Spellbook.Classes.CharacterCounter = (function(superClass) {
         $element = $(event.currentTarget);
         _this._count = $element.val().length;
         _this._settings.$number.text(_this._count);
-        if (_this._count > _this._settings.maxChars) {
+        if (_this._count > _this._settings.charsMax) {
           _this._toggleState($element, 'error');
           return typeof (base = _this._settings).onMaxExceeded === "function" ? base.onMaxExceeded(_this._settings) : void 0;
-        } else if (_this._count < _this._settings.minChars) {
+        } else if (_this._count < _this._settings.charsMin) {
           _this._toggleState($element, 'error');
           return typeof (base1 = _this._settings).onMinPreceeded === "function" ? base1.onMinPreceeded(_this._settings) : void 0;
         } else {
@@ -186,15 +170,15 @@ this.Spellbook.Classes.CharacterCounter = (function(superClass) {
   CharacterCounter.prototype._toggleState = function(element, state) {
     switch (state) {
       case 'error':
-        element.removeClass(this._settings.successClass);
-        this._settings.$label.removeClass(this._settings.successClass);
-        element.addClass(this._settings.errorClass);
-        return this._settings.$label.addClass(this._settings.errorClass);
+        element.removeClass(this._settings.classSuccess);
+        this._settings.$label.removeClass(this._settings.classSuccess);
+        element.addClass(this._settings.classError);
+        return this._settings.$label.addClass(this._settings.classError);
       case 'success':
-        element.removeClass(this._settings.errorClass);
-        this._settings.$label.removeClass(this._settings.errorClass);
-        element.addClass(this._settings.successClass);
-        return this._settings.$label.addClass(this._settings.successClass);
+        element.removeClass(this._settings.classError);
+        this._settings.$label.removeClass(this._settings.classError);
+        element.addClass(this._settings.classSuccess);
+        return this._settings.$label.addClass(this._settings.classSuccess);
     }
   };
 
@@ -208,22 +192,19 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Dematerialize = (function(superClass) {
   extend(Dematerialize, superClass);
 
-  function Dematerialize() {
-    return Dematerialize.__super__.constructor.apply(this, arguments);
-  }
-
-  Dematerialize.prototype._item = '';
-
-  Dematerialize.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-dematerialize'),
-      $trigger: $('.js-dematerialize-trigger'),
-      itemTitle: 'hidden_element',
-      hiddenClass: 'is-hidden'
-    });
-    this._setEventHandlers();
-    return this._setInitialState();
+  Dematerialize._defaults = {
+    $element: $('.js-dematerialize'),
+    $trigger: $('.js-dematerialize-trigger'),
+    classHidden: 'is-hidden',
+    titleItem: 'hidden_element'
   };
+
+  function Dematerialize() {
+    Dematerialize.__super__.constructor.apply(this, arguments);
+    this._item = '';
+    this._setEventHandlers();
+    this._setInitialState();
+  }
 
   Dematerialize.prototype._setEventHandlers = function() {
     if (this._settings.$trigger instanceof jQuery) {
@@ -239,19 +220,19 @@ this.Spellbook.Classes.Dematerialize = (function(superClass) {
   };
 
   Dematerialize.prototype._setInitialState = function() {
-    this._item = localStorage.getItem(this._settings.itemTitle);
+    this._item = localStorage.getItem(this._settings.titleItem);
     if (this._item !== 'true') {
-      return this._settings.$element.removeClass(this._settings.hiddenClass);
+      return this._settings.$element.removeClass(this._settings.classHidden);
     }
   };
 
   Dematerialize.prototype._toggleState = function() {
-    if (!this._settings.$element.hasClass(this._settings.hiddenClass)) {
-      this._settings.$element.addClass(this._settings.hiddenClass);
-      return this._item = localStorage.setItem(this._settings.itemTitle, 'true');
+    if (!this._settings.$element.hasClass(this._settings.classHidden)) {
+      this._settings.$element.addClass(this._settings.classHidden);
+      return this._item = localStorage.setItem(this._settings.titleItem, 'true');
     } else {
-      this._settings.$element.removeClass(this._settings.hiddenClass);
-      return this._item = localStorage.removeItem(this._settings.itemTitle);
+      this._settings.$element.removeClass(this._settings.classHidden);
+      return this._item = localStorage.removeItem(this._settings.titleItem);
     }
   };
 
@@ -280,18 +261,16 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Dispatcher = (function(superClass) {
   extend(Dispatcher, superClass);
 
-  function Dispatcher() {
-    return Dispatcher.__super__.constructor.apply(this, arguments);
-  }
-
-  Dispatcher.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-dispatcher'),
-      dataAttr: 'dispatcher-page',
-      events: []
-    });
-    return this.dispatch();
+  Dispatcher._defaults = {
+    $element: $('.js-dispatcher'),
+    dataAttr: 'dispatcher-page',
+    events: []
   };
+
+  function Dispatcher() {
+    Dispatcher.__super__.constructor.apply(this, arguments);
+    this.dispatch();
+  }
 
   Dispatcher.prototype.dispatch = function(event) {
     var i, len, page, ref, results;
@@ -350,29 +329,32 @@ var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); 
 this.Spellbook.Classes.DrawSvg = (function(superClass) {
   extend(DrawSvg, superClass);
 
+  DrawSvg._defaults = {
+    $element: $('.js-drawSvg'),
+    prefix: 'path'
+  };
+
   function DrawSvg() {
     this.draw = bind(this.draw, this);
-    return DrawSvg.__super__.constructor.apply(this, arguments);
+    DrawSvg.__super__.constructor.apply(this, arguments);
+    this._currentFrame = 0;
+    this._handle = 0;
+    this._lengths = [];
+    this._paths = [];
+    this._progress = 0;
+    this._totalFrames = 60;
+    this._setStorage();
   }
 
-  DrawSvg.prototype._paths = [];
-
-  DrawSvg.prototype._lengths = [];
-
-  DrawSvg.prototype._currentFrame = 0;
-
-  DrawSvg.prototype._totalFrames = 60;
-
-  DrawSvg.prototype._handle = 0;
-
-  DrawSvg.prototype._progress = 0;
-
-  DrawSvg.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-drawSvg'),
-      prefix: 'path'
-    });
-    return this._setStorage();
+  DrawSvg.prototype.draw = function() {
+    this._progress = this._currentFrame / this._totalFrames;
+    if (this._progress > 1) {
+      return window.cancelAnimationFrame(this._handle);
+    } else {
+      this._currentFrame++;
+      this._setStroke();
+      return this._handle = window.requestAnimationFrame(this.draw);
+    }
   };
 
   DrawSvg.prototype._setStorage = function() {
@@ -398,17 +380,6 @@ this.Spellbook.Classes.DrawSvg = (function(superClass) {
     return results;
   };
 
-  DrawSvg.prototype.draw = function() {
-    this._progress = this._currentFrame / this._totalFrames;
-    if (this._progress > 1) {
-      return window.cancelAnimationFrame(this._handle);
-    } else {
-      this._currentFrame++;
-      this._setStroke();
-      return this._handle = window.requestAnimationFrame(this.draw);
-    }
-  };
-
   return DrawSvg;
 
 })(Spellbook.Classes.Base);
@@ -419,20 +390,25 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.EqualHeights = (function(superClass) {
   extend(EqualHeights, superClass);
 
+  EqualHeights._defaults = {
+    $element: $('.js-equalHeights')
+  };
+
   function EqualHeights() {
-    return EqualHeights.__super__.constructor.apply(this, arguments);
+    EqualHeights.__super__.constructor.apply(this, arguments);
+    this._heights = [];
+    this._timer = null;
+    this._setHeight();
+    this._setEventHandlers();
   }
 
-  EqualHeights.prototype._heights = [];
-
-  EqualHeights.prototype._timer = null;
-
-  EqualHeights.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-equalHeights')
-    });
-    this._setHeight();
-    return this._setEventHandlers();
+  EqualHeights.prototype._setEventHandlers = function() {
+    return $(window).on('resize', (function(_this) {
+      return function() {
+        clearTimeout(_this._timer);
+        return _this._timer = setTimeout(_this._setHeight, 250);
+      };
+    })(this));
   };
 
   EqualHeights.prototype._setHeight = function() {
@@ -447,15 +423,6 @@ this.Spellbook.Classes.EqualHeights = (function(superClass) {
     return this._settings.$element.css('height', height);
   };
 
-  EqualHeights.prototype._setEventHandlers = function() {
-    return $(window).on('resize', (function(_this) {
-      return function() {
-        clearTimeout(_this._timer);
-        return _this._timer = setTimeout(_this._setHeight, 250);
-      };
-    })(this));
-  };
-
   return EqualHeights;
 
 })(Spellbook.Classes.Base);
@@ -466,61 +433,26 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.FormValidator = (function(superClass) {
   extend(FormValidator, superClass);
 
+  FormValidator._defaults = {
+    $element: $('.js-formValidator'),
+    $input: $('.js-formValidator-input'),
+    $submit: $('.js-formValidator-submit'),
+    classError: 'is-invalid',
+    classMessage: 'js-formValidator-message',
+    dataAttr: 'validate',
+    delimiter: '|',
+    isMessageShown: true,
+    onError: null,
+    onSuccess: null
+  };
+
   function FormValidator() {
-    return FormValidator.__super__.constructor.apply(this, arguments);
+    FormValidator.__super__.constructor.apply(this, arguments);
+    this._input = null;
+    this._errors = [];
+    this._validators = ['required'];
+    this._setEventHandlers();
   }
-
-  FormValidator.prototype._input = null;
-
-  FormValidator.prototype._errors = [];
-
-  FormValidator.prototype._validators = ['required'];
-
-  FormValidator.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-formValidator'),
-      $input: $('.js-formValidator-input'),
-      $submit: $('.js-formValidator-submit'),
-      messageClass: 'js-formValidator-message',
-      errorClass: 'is-invalid',
-      delimiter: '|',
-      dataAttr: 'validate',
-      showMessage: true,
-      onError: null,
-      onSuccess: null
-    });
-    return this._setEventHandlers();
-  };
-
-  FormValidator.prototype._setEventHandlers = function() {
-    this._settings.$element.on('submit', (function(_this) {
-      return function(event) {
-        if (!_this._validateAllFields()) {
-          return event.preventDefault();
-        }
-      };
-    })(this));
-    return this._settings.$input.on('keyup', (function(_this) {
-      return function(event) {
-        _this._input = $(event.currentTarget);
-        return _this.validate(_this._input);
-      };
-    })(this));
-  };
-
-  FormValidator.prototype._validateAllFields = function() {
-    this._settings.$input.each((function(_this) {
-      return function(index, element) {
-        _this._input = $(element);
-        return _this.validate(_this._input);
-      };
-    })(this));
-    if (this._errors.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   FormValidator.prototype.validate = function(input) {
     var i, key, len, parameter, results;
@@ -538,6 +470,10 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     }
   };
 
+  FormValidator.prototype._isValidator = function(parameter) {
+    return this._validators.indexOf(parameter) !== -1;
+  };
+
   FormValidator.prototype._matchValidators = function(match) {
     switch (match) {
       case 'required':
@@ -546,20 +482,6 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
         } else {
           return this._setValidationState('success');
         }
-    }
-  };
-
-  FormValidator.prototype._setValidationState = function(state, message) {
-    var base, base1;
-    switch (state) {
-      case 'error':
-        this._setError(message);
-        this._setInputState(message);
-        return typeof (base = this._settings).onError === "function" ? base.onError(this._settings) : void 0;
-      case 'success':
-        this._removeError();
-        this._removeInputState();
-        return typeof (base1 = this._settings).onSuccess === "function" ? base1.onSuccess(this._settings) : void 0;
     }
   };
 
@@ -578,15 +500,16 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     }
   };
 
-  FormValidator.prototype._isValidator = function(parameter) {
-    return this._validators.indexOf(parameter) !== -1;
+  FormValidator.prototype._removeError = function() {
+    var index;
+    index = this._errors.indexOf(this._input);
+    return this._errors.splice(index, 1);
   };
 
-  FormValidator.prototype._validateRequired = function() {
-    if (this._input.val() === '') {
-      return true;
-    } else {
-      return false;
+  FormValidator.prototype._removeInputState = function() {
+    this._input.removeClass(this._settings.classError);
+    if (this._settings.isMessageShown) {
+      return this._input.next("." + this._settings.classMessage).remove();
     }
   };
 
@@ -597,24 +520,63 @@ this.Spellbook.Classes.FormValidator = (function(superClass) {
     });
   };
 
-  FormValidator.prototype._removeError = function() {
-    var index;
-    index = this._errors.indexOf(this._input);
-    return this._errors.splice(index, 1);
+  FormValidator.prototype._setEventHandlers = function() {
+    this._settings.$element.on('submit', (function(_this) {
+      return function(event) {
+        if (!_this._validateAllFields()) {
+          return event.preventDefault();
+        }
+      };
+    })(this));
+    return this._settings.$input.on('keyup', (function(_this) {
+      return function(event) {
+        _this._input = $(event.currentTarget);
+        return _this.validate(_this._input);
+      };
+    })(this));
   };
 
   FormValidator.prototype._setInputState = function(message) {
     this._removeInputState();
-    this._input.addClass(this._settings.errorClass);
-    if (this._settings.showMessage) {
-      return this._input.after("<p class='" + this._settings.messageClass + "'>" + message + "</p>");
+    this._input.addClass(this._settings.classError);
+    if (this._settings.isMessageShown) {
+      return this._input.after("<p class='" + this._settings.classMessage + "'>" + message + "</p>");
     }
   };
 
-  FormValidator.prototype._removeInputState = function() {
-    this._input.removeClass(this._settings.errorClass);
-    if (this._settings.showMessage) {
-      return this._input.next("." + this._settings.messageClass).remove();
+  FormValidator.prototype._setValidationState = function(state, message) {
+    var base, base1;
+    switch (state) {
+      case 'error':
+        this._setError(message);
+        this._setInputState(message);
+        return typeof (base = this._settings).onError === "function" ? base.onError(this._settings) : void 0;
+      case 'success':
+        this._removeError();
+        this._removeInputState();
+        return typeof (base1 = this._settings).onSuccess === "function" ? base1.onSuccess(this._settings) : void 0;
+    }
+  };
+
+  FormValidator.prototype._validateAllFields = function() {
+    this._settings.$input.each((function(_this) {
+      return function(index, element) {
+        _this._input = $(element);
+        return _this.validate(_this._input);
+      };
+    })(this));
+    if (this._errors.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  FormValidator.prototype._validateRequired = function() {
+    if (this._input.val() === '') {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -628,21 +590,15 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.HeadingLinks = (function(superClass) {
   extend(HeadingLinks, superClass);
 
+  HeadingLinks._defaults = {
+    $element: $('h1, h2, h3, h4, h5'),
+    classAnchor: 'anchor'
+  };
+
   function HeadingLinks() {
-    return HeadingLinks.__super__.constructor.apply(this, arguments);
+    HeadingLinks.__super__.constructor.apply(this, arguments);
+    this._addAnchors();
   }
-
-  HeadingLinks.prototype.init = function() {
-    this._setDefaults({
-      $element: $('h1, h2, h3, h4, h5'),
-      anchorClass: 'anchor'
-    });
-    return this._addAnchors();
-  };
-
-  HeadingLinks.prototype._slugify = function(string) {
-    return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
-  };
 
   HeadingLinks.prototype._addAnchors = function() {
     return this._settings.$element.each((function(_this) {
@@ -651,9 +607,13 @@ this.Spellbook.Classes.HeadingLinks = (function(superClass) {
         $element = $(elementNode);
         slug = _this._slugify($element.text());
         $element.attr('id', slug);
-        return $element.prepend("<a class='" + _this._settings.anchorClass + "' href='#" + slug + "'>#</a>");
+        return $element.prepend("<a class='" + _this._settings.classAnchor + "' href='#" + slug + "'>#</a>");
       };
     })(this));
+  };
+
+  HeadingLinks.prototype._slugify = function(string) {
+    return string.toLowerCase().replace(/[^\w ]+/g, '').replace(/\s+/g, '-');
   };
 
   return HeadingLinks;
@@ -666,16 +626,14 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
   extend(KeyboardEvents, superClass);
 
-  function KeyboardEvents() {
-    return KeyboardEvents.__super__.constructor.apply(this, arguments);
-  }
-
-  KeyboardEvents.prototype.init = function() {
-    this._setDefaults({
-      events: []
-    });
-    return this.emit();
+  KeyboardEvents._defaults = {
+    events: []
   };
+
+  function KeyboardEvents() {
+    KeyboardEvents.__super__.constructor.apply(this, arguments);
+    this.emit();
+  }
 
   KeyboardEvents.prototype.emit = function(event) {
     var i, len, ref, results;
@@ -695,6 +653,13 @@ this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
     }
   };
 
+  KeyboardEvents.prototype._getKeyCode = function(event) {
+    var charCode;
+    event = event || window.event;
+    charCode = event.keyCode || event.which;
+    return charCode;
+  };
+
   KeyboardEvents.prototype._match = function(event) {
     return $(document).on('keyup', (function(_this) {
       return function(e) {
@@ -710,13 +675,6 @@ this.Spellbook.Classes.KeyboardEvents = (function(superClass) {
     })(this));
   };
 
-  KeyboardEvents.prototype._getKeyCode = function(event) {
-    var charCode;
-    event = event || window.event;
-    charCode = event.keyCode || event.which;
-    return charCode;
-  };
-
   return KeyboardEvents;
 
 })(Spellbook.Classes.Base);
@@ -727,27 +685,65 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.LiveSearch = (function(superClass) {
   extend(LiveSearch, superClass);
 
+  LiveSearch._defaults = {
+    $container: $('.js-search-container'),
+    $element: $('.js-search'),
+    $query: $('.js-search-query'),
+    classHidden: 'is-hidden',
+    isEmptyMessageShown: true,
+    onClear: null,
+    onEmpty: null,
+    onFound: null,
+    onKeyup: null,
+    selectorEmpty: '.js-search-empty',
+    selectorItem: '.js-search-item'
+  };
+
   function LiveSearch() {
-    return LiveSearch.__super__.constructor.apply(this, arguments);
+    LiveSearch.__super__.constructor.apply(this, arguments);
+    this._query = '';
+    this._setEventHandlers();
   }
 
-  LiveSearch.prototype._query = '';
+  LiveSearch.prototype._clearEmptyMessage = function() {
+    if (this._settings.isEmptyMessageShown && $(this._settings.selectorEmpty).length > 0) {
+      return $(this._settings.selectorEmpty).remove();
+    }
+  };
 
-  LiveSearch.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-search'),
-      $query: $('.js-search-query'),
-      $container: $('.js-search-container'),
-      itemNode: '.js-search-item',
-      hiddenClass: 'is-hidden',
-      emptyMessage: true,
-      emptyNode: '.js-search-empty',
-      onClear: null,
-      onEmpty: null,
-      onFound: null,
-      onKeyup: null
-    });
-    return this._setEventHandlers();
+  LiveSearch.prototype._handleEmptyResults = function() {
+    var base, emptyClass;
+    if (this._isEmpty()) {
+      if (this._settings.isEmptyMessageShown) {
+        emptyClass = this._settings.selectorEmpty.replace('.', '');
+      }
+      $("<p class='" + emptyClass + "'>\n  There are no results matching '" + this._query + "'.\n</p>").insertAfter(this._settings.$container);
+      return typeof (base = this._settings).onEmpty === "function" ? base.onEmpty(this._settings) : void 0;
+    }
+  };
+
+  LiveSearch.prototype._isEmpty = function() {
+    return $(this._settings.selectorItem + "." + this._settings.classHidden).length === $(this._settings.selectorItem).length;
+  };
+
+  LiveSearch.prototype._isQueryAbsent = function(element) {
+    return element.text().search(new RegExp(this._query, 'i')) < 0;
+  };
+
+  LiveSearch.prototype._parseDom = function() {
+    this._settings.$query.each((function(_this) {
+      return function(index, elementNode) {
+        var $element, base;
+        $element = $(elementNode);
+        if (_this._isQueryAbsent($element)) {
+          return $element.closest(_this._settings.selectorItem).addClass(_this._settings.classHidden);
+        } else {
+          $element.closest(_this._settings.selectorItem).removeClass(_this._settings.classHidden);
+          return typeof (base = _this._settings).onFound === "function" ? base.onFound(_this._settings) : void 0;
+        }
+      };
+    })(this));
+    return this._handleEmptyResults();
   };
 
   LiveSearch.prototype._setEventHandlers = function() {
@@ -759,7 +755,7 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
           base.onKeyup(_this._settings);
         }
         if (_this._query === '') {
-          $(_this._settings.itemNode).removeClass(_this._settings.hiddenClass);
+          $(_this._settings.selectorItem).removeClass(_this._settings.classHidden);
           _this._clearEmptyMessage();
           if (typeof (base1 = _this._settings).onClear === "function") {
             base1.onClear(_this._settings);
@@ -769,47 +765,6 @@ this.Spellbook.Classes.LiveSearch = (function(superClass) {
         return _this._parseDom();
       };
     })(this));
-  };
-
-  LiveSearch.prototype._parseDom = function() {
-    this._settings.$query.each((function(_this) {
-      return function(index, elementNode) {
-        var $element, base;
-        $element = $(elementNode);
-        if (_this._isQueryAbsent($element)) {
-          return $element.closest(_this._settings.itemNode).addClass(_this._settings.hiddenClass);
-        } else {
-          $element.closest(_this._settings.itemNode).removeClass(_this._settings.hiddenClass);
-          return typeof (base = _this._settings).onFound === "function" ? base.onFound(_this._settings) : void 0;
-        }
-      };
-    })(this));
-    return this._handleEmptyResults();
-  };
-
-  LiveSearch.prototype._clearEmptyMessage = function() {
-    if (this._settings.emptyMessage && $(this._settings.emptyNode).length > 0) {
-      return $(this._settings.emptyNode).remove();
-    }
-  };
-
-  LiveSearch.prototype._handleEmptyResults = function() {
-    var base, emptyClass;
-    if (this._isEmpty()) {
-      if (this._settings.emptyMessage) {
-        emptyClass = this._settings.emptyNode.replace('.', '');
-      }
-      $("<p class='" + emptyClass + "'>\n  There are no results matching '" + this._query + "'.\n</p>").insertAfter(this._settings.$container);
-      return typeof (base = this._settings).onEmpty === "function" ? base.onEmpty(this._settings) : void 0;
-    }
-  };
-
-  LiveSearch.prototype._isQueryAbsent = function(element) {
-    return element.text().search(new RegExp(this._query, 'i')) < 0;
-  };
-
-  LiveSearch.prototype._isEmpty = function() {
-    return $(this._settings.itemNode + "." + this._settings.hiddenClass).length === $(this._settings.itemNode).length;
   };
 
   return LiveSearch;
@@ -822,26 +777,22 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Modal = (function(superClass) {
   extend(Modal, superClass);
 
-  function Modal() {
-    return Modal.__super__.constructor.apply(this, arguments);
-  }
-
-  Modal.prototype._$modal = null;
-
-  Modal.prototype._$backdrop = null;
-
-  Modal.prototype.init = function() {
-    this._setDefaults({
-      $trigger: $('.js-modal-trigger'),
-      $close: $('.js-modal-close'),
-      dataAttribute: 'modal',
-      backdropClass: 'modal-backdrop',
-      activeClass: 'is-active',
-      inactiveClass: 'is-inactive',
-      activeBodyClass: 'is-modal-active'
-    });
-    return this._setEventHandlers();
+  Modal._defaults = {
+    $close: $('.js-modal-close'),
+    $trigger: $('.js-modal-trigger'),
+    classActive: 'is-active',
+    classBackdrop: 'modal-backdrop',
+    classBodyActive: 'is-modal-active',
+    classInactive: 'is-inactive',
+    dataAttr: 'modal'
   };
+
+  function Modal() {
+    Modal.__super__.constructor.apply(this, arguments);
+    this._$modal = null;
+    this._$backdrop = null;
+    this._setEventHandlers();
+  }
 
   Modal.prototype.trigger = function($element, event, removeBackdrop, callback) {
     if (removeBackdrop == null) {
@@ -853,12 +804,12 @@ this.Spellbook.Classes.Modal = (function(superClass) {
     this._$modal = $element;
     switch (event) {
       case 'open':
-        $element.addClass(this._settings.activeClass);
-        $('body').addClass(this._settings.activeBodyClass);
+        $element.addClass(this._settings.classActive);
+        $('body').addClass(this._settings.classBodyActive);
         break;
       case 'close':
-        $element.removeClass(this._settings.activeClass);
-        $('body').removeClass(this._settings.activeBodyClass);
+        $element.removeClass(this._settings.classActive);
+        $('body').removeClass(this._settings.classBodyActive);
         this._cleanupEvents();
     }
     if (!removeBackdrop) {
@@ -870,36 +821,9 @@ this.Spellbook.Classes.Modal = (function(superClass) {
     return this._setActiveEventHandlers();
   };
 
-  Modal.prototype._toggleOverlay = function(event) {
-    switch (event) {
-      case 'open':
-        $('<div class=' + this._settings.backdropClass + '></div>').appendTo($('body'));
-        this._$backdrop = $("." + this._settings.backdropClass);
-        return setTimeout((function(_this) {
-          return function() {
-            return _this._$backdrop.addClass(_this._settings.activeClass);
-          };
-        })(this), 25);
-      case 'close':
-        this._$backdrop.removeClass(this._settings.activeClass);
-        return setTimeout((function(_this) {
-          return function() {
-            return _this._$backdrop.remove();
-          };
-        })(this), 500);
-    }
-  };
-
-  Modal.prototype._setEventHandlers = function() {
-    return this._settings.$trigger.on('click', (function(_this) {
-      return function(event) {
-        var selector;
-        event.preventDefault();
-        selector = $(event.currentTarget).data(_this._settings.dataAttribute);
-        _this._$modal = $(selector);
-        return _this.trigger(_this._$modal, 'open');
-      };
-    })(this));
+  Modal.prototype._cleanupEvents = function() {
+    this._settings.$close.off('click');
+    return $(document).off('keydown');
   };
 
   Modal.prototype._setActiveEventHandlers = function() {
@@ -924,9 +848,36 @@ this.Spellbook.Classes.Modal = (function(superClass) {
     })(this));
   };
 
-  Modal.prototype._cleanupEvents = function() {
-    this._settings.$close.off('click');
-    return $(document).off('keydown');
+  Modal.prototype._setEventHandlers = function() {
+    return this._settings.$trigger.on('click', (function(_this) {
+      return function(event) {
+        var selector;
+        event.preventDefault();
+        selector = $(event.currentTarget).data(_this._settings.dataAttr);
+        _this._$modal = $(selector);
+        return _this.trigger(_this._$modal, 'open');
+      };
+    })(this));
+  };
+
+  Modal.prototype._toggleOverlay = function(event) {
+    switch (event) {
+      case 'open':
+        $('<div class=' + this._settings.classBackdrop + '></div>').appendTo($('body'));
+        this._$backdrop = $("." + this._settings.classBackdrop);
+        return setTimeout((function(_this) {
+          return function() {
+            return _this._$backdrop.addClass(_this._settings.classActive);
+          };
+        })(this), 25);
+      case 'close':
+        this._$backdrop.removeClass(this._settings.classActive);
+        return setTimeout((function(_this) {
+          return function() {
+            return _this._$backdrop.remove();
+          };
+        })(this), 500);
+    }
   };
 
   return Modal;
@@ -939,40 +890,33 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.QuantityInput = (function(superClass) {
   extend(QuantityInput, superClass);
 
+  QuantityInput._defaults = {
+    $decrease: $('.js-quantityInput-decrease'),
+    $element: $('.js-quantityInput'),
+    $field: $('.js-quantityInput-field'),
+    $increase: $('.js-quantityInput-increase'),
+    $target: $('.js-quantityInput-target'),
+    onDecrease: null,
+    onIncrease: null,
+    onTargetUpdate: null,
+    valueBase: 29,
+    valueMax: 100,
+    valueMin: 1,
+    valuePrefix: '$'
+  };
+
   function QuantityInput() {
-    return QuantityInput.__super__.constructor.apply(this, arguments);
-  }
-
-  QuantityInput.prototype._value = null;
-
-  QuantityInput.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-quantityInput'),
-      $field: $('.js-quantityInput-field'),
-      $increase: $('.js-quantityInput-increase'),
-      $decrease: $('.js-quantityInput-decrease'),
-      $target: $('.js-quantityInput-target'),
-      targetBaseValue: 29,
-      targetValuePrefix: '$',
-      minValue: 1,
-      maxValue: 100,
-      onIncrease: null,
-      onDecrease: null,
-      onTargetUpdate: null
-    });
+    QuantityInput.__super__.constructor.apply(this, arguments);
+    this._value = null;
     this._setValue();
-    return this._setEventHandlers();
-  };
-
-  QuantityInput.prototype._setValue = function() {
-    return this._value = parseInt(this._settings.$element.val());
-  };
+    this._setEventHandlers();
+  }
 
   QuantityInput.prototype._setEventHandlers = function() {
     this._settings.$element.on('keyup', (function(_this) {
       return function(event) {
         _this._setValue();
-        if (!(isNaN(_this._value) || _this._value < _this._settings.minValue || _this._value > _this._settings.maxValue)) {
+        if (!(isNaN(_this._value) || _this._value < _this._settings.valueMin || _this._value > _this._settings.valueMax)) {
           return _this._updateValue();
         }
       };
@@ -981,7 +925,7 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
       return function(event) {
         var base;
         event.preventDefault();
-        if (!(_this._value >= _this._settings.maxValue)) {
+        if (!(_this._value >= _this._settings.valueMax)) {
           _this._updateValue('up');
         }
         return typeof (base = _this._settings).onIncrease === "function" ? base.onIncrease(_this._settings) : void 0;
@@ -991,12 +935,22 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
       return function(event) {
         var base;
         event.preventDefault();
-        if (!(_this._value <= _this._settings.minValue)) {
+        if (!(_this._value <= _this._settings.valueMin)) {
           _this._updateValue('down');
         }
         return typeof (base = _this._settings).onDecrease === "function" ? base.onDecrease(_this._settings) : void 0;
       };
     })(this));
+  };
+
+  QuantityInput.prototype._setValue = function() {
+    return this._value = parseInt(this._settings.$element.val());
+  };
+
+  QuantityInput.prototype._updateTarget = function() {
+    var updatedValue;
+    updatedValue = this._value * this._settings.valueBase;
+    return this._settings.$target.text("" + this._settings.valuePrefix + updatedValue);
   };
 
   QuantityInput.prototype._updateValue = function(direction) {
@@ -1018,12 +972,6 @@ this.Spellbook.Classes.QuantityInput = (function(superClass) {
     return typeof (base = this._settings).onTargetUpdate === "function" ? base.onTargetUpdate(this._settings) : void 0;
   };
 
-  QuantityInput.prototype._updateTarget = function() {
-    var updatedValue;
-    updatedValue = this._value * this._settings.targetBaseValue;
-    return this._settings.$target.text("" + this._settings.targetValuePrefix + updatedValue);
-  };
-
   return QuantityInput;
 
 })(Spellbook.Classes.Base);
@@ -1034,47 +982,17 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.QueryParams = (function(superClass) {
   extend(QueryParams, superClass);
 
+  QueryParams._defaults = {
+    url: null
+  };
+
   function QueryParams() {
-    return QueryParams.__super__.constructor.apply(this, arguments);
-  }
-
-  QueryParams.prototype.params = {};
-
-  QueryParams.prototype.variables = [];
-
-  QueryParams.prototype.init = function() {
-    this._setDefaults({
-      url: null
-    });
+    QueryParams.__super__.constructor.apply(this, arguments);
+    this.params = {};
+    this.variables = [];
     this._parseQueryString(this._settings.url);
-    return this._sortParams();
-  };
-
-  QueryParams.prototype._parseQueryString = function(url) {
-    var queryString;
-    if (url) {
-      queryString = url.split('?')[1];
-    } else {
-      queryString = window.location.search.substring(1);
-    }
-    return this.variables = queryString.split('&');
-  };
-
-  QueryParams.prototype._sortParams = function() {
-    var i, len, pair, param, ref, results;
-    ref = this.variables;
-    results = [];
-    for (i = 0, len = ref.length; i < len; i++) {
-      param = ref[i];
-      pair = param.split('=');
-      if (pair[1] !== void 0) {
-        results.push(this.params[pair[0]] = pair[1]);
-      } else {
-        results.push(void 0);
-      }
-    }
-    return results;
-  };
+    this._sortParams();
+  }
 
   QueryParams.prototype.allParams = function() {
     return this.params;
@@ -1104,6 +1022,32 @@ this.Spellbook.Classes.QueryParams = (function(superClass) {
     return false;
   };
 
+  QueryParams.prototype._parseQueryString = function(url) {
+    var queryString;
+    if (url) {
+      queryString = url.split('?')[1];
+    } else {
+      queryString = window.location.search.substring(1);
+    }
+    return this.variables = queryString.split('&');
+  };
+
+  QueryParams.prototype._sortParams = function() {
+    var i, len, pair, param, ref, results;
+    ref = this.variables;
+    results = [];
+    for (i = 0, len = ref.length; i < len; i++) {
+      param = ref[i];
+      pair = param.split('=');
+      if (pair[1] !== void 0) {
+        results.push(this.params[pair[0]] = pair[1]);
+      } else {
+        results.push(void 0);
+      }
+    }
+    return results;
+  };
+
   return QueryParams;
 
 })(Spellbook.Classes.Base);
@@ -1114,25 +1058,23 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.SaveProgress = (function(superClass) {
   extend(SaveProgress, superClass);
 
-  function SaveProgress() {
-    return SaveProgress.__super__.constructor.apply(this, arguments);
-  }
-
-  SaveProgress.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-saveProgress'),
-      $container: $('.js-saveProgress-container'),
-      dataAttribute: 'saveprogress'
-    });
-    this._restoreProgress();
-    return this._setEventHandlers();
+  SaveProgress._defaults = {
+    $container: $('.js-saveProgress-container'),
+    $element: $('.js-saveProgress'),
+    dataAttr: 'saveprogress'
   };
+
+  function SaveProgress() {
+    SaveProgress.__super__.constructor.apply(this, arguments);
+    this._restoreProgress();
+    this._setEventHandlers();
+  }
 
   SaveProgress.prototype._eraseProgress = function(container) {
     return container.find(this._settings.$element).each((function(_this) {
       return function(index, elementNode) {
         var key;
-        key = $(elementNode).data(_this._settings.dataAttribute);
+        key = $(elementNode).data(_this._settings.dataAttr);
         return localStorage.removeItem(key);
       };
     })(this));
@@ -1143,7 +1085,7 @@ this.Spellbook.Classes.SaveProgress = (function(superClass) {
       return function(index, elementNode) {
         var $element, key, value;
         $element = $(elementNode);
-        key = $element.data(_this._settings.dataAttribute);
+        key = $element.data(_this._settings.dataAttr);
         value = localStorage.getItem(key);
         if (value !== null) {
           return $element.val(value);
@@ -1157,7 +1099,7 @@ this.Spellbook.Classes.SaveProgress = (function(superClass) {
       return function(event) {
         var $element, key, value;
         $element = $(event.currentTarget);
-        key = $element.data(_this._settings.dataAttribute);
+        key = $element.data(_this._settings.dataAttr);
         value = $element.val();
         return _this._storeProgress(key, value);
       };
@@ -1183,17 +1125,15 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.SelectText = (function(superClass) {
   extend(SelectText, superClass);
 
-  function SelectText() {
-    return SelectText.__super__.constructor.apply(this, arguments);
-  }
-
-  SelectText.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-selectText'),
-      onClick: null
-    });
-    return this._setEventHandlers();
+  SelectText._defaults = {
+    $element: $('.js-selectText'),
+    onClick: null
   };
+
+  function SelectText() {
+    SelectText.__super__.constructor.apply(this, arguments);
+    this._setEventHandlers();
+  }
 
   SelectText.prototype._selectElement = function($element) {
     var elementNode, range, selection;
@@ -1232,22 +1172,20 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Share = (function(superClass) {
   extend(Share, superClass);
 
-  function Share() {
-    return Share.__super__.constructor.apply(this, arguments);
-  }
-
-  Share.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-share'),
-      popup: {
-        height: 400,
-        width: 575,
-        left: 0,
-        top: 0
-      }
-    });
-    return this._setEventHandlers();
+  Share._defaults = {
+    $element: $('.js-share'),
+    popup: {
+      height: 400,
+      left: 0,
+      top: 0,
+      width: 575
+    }
   };
+
+  function Share() {
+    Share.__super__.constructor.apply(this, arguments);
+    this._setEventHandlers();
+  }
 
   Share.prototype._setEventHandlers = function() {
     return this._settings.$element.on('click', (function(_this) {
@@ -1290,21 +1228,19 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.ShowPassword = (function(superClass) {
   extend(ShowPassword, superClass);
 
-  function ShowPassword() {
-    return ShowPassword.__super__.constructor.apply(this, arguments);
-  }
-
-  ShowPassword.prototype.init = function() {
-    this._setDefaults({
-      $input: $('.js-showPassword-input'),
-      $toggle: $('.js-showPassword-toggle'),
-      showByDefault: false
-    });
-    this._setEventHandlers();
-    if (this._settings.showByDefault) {
-      return this._showPassword();
-    }
+  ShowPassword._defaults = {
+    $input: $('.js-showPassword-input'),
+    $toggle: $('.js-showPassword-toggle'),
+    isShownByDefault: false
   };
+
+  function ShowPassword() {
+    ShowPassword.__super__.constructor.apply(this, arguments);
+    this._setEventHandlers();
+    if (this._settings.isShownByDefault) {
+      this._showPassword();
+    }
+  }
 
   ShowPassword.prototype._setEventHandlers = function() {
     return this._settings.$toggle.on('change', (function(_this) {
@@ -1335,25 +1271,19 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.StateUrls = (function(superClass) {
   extend(StateUrls, superClass);
 
+  StateUrls._defaults = {
+    $element: $('.js-stateUrls'),
+    $link: $('.js-stateUrls-link'),
+    classActive: 'is-active',
+    classHidden: 'is-hidden',
+    dataAttr: 'state'
+  };
+
   function StateUrls() {
-    return StateUrls.__super__.constructor.apply(this, arguments);
-  }
-
-  StateUrls.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-stateUrls'),
-      $link: $('.js-stateUrls-link'),
-      hiddenClass: 'is-hidden',
-      activeClass: 'is-active',
-      dataAttribute: 'state'
-    });
+    StateUrls.__super__.constructor.apply(this, arguments);
     this._setInitialState(this._getCurrentState());
-    return this._setEventHandlers();
-  };
-
-  StateUrls.prototype._sanitizeHash = function(string) {
-    return string.replace(/(<([^>]+)>)/ig, '');
-  };
+    this._setEventHandlers();
+  }
 
   StateUrls.prototype._getCurrentState = function() {
     var state;
@@ -1365,9 +1295,8 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
     return state;
   };
 
-  StateUrls.prototype._setInitialState = function(state) {
-    this._settings.$element.not(state).addClass(this._settings.hiddenClass);
-    return $("[data-" + this._settings.dataAttribute + "=" + state + "]").removeClass(this._settings.hiddenClass).addClass(this._settings.activeClass);
+  StateUrls.prototype._sanitizeHash = function(string) {
+    return string.replace(/(<([^>]+)>)/ig, '');
   };
 
   StateUrls.prototype._setEventHandlers = function() {
@@ -1389,11 +1318,16 @@ this.Spellbook.Classes.StateUrls = (function(superClass) {
     })(this));
   };
 
+  StateUrls.prototype._setInitialState = function(state) {
+    this._settings.$element.not(state).addClass(this._settings.classHidden);
+    return $("[data-" + this._settings.dataAttr + "=" + state + "]").removeClass(this._settings.classHidden).addClass(this._settings.classActive);
+  };
+
   StateUrls.prototype._showSection = function($element, state) {
-    this._settings.$link.removeClass(this._settings.activeClass);
-    this._settings.$element.addClass(this._settings.hiddenClass);
-    $element.addClass(this._settings.activeClass);
-    return $(state).removeClass(this._settings.hiddenClass);
+    this._settings.$link.removeClass(this._settings.classActive);
+    this._settings.$element.addClass(this._settings.classHidden);
+    $element.addClass(this._settings.classActive);
+    return $(state).removeClass(this._settings.classHidden);
   };
 
   return StateUrls;
@@ -1406,33 +1340,22 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.Toggle = (function(superClass) {
   extend(Toggle, superClass);
 
+  Toggle._defaults = {
+    $element: $('.js-toggle'),
+    classActive: 'is-active',
+    classToggle: 'is-hidden',
+    event: 'click',
+    onClick: null,
+    onInitialState: null,
+    onMouseout: null,
+    onMouseover: null,
+    proximity: 'next'
+  };
+
   function Toggle() {
-    return Toggle.__super__.constructor.apply(this, arguments);
+    Toggle.__super__.constructor.apply(this, arguments);
+    this._setEventHandlers();
   }
-
-  Toggle.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-toggle'),
-      proximity: 'next',
-      event: 'click',
-      toggleClass: 'is-hidden',
-      activeClass: 'is-active',
-      initialState: null,
-      onClick: null,
-      onMouseover: null,
-      onMouseout: null
-    });
-    return this._setEventHandlers();
-  };
-
-  Toggle.prototype._setEventHandlers = function() {
-    switch (this._settings.event) {
-      case 'click':
-        return this._handleClickEvent();
-      case 'hover':
-        return this._handleHoverEvent();
-    }
-  };
 
   Toggle.prototype._handleClickEvent = function() {
     return this._settings.$element.on('click', (function(_this) {
@@ -1443,21 +1366,21 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
         if (typeof (base = _this._settings).onClick === "function") {
           base.onClick(_this._settings);
         }
-        _this._settings.$element.toggleClass(_this._settings.activeClass);
+        _this._settings.$element.toggleClass(_this._settings.classActive);
         switch (_this._settings.proximity) {
           case 'next':
-            return $element.next().toggleClass(_this._settings.toggleClass);
+            return $element.next().toggleClass(_this._settings.classToggle);
           case 'prev':
-            return $element.prev().toggleClass(_this._settings.toggleClass);
+            return $element.prev().toggleClass(_this._settings.classToggle);
           case 'nextParent':
-            return $element.parent().next().toggleClass(_this._settings.toggleClass);
+            return $element.parent().next().toggleClass(_this._settings.classToggle);
           case 'prevParent':
-            return $element.parent().prev().toggleClass(_this._settings.toggleClass);
+            return $element.parent().prev().toggleClass(_this._settings.classToggle);
           default:
             if (typeof _this._settings.proximity === 'object') {
-              return _this._settings.proximity.toggleClass(_this._settings.toggleClass);
+              return _this._settings.proximity.toggleClass(_this._settings.classToggle);
             } else {
-              return $element.find(_this._settings.proximity).toggleClass(_this._settings.toggleClass);
+              return $element.find(_this._settings.proximity).toggleClass(_this._settings.classToggle);
             }
         }
       };
@@ -1465,8 +1388,8 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
   };
 
   Toggle.prototype._handleHoverEvent = function() {
-    if (this._settings.initialState) {
-      this._settings.initialState(this._settings);
+    if (this._settings.onInitialState) {
+      this._settings.onInitialState(this._settings);
     }
     return this._settings.$element.on({
       mouseenter: (function(_this) {
@@ -1489,13 +1412,13 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
         if (typeof (base = this._settings).onMouseover === "function") {
           base.onMouseover(this._settings);
         }
-        $element.addClass(this._settings.activeClass);
+        $element.addClass(this._settings.classActive);
         break;
       case 'off':
         if (typeof (base1 = this._settings).onMouseout === "function") {
           base1.onMouseout(this._settings);
         }
-        $element.removeClass(this._settings.activeClass);
+        $element.removeClass(this._settings.classActive);
     }
     switch (this._settings.proximity) {
       case 'next':
@@ -1515,9 +1438,18 @@ this.Spellbook.Classes.Toggle = (function(superClass) {
     }
   };
 
+  Toggle.prototype._setEventHandlers = function() {
+    switch (this._settings.event) {
+      case 'click':
+        return this._handleClickEvent();
+      case 'hover':
+        return this._handleHoverEvent();
+    }
+  };
+
   Toggle.prototype._toggleClass = function($element, classToToggle) {
     if (classToToggle == null) {
-      classToToggle = this._settings.toggleClass;
+      classToToggle = this._settings.classToggle;
     }
     if ($element.hasClass(classToToggle)) {
       return $element.removeClass(classToToggle);
@@ -1629,10 +1561,10 @@ this.Spellbook.Services.clickOut = function(options) {
   var settings;
   settings = $.extend({
     $element: $('.js-clickout'),
-    run: null
+    callback: null
   }, options);
   $(document).on('click', function() {
-    return settings.run();
+    return settings.callback();
   });
   return settings.$element.on('click', function(event) {
     return event.stopPropagation();
@@ -1643,29 +1575,29 @@ this.Spellbook.Services.contextMenu = function(options) {
   var settings;
   settings = $.extend({
     $element: $('.js-contextMenu'),
-    activeClass: 'is-active'
+    classActive: 'is-active'
   }, options);
   $(document).on('contextmenu', function(event) {
     event.preventDefault();
     return settings.$element.css({
       top: event.pageY + 'px',
       left: event.pageX + 'px'
-    }).addClass(settings.activeClass);
+    }).addClass(settings.classActive);
   });
   return $(document).on('click', function(event) {
-    return settings.$element.removeClass(settings.activeClass);
+    return settings.$element.removeClass(settings.classActive);
   });
 };
 
 this.Spellbook.Services.escapeOut = function(options) {
   var settings;
   settings = $.extend({
-    run: null
+    callback: null
   }, options);
   return $(document).on('keyup', function(event) {
     switch (event.which) {
       case 27:
-        return settings.run();
+        return settings.callback();
     }
   });
 };
@@ -1674,30 +1606,30 @@ this.Spellbook.Services.filter = function(options) {
   var settings;
   settings = $.extend({
     $element: $('.js-filter'),
+    $empty: $('<p>There are no items to show.</p>'),
     $item: $('.js-filter-item'),
     $link: $('.js-filter-link'),
-    $empty: $('<p>There are no items to show.</p>'),
-    activeClass: 'is-active',
-    hiddenClass: 'is-hidden',
-    dataAttribute: 'item'
+    classActive: 'is-active',
+    classHidden: 'is-hidden',
+    dataAttr: 'item'
   }, options);
   return settings.$link.on('click', function(event) {
     var $element, dataItemToShow, itemToShow;
     event.preventDefault();
     $element = $(this);
     itemToShow = $element.attr('href').split('#')[1];
-    settings.$link.removeClass(settings.activeClass);
-    $element.toggleClass(settings.activeClass);
+    settings.$link.removeClass(settings.classActive);
+    $element.toggleClass(settings.classActive);
     if (itemToShow !== 'all') {
-      settings.$item.addClass(settings.hiddenClass);
-      dataItemToShow = $("[data-" + settings.dataAttribute + "=" + itemToShow + "]");
+      settings.$item.addClass(settings.classHidden);
+      dataItemToShow = $("[data-" + settings.dataAttr + "=" + itemToShow + "]");
       if (dataItemToShow.length > 0) {
-        return dataItemToShow.removeClass(settings.hiddenClass);
+        return dataItemToShow.removeClass(settings.classHidden);
       } else {
         return settings.$element.append(settings.$empty);
       }
     } else {
-      return settings.$item.removeClass(settings.hiddenClass);
+      return settings.$item.removeClass(settings.classHidden);
     }
   });
 };
@@ -1759,16 +1691,16 @@ this.Spellbook.Services.limiter = function(options) {
   settings = $.extend({
     $element: $('.js-limiter-element'),
     $toggle: $('.js-limiter-toggle'),
-    hiddenClass: 'is-hidden',
+    classHidden: 'is-hidden',
     limit: 5
   }, options);
   count = settings.$element.length;
   if (count > settings.limit) {
-    settings.$element.not(":lt(" + settings.limit + ")").addClass(settings.hiddenClass);
+    settings.$element.not(":lt(" + settings.limit + ")").addClass(settings.classHidden);
     return settings.$toggle.on('click', function(event) {
       event.preventDefault();
       $(this).remove();
-      return settings.$element.removeClass(settings.hiddenClass);
+      return settings.$element.removeClass(settings.classHidden);
     });
   } else {
     return settings.$toggle.remove();
@@ -1779,19 +1711,19 @@ this.Spellbook.Services.loader = function(options) {
   var settings;
   settings = $.extend({
     $element: $('.js-loader-element'),
-    $toggle: $('.js-loader-toggle'),
-    $spinner: $('<span></span>'),
     $overlay: $('<div></div>'),
-    spinnerClass: 'loader',
-    overlayClass: 'loader-overlay',
-    loadingClass: 'is-loading'
+    $spinner: $('<span></span>'),
+    $toggle: $('.js-loader-toggle'),
+    classLoading: 'is-loading',
+    classOverlay: 'loader-overlay',
+    classSpinner: 'loader'
   }, options);
   return settings.$toggle.on('click', function(event) {
-    settings.$element.toggleClass(settings.loadingClass);
+    settings.$element.toggleClass(settings.classLoading);
     settings.$element.append(settings.$spinner);
-    settings.$spinner.addClass(settings.spinnerClass);
+    settings.$spinner.addClass(settings.classSpinner);
     settings.$element.append(settings.$overlay);
-    return settings.$overlay.addClass(settings.overlayClass);
+    return settings.$overlay.addClass(settings.classOverlay);
   });
 };
 
@@ -1835,16 +1767,16 @@ this.Spellbook.Services.scrollTrigger = function(options) {
   var active, scrolled, settings;
   settings = $.extend({
     $element: $('.js-scrollTrigger'),
-    scrollPadding: 400,
-    activeClass: 'is-active',
-    onTrigger: null
+    classActive: 'is-active',
+    onTrigger: null,
+    scrollPadding: 400
   }, options);
   scrolled = $(window).scrollTop();
   if (settings.$element.offset().top >= 0) {
     active = scrolled - settings.$element.offset().top - settings.scrollPadding;
   }
-  if (!settings.$element.hasClass(settings.activeClass) && active) {
-    settings.$element.addClass(settings.activeClass);
+  if (!settings.$element.hasClass(settings.classActive) && active) {
+    settings.$element.addClass(settings.classActive);
     return typeof settings.onTrigger === "function" ? settings.onTrigger(settings) : void 0;
   }
 };
@@ -1853,12 +1785,12 @@ this.Spellbook.Services.shortcut = function(options) {
   var settings;
   settings = $.extend({
     $element: $('[data-shortcut]'),
-    dataAttribute: 'shortcut',
+    dataAttr: 'shortcut',
     keyCodes: Spellbook.Globals.keyCodes
   }, options);
   return settings.$element.each(function() {
     var key;
-    key = settings.keyCodes[$(this).data(settings.dataAttribute)];
+    key = settings.keyCodes[$(this).data(settings.dataAttr)];
     return $(document).on('keyup', (function(_this) {
       return function(event) {
         var $element, tag;
@@ -1883,16 +1815,14 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Spellbook.Classes.ClassName = (function(superClass) {
   extend(ClassName, superClass);
 
-  function ClassName() {
-    return ClassName.__super__.constructor.apply(this, arguments);
-  }
-
-  ClassName.prototype.init = function() {
-    this._setDefaults({
-      $element: $('.js-element')
-    });
-    return this._setEventHandlers();
+  ClassName._defaults = {
+    $element: $('.js-element')
   };
+
+  function ClassName(options) {
+    ClassName.__super__.constructor.call(this, options);
+    this._setEventHandlers();
+  }
 
   ClassName.prototype._setEventHandlers = function() {};
 

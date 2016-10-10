@@ -12,18 +12,18 @@
 class @Spellbook.Classes.ClassName extends @Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
+  #   Defaults
   # -------------------------------------
 
-  # ...
+  @_defaults :
+    $element : $( '.js-element' )
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element : $( '.js-element' )
+  constructor : ( options ) ->
+    super( options )
 
     @_setEventHandlers()
 

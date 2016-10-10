@@ -13,13 +13,19 @@
 class @Spellbook.Classes.SelectText extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Initialize
+  #   Defaults
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $element : $( '.js-selectText' )
-      onClick  : null
+  @_defaults :
+    $element : $( '.js-selectText' )
+    onClick  : null
+
+  # -------------------------------------
+  #   Constructor
+  # -------------------------------------
+
+  constructor : ->
+    super
 
     @_setEventHandlers()
 
@@ -60,5 +66,5 @@ class @Spellbook.Classes.SelectText extends Spellbook.Classes.Base
 #   Usage
 # -------------------------------------
 #
-# new Spellbook.Classes.selectText()
+# new Spellbook.Classes.SelectText()
 #

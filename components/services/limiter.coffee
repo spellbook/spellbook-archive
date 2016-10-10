@@ -7,8 +7,8 @@
 #
 # @param $element    { jQuery object }
 # @param $toggle     { jQuery object }
+# @param classHidden { string }
 # @param limit       { integer }
-# @param hiddenClass { string }
 #
 # *************************************
 
@@ -16,7 +16,7 @@
   settings = $.extend
     $element    : $( '.js-limiter-element' )
     $toggle     : $( '.js-limiter-toggle' )
-    hiddenClass : 'is-hidden'
+    classHidden : 'is-hidden'
     limit       : 5
   , options
 
@@ -25,12 +25,12 @@
   if count > settings.limit
     settings.$element
       .not( ":lt(#{ settings.limit })" )
-      .addClass( settings.hiddenClass )
+      .addClass( settings.classHidden )
 
     settings.$toggle.on 'click', ( event ) ->
       event.preventDefault()
       $(@).remove()
-      settings.$element.removeClass( settings.hiddenClass )
+      settings.$element.removeClass( settings.classHidden )
   else
     settings.$toggle.remove()
 

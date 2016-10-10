@@ -6,14 +6,14 @@
 # *************************************
 #
 # @param $element    { jQuery object }
-# @param activeClass { string }
+# @param classActive { string }
 #
 # *************************************
 
 @Spellbook.Services.contextMenu = ( options ) ->
   settings = $.extend
     $element    : $( '.js-contextMenu' )
-    activeClass : 'is-active'
+    classActive : 'is-active'
   , options
 
   # -------------------------------------
@@ -25,14 +25,14 @@
 
     settings.$element
       .css( { top : event.pageY + 'px', left : event.pageX + 'px' } )
-      .addClass( settings.activeClass )
+      .addClass( settings.classActive )
 
   # -------------------------------------
   #   Event: Document Click
   # -------------------------------------
 
   $( document ).on 'click', ( event ) ->
-    settings.$element.removeClass( settings.activeClass )
+    settings.$element.removeClass( settings.classActive )
 
 # -------------------------------------
 #   Usage

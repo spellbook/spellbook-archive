@@ -5,38 +5,40 @@
 #
 # *************************************
 #
-# @param $trigger        { jQuery object }
 # @param $close          { jQuery object }
-# @param dataAttribute   { string }
-# @param backdropClass   { string }
-# @param activeClass     { string }
-# @param inactiveClass   { string }
-# @param activeBodyClass { string }
+# @param $trigger        { jQuery object }
+# @param classActive     { string }
+# @param classBackdrop   { string }
+# @param classBodyActive { string }
+# @param classInactive   { string }
+# @param dataAttr        { string }
 #
 # *************************************
 
 class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
 
   # -------------------------------------
-  #   Private Variables
+  #   Defaults
   # -------------------------------------
 
-  _$modal    : null
-  _$backdrop : null
+  @_defaults        :
+    $close          : $( '.js-modal-close' )
+    $trigger        : $( '.js-modal-trigger' )
+    classActive     : 'is-active'
+    classBackdrop   : 'modal-backdrop'
+    classBodyActive : 'is-modal-active'
+    classInactive   : 'is-inactive'
+    dataAttr        : 'modal'
 
   # -------------------------------------
-  #   Initialize
+  #   Constructor
   # -------------------------------------
 
-  init : ->
-    @_setDefaults
-      $trigger        : $( '.js-modal-trigger' )
-      $close          : $( '.js-modal-close' )
-      dataAttribute   : 'modal'
-      backdropClass   : 'modal-backdrop'
-      activeClass     : 'is-active'
-      inactiveClass   : 'is-inactive'
-      activeBodyClass : 'is-modal-active'
+  constructor : ->
+    super
+
+    @_$modal    = null
+    @_$backdrop = null
 
     @_setEventHandlers()
 
@@ -58,13 +60,13 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
 
       when 'open'
 
-        $element.addClass( @_settings.activeClass )
-        $( 'body' ).addClass( @_settings.activeBodyClass )
+        $element.addClass( @_settings.classActive )
+        $( 'body' ).addClass( @_settings.classBodyActive )
 
       when 'close'
 
-        $element.removeClass( @_settings.activeClass )
-        $( 'body' ).removeClass( @_settings.activeBodyClass )
+        $element.removeClass( @_settings.classActive )
+        $( 'body' ).removeClass( @_settings.classBodyActive )
 
         @_cleanupEvents()
 
@@ -75,43 +77,12 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
     @_setActiveEventHandlers()
 
   # -------------------------------------
-  #   Toggle Overlay
+  #   Clean Up Events
   # -------------------------------------
 
-  _toggleOverlay : ( event ) ->
-    switch event
-
-      when 'open'
-
-        $( '<div class=' + @_settings.backdropClass + '></div>' )
-          .appendTo( $( 'body' ) )
-
-        @_$backdrop = $( ".#{ @_settings.backdropClass }" )
-
-        setTimeout =>
-          @_$backdrop.addClass( @_settings.activeClass )
-        , 25
-
-      when 'close'
-
-        @_$backdrop.removeClass( @_settings.activeClass )
-
-        setTimeout =>
-          @_$backdrop.remove()
-        , 500
-
-  # -------------------------------------
-  #   Set Event Handlers
-  # -------------------------------------
-
-  _setEventHandlers : ->
-    @_settings.$trigger.on 'click', ( event ) =>
-      event.preventDefault()
-
-      selector = $( event.currentTarget ).data( @_settings.dataAttribute )
-      @_$modal = $( selector )
-
-      @trigger( @_$modal, 'open' )
+  _cleanupEvents : ->
+    @_settings.$close.off( 'click' )
+    $( document ).off( 'keydown' )
 
   # -------------------------------------
   #   Set Active Event Handlers
@@ -137,12 +108,43 @@ class @Spellbook.Classes.Modal extends Spellbook.Classes.Base
         when 27 then @trigger( @_$modal, 'close' )
 
   # -------------------------------------
-  #   Clean Up Events
+  #   Set Event Handlers
   # -------------------------------------
 
-  _cleanupEvents : ->
-    @_settings.$close.off( 'click' )
-    $( document ).off( 'keydown' )
+  _setEventHandlers : ->
+    @_settings.$trigger.on 'click', ( event ) =>
+      event.preventDefault()
+
+      selector = $( event.currentTarget ).data( @_settings.dataAttr )
+      @_$modal = $( selector )
+
+      @trigger( @_$modal, 'open' )
+
+  # -------------------------------------
+  #   Toggle Overlay
+  # -------------------------------------
+
+  _toggleOverlay : ( event ) ->
+    switch event
+
+      when 'open'
+
+        $( '<div class=' + @_settings.classBackdrop + '></div>' )
+          .appendTo( $( 'body' ) )
+
+        @_$backdrop = $( ".#{ @_settings.classBackdrop }" )
+
+        setTimeout =>
+          @_$backdrop.addClass( @_settings.classActive )
+        , 25
+
+      when 'close'
+
+        @_$backdrop.removeClass( @_settings.classActive )
+
+        setTimeout =>
+          @_$backdrop.remove()
+        , 500
 
 # -------------------------------------
 #   Usage
